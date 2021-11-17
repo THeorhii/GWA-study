@@ -1,6 +1,5 @@
 /* Color custom properties */
 
-
 :root,
 .color-background-1 {
   --color-foreground: var(--color-base-text);
