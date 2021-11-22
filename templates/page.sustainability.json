@@ -1,15 +1,5 @@
 {
   "sections": {
-    "main": {
-      "type": "main-blog",
-      "settings": {
-        "layout": "collage",
-        "show_image": true,
-        "image_height": "medium",
-        "show_date": true,
-        "show_author": false
-      }
-    },
     "1637571756c14c558a": {
       "type": "sustainability-content--section",
       "blocks": {
