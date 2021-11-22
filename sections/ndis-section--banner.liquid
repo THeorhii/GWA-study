@@ -8,24 +8,21 @@
             {%- assign img_url_desktop = section.settings.image_desktop | img_url -%}
             <img class="ndis-banner__img l banner-meal-pack--image-desktop"
                  src="{{ img_url_desktop }}"
-                 data-widths="[50, 100, 180, 250, 300, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
-                 data-sizes="auto"
+
                  alt="{{ icon_desktop.alt | default: 'Workout Meals ™' | escape }}">
 
             {%- assign icon_tablet = section.settings.image_tablet | img_url -%}
             {%- assign img_url_tablet = section.settings.image_tablet | img_url -%}
             <img class="ndis-banner__img lazyload banner-meal-pack--image-tablet"
                  src="{{ img_url_tablet }}"
-                 data-widths="[50, 100, 180, 250, 300, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
-                 data-sizes="auto"
+
                  alt="{{ icon_tablet.alt | default: 'Workout Meals ™' | escape }}">
 
             {%- assign icon_mobile = section.settings.image_mobile.src -%}
             {%- assign img_url_mobile = section.settings.image_mobile | img_url -%}
             <img class="ndis-banner__img lazyload banner-meal-pack--image-mobile"
                  src="{{ img_url_mobile }}"
-                 data-widths="[50, 100, 180, 250, 300, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
-                 data-sizes="auto"
+
                  alt="{{ icon_mobile.alt | default: 'Workout Meals ™' | escape }}">
         {% endif %}
         <div class="ndis-on-banner__container {{ section.settings.content_position }}">
