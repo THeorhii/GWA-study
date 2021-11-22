@@ -4,9 +4,9 @@
     "16375769486685f2ba": {
       "type": "ndis-section--banner",
       "settings": {
-        "image_desktop": "shopify:\/\/shop_images\/background_2x_fe4bfe86-8432-44ee-bc6f-6cf804edd693.jpg",
-        "image_tablet": "shopify:\/\/shop_images\/background_2x_fe4bfe86-8432-44ee-bc6f-6cf804edd693.jpg",
-        "image_mobile": "shopify:\/\/shop_images\/background_2x_fe4bfe86-8432-44ee-bc6f-6cf804edd693.jpg",
+        "image_desktop": "shopify:\/\/shop_images\/bitmap_2x_05ba374f-9ff1-4f71-b336-661a9a23ee4f.jpg",
+        "image_tablet": "shopify:\/\/shop_images\/bitmap_2x_05ba374f-9ff1-4f71-b336-661a9a23ee4f.jpg",
+        "image_mobile": "shopify:\/\/shop_images\/bitmap_2x_05ba374f-9ff1-4f71-b336-661a9a23ee4f.jpg",
         "content_position": "",
         "sub_headline_d": "",
         "sub_headline_m": "",
@@ -25,6 +25,21 @@
     },
     "1637576957ccfab88d": {
       "type": "ndis-section--benefits",
+      "disabled": true,
+      "blocks": {
+        "643394c9-c80f-446c-9e76-b2488a38d6ad": {
+          "type": "text",
+          "settings": {
+            "ndisBenefitsCardTitle": "Your title",
+            "ndisBenefitsCardTitleColor": "#010101",
+            "ndisBenefitsCardText": "<p>Your text<\/p>",
+            "ndisBenefitsCardTextColor": "#010101"
+          }
+        }
+      },
+      "block_order": [
+        "643394c9-c80f-446c-9e76-b2488a38d6ad"
+      ],
       "settings": {
         "ndisBenefitsTitle": "Your title",
         "ndisBenefitsSubTitleText": "<p>Your text<\/p>",
@@ -33,11 +48,79 @@
     },
     "1637576965822606c5": {
       "type": "ndis-section--cards",
+      "disabled": true,
+      "blocks": {
+        "b576920c-65cd-47ae-af53-4985d4b97a83": {
+          "type": "text",
+          "settings": {
+            "InfCardText": "Your sub-headline",
+            "InfCardTextColor": "#fff",
+            "InfCardTitle": "Your headline",
+            "InfCardTitleColor": "#6cc900",
+            "CardContent": "<p>Your card content<\/p>"
+          }
+        },
+        "1c8af818-8897-4454-b541-33e2c08f3dee": {
+          "type": "text",
+          "settings": {
+            "InfCardText": "Your sub-headline",
+            "InfCardTextColor": "#fff",
+            "InfCardTitle": "Your headline",
+            "InfCardTitleColor": "#6cc900",
+            "CardContent": "<p>Your card content<\/p>"
+          }
+        },
+        "3d50b93c-8cde-4587-9eb9-e95143457d2a": {
+          "type": "text",
+          "settings": {
+            "InfCardText": "Your sub-headline",
+            "InfCardTextColor": "#fff",
+            "InfCardTitle": "Your headline",
+            "InfCardTitleColor": "#6cc900",
+            "CardContent": "<p>Your card content<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "b576920c-65cd-47ae-af53-4985d4b97a83",
+        "1c8af818-8897-4454-b541-33e2c08f3dee",
+        "3d50b93c-8cde-4587-9eb9-e95143457d2a"
+      ],
       "settings": {
       }
     },
     "1637576973273b3351": {
       "type": "ndis-section--food-blocks",
+      "blocks": {
+        "fa4e21d9-a88a-4f5e-b6de-1a794c74ad3c": {
+          "type": "text",
+          "settings": {
+            "ndisFoodImg": "shopify:\/\/shop_images\/image-copy-3_2x_a0f0c33b-6cc6-44d7-90d9-827b87e4a181.png",
+            "ndisImgPosition": true,
+            "ndisContentTitle": "Your title",
+            "ndisContentTitleColor": "#fbb03c",
+            "ndisContentText": "<p>Your text<\/p>",
+            "ndisMealPriceColor": "#fbb03c",
+            "ndisCoPayColor": "#6cc900"
+          }
+        },
+        "b2499946-dad7-4406-a643-b5744322463c": {
+          "type": "text",
+          "settings": {
+            "ndisFoodImg": "shopify:\/\/shop_images\/image_2x_690af36f-b267-4252-8351-02abc83cd4a1.png",
+            "ndisImgPosition": false,
+            "ndisContentTitle": "Your title",
+            "ndisContentTitleColor": "#fbb03c",
+            "ndisContentText": "<p>Your text<\/p>",
+            "ndisMealPriceColor": "#fbb03c",
+            "ndisCoPayColor": "#6cc900"
+          }
+        }
+      },
+      "block_order": [
+        "fa4e21d9-a88a-4f5e-b6de-1a794c74ad3c",
+        "b2499946-dad7-4406-a643-b5744322463c"
+      ],
       "settings": {
         "ndisFoodTitle": "Your title",
         "ndisFoodTitleLink": ""
@@ -67,7 +150,6 @@
     }
   },
   "order": [
-
     "16375769486685f2ba",
     "1637576957ccfab88d",
     "1637576965822606c5",
