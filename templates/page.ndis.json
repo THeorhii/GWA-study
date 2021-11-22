@@ -8,6 +8,9 @@
     "16375769486685f2ba": {
       "type": "ndis-section--banner",
       "settings": {
+        "image_desktop": "shopify:\/\/shop_images\/background_2x_fe4bfe86-8432-44ee-bc6f-6cf804edd693.jpg",
+        "image_tablet": "shopify:\/\/shop_images\/background_2x_fe4bfe86-8432-44ee-bc6f-6cf804edd693.jpg",
+        "image_mobile": "shopify:\/\/shop_images\/background_2x_fe4bfe86-8432-44ee-bc6f-6cf804edd693.jpg",
         "content_position": "",
         "sub_headline_d": "",
         "sub_headline_m": "",
