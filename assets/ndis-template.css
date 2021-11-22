@@ -79,7 +79,9 @@
 .ndis-on-banner__text--mob {
     font: bold 16px/16px var(--font-stack-body);
 }
-
+.banner-meal-pack--image-desktop {
+    display: block;
+}
 .banner-meal-pack--image-mobile,
 .banner-meal-pack--image-tablet{
     display: none;
