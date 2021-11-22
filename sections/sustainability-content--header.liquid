@@ -1,5 +1,5 @@
 {{ 'sus-template.css' | asset_url | stylesheet_tag }}
-
+<section class="sustainability-page__container">
 <div class="sus-header__container">
     <h4 class="sus-page__title">{{ section.settings.sustainability-page__title }}</h4>
     <h2 class="sus-header__title">{{ section.settings.sustainability-header__title }}</h2>
@@ -15,7 +15,7 @@
     <div class="sus-header__richtext"> {{ section.settings.sustainability-header__richtext }} </div>
 </div>
 
-
+</section>
 {% schema %}
 {
 "name": "Sustainability header",
