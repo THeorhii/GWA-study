@@ -3,10 +3,36 @@
     "main": {
       "type": "main-blog",
       "settings": {
+        "layout": "collage",
+        "show_image": true,
+        "image_height": "medium",
+        "show_date": true,
+        "show_author": false
+      }
+    },
+    "1637571756c14c558a": {
+      "type": "sustainability-content--section",
+      "blocks": {
+        "e0f3af47-8071-44f1-90d4-dacb905e3ea1": {
+          "type": "text",
+          "settings": {
+            "sustainability-block__title": "Your title",
+            "sustainability-block__title--position": "sus-block__title--center",
+            "sustainability-block__img": "shopify:\/\/shop_images\/bitmap_2x_05ba374f-9ff1-4f71-b336-661a9a23ee4f.jpg",
+            "sustainability-block__img--position": false,
+            "sustainability-block__richtext": "<p>Your text<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "e0f3af47-8071-44f1-90d4-dacb905e3ea1"
+      ],
+      "settings": {
       }
     }
   },
   "order": [
-    "main"
+    "main",
+    "1637571756c14c558a"
   ]
 }
