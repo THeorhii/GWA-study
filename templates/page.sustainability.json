@@ -1,16 +1,5 @@
 {
   "sections": {
-    "main": {
-      "type": "main-blog",
-      "disabled": true,
-      "settings": {
-        "layout": "collage",
-        "show_image": true,
-        "image_height": "medium",
-        "show_date": true,
-        "show_author": false
-      }
-    },
     "16375741780ec4df9e": {
       "type": "sustainability-content--header",
       "settings": {
@@ -75,7 +64,6 @@
     }
   },
   "order": [
-    "main",
     "16375741780ec4df9e",
     "1637574184af040cc3"
   ]
