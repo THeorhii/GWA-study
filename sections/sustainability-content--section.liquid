@@ -1,3 +1,4 @@
+{{ 'sus-template.css' | asset_url | stylesheet_tag }}
 {% for block in section.blocks limit: section.blocks.size %}
 <div class="sus-block__container {% if block.settings.sustainability-block__img--position == true %} sus-block__container--position {% endif %}">
 
@@ -72,7 +73,7 @@
 }]
 }],"presets": [
 {
-"name": "Sustainability header"
+"name": "Sustainability section"
 }
 ]
 }
