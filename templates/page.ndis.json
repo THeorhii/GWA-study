@@ -54,7 +54,7 @@
           "type": "text",
           "settings": {
             "InfCardText": "Your sub-headline",
-            "InfCardTextColor": "#fff",
+            "InfCardTextColor": "#ffffff",
             "InfCardTitle": "Your headline",
             "InfCardTitleColor": "#6cc900",
             "CardContent": "<p>Your card content<\/p>"
@@ -64,7 +64,7 @@
           "type": "text",
           "settings": {
             "InfCardText": "Your sub-headline",
-            "InfCardTextColor": "#fff",
+            "InfCardTextColor": "#ffffff",
             "InfCardTitle": "Your headline",
             "InfCardTitleColor": "#6cc900",
             "CardContent": "<p>Your card content<\/p>"
@@ -74,7 +74,7 @@
           "type": "text",
           "settings": {
             "InfCardText": "Your sub-headline",
-            "InfCardTextColor": "#fff",
+            "InfCardTextColor": "#ffffff",
             "InfCardTitle": "Your headline",
             "InfCardTitleColor": "#6cc900",
             "CardContent": "<p>Your card content<\/p>"
@@ -95,7 +95,7 @@
         "fa4e21d9-a88a-4f5e-b6de-1a794c74ad3c": {
           "type": "text",
           "settings": {
-            "ndisFoodImg": "shopify:\/\/shop_images\/image-copy-3_2x_a0f0c33b-6cc6-44d7-90d9-827b87e4a181.png",
+            "ndisFoodImg": "shopify:\/\/shop_images\/vegan-meals_2x_101a7443-d8e7-43c5-a2de-37bc17dec7fa.jpg",
             "ndisImgPosition": true,
             "ndisContentTitle": "Your title",
             "ndisContentTitleColor": "#fbb03c",
@@ -107,7 +107,7 @@
         "b2499946-dad7-4406-a643-b5744322463c": {
           "type": "text",
           "settings": {
-            "ndisFoodImg": "shopify:\/\/shop_images\/image_2x_690af36f-b267-4252-8351-02abc83cd4a1.png",
+            "ndisFoodImg": "shopify:\/\/shop_images\/vegan-meals_2x_101a7443-d8e7-43c5-a2de-37bc17dec7fa.jpg",
             "ndisImgPosition": false,
             "ndisContentTitle": "Your title",
             "ndisContentTitleColor": "#fbb03c",
