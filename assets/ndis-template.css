@@ -1,0 +1,861 @@
+/*===============================================
+*  ndis page
+* ================================================*/
+
+/* <===================================== ndis banner=============================================== */
+.ndis-banner__text--blank {
+    align-items: center;
+    font-size: 38px;
+    font-weight: normal;
+    padding: 0 25px;
+}
+
+.ndis-banner__img {
+    width: 100%;
+}
+.ndis-banner__text-container {
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+    max-width: 1384px;
+    text-align: center;
+    margin: 46px auto -8px;
+}
+.ndis-banner__text-container .ndis-banner__text  {
+    font: 28px/48px var(--font-stack-header);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 0 30px;
+    margin: 0;
+}
+.ndis-banner__text p {
+    margin: 0
+}
+
+
+/* text on the banner */
+.ndis-banner__wrap {
+    position: relative;
+}
+.ndis-on-banner__container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    left: 10%;
+    justify-content: center;
+    flex-flow: column;
+    padding: 3% 0;
+    display: flex;
+}
+.ndis-on-banner__container--bottom {
+    justify-content: flex-end;
+}
+.ndis-on-banner__container--top {
+    justify-content: flex-start;
+}
+.ndis-on-banner__container--center {
+    justify-content: center;
+}
+.ndis-on-banner__container p {
+    margin: 0;
+}
+
+.ndis-on-banner__title--desktop {
+    font: bold 64px/64px var(--font-stack-header);
+}
+.ndis-on-banner_subtitle--desktop {
+    font: bold 44px/30px var(--font-stack-header);
+}
+.ndis-on-banner__text--desktop {
+    font: bold 16px/22px var(--font-stack-body);
+}
+
+.ndis-on-banner__title--mob {
+    font: bold 21px/21px var(--font-stack-header);
+}
+.ndis-on-banner_subtitle--mob{
+    font: bold 18px/18px var(--font-stack-header);
+}
+.ndis-on-banner__text--mob {
+    font: bold 16px/16px var(--font-stack-body);
+}
+
+
+@media (min-width: 966px) and (max-width: 1174px)    {
+    .ndis-banner__text-container .ndis-banner__text {
+        font: 22px/34px var(--font-stack-body);
+    }
+}
+@media (max-width: 966px) {
+    .ndis-banner__text-container {
+        margin: 23px auto -31px;
+    }
+    .ndis-banner__text-container .ndis-banner__text {
+        margin: 5px 0;
+    }
+}
+@media (min-width: 750px) and (max-width: 966px)    {
+    .ndis-banner__text-container .ndis-banner__text {
+        font: 18px/28px var(--font-stack-body);
+    }
+}
+@media (min-width: 480px) and (max-width: 750px)    {
+    .ndis-banner__text-container .ndis-banner__text {
+        font: 16px/18px var(--font-stack-body);
+        padding: 0 15px;
+    }
+    .ndis-on-banner__title--desktop {
+        font: bold 54px/64px var(--font-stack-header);
+    }
+    .ndis-on-banner_subtitle--desktop {
+        font: bold 34px/30px var(--font-stack-header);
+    }
+    .ndis-on-banner__text--desktop {
+        font: bold 16px/22px var(--font-stack-body);
+    }
+}
+@media (max-width: 480px)    {
+    .ndis-banner__text-container {
+        margin: 11px auto -42px;
+
+    }
+    .ndis-banner__text-container .ndis-banner__text {
+        font: 16px/18px var(--font-stack-body);
+        padding: 0 15px;
+    }
+    .ndis-on-banner__text--desktop, .ndis-on-banner__title--desktop, .ndis-on-banner_subtitle--desktop  {
+        display:none
+    }
+
+}
+@media (min-width: 481px) {
+    .ndis-on-banner__text--desktop, .ndis-on-banner__title--desktop, .ndis-on-banner_subtitle--desktop  {
+        display: block;
+    }
+    .ndis-on-banner__text--mob, .ndis-on-banner__title--mob, .ndis-on-banner_subtitle--mob  {
+        display: none;
+    }
+}
+
+/* <===================================== ndis card ===============================================*/
+.ndis-cards__container {
+    display: flex;
+    flex-flow: row wrap;
+    max-width: 1448px;
+    margin: 54px auto 0 ;
+    justify-content: center;
+    padding: 0 10px;
+
+}
+.ndis-information-card {
+    position: relative;
+    width: 30%;
+    height: 600px;
+    text-align: left;
+    font-family: var(--font-stack-body);
+    border-bottom-left-radius: 24px;
+    border-top-right-radius: 24px;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+
+}
+.ndis-information-card:nth-child(3n+2) {
+    margin: 0 44px 30px;
+
+}
+.ndis-card__img {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.ndis-card__title-container {
+    padding: 24px;
+    position: relative;
+
+}
+.ndis-card__title {
+    margin: 0;
+
+}
+.ndis-card__title--p {
+    font: bold 24px/24px var(--font-stack-header);
+}
+.ndis-card__title--h4 {
+    font: bold 48px/54px var(--font-stack-header);
+}
+
+.ndis-card__content {
+    font: bold 16px/22px var(--font-stack-body);
+    color: var(--color-dark-text);
+    text-align: center;
+    padding: 32px 24px 40px;
+    backdrop-filter: blur(11px);
+    background-image: linear-gradient(to bottom, rgba(245, 245, 245, 0.72), rgba(245, 245, 245, 0.72));
+    border-bottom-left-radius: 24px;
+}
+
+.ndis-card__content p  {
+    margin: 0;
+}
+
+@media (max-width: 1230px) {
+    .ndis-information-card:nth-child(3n+2) {
+        margin: 0 20px 30px;
+    }
+    .ndis-card__title--p {
+        font: bold 21px/21px var(--font-stack-header);
+    }
+    .ndis-card__title--h4 {
+        font: bold 38px/48px var(--font-stack-header);
+
+    }
+    .ndis-information-card {
+        width: 31%;
+        height: 500px;
+    }
+    .ndis-card__content {
+        padding: 16px;
+    }
+}
+@media (max-width: 966px) {
+    .ndis-information-card {
+        width: 30%;
+        height: 350px;
+    }
+    .ndis-information-card:nth-child(3n+2) {
+        margin: 0 20px 30px;
+    }
+    .ndis-card__title--p {
+        font: bold 18px/21px var(--font-stack-header);
+    }
+    .ndis-card__title--h4 {
+        font: bold 24px/35px var(--font-stack-header);
+    }
+    .ndis-card__content {
+        padding: 10px;
+    }
+}
+@media (max-width: 750px) {
+    .ndis-information-card {
+        width: 45%;
+        height: 400px;
+    }
+
+}
+@media (max-width: 680px) {
+    .ndis-information-card {
+        width: 55%;
+    }
+}
+@media (max-width: 550px) {
+    .ndis-information-card {
+        width: 70%;
+    }
+}
+@media (max-width: 480px) {
+    .ndis-information-card:nth-child(3n+2) {
+        margin: 0 0 30px;
+    }
+    .ndis-information-card {
+        flex: initial;
+        height: 450px;
+        width: 100%;
+    }
+    .ndis-cards__container {
+        padding: 0 15px;
+
+    }
+
+    .ndis-card__title--p {
+        font: bold 18px/21px var(--font-stack-header);
+    }
+    .ndis-card__title--h4 {
+        font: bold 21px/28px var(--font-stack-header);
+    }
+}
+
+/* <===================================== ndis food blocks ===============================================>*/
+.ndis-food-blocks-wrap-bg {
+    background-color: #f3f3f3;
+}
+.ndis-food-blocks__container {
+    display: flex;
+    max-width: 1214px;
+    margin: 24px auto 0 ;
+    flex-flow: column;
+}
+.nfb-block-card {
+    display: flex;
+    margin-bottom: 56px;
+    align-items: center;
+
+}
+.nfb-block-card--left-position {
+    flex-direction: row-reverse;
+}
+.ndis-food-blocks__wrapper {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    padding: 0 0 0 30px;
+}
+.nfb-block-content {
+    width: 586px;
+    margin: 35px 0;
+    position: relative;
+    z-index: 2;
+    border-radius: 24px;
+    padding: 56px 32px 104px;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
+    background-blend-mode: hard-light;
+    background-image: linear-gradient(to bottom, rgba(245, 245, 245, 0.8), rgba(245, 245, 245, 0.8));
+    box-shadow: 6px 8px 18px 3px #00000026;
+}
+.nfb-block-title {
+    font: bold 36px/48px var(--font-stack-header);
+    letter-spacing: 1px;
+    text-align: center;
+    color: var(--color-yellow);
+    margin: 0;
+}
+.nfb-block-text {
+    font: 24px/32px var(--font-stack-body);
+    color: var(--color-text-black);
+    margin-top:24px;
+}
+.nfb-block-price-wrap {
+    margin-top: 15px
+}
+.nfb-block-text p {
+    margin: 0;
+}
+.nfb-block-price {
+    font: bold 18px/32px var(--font-stack-header);
+    color: var(--color-dark-text);
+    margin: 0;
+    letter-spacing: normal;
+}
+.nfb-block-price .nfb-block-price-num-meal {
+    color: var(--color-yellow);
+}
+.nfb-block-price .nfb-block-price-num-copay {
+    color: #6cc900;
+}
+.nfb-block__img {
+    max-width: 646px;
+    margin: 0 0 0 -40px;
+    position: relative;
+    z-index: 1;
+    border-radius: 24px;
+    object-fit:cover;
+}.nfb-block__img--left-position {
+     margin: 0 -40px 0 0px;
+ }
+.ndis-food__link {
+    display: flex;
+    padding: 16px 10px;
+    width: 312px;
+    justify-content: center;
+    color: var(--color-yellow);
+    align-self: center;
+    text-decoration: none;
+    background-color: var(--color-background-product);
+    border-radius: 4px;
+    border: solid 4px transparent;
+    font: bold 16px/24px var(--font-stack-body);
+    transition: border 1s ease-in-out;
+    margin-bottom: 56px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.ndis-food__link:hover {
+    border: solid 4px var(--color-yellow);
+}
+@media (min-width: 966px) and (max-width: 1270px) {
+    .nfb-block-content {
+        max-width: 400px;
+    }
+    .nfb-block__img {
+        max-width: 500px;
+    }
+    .ndis-food-blocks__wrapper {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+    }
+    .nfb-block-title {
+        font: bold 28px/28px var(--font-stack-header);
+    }
+    .nfb-block-text {
+        font: 18px/26px var(--font-stack-body);
+    }
+    .nfb-block-price {
+        font: bold 16px/18px var(--font-stack-header);
+    }
+}
+@media (min-width: 750px) and (max-width: 966px) {
+    .ndis-food__title {
+        margin: 30px 0 20px;
+    }
+    .nfb-block-content {
+        max-width: 350px;
+        padding: 23px 32px 30px;
+    }
+    .nfb-block__img {
+        max-width: 360px;
+    }
+    .ndis-food-blocks__wrapper {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+    }
+    .nfb-block-title {
+        font: bold 28px/28px var(--font-stack-header);
+    }
+    .nfb-block-text {
+        font: 18px/26px var(--font-stack-body);
+    }
+    .nfb-block-price {
+        font: bold 16px/18px var(--font-stack-header);
+    }
+}
+@media (min-width: 480px) and (max-width: 750px) {
+    .ndis-food__title {
+        margin: 30px 0 20px;
+    }
+    .nfb-block-content {
+        max-width: 350px;
+        padding: 23px 32px 30px;
+    }
+    .nfb-block__img {
+        max-width: 400px;
+        margin: 0 0 -100px 0;
+    }
+    .ndis-food-blocks__wrapper {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+    }
+    .nfb-block-card {
+        display: flex;
+        flex-flow: column-reverse;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    .nfb-block-title {
+        font: bold 28px/28px var(--font-stack-header);
+    }
+    .nfb-block-text {
+        font: 18px/26px var(--font-stack-body);
+    }
+    .nfb-block-price {
+        font: bold 16px/18px var(--font-stack-header);
+    }
+    .ndis-food__link {
+        width: 60%;
+    }
+}
+@media (max-width: 480px) {
+    .ndis-food__title {
+        margin: 30px 0 20px;
+    }
+    .nfb-block-content {
+        max-width: 290px;
+        padding: 23px 15px 30px;
+    }
+    .nfb-block__img {
+        max-width: 300px;
+        margin: 0 0 -100px 0;
+    }
+    .ndis-food-blocks__wrapper {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        padding: 0 15px;
+    }
+    .nfb-block-card {
+        display: flex;
+        flex-flow: column-reverse;
+        align-items: center;
+        margin-bottom: 10px;
+
+    }
+    .nfb-block-title {
+        font: bold 28px/28px var(--font-stack-header);
+    }
+    .nfb-block-text {
+        font: 18px/26px var(--font-stack-body);
+    }
+
+    .nfb-block-price {
+        font: bold 16px/18px var(--font-stack-header);
+    }
+    .ndis-food__link {
+        width: 100%;
+    }
+}
+/* <===================================== ndis benefits blocks ===============================================>*/
+.ndis-benefits__container {
+    max-width: 1214px;
+    margin: 56px auto;
+}
+.ndis-benefits__title {
+    font: bold 48px var(--font-stack-header);
+    letter-spacing: 1px;
+    color: var(--color-dark-text);
+    text-align: center;
+    margin: 0;
+    padding: 0 25px;
+}
+.ndis-benefits__subtitle-text {
+    font: 24px var(--font-stack-header);
+    color: var(--color-text-black);
+    text-align: center;
+    letter-spacing: 0px;
+    padding: 0 25px;
+    text-transform: uppercase;
+    margin: 16px 0 0;
+}
+.ndis-benefits__subtitle-text p {
+    margin: 0;
+}
+.nb-card {
+    display: flex;
+    flex-flow: column;
+    width: 368px;
+    margin-top: 56px;
+
+}
+.nb-card:nth-child(3n+2) {
+    margin: 56px 40px 0;
+
+}
+.ndis-benefits__wrapper {
+    display:flex;
+    flex-flow: row wrap;
+    padding: 0 10px;
+    justify-content: center;
+}
+.nb-card__img {
+    width: 222px;
+    height: 222px;
+    align-self: center;
+}
+.nb-card__title {
+    text-align: center;
+    font: bold 24px/36px var(--font-stack-header);
+    letter-spacing: 1px;
+    color: var(--color-dark-text);
+    margin: 24px 0 0;
+}
+.nb-card__text {
+    text-align: center;
+    color: var(--color-dark-text);
+    letter-spacing: 0px;
+    font: 16px/24px var(--font-stack-body);
+    margin: 6px 0 0;
+}
+.nb-card__text p {
+    width: 100%;
+    margin: 0;
+}
+@media (max-width: 1210px) {
+    .nb-card:nth-child(3n+2) {
+        margin: 56px 20px 0;
+    }
+
+}
+@media (min-width: 750px) and (max-width: 966px) {
+    .ndis-benefits__container {
+        margin: 36px auto;
+    }
+    .ndis-benefits__subtitle-text {
+        font: 20px var(--font-stack-body);
+        padding: 0 60px;
+    }
+}
+@media (max-width: 750px) {
+    .ndis-benefits__wrapper {
+        padding: 0 50px;
+    }
+    .ndis-benefits__container {
+        margin: 30px auto;
+    }
+    .ndis-benefits__title {
+        font: bold 32px/24px var(--font-stack-header);
+    }
+    .ndis-benefits__subtitle-text {
+        font: 18px var(--font-stack-body);
+        padding: 0 60px;
+    }
+    .nb-card {
+        width: 100%;
+    }
+}
+@media (max-width: 480px) {
+    .ndis-benefits__wrapper {
+        padding: 0 15px;
+    }
+    .ndis-benefits__container {
+        margin: 30px auto;
+    }
+    .ndis-benefits__title {
+        font: bold 32px/24px var(--font-stack-header);
+    }
+    .ndis-benefits__subtitle-text {
+        font: 18px var(--font-stack-body);
+        padding: 0 15px;
+    }
+    .nb-card {
+        width: 100%;
+    }
+}
+
+
+
+/* <===================================== ndis form ===============================================>*/
+.ndis-form__wrap {
+    background-color: #f9f9f9;
+    padding: 56px 0;
+}
+.ndis-form__container {
+    max-width: 1168px;
+    margin: 0 auto;
+}
+.ndis-describe-form__container {
+    text-align: center;
+}
+.ndis-describe-form__title {
+    font: bold 48px var(--font-stack-header);
+    margin: 0;
+    padding: 0 15px;
+}
+.ndis-describe-form__text p {
+    font: 24px var(--font-stack-header);
+    text-transform: uppercase;
+    padding: 0 15%;
+    margin: 0;
+}
+.ndis-describe-form__text--dedicated {
+    font: bold 36px var(--font-stack-header);
+    text-transform: uppercase;
+    margin:0;
+    padding: 0 15px;
+}
+.ndis-describe-form__tel-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row;
+    padding: 0 15px;
+}
+.ndis-describe-form__text--tel {
+    font: bold 28px/36px var(--font-stack-header);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0 0 0 16px;
+}
+.ndis-describe-form__tel-wrap, .ndis-describe-form__text--dedicated, .ndis-describe-form__text {
+    margin-top: 16px;
+}
+
+.nf__wrap {
+    display: flex;
+    flex-flow: column;
+}
+.nf__section {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    margin-top: 38px;
+}
+.nf__section .input-wrapper {
+    display: flex;
+    flex-flow: column-reverse;
+    width: 49%;
+    position: relative;
+
+
+}
+.nf__section .input-wrapper label {
+    color: #000;
+    letter-spacing: 0.5px;
+    font: 18px/21px var(--font-stack-body)
+}
+.nf__section .input-wrapper input {
+    padding: 18px 16px;
+    border-radius: 4px;
+    border: solid 1px #ccc;
+    background-color: white;
+    color: var(--color-text-black);
+    margin-top: 6px;
+    font: 16px/21px var(--font-stack-body)
+}
+.nf__section .input-wrapper input:focus-visible {
+    outline: none;
+    border: solid 1px var(--color-yellow);
+}
+.nf__section .input-wrapper input:focus {
+    outline: none;
+    border: solid 1px var(--color-yellow);
+    color: var(--color-text-black);
+}
+
+.nf__section .textarea-wrapper {
+    display: flex;
+    flex-flow: column-reverse;
+    position: relative;
+
+}
+.nf__section .textarea-wrapper-tel {
+    postion:relative;
+}
+.nf__section .textarea-wrapper textarea {
+    border: solid 1px #ccc;
+    background-color: white;
+    color: var(--color-text-black);
+    font: 16px/21px var(--font-stack-body);
+    margin-top: 6px;
+    padding: 16px;
+    border-radius: 4px;
+}
+.nf__section .textarea-wrapper textarea:focus-visible {
+    outline: none;
+    border: solid 1px var(--color-yellow);
+}
+.nf__section .textarea-wrapper textarea:focus {
+    outline: none;
+    border: solid 1px var(--color-yellow);
+}
+.nf__section .textarea-wrapper label{
+    font: 18px/21px var(--font-stack-body);
+    color: #000;
+    letter-spacing: 0.5px;
+}
+.nf__section--footer {
+    flex-flow: column;
+}
+.nf__section--footer input {
+    margin-top: 58px;
+    display: flex;
+    padding: 16px;
+    width: 368px;
+    justify-content: center;
+    color: var(--color-yellow);
+    align-self: center;
+    text-decoration: none;
+    background-color: var(--color-background-product);
+    border-radius: 4px;
+    border: solid 4px transparent;
+    font: bold 16px/24px var(--font-stack-body);
+    transition: border 1s ease-in-out;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.nf__section--footer input:hover {
+    border: solid 4px var(--color-yellow);
+}
+.nf__section .textarea-wrapper .ContactFormMessage__characters {
+    position: absolute;
+    bottom: -24px;
+    font: 12px/18px var(--font-stack-body);
+    color: #999999;
+}
+
+.ndis-input--required {
+    border: solid 1px #f03d44 !important;
+}
+
+.ndis-input--check {
+    border: solid 1px var(--color-dark-text) !important;
+}
+.ndis-input--submitted {
+    border: solid 1px forestgreen !important;
+}
+.ndis-form-item__title--submitted::after {
+    content: url("icon-check_green.svg");
+    position: absolute;
+    padding: 1px 0 0 5px;
+}
+
+.ndis-input-tel--required {
+    font: 12px/18px var(--font-stack-body);
+    color: #ed1c24;
+    position: absolute;
+    bottom: -30px;
+    left: 2px;
+    display:none;
+}
+
+
+@media (max-width: 1200px) {
+    .nf__wrap {
+        padding: 15px;
+    }
+}
+@media (max-width: 750px) {
+    .ndis-describe-form__title {
+        font-size: 35px;
+    }
+    .ndis-describe-form__text p {
+        font-size: 22px;
+    }
+    .ndis-describe-form__text--dedicated {
+        font-size: 32px;
+    }
+    .ndis-form__wrap {
+        padding: 46px 0;
+    }
+}
+
+@media (max-width:480px) {
+    .nf__section {
+        flex-flow: column;
+        align-items: center;
+        margin-top: 0;
+    }
+    .nf__section--footer input {
+        margin-top: 30px;
+    }
+    .nf__section .input-wrapper {
+        width: 100%;
+        margin-top: 20px;
+    }
+    .nf__section .textarea-wrapper {
+        width: 100%;
+    }
+    .nf__section .textarea-wrapper label {
+        display: none;
+    }
+    .ndis-describe-form__text--dedicated {
+        font-size: 28px;
+    }
+    .ndis-describe-form__title {
+        font-size: 32px;
+    }
+    .ndis-describe-form__text p {
+        padding: 0 15px;
+        font-size: 18px;
+    }
+    .nf__section .input-wrapper label {
+        display: none;
+    }
+    .ndis-form__wrap {
+        padding: 36px 0;
+    }
+    .nf__section .textarea-wrapper textarea {
+        margin-top: 30px;
+    }
+
+
+}

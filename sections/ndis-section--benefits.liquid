@@ -1,0 +1,86 @@
+<div class="ndis-benefits__container">
+    <h3 class="ndis-benefits__title">{{ section.settings.ndisBenefitsTitle }}</h3>
+    <div class="ndis-benefits__subtitle-text" style="color:{{ section.settings.ndisBenefitsSubTitleTextColor }}">{{ section.settings.ndisBenefitsSubTitleText }}</div>
+    <div class="ndis-benefits__wrapper">
+        {% for block in section.blocks %}
+            <div class="nb-card">
+                {%- assign ndisBenefits_img = block.settings.ndisBenefitsCardImg.src -%}
+                {%- assign ndisBenefits_url = ndisBenefits_img | img_url: '600x600' | replace: '_1x1.', '_{width}x.' -%}
+                <img class="nb-card__img lazyload"
+                     data-help="{{ ndisBenefits_url }}"
+                     src="{{ ndisBenefits_img | img_url: '600x600' }}"
+                     data-src="{{ ndisBenefits_url }}"
+                     data-widths="[50, 100, 250, 300, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                     data-sizes="auto"
+                     alt="{{ ndisBenefits_img | default: 'Ndis Meals ™ -benefit' | escape }}">
+                <h4 class="nb-card__title" style="color: {{ block.settings.ndisBenefitsCardTitleColor }}" >{{ block.settings.ndisBenefitsCardTitle }}</h4>
+                <div class="nb-card__text" style="color: {{ block.settings.ndisBenefitsCardTextColor }}" >{{  block.settings.ndisBenefitsCardText }}</div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% schema %}
+{
+"name": "NDIS benefits",
+"settings": [
+{
+"type": "text",
+"id": "ndisBenefitsTitle",
+"label": "Title",
+"default": "Your title"
+},
+{
+"type": "richtext",
+"id": "ndisBenefitsSubTitleText",
+"label": "Text",
+"default": "<p>Your text</p>"
+},
+{
+"type": "color",
+"id": "ndisBenefitsSubTitleTextColor",
+"label": "Color (text)",
+"default": "#181818"
+}
+],
+"blocks": [
+{
+"type": "text",
+"name": "Advantage",
+"settings": [
+{
+"type": "image_picker",
+"id": "ndisBenefitsCardImg",
+"label": "Image"
+},
+{
+"type": "text",
+"id": "ndisBenefitsCardTitle",
+"label": "Title",
+"default": "Your title"
+},
+{
+"type": "color",
+"id": "ndisBenefitsCardTitleColor",
+"label": "Color (title)",
+"default": "#010101"
+},
+{
+"type": "richtext",
+"id": "ndisBenefitsCardText",
+"label": "Text",
+"default": "<p>Your text</p>"
+},
+{
+"type": "color",
+"id": "ndisBenefitsCardTextColor",
+"label": "Color (text)",
+"default": "#010101"
+}
+]
+}],"presets": [
+{
+"name": "NDIS Benefits"
+}
+]
+}
+{% endschema %}

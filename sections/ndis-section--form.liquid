@@ -1,0 +1,220 @@
+<div class="ndis-form__wrap">
+    <div class="ndis-form__container">
+        <div class="ndis-describe-form__container">
+            <h3 style="color: {{ section.settings.DescribeTitleColor }}"
+                class="ndis-describe-form__title">{{ section.settings.DescribeTitle }}</h3>
+            <div style="color: {{ section.settings.DescribeTextColor }}"
+                 class="ndis-describe-form__text">{{ section.settings.DescribeText }}</div>
+            <p style="color: {{ section.settings.selectedTextColor }}"
+               class="ndis-describe-form__text--dedicated">{{ section.settings.selectedText }}</p>
+            <div class="ndis-describe-form__tel-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48">
+                    <g fill="none" fill-rule="evenodd">
+                        <rect fill="#231F20" width="48" height="48" rx="24"/>
+                        <path d="M32.001 32c-4.853.099-8.677-1.244-11.389-3.947-3.938-3.925-4.527-9.785-4.6-12.057h4.175l.682 3.44-1.317.658a.998.998 0 0 0-.539 1.057c.387 2.314 2.517 6.924 7.818 7.807.428.067.86-.145 1.056-.535l.666-1.318 3.448.688V32zm1.195-6.004-4.997-.998a.995.995 0 0 0-1.088.53l-.663 1.31c-3.56-.922-4.867-3.932-5.288-5.315l1.284-.642a.997.997 0 0 0 .534-1.087l-.991-4.99a.997.997 0 0 0-.98-.804H15.01a.999.999 0 0 0-.998.945c-.019.363-.403 8.936 5.178 14.51C22.213 32.476 26.375 34 31.577 34c.484 0 .976-.013 1.476-.039a.999.999 0 0 0 .947-.997v-5.988a1 1 0 0 0-.804-.98z" fill="#FBB03B"/>
+                    </g>
+                </svg>
+                <div class="ndis-describe-form__text--tel">{{ section.settings.ndisTel }}</div>
+            </div>
+        </div>
+        <form accept-charset="UTF-8" action="/contact" class="contact-form ndis__contact-form"   method="post">
+            <input name="form_type" type="hidden" value="contact" />
+            <input name="utf8" type="hidden" value="✓" />
+            <input name="contact[page]" type="hidden" value="NDIS" />
+            <div class="nf__wrap">
+                <div class="nf__section">
+                    <div class="input-wrapper">
+                        <input type="text"
+                               name="contact[name]"
+                               id="ContactFormName"
+                               class="ndis-form__item"
+                               placeholder="{{ section.settings.namePlaceholder }}">
+                        <label class="ndis-form-item__title" for="ContactFormName">{{ section.settings.nameTitle }}</label>
+
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="email"
+                               name="contact[email]"
+                               id="ContactFormEmail"
+                               class="ndis-form__item"
+                               placeholder="{{ section.settings.emailPlaceholder }}"
+                               spellcheck="false"
+                               autocomplete="off"
+                               autocapitalize="off">
+                        <label class="ndis-form-item__title" for="ContactFormEmail">{{ section.settings.emailTitle }}</label>
+                    </div>
+                </div>
+                <div class="nf__section">
+                    <div class="input-wrapper">
+                        <p class="ndis-input-tel--required">Example: +61 0 0000 0000</p>
+                        <input type="tel"
+                               name="contact[phone]"
+                               id="ContactFormPhone"
+                               class="ndis-form__item"
+                               placeholder="{{ section.settings.telPlaceholder }}"
+                               maxlength="15">
+                        <label class="ndis-form-item__title" for="ContactFormPhone">{{ section.settings.telTitle }}</label>
+
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="text"
+                               name="contact[title]"
+                               class="ndis-form__item"
+                               id="ContactFormSubject"
+                               placeholder="{{ section.settings.subjectPlaceholder }}">
+                        <label class="ndis-form-item__title" for="ContactFormSubject">{{ section.settings.subjectTitle }}</label>
+                    </div>
+                </div>
+                <div class="nf__section nf__section--footer">
+                    <div class="textarea-wrapper">
+                  <textarea rows="4"
+                            maxlength="280"
+                            class="ndis-form__item"
+                            name="contact[body]"
+                            id="ContactFormMessage"
+                            placeholder="{{ section.settings.messagePlaceholder }}"></textarea>
+                        <label  class="ndis-form-item__title" for="ContactFormMessage">{{ section.settings.messageTitle }}</label>
+                        <label class="ContactFormMessage__characters" for="ContactFormMessage">280 character (min:15)</label>
+                    </div>
+                    <input type="submit" class="btn std-btn ndis__btn" value="Submit">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    /* document.addEventListener("DOMContentLoaded", () => {
+        let path = "?contact_posted=true"
+        let title = document.querySelectorAll(".ndis-form-item__title")
+        if(window.location.search == path) {
+            ndisFormInputItems.forEach(item => {
+                item.classList.add("ndis-input--submitted")
+            })
+            title.forEach(item => {
+                item.classList.add('ndis-form-item__title--submitted')
+            })
+        }
+
+    })
+       */
+
+</script>
+
+{% schema %}
+{
+"name": "NDIS form",
+"settings": [
+{
+"type": "text",
+"id": "DescribeTitle",
+"label": "Title",
+"default": "Your title"
+},
+{
+"type": "color",
+"id": "DescribeTitleColor",
+"label": "Text color",
+"default": "#010101"
+},
+{
+"type": "richtext",
+"id": "DescribeText",
+"label": "Text",
+"default": "<p>Youre text</p>"
+},
+{
+"type": "color",
+"id": "DescribeTextColor",
+"label": "Text color",
+"default": "#181818"
+},
+{
+"type": "text",
+"id": "selectedText",
+"label": "Selected text",
+"default": "Your text"
+},
+{
+"type": "color",
+"id": "selectedTextColor",
+"label": "Selected text color",
+"default": "#fbb03a"
+},
+{
+"type": "text",
+"id": "ndisTel",
+"label": "Tel:",
+"default": "Your number"
+},
+{
+"type": "header",
+"content": "Form options"
+},
+{
+"type": "text",
+"id": "nameTitle",
+"label": "Name input label",
+"default": "Your name"
+},
+{
+"type": "text",
+"id": "namePlaceholder",
+"label": "Name input placeholder",
+"default": "Enter your username"
+},
+{
+"type": "text",
+"id": "emailTitle",
+"label": "Email label",
+"default": "Your email"
+},
+{
+"type": "text",
+"id": "emailPlaceholder",
+"label": "Email placeholder",
+"default": "Enter your email"
+},
+{
+"type": "text",
+"id": "telTitle",
+"label": "Tel label",
+"default": "Phone number"
+},
+{
+"type": "text",
+"id": "telPlaceholder",
+"label": "Tel placeholder",
+"default": "Enter your tel"
+},
+{
+"type": "text",
+"id": "subjectTitle",
+"label": "Subject label",
+"default": "Subject"
+},
+{
+"type": "text",
+"id": "subjectPlaceholder",
+"label": "Subject placeholder",
+"default": "Placeholder text (Hint text)"
+},
+{
+"type": "text",
+"id": "messageTitle",
+"label": "Message label",
+"default": "Message"
+},
+{
+"type": "text",
+"id": "messagePlaceholder",
+"label": "Message placeholder",
+"default": "Enter your message"
+}
+
+],"presets": [
+{
+"name": "NDIS form"
+}
+]
+}
+{% endschema %}

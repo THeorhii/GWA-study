@@ -1,0 +1,60 @@
+<div class="ndis-cards__container">
+    {% for block in section.blocks  %}
+        {% include 'ndis-information-card.liquid' %}
+    {% endfor %}
+</div>
+
+{% schema %}
+{
+"name": "NDIS suggestions",
+"settings": [],
+"blocks": [
+{
+"type": "text",
+"name": "Suggestion",
+"settings": [
+{
+"type": "image_picker",
+"id": "InfCardImg",
+"label": "Image"
+},
+{
+"type": "text",
+"id": "InfCardText",
+"label": "Sub-headline",
+"default": "Your sub-headline"
+},
+{
+"type": "color",
+"id": "InfCardTextColor",
+"label": "Color (sub-headline)",
+"default": "#fff"
+},
+{
+"type": "text",
+"id": "InfCardTitle",
+"label": "Headline",
+"default": "Your headline"
+},
+{
+"type": "color",
+"id": "InfCardTitleColor",
+"label": "Color (headline)",
+"default": "#6cc900"
+},
+{
+"type": "richtext",
+"id": "CardContent",
+"label": "Content",
+"default": "<p>Your card content</p>"
+}
+
+
+]
+}],"presets": [
+{
+"name": "NDIS card"
+}
+]
+}
+{% endschema %}

@@ -1,0 +1,112 @@
+<div class="ndis-food-blocks-wrap-bg">
+    <div class="ndis-food-blocks__container">
+        <h3 class="ndis-food__title">{{ section.settings.ndisFoodTitle }}</h3>
+        <div class="ndis-food-blocks__wrapper">
+            {% for block in section.blocks %}
+                <div class="nfb-block-card {% if block.settings.ndisImgPosition == true %} nfb-block-card--left-position {% endif %}">
+                    <div class="nfb-block-content">
+                        <div class="nfb-block-describe-wrap">
+                            <h4 class="nfb-block-title" style="color: {{ block.settings.ndisContentTitleColor }}">{{ block.settings.ndisContentTitle }}</h4>
+                           <div class="nfb-block-text">{{ block.settings.ndisContentText }}</div>
+                        </div>
+                        <div class="nfb-block-price-wrap">
+                            <p class="nfb-block-price">Meal Price: <span class="nfb-block-price-num-meal" style="color:{{ block.settings.ndisMealPriceColor }}">{{ block.settings.ndisMealPrice }}$</span></p>
+                            <p class="nfb-block-price">Your Co-pay is <span class="nfb-block-price-num-copay" style="color:{{ block.settings.ndisCoPayColor  }}">{{ block.settings.ndisCoPay }}$</span></p>
+                        </div>
+                    </div>
+                    {%- assign ndisFood_img = block.settings.ndisFoodImg.src -%}
+                    {%- assign ndisFood_url = ndisFood_img | img_url: '800x800' | replace: '_1x1.', '_{width}x.' -%}
+                    <img class="nfb-block__img lazyload  {% if block.settings.ndisImgPosition == true %} nfb-block__img--left-position {% endif %}"
+                         data-help="{{ ndisFood_url }}"
+                         src="{{ ndisFood_img | img_url: '2100x800' }}"
+                         data-src="{{ ndisFood_url }}"
+                         data-widths="[50, 100, 250, 300, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                         data-sizes="auto"
+                         alt="{{ ndisFood_img | default: 'Ndis Meals ™' | escape }}">
+                </div>
+
+            {% endfor %}
+        <a class="ndis-food__link" href="{{ section.settings.ndisFoodTitleLink }}">View our full MENU</a>
+        </div>
+    </div>
+</div>
+{% schema %}
+{
+"name": "NDIS foods",
+"settings": [
+{
+"type": "text",
+"id": "ndisFoodTitle",
+"label": "Title",
+"default": "Your title"
+},
+{
+"type": "url",
+"id": "ndisFoodTitleLink",
+"label": "Link button"
+}
+],
+"blocks": [
+{
+"type": "text",
+"name": "Food article",
+"settings": [
+{
+"type": "image_picker",
+"id": "ndisFoodImg",
+"label": "Image"
+},
+{
+"type": "checkbox",
+"id": "ndisImgPosition",
+"label": "Image position - left",
+"default": false
+},
+{
+"type": "text",
+"id": "ndisContentTitle",
+"label": "Title",
+"default": "Your title"
+},
+{
+"type": "color",
+"id": "ndisContentTitleColor",
+"label": "Color (title)",
+"default": "#fbb03c"
+},
+{
+"type": "richtext",
+"id": "ndisContentText",
+"label": "Text",
+"default": "<p>Your text</p>"
+},
+{
+"type": "number",
+"id": "ndisMealPrice",
+"label": "Meal price (numbers only)"
+},
+{
+"type": "color",
+"id": "ndisMealPriceColor",
+"label": "Color (meal price)",
+"default": "#fbb03c"
+},
+{
+"type": "number",
+"id": "ndisCoPay",
+"label": "Co-pay price (numbers only)"
+},
+{
+"type": "color",
+"id": "ndisCoPayColor",
+"label": "Color (co-pay price)",
+"default": "#6cc900"
+}
+]
+}],"presets": [
+{
+"name": "NDIS food blocks"
+}
+]
+}
+{% endschema %}
