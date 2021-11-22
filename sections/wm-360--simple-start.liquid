@@ -1,0 +1,82 @@
+{% if section.settings.show %}
+    <section class="grid wm-360-start__content page-width">
+        <h2>{{ section.settings.header }}</h2>
+        <a href="{{ section.settings.btn-url }}">{{ section.settings.btn-text }}</a>
+    </section>
+    <section class="wm-360-start__image-wrap">
+        {%- assign icon_full = section.settings.image_full.src -%}
+        {%- assign img_url_full = icon_full | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <img class="image__full lazyload"
+             src="{{ icon_full | img_url: '100x' }}"
+             data-src="{{ img_url_full }}"
+             data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+             data-sizes="auto"
+             alt="{{ icon_full.alt | default: 'Workout Meals ™' | escape }}">
+
+        {%- assign icon_tablet = section.settings.image_tablet.src -%}
+        {%- assign img_url_tablet = icon_tablet | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <img class="image__tablet lazyload"
+             src="{{ icon_tablet | img_url: '100x' }}"
+             data-src="{{ img_url_tablet }}"
+             data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+             data-sizes="auto"
+             alt="{{ icon_tablet.alt | default: 'Workout Meals ™' | escape }}">
+
+        {%- assign icon_mobile = section.settings.image_mobile.src -%}
+        {%- assign img_url_mobile = icon_mobile | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <img class="image__mobile lazyload"
+             src="{{ icon_mobile | img_url: '100x' }}"
+             data-src="{{ img_url_mobile }}"
+             data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728]"
+             data-sizes="auto"
+             alt="{{ icon_mobile.alt | default: 'Workout Meals ™' | escape }}">
+    </section>
+{% endif %}
+
+
+{% schema %}
+    {
+    "name": "WM-360 Get Started",
+    "class": "wm-360-start",
+    "settings": [
+    {
+    "type": "checkbox",
+    "id": "show",
+    "label": "Show",
+    "default": true
+    },
+    {
+    "type": "text",
+    "id": "header",
+    "label": "Header section",
+    "default": "Get Started Today"
+    },
+    {
+    "type": "text",
+    "id": "btn-text",
+    "label": "Button text",
+    "default": "Book A FREE Consultation"
+    },
+    {
+    "type": "url",
+    "id": "btn-url",
+    "label": "Button link"
+    },
+    {
+    "type": "image_picker",
+    "id": "image_full",
+    "label": "Image for desktop"
+    },
+    {
+    "type": "image_picker",
+    "id": "image_tablet",
+    "label": "Image for tablet"
+    },
+    {
+    "type": "image_picker",
+    "id": "image_mobile",
+    "label": "Image for mobile"
+    }
+    ]
+    }
+{% endschema %}

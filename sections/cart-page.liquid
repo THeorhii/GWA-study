@@ -1,0 +1,178 @@
+<script>
+    if (window.theme.cartType == 'drawer') {
+        document.location.href = "/collections/menu"
+    }
+</script>
+
+<div class="grid">
+        {% if cart.item_count > 0 %}
+            <h1>{{ 'cart.general.title' | t }}</h1>
+
+            <form action="/cart" method="post" novalidate>
+                <div class="cart-main">
+                    <div class="cart-main-header tablet-hide">
+                        <p>{{ 'cart.label.product' | t }}</p>
+                        <p>{{ 'cart.label.price' | t }}</p>
+                        <p>{{ 'cart.label.quantity' | t }}</p>
+                        <p>{{ 'cart.label.total' | t }}</p>
+                    </div>
+                    {%- for item in cart.items -%}
+                        <div class="cart-main-content item-{{ item.variant_id }}">
+                            <div class="item-image">
+                                {% if item.image != blank %}
+                                    {{ item | img_url: '170x170' | img_tag: item.title }}
+                                {% endif %}
+                            </div>
+                            <div class="item-content">
+                                <p class="item-content-title">{{ item.product.title }}</p>
+                                {% unless item.product.has_only_default_variant %}
+                                    <p class="item-content-variant">{{ item.variant.title }}</p>
+                                {% endunless %}
+                                <div class="item-content-remove">
+                                    <p class="tablet-show">
+                                        {% if item.original_line_price != item.line_price %}
+                                            <span class="visually-hidden">{{ 'cart.label.discounted_price' | t }}</span>
+                                            {{ item.price | money }}
+                                            <span class="visually-hidden">{{ 'cart.label.original_price' | t }}</span>
+                                            <s>{{ item.original_price | money }}</s>
+                                        {% else %}
+                                            {{ item.price | money }}
+                                        {% endif %}
+                                    </p>
+                                        <a class="table-remove" href="/cart/change?line={{ forloop.index }}&amp;quantity=0">
+                                            {% include 'icon-remove' %}<small class="tablet-hide">{{ 'cart.general.remove' | t }}</small>
+                                        </a>
+                                </div>
+                                <div class="cart-item-count tablet-show" data-variant-id="{{ item.variant_id }}" data-line="{{ forloop.index }}" data-qty="{{ item.quantity }}">
+                                    <button class="product-remove">{%- include 'icon-minus' -%}</button>
+                                    <span class="product-count">{{ item.quantity }}</span>
+                                    <button class="product-add">{%- include 'icon-plus' -%}</button>
+                                </div>
+                            </div>
+                            <div class="item-price tablet-hide">
+                                {% if item.original_line_price != item.line_price %}
+                                    <span class="visually-hidden">{{ 'cart.label.discounted_price' | t }}</span>
+                                    {{ item.price | money }}
+                                    <span class="visually-hidden">{{ 'cart.label.original_price' | t }}</span>
+                                    <s>{{ item.original_price | money }}</s>
+                                {% else %}
+                                    {{ item.price | money }}
+                                {% endif %}
+                            </div>
+                            <div class="item-qty tablet-hide">
+                                <div class="cart-item-count" data-variant-id="{{ item.variant_id }}" data-line="{{ forloop.index }}" data-qty="{{ item.quantity }}">
+                                    <button class="product-remove">{%- include 'icon-minus' -%}</button>
+                                    <span class="product-count">{{ item.quantity }}</span>
+                                    <button class="product-add">{%- include 'icon-plus' -%}</button>
+                                </div>
+                            </div>
+                            <div class="item-total tablet-hide">
+                                {{ item.line_price | money }}
+                            </div>
+                        </div>
+                    {%- endfor -%}
+                </div>
+
+                <div class="cart-footer">
+                    <div class="delivery-search delivery-cart">
+                        <h3 class="delivery-header empty">Choose your delivery region before you proceed to checkout!</h3>
+                        <div class="input-region">
+                            {% include 'icon-search' %}
+                            {% include 'icon-page' %}
+                            <input id="searchFormCart"  type="text" class="delivery-location searchForm empty" placeholder="Enter suburb name or postcode" autocomplete="off">
+                        </div>
+                        <ul class="searchBlock" id="searchBlock" style="cursor: pointer; background-color: white; display: none;"></ul>
+                        <div class="delivery-date-wrapper hide">
+                            <h3>Delivery Date</h3>
+                            <div>
+                                <ul class="cart--available-delivery-days">
+                                    <li class="active"><input type="radio" id="delivery-date-0" class="delivery-date right" checked="checked" name="delivery-date" value="You need to get it by JS">
+                                        <label class="left" for="delivery-date-0">The input value</label></li>
+                                    <li><input type="radio" id="delivery-date-1" class="delivery-date right" name="delivery-date" value="You need to get it by JS">
+                                        <label class="left" for="delivery-date-1">The input value</label></li>
+                                    <li><input type="radio" id="delivery-date-2" class="delivery-date right" name="delivery-date" value="You need to get it by JS">
+                                        <label class="left" for="delivery-date-2">The input value</label></li>
+                                </ul>
+                                <div class="business-hours hide">
+                                    <h3>Delivery hours</h3>
+                                    <ul class="cart--available-delivery-hours">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        {% if settings.cart_notes_enable %}
+                            <label class="cart-special-note" for="CartSpecialInstructions">{{ 'cart.general.note' | t }}</label>
+                            <textarea name="note" placeholder="Please enter any delivery instructions here for the driver. If you are shipping to a BUSINESS ADDRESS, please enter the name of your company here." id="CartSpecialInstructions">{% comment %}{{ cart.note }}{% endcomment %}</textarea>
+                        {% endif %}
+                    </div>
+                    <div class="purchase-type">
+                        <h3>Make this entire cart recurring?</h3>
+                        <div class="purchase-type-button">
+                            <label class="radio-purchase">
+                                <input type="radio" checked="checked" name="type-purchase" value="0">
+                                <div class="radio__text">ONE-TIME PURCHASE</div>
+                            </label>
+                            <label class="radio-purchase">
+                                <input type="radio" name="type-purchase" value="1">
+                                <div class="radio__text">Subscribe and receive FREE Delivery<span></span></div>
+                            </label>
+                        </div>
+
+                        <div class="frequency-weeks-button hide">
+                            <label class="radio-frequency-weeks">
+                                <input type="radio" checked="checked" name="frequency-weeks" value="1">
+                                <div class="radio__text">Deliver every 1 week</div>
+                            </label>
+                            <label class="radio-frequency-weeks">
+                                <input type="radio" name="frequency-weeks" value="2">
+                                <div class="radio__text">Deliver every 2 weeks<span></span></div>
+                            </label>
+                        </div>
+
+                        <p class="title-total">{{ 'cart.general.subtotal' | t }}</p>
+                        <p class="title-sum">{{ cart.total_price | money }}</p>
+                        {% if cart.total_discounts > 0 %}
+                            <p>{{ 'cart.general.savings' | t }} {{ cart.total_discounts | money }}</p>
+                        {% endif %}
+                        <p>{{ 'cart.general.shipping_at_checkout' | t }}</p>
+                    </div>
+                </div>
+
+                <div class="cart-footer-buttons">
+                    <div>
+                        <a href="/collections/all">{% include 'icon-arrow-left' %}GO BACK</a>
+                        <a href="/cart.js" class="clear-cart">clear all items {% include 'icon-cart' %}</a>
+                    </div>
+                    <div>
+                        <input type="submit" name="update" value="{{ 'cart.general.update' | t }}">
+                        <label>
+                            <small class="cart-total-min hide">Cannot place order,<br> conditions not met:<br> Minimum order value is $60.</small>
+                            <small class="message-choose">Choose your delivery region.</small>
+                        <input disabled="true" type="submit" name="checkout" class="btn" value="Order not valid"></label>
+                    </div>
+                </div>
+
+            </form>
+        {% else %}
+            <h1>{{ 'cart.general.empty' | t }}</h1>
+
+            {% comment %}
+                Cart empty state
+            {% endcomment %}
+            <div class="supports-cookies">
+                {% comment %}<p>{{ 'cart.general.empty' | t }}</p>{% endcomment %}
+                <p>{{ 'cart.general.continue_browsing_html' | t }}</p>
+            </div>
+
+            {% comment %}
+                Cart no cookies state
+                ---------------------
+                Browser cookies are required to use the cart. If cookies aren't enabled in the
+                browser a message is displayed prompting the user to enable them.
+            {% endcomment %}
+            <div class="supports-no-cookies">
+                <p>{{ 'cart.general.cookies_required' | t }}</p>
+            </div>
+        {% endif %}
+
+    </div>

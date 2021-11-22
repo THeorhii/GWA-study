@@ -1,0 +1,29 @@
+<div class="collection-product-block ad-block">
+    <div class="ad-block-img">
+        {%- assign icon = ad_img.src -%}
+        {%- assign img_url = icon | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <img class="lazyload ad-block-img-desktop"
+             src="{{ icon | img_url: '50x' }}"
+             srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+             data-src="{{ img_url }}"
+             data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+             data-sizes="auto"
+             alt="{{ icon.alt | default: 'Workout Meals ™' | escape }}"/>
+        {%- assign icon_mobile = ad_img_mobile.src -%}
+        {%- assign img_url_mobile = icon_mobile | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <img class="lazyload ad-block-img-mobile"
+             src="{{ icon_mobile | img_url: '50x' }}"
+             srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+             data-src="{{ img_url_mobile }}"
+             data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+             data-sizes="auto"
+             alt="{{ icon.alt | default: 'Workout Meals ™' | escape }}"/>
+    </div>
+        {% comment %}{%- include 'icon-wm-logo' -%}{% endcomment %}
+    <p class="main-ad-text" style="color: {{ ad_color }}">{{ ad_text }}</p>
+    {%- if ad_name != "" -%}
+        <p class="main-ad-name">{{ ad_name }}</p>
+    {%- else -%}
+        <p class="main-ad-subtext">{{ ad_sub_text }}</p>
+    {%- endif -%}
+</div>

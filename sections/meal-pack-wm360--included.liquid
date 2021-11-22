@@ -1,0 +1,533 @@
+<section data-section-id="{{ section.id }}" id="section-{{ section.id }}" class="collections-section">
+    {% if section.settings.title != blank %}
+        <h3>{{ section.settings.title | escape }}</h3>
+    {% endif %}
+
+    <div class="collections-wrapper">
+        <div class="tab-collection">
+            {% for block in section.blocks %}
+                <button class="tablinks-wm360-collection"
+                        data-collection-handle="{{ block.settings.tab_title | downcase | replace: ' ', '-' }}">
+                    <span>{{ block.settings.tab_title }}</span>
+                </button>
+            {% endfor %}
+        </div>
+        <div class="tab-content__wrap">
+            <div class="tab-anim-content">
+                <svg class="anim-circle" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="628" height="628" viewBox="0 0 628 628">
+                    <defs>
+                        <filter x="-9.7%" y="-6.2%" width="119.4%" height="119.4%" filterUnits="objectBoundingBox" id="a">
+                            <feOffset dy="20" in="SourceAlpha" result="shadowOffsetOuter1"/>
+                            <feGaussianBlur stdDeviation="15" in="shadowOffsetOuter1" result="shadowBlurOuter1"/>
+                            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0" in="shadowBlurOuter1"/>
+                        </filter>
+                        <circle id="b" cx="284" cy="284" r="284"/>
+                    </defs>
+                    <g fill="none" fill-rule="evenodd">
+                        <g transform="translate(30 10)">
+                            <use fill="#000" filter="url(#a)" xlink:href="#b"/>
+                            <use fill="#FFF" xlink:href="#b"/>
+                        </g>
+                        <path class="circle-spin" d="M596.095 260c9.628 82.739-17.572 165.782-74.096 226.848C465.3 547.527 385.51 580.59 303.023 577.84l-2.5-.094L277 559.45l25.668-19.41c72.032 3.251 141.934-25.35 191.108-78.29 48.992-52.144 72.813-122.945 65.392-193.793l-.234-2.146 16.192 21.447L596.096 260zM137.275 95l-4.192 31.438c-63.984 68.61-83.236 167.926-49.753 256.219 33.236 86.588 112.446 147.402 204.865 157.38l2.805.286-26.686 19.391L286.807 577c-65.756-6.068-127.177-35.036-173.678-81.7C5.442 387.454 2.422 214.04 103.824 102.556l3.105-3.36L137.274 95zm378.587-1.82c41.924 41.832 69.675 96.086 78.865 154.887l.273 1.783L576.134 275l-18.343-24.627C541.373 160.59 477.085 87.002 390.61 59.119c-86.39-27.712-180.644-6.164-246.42 55.742l-1.985 1.889 4.192-30.39L116 90.55C227.56-17.68 405.778-16.884 515.862 93.18z" fill="#FBB03C"/>
+                        <g fill-rule="nonzero">
+                            <path d="m167.238 317.81-9 22.1-30-85.19h20.57a5.89 5.89 0 0 1 5.59 3.86l13.41 36.81a31.22 31.22 0 0 1-.57 22.42M206.418 317.81l-9 22.1-30-85.19h20.62a5.89 5.89 0 0 1 5.59 3.86l13.41 36.81a31.22 31.22 0 0 1-.57 22.42M221.268 276.83l9-22.11 30 85.19h-20.57a5.88 5.88 0 0 1-5.59-3.86l-13.41-36.81a31.15 31.15 0 0 1 .57-22.41" fill="#FBB03C"/>
+                            <path d="M504.678 259.27c-2.473-3.133-6.14-4.7-11-4.7h-27.75a20.51 20.51 0 0 0-2.37.15h-175.81l30 85.12v.07H478.448a19.13 19.13 0 0 0 12.64-4.46 19.39 19.39 0 0 0 6.8-11.85l9.3-52.36c.887-4.827.05-8.817-2.51-11.97z" fill="#231F20"/>
+                            <path d="m260.518 276.83 9-22.11 30 85.19h-20.62a5.88 5.88 0 0 1-5.59-3.86l-13.4-36.81a31.15 31.15 0 0 1 .57-22.41" fill="#FBB03C"/>
+                            <text fill="#FFF" font-family="Industry-MediumItalic, Industry" font-size="95.48"  font-weight="400" transform="translate(67 49)">
+                                <tspan x="252.338" y="280.07">360</tspan>
+                            </text>
+                            <path d="m338.358 65-21.33 16.2c115.72 1.88 209.29 96.59 209.29 212.8a211.59 211.59 0 0 1-38.1 121.36l-3.7 26.33 27.05-3.69a243.66 243.66 0 0 0 46.95-144c0-133.89-107.89-243-241.26-245l21.1 16z" fill="#FBB03C"/>
+                            <path d="m121.278 425.79 28.49 3.91a211.78 211.78 0 0 1-49.05-135.7c0-114.71 91.17-208.47 204.8-212.68l21.56-16.26-21-16C174.408 53 68.518 161.35 68.518 294a243.91 243.91 0 0 0 56.05 155.8l-3.29-24.01z" fill="#FBB03C"/>
+                            <path d="m476.588 449.69 3.16-23.05a212.5 212.5 0 0 1-323.13 10.91l-27.34-3.83 3.46 25.42a244.69 244.69 0 0 0 373-13.45l-29.15 4z" fill="#FBB03C"/>
+                            <text class="anim-words anim-words--active anim-word--personal-trainer" fill="#000" transform="rotate(-99.41 73.484 279.321)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="10.71" y="295.226">P</tspan>
+                            </text>
+                            <text class="anim-words anim-words--active anim-word--personal-trainer" fill="#000" transform="rotate(-95.18 72.935 260.256)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="9.055" y="278.356">E</tspan>
+                            </text>
+                            <text class="anim-words anim-words--active anim-word--personal-trainer" fill="#000" transform="rotate(-90.93 73.75 240.095)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="7.144" y="260.556">R</tspan>
+                            </text>
+                            <text class="anim-words anim-words--active anim-word--personal-trainer" fill="#000" transform="rotate(-86.566 76.063 219.61)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="8.033" y="242.651">S</tspan>
+                            </text>
+                            <text class="anim-words anim-words--active anim-word--personal-trainer" fill="#000" transform="rotate(-81.98 80.125 198.643)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="9.432" y="224.694">O</tspan>
+                            </text>
+                            <text class="anim-words anim-words--active anim-word--personal-trainer" fill="#000" transform="rotate(-77.347 85.918 176.616)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="12.267" y="205.9">N</tspan>
+                            </text>
+                            <text class="anim-words anim-words--active anim-word--personal-trainer" fill="#000" transform="rotate(-72.36 94 153.961)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="18" y="187.267">A</tspan>
+                            </text>
+                            <text class="anim-words anim-words--active anim-word--personal-trainer" fill="#000" transform="rotate(-68.07 102.553 134.17)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="25.278" y="171.271">L</tspan>
+                            </text>
+                            <text class="anim-words anim-words--active anim-word--personal-trainer" fill="#000" transform="rotate(-62.66 115.711 108.77)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="33.963" y="151.302">T</tspan>
+                            </text>
+                            <text class="anim-words anim-words--active anim-word--personal-trainer" fill="#000" transform="rotate(-58.36 127.787 88.942)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="41.413" y="136.433">R</tspan>
+                            </text>
+                            <text class="anim-words anim-words--active anim-word--personal-trainer" fill="#000" transform="rotate(-53.931 142.315 67.814)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="51.64" y="121.126">A</tspan>
+                            </text>
+                            <text class="anim-words anim-words--active anim-word--personal-trainer" fill="#000" transform="rotate(-50.47 154.432 52.039)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="64.949" y="110.617">I</tspan>
+                            </text>
+                            <text class="anim-words anim-words--active anim-word--personal-trainer" fill="#000" transform="rotate(-47.031 167.873 35.777)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="68.591" y="100.303">N</tspan>
+                            </text>
+                            <text class="anim-words anim-words--active anim-word--personal-trainer" fill="#000" transform="rotate(-42.58 187.45 13.794)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="83.039" y="87.18">E</tspan>
+                            </text>
+                            <text class="anim-words anim-words--active anim-word--personal-trainer" fill="#000" transform="rotate(-38.1 209.198 -8.712)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="95.746" y="75.803">R</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-nutritionist" fill="#000" transform="rotate(29.75 302.103 195.953)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="352.343" y="57.329">P</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-nutritionist" fill="#000" transform="rotate(33.99 328.63 188.43)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="367.29" y="66.323">E</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-nutritionist" fill="#000" transform="rotate(38.36 352.74 185.673)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="380.673" y="76.866">R</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-nutritionist" fill="#000" transform="rotate(42.969 374.487 186.192)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="394.753" y="88.618">S</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-nutritionist" fill="#000" transform="rotate(47.031 393.174 190.768)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="407" y="101.318">O</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-nutritionist" fill="#000" transform="rotate(52.01 411.572 196.98)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="418.793" y="115.811">N</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-nutritionist" fill="#000" transform="rotate(56.79 427.767 206.077)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="430.588" y="131.608">A</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-nutritionist" fill="#000" transform="rotate(61.113 440.27 215.438)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="440.816" y="146.297">L</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-nutritionist" fill="#000" transform="rotate(67.027 455.427 231.027)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="449.431" y="167.952">N</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-nutritionist" fill="#000" transform="rotate(71.94 465.449 244.806)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="456.707" y="186.146">U</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-nutritionist" fill="#000" transform="rotate(76.28 472.792 258.238)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="462.493" y="203.076">T</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-nutritionist" fill="#000" transform="rotate(80.59 478.504 271.846)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="464.898" y="219.837">R</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-nutritionist" fill="#000" transform="rotate(83.89 481.903 282.747)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="471.666" y="232.97">I</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-nutritionist" fill="#000" transform="rotate(86.88 484.254 293.05)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="468.626" y="245.175">T</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-nutritionist" fill="#000" transform="rotate(88.854 485.474 303.537)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="472.968" y="256.857">I</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-nutritionist" fill="#000" transform="rotate(93.09 486.883 314.614)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="467.596" y="270.374">O</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-nutritionist" fill="#000" transform="rotate(97.85 486.905 330.978)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="465.259" y="289.28">N</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-nutritionist" fill="#000" transform="rotate(101.35 485.806 343.267)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="468.377" y="303.323">I</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-nutritionist" fill="#000" transform="rotate(104.452 484.047 354.236)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="461.019" y="315.748">S</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-nutritionist" fill="#000" transform="rotate(108.71 480.599 368.36)" font-family="Industry-MediumItalic, Industry" font-size="26.94"  font-weight="400">
+                                <tspan x="456.668" y="331.837">T</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-chef" fill="#000" transform="rotate(26.77 80.484 614.345)" font-family="Industry-MediumItalic, Industry" font-size="28.1"  font-weight="400">
+                                <tspan x="140.944" y="461.563">P</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-chef" fill="#000" transform="rotate(22.18 74.065 651.553)" font-family="Industry-MediumItalic, Industry" font-size="28.1"  font-weight="400">
+                                <tspan x="157.058" y="468.644">E</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-chef" fill="#000" transform="rotate(17.526 56.97 704.085)" font-family="Industry-MediumItalic, Industry" font-size="28.1"  font-weight="400">
+                                <tspan x="172.949" y="474.817">R</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-chef" fill="#000" transform="rotate(12.55 10.6 795.992)" font-family="Industry-MediumItalic, Industry" font-size="28.1"  font-weight="400">
+                                <tspan x="190.91" y="479.334">S</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-chef" fill="#000" transform="rotate(7.481 -123.487 1006.89)" font-family="Industry-MediumItalic, Industry" font-size="28.1"  font-weight="400">
+                                <tspan x="208.283" y="482.495">O</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-chef" fill="#000" transform="rotate(2.58 -817.64 1983.835)" font-family="Industry-MediumItalic, Industry" font-size="28.1"  font-weight="400">
+                                <tspan x="226.851" y="484.173">N</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-chef" fill="#000" transform="rotate(-2.291 1515.328 -1179.49)" font-family="Industry-MediumItalic, Industry" font-size="28.1"  font-weight="400">
+                                <tspan x="246.831" y="484.167">A</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-chef" fill="#000" transform="rotate(-7.01 706.942 -52.21)" font-family="Industry-MediumItalic, Industry" font-size="28.1"  font-weight="400">
+                                <tspan x="265.443" y="482.727">L</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-chef" fill="#000" transform="rotate(-13.339 539.37 204.142)" font-family="Industry-MediumItalic, Industry" font-size="28.1"  font-weight="400">
+                                <tspan x="287.381" y="478.676">C</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-chef" fill="#000" transform="rotate(-18.28 500.29 277.228)" font-family="Industry-MediumItalic, Industry" font-size="28.1"  font-weight="400">
+                                <tspan x="304.513" y="473.444">H</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-chef" fill="#000" transform="rotate(-23.18 484.433 315.65)" font-family="Industry-MediumItalic, Industry" font-size="28.1"  font-weight="400">
+                                <tspan x="322.972" y="466.993">E</tspan>
+                            </text>
+                            <text class="anim-words anim-word--personal-chef" fill="#000" transform="rotate(-27.64 479.413 335.743)" font-family="Industry-MediumItalic, Industry" font-size="28.1"  font-weight="400">
+                                <tspan x="338.317" y="459.925">F</tspan>
+                            </text>
+                        </g>
+                    </g>
+                </svg>
+                <div class="tab-anim-content-arrows">
+                    <svg class="anim-arrow anim-arrow-top" xmlns="http://www.w3.org/2000/svg" width="160" height="117">
+                        <g fill="#FBB03C" stroke="#FFF" stroke-width="8" fill-rule="evenodd">
+                            <path class="anim-arrow arrow-end" d="M85 8.028 152.692 58.5 85 108.972V8.028z"/>
+                            <path class="anim-arrow arrow-middle" d="M45 8.028 112.692 58.5 45 108.972V8.028z"/>
+                            <path class="anim-arrow arrow-start" d="M4 8.028 71.692 58.5 4 108.972V8.028z"/>
+                        </g>
+                    </svg>
+                    <svg class="anim-arrow anim-arrow-center" xmlns="http://www.w3.org/2000/svg" width="160" height="117">
+                        <g fill="#FBB03C" stroke="#FFF" stroke-width="8" fill-rule="evenodd">
+                            <path class="anim-arrow arrow-end" d="M85 8.028 152.692 58.5 85 108.972V8.028z"/>
+                            <path class="anim-arrow arrow-middle" d="M45 8.028 112.692 58.5 45 108.972V8.028z"/>
+                            <path class="anim-arrow arrow-start" d="M4 8.028 71.692 58.5 4 108.972V8.028z"/>
+                        </g>
+                    </svg>
+                    <svg class="anim-arrow anim-arrow-bottom" xmlns="http://www.w3.org/2000/svg" width="160" height="117">
+                        <g fill="#FBB03C" stroke="#FFF" stroke-width="8" fill-rule="evenodd">
+                            <path class="anim-arrow arrow-end" d="M85 8.028 152.692 58.5 85 108.972V8.028z"/>
+                            <path class="anim-arrow arrow-middle" d="M45 8.028 112.692 58.5 45 108.972V8.028z"/>
+                            <path class="anim-arrow arrow-start" d="M4 8.028 71.692 58.5 4 108.972V8.028z"/>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+            {% for block in section.blocks %}
+                <div id="tabcontent-{{ block.settings.tab_title | downcase | replace: ' ', '-' }}"
+                     class="custom-tabcontent-container custom-tabcontent-collection">
+                    {% if block.settings.video_show %}
+                        <div class="wm360-video__container">
+                            <div class="wm360-video-mob__container">
+                                <div class="wm360-video-mob">
+                                    <video playsinline {% if block.settings.video_autoplay %}allow="autoplay" muted
+                                           autoplay class="video-play-active video-autoplay-block"{% endif %}
+                                           src-webm="{{ block.settings.video_webm }}"
+                                           muted
+                                            {% if block.settings.video_size == true %} style="width:inherit; transform:scale(3.7)"
+                                            {% endif %}
+                                           src-mp4="{{ block.settings.video_mp4 }}"
+                                           src-ogg="{{ block.settings.video_ogg }}">
+                                        <source src="{{ block.settings.video_webm }}" type='video/webm'>
+                                        <source src="{{ block.settings.video_mp4 }}" type='video/mp4'>
+                                        <source src="{{ block.settings.video_ogg }}" type='video/ogg'>
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <button class="wm360-video-play">{% include 'icon-btn-play' %}</button>
+                                    <button class="wm360-video-sound video-sound-on  ">{% include 'icon-sound-off' %}</button>
+                                    <button class="wm360-video-sound video-sound-off hide">{% include 'icon-sound-on' %}</button>
+
+                                </div>
+                            </div>
+                            <div class="wm360-video-mob__container wm360-video-mob__container--img">
+                                <div class="wm360-video-mob">
+                                    {%- assign icon_desktop = block.settings.image_mobile.src -%}
+                                    {%- assign img_url_desktop = icon_desktop | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                                    <img class="WM360-banner__img lazyload banner-meal-pack--image-desktop"
+                                         src="{{ icon_desktop | img_url: '50x' }}"
+                                         data-src="{{ img_url_desktop }}"
+                                         data-widths="[50, 100, 180, 250, 300, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                                         data-sizes="auto"
+                                         alt="{{ icon_desktop.alt | default: 'Workout Meals ™' | escape }}">
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                        {%- if block.settings.title != '' or block.settings.text != '' -%}
+                            <div class="tab grid custom-grid">
+                        {%- if block.settings.title != '' -%}
+                            <h2 class="tab__title custom-tab__title">{{ block.settings.title }}</h2>
+                        {%- endif -%}
+                        {%- if block.settings.text != '' -%}
+                            <div style="text-align: {{ block.settings.text-align }}"
+                                 class="tab__subtitle custom-tab__subtitle {% if block.settings.checkIcon == true %} custom-tab__subtitle--check custom-tab__subtitle--before {% endif %}">{{ block.settings.text }}</div>
+                        {%- endif -%}
+                        {% if block.settings.checkButton != false %}
+                            <a class="custom-inf__link"
+                               href="{{ block.settings.titleLink }}">{{ block.settings.buttonTitle }}</a>
+                        {% endif %}
+                    </div>
+                    {%- endif -%}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+</section>
+
+<script>
+    $(".custom-tabcontent-collection").css("display","none");
+
+    //Tab with collection
+    $(".tablinks-wm360-collection:eq(0)").addClass("active");
+    $(".custom-tabcontent-collection:eq(0)").css("display","block");
+
+    $(document).ready(function () {
+        $('.tablinks-wm360-collection')[0].classList.add('active')
+    })
+    $('.tablinks-wm360-collection').on('click', function () {
+        let tab = "tabcontent-" + $(this).attr("data-collection-handle");
+        openCollection360Product(event, tab);
+        let name = $(this).attr("data-collection-handle")
+        changeCircleTitles(name)
+        changeArrowColor()
+    });
+
+    function changeArrowColor() {
+        setTimeout(function() {
+            $(".arrow-start").css('fill', 'black')
+        },400)
+        setTimeout(function() {
+            $(".arrow-middle").css('fill', 'black')
+        },600)
+        setTimeout(function() {
+            $(".arrow-end").css('fill', 'black')
+        },800)
+
+        setTimeout(function() {
+            $(".arrow-end").css('fill', 'var(--color-yellow)')
+            $(".arrow-middle").css('fill', 'var(--color-yellow)')
+            $(".arrow-start").css('fill', 'var(--color-yellow)')
+        },1100)
+    }
+    function changeCircleTitles(name) {
+
+        if (name == "personal-trainer") {
+            $(".anim-words").removeClass("anim-words--active")
+           $(".anim-word--personal-trainer").addClass("anim-words--active")
+            $(".circle-spin").css({
+                "-webkit-transform": "rotate(60deg)",
+                "-moz-transform": "rotate(60deg)",
+                "transform": "rotate(60deg)"
+            });
+        }
+        else if(name == 'personal-nutritionist') {
+            $(".anim-words").removeClass("anim-words--active")
+            $(".anim-word--personal-nutritionist").addClass("anim-words--active")
+            $(".circle-spin").css({
+                "-webkit-transform": "rotate(180deg)",
+                "-moz-transform": "rotate(180deg)",
+                "transform": "rotate(180deg)"
+            });
+        }
+        else if (name == "personal-chef") {
+            $(".anim-words").removeClass("anim-words--active")
+            $(".anim-word--personal-chef").addClass("anim-words--active")
+            $(".circle-spin").css({
+                "-webkit-transform": "rotate(360deg)",
+                "-moz-transform": "rotate(360deg)",
+                "transform": "rotate(360deg)"
+            });
+        }
+
+    }
+    function openCollection360Product(evt, desc) {
+        let i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("custom-tabcontent-collection");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+            tabcontent[i].className = tabcontent[i].className.replace("show", "");
+        }
+        tablinks = document.getElementsByClassName("tablinks-wm360-collection");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(desc).style.opacity = "0";
+        document.getElementById(desc).style.display = "block";
+        $(".tab-anim-content").addClass("tab-anim-content--visible")
+        setTimeout(function() {
+            document.getElementById(desc).style.opacity = "1";
+            $(".tab-anim-content").removeClass("tab-anim-content--visible")
+        },1000)
+        document.getElementById(desc).className += " show";
+        evt.currentTarget.className += " active";
+    }
+
+    /*================ Page WM-360 video ================*/
+    window.addEventListener('DOMContentLoaded', function () {
+        if (document.querySelectorAll(".video-autoplay-block").length > 0) {
+            document.querySelectorAll(".video-autoplay-block").forEach(item => {
+                item.play()
+
+            });
+        }
+    });
+
+    if (document.querySelectorAll('.wm360-video-play').length > 0) {
+        for (let i = 0; i < document.querySelectorAll('.wm360-video-play').length; i++) {
+            videoControllers(i)
+        }
+        function videoControllers(i) {
+            document.querySelectorAll('.wm360-video-play')[i].addEventListener('click', function (el) {
+                let video = this.previousElementSibling;
+                video.play();
+                video.classList.add('video-play-active');
+            });
+
+            document.querySelectorAll('.wm360-video-mob video')[i].addEventListener('click', function (el) {
+                let video = this;
+                if (this.classList.contains('video-play-active')) {
+                    video.pause();
+                    video.classList.remove('video-play-active');
+                }
+            });
+
+            document.querySelectorAll('.wm360-video-mob .video-sound-off')[i].addEventListener('click', function (el) {
+                let button = this;
+                let button_on = this.previousElementSibling;
+                button.classList.add('hide');
+                button_on.classList.remove('hide');
+                button.parentNode.querySelector('video').muted = true;
+            });
+            document.querySelectorAll('.wm360-video-mob .video-sound-on')[i].addEventListener('click', function (el) {
+                let button = this;
+                let button_off = this.nextElementSibling;
+                button.classList.add('hide');
+                button_off.classList.remove('hide');
+                button.parentNode.querySelector('video').muted = false;
+            });
+        }
+    }
+</script>
+
+{% schema %}
+
+{
+"name": "Anim information",
+"class": "wm360-information",
+"settings": [
+{
+"type": "text",
+"id": "title",
+"label": "Title"
+}
+],
+"blocks": [
+{
+"type": "information",
+"name": "Item",
+"settings": [
+{
+"id": "tab_title",
+"type": "text",
+"label": "Tab menu title"
+},
+{
+"id": "title",
+"type": "text",
+"label": "Title"
+},
+{
+"id": "text",
+"type": "richtext",
+"label": "Text"
+},
+{
+"type": "checkbox",
+"id": "checkIcon",
+"label": "List item - check",
+"default": false
+},
+{
+"type": "radio",
+"id": "text-align",
+"label": "Text align",
+"options": [
+{
+"value": "left",
+"label": "Left"
+},
+{
+"value": "center",
+"label": "Center"
+},
+{
+"value": "right",
+"label": "Right"
+}],
+"default": "left"
+},
+{
+"type": "checkbox",
+"id": "checkButton",
+"label": "Button",
+"default": false
+},
+{
+"type": "url",
+"id": "titleLink",
+"label": "Link button"
+},
+{
+"id": "buttonTitle",
+"type": "text",
+"label": "Button title"
+},
+{
+"type": "checkbox",
+"id": "video_show",
+"label": "Video show",
+"default": false
+},
+{
+"type": "header",
+"content": "Left mobile settings"
+},
+{
+"type": "checkbox",
+"id": "video_autoplay",
+"label": "Autoplay",
+"default": false
+
+},
+{
+"type": "checkbox",
+"id": "video_size",
+"label": "Video Crop",
+"default": false
+},
+{
+"type": "text",
+"id": "video_webm",
+"label": "Format: .webm"
+},
+{
+"type": "text",
+"id": "video_mp4",
+"label": "Format: .mp4"
+},
+{
+"type": "text",
+"id": "video_ogg",
+"label": "Format: .ogg / .ogv / .ogm"
+},
+{
+"type": "header",
+"content": "Right mobile settings"
+},
+{
+"type": "image_picker",
+"id": "image_mobile",
+"label": "Right mobile Image"
+}
+]
+}
+]
+}
+
+{% endschema %}
+

@@ -1,0 +1,330 @@
+{% if section.settings.show %}
+    {% assign female_sedentary_5 = section.settings.female_sedentary_5 %}
+    {% assign female_sedentary_5_price = all_products[female_sedentary_5].metafields.mealplanDetails.mealplanDetails.mealplan_price %}
+    {% assign female_sedentary_5_quantity = all_products[female_sedentary_5].metafields.mealplanDetails.mealplanDetails.meals_quantity %}
+    {% assign female_sedentary_5_regular_price = all_products[female_sedentary_5].metafields.mealplanDetails.mealplanDetails.mealplan_regular_price %}
+    {% assign female_sedentary_5_discount_type = all_products[female_sedentary_5].metafields.mealplanDetails.mealplanDetails.mealplan_discount_type %}
+
+    {% assign female_sedentary_6 = section.settings.female_sedentary_6 %}
+    {% assign female_sedentary_6_price = all_products[female_sedentary_6].metafields.mealplanDetails.mealplanDetails.mealplan_price %}
+    {% assign female_sedentary_6_quantity = all_products[female_sedentary_6].metafields.mealplanDetails.mealplanDetails.meals_quantity %}
+    {% assign female_sedentary_6_regular_price = all_products[female_sedentary_6].metafields.mealplanDetails.mealplanDetails.mealplan_regular_price %}
+    {% assign female_sedentary_6_discount_type = all_products[female_sedentary_6].metafields.mealplanDetails.mealplanDetails.mealplan_discount_type %}
+
+    {% assign female_sedentary_7 = section.settings.female_sedentary_7 %}
+    {% assign female_sedentary_7_price = all_products[female_sedentary_7].metafields.mealplanDetails.mealplanDetails.mealplan_price %}
+    {% assign female_sedentary_7_quantity = all_products[female_sedentary_7].metafields.mealplanDetails.mealplanDetails.meals_quantity %}
+    {% assign female_sedentary_7_regular_price = all_products[female_sedentary_7].metafields.mealplanDetails.mealplanDetails.mealplan_regular_price %}
+    {% assign female_sedentary_7_discount_type = all_products[female_sedentary_7].metafields.mealplanDetails.mealplanDetails.mealplan_discount_type %}
+
+
+    {% assign female_active_5 = section.settings.female_active_5 %}
+    {% assign female_active_5_price = all_products[female_active_5].metafields.mealplanDetails.mealplanDetails.mealplan_price %}
+    {% assign female_active_5_quantity = all_products[female_active_5].metafields.mealplanDetails.mealplanDetails.meals_quantity %}
+    {% assign female_active_5_regular_price = all_products[female_active_5].metafields.mealplanDetails.mealplanDetails.mealplan_regular_price %}
+    {% assign female_active_5_discount_type = all_products[female_active_5].metafields.mealplanDetails.mealplanDetails.mealplan_discount_type %}
+
+    {% assign female_active_6 = section.settings.female_active_6 %}
+    {% assign female_active_6_price = all_products[female_active_6].metafields.mealplanDetails.mealplanDetails.mealplan_price %}
+    {% assign female_active_6_quantity = all_products[female_active_6].metafields.mealplanDetails.mealplanDetails.meals_quantity %}
+    {% assign female_active_6_regular_price = all_products[female_active_6].metafields.mealplanDetails.mealplanDetails.mealplan_regular_price %}
+    {% assign female_active_6_discount_type = all_products[female_active_6].metafields.mealplanDetails.mealplanDetails.mealplan_discount_type %}
+
+    {% assign female_active_7 = section.settings.female_active_7 %}
+    {% assign female_active_7_price = all_products[female_active_7].metafields.mealplanDetails.mealplanDetails.mealplan_price %}
+    {% assign female_active_7_quantity = all_products[female_active_7].metafields.mealplanDetails.mealplanDetails.meals_quantity %}
+    {% assign female_active_7_regular_price = all_products[female_active_7].metafields.mealplanDetails.mealplanDetails.mealplan_regular_price %}
+    {% assign female_active_7_discount_type = all_products[female_active_7].metafields.mealplanDetails.mealplanDetails.mealplan_discount_type %}
+
+
+    {% assign female_very_active_5 = section.settings.female_very_active_5 %}
+    {% assign female_very_active_5_price = all_products[female_very_active_5].metafields.mealplanDetails.mealplanDetails.mealplan_price %}
+    {% assign female_very_active_5_quantity = all_products[female_very_active_5].metafields.mealplanDetails.mealplanDetails.meals_quantity %}
+    {% assign female_very_active_5_regular_price = all_products[female_very_active_5].metafields.mealplanDetails.mealplanDetails.mealplan_regular_price %}
+    {% assign female_very_active_5_discount_type = all_products[female_very_active_5].metafields.mealplanDetails.mealplanDetails.mealplan_discount_type %}
+
+    {% assign female_very_active_6 = section.settings.female_very_active_6 %}
+    {% assign female_very_active_6_price = all_products[female_very_active_6].metafields.mealplanDetails.mealplanDetails.mealplan_price %}
+    {% assign female_very_active_6_quantity = all_products[female_very_active_6].metafields.mealplanDetails.mealplanDetails.meals_quantity %}
+    {% assign female_very_active_6_regular_price = all_products[female_very_active_6].metafields.mealplanDetails.mealplanDetails.mealplan_regular_price %}
+    {% assign female_very_active_6_discount_type = all_products[female_very_active_6].metafields.mealplanDetails.mealplanDetails.mealplan_discount_type %}
+
+    {% assign female_very_active_7 = section.settings.female_very_active_7 %}
+    {% assign female_very_active_7_price = all_products[female_very_active_7].metafields.mealplanDetails.mealplanDetails.mealplan_price %}
+    {% assign female_very_active_7_quantity = all_products[female_very_active_7].metafields.mealplanDetails.mealplanDetails.meals_quantity %}
+    {% assign female_very_active_7_regular_price = all_products[female_very_active_7].metafields.mealplanDetails.mealplanDetails.mealplan_regular_price %}
+    {% assign female_very_active_7_discount_type = all_products[female_very_active_7].metafields.mealplanDetails.mealplanDetails.mealplan_discount_type %}
+
+
+    {% assign male_sedentary_5 = section.settings.male_sedentary_5 %}
+    {% assign male_sedentary_5_price = all_products[male_sedentary_5].metafields.mealplanDetails.mealplanDetails.mealplan_price %}
+    {% assign male_sedentary_5_quantity = all_products[male_sedentary_5].metafields.mealplanDetails.mealplanDetails.meals_quantity %}
+    {% assign male_sedentary_5_regular_price = all_products[male_sedentary_5].metafields.mealplanDetails.mealplanDetails.mealplan_regular_price %}
+    {% assign male_sedentary_5_discount_type = all_products[male_sedentary_5].metafields.mealplanDetails.mealplanDetails.mealplan_discount_type %}
+
+    {% assign male_sedentary_6 = section.settings.male_sedentary_6 %}
+    {% assign male_sedentary_6_price = all_products[male_sedentary_6].metafields.mealplanDetails.mealplanDetails.mealplan_price %}
+    {% assign male_sedentary_6_quantity = all_products[male_sedentary_6].metafields.mealplanDetails.mealplanDetails.meals_quantity %}
+    {% assign male_sedentary_6_regular_price = all_products[male_sedentary_6].metafields.mealplanDetails.mealplanDetails.mealplan_regular_price %}
+    {% assign male_sedentary_6_discount_type = all_products[male_sedentary_6].metafields.mealplanDetails.mealplanDetails.mealplan_discount_type %}
+
+    {% assign male_sedentary_7 = section.settings.male_sedentary_7 %}
+    {% assign male_sedentary_7_price = all_products[male_sedentary_7].metafields.mealplanDetails.mealplanDetails.mealplan_price %}
+    {% assign male_sedentary_7_quantity = all_products[male_sedentary_7].metafields.mealplanDetails.mealplanDetails.meals_quantity %}
+    {% assign male_sedentary_7_regular_price = all_products[male_sedentary_7].metafields.mealplanDetails.mealplanDetails.mealplan_regular_price %}
+    {% assign male_sedentary_7_discount_type = all_products[male_sedentary_7].metafields.mealplanDetails.mealplanDetails.mealplan_discount_type %}
+
+
+    {% assign male_active_5 = section.settings.male_active_5 %}
+    {% assign male_active_5_price = all_products[male_active_5].metafields.mealplanDetails.mealplanDetails.mealplan_price %}
+    {% assign male_active_5_quantity = all_products[male_active_5].metafields.mealplanDetails.mealplanDetails.meals_quantity %}
+    {% assign male_active_5_regular_price = all_products[male_active_5].metafields.mealplanDetails.mealplanDetails.mealplan_regular_price %}
+    {% assign male_active_5_discount_type = all_products[male_active_5].metafields.mealplanDetails.mealplanDetails.mealplan_discount_type %}
+
+    {% assign male_active_6 = section.settings.male_active_6 %}
+    {% assign male_active_6_price = all_products[male_active_6].metafields.mealplanDetails.mealplanDetails.mealplan_price %}
+    {% assign male_active_6_quantity = all_products[male_active_6].metafields.mealplanDetails.mealplanDetails.meals_quantity %}
+    {% assign male_active_6_regular_price = all_products[male_active_6].metafields.mealplanDetails.mealplanDetails.mealplan_regular_price %}
+    {% assign male_active_6_discount_type = all_products[male_active_6].metafields.mealplanDetails.mealplanDetails.mealplan_discount_type %}
+
+    {% assign male_active_7 = section.settings.male_active_7 %}
+    {% assign male_active_7_price = all_products[male_active_7].metafields.mealplanDetails.mealplanDetails.mealplan_price %}
+    {% assign male_active_7_quantity = all_products[male_active_7].metafields.mealplanDetails.mealplanDetails.meals_quantity %}
+    {% assign male_active_7_regular_price = all_products[male_active_7].metafields.mealplanDetails.mealplanDetails.mealplan_regular_price %}
+    {% assign male_active_7_discount_type = all_products[male_active_7].metafields.mealplanDetails.mealplanDetails.mealplan_discount_type %}
+
+
+    {% assign male_very_active_5 = section.settings.male_very_active_5 %}
+    {% assign male_very_active_5_price = all_products[male_very_active_5].metafields.mealplanDetails.mealplanDetails.mealplan_price %}
+    {% assign male_very_active_5_quantity = all_products[male_very_active_5].metafields.mealplanDetails.mealplanDetails.meals_quantity %}
+    {% assign male_very_active_5_regular_price = all_products[male_very_active_5].metafields.mealplanDetails.mealplanDetails.mealplan_regular_price %}
+    {% assign male_very_active_5_discount_type = all_products[male_very_active_5].metafields.mealplanDetails.mealplanDetails.mealplan_discount_type %}
+
+    {% assign male_very_active_6 = section.settings.male_very_active_6 %}
+    {% assign male_very_active_6_price = all_products[male_very_active_6].metafields.mealplanDetails.mealplanDetails.mealplan_price %}
+    {% assign male_very_active_6_quantity = all_products[male_very_active_6].metafields.mealplanDetails.mealplanDetails.meals_quantity %}
+    {% assign male_very_active_6_regular_price = all_products[male_very_active_6].metafields.mealplanDetails.mealplanDetails.mealplan_regular_price %}
+    {% assign male_very_active_6_discount_type = all_products[male_very_active_6].metafields.mealplanDetails.mealplanDetails.mealplan_discount_type %}
+
+    {% assign male_very_active_7 = section.settings.male_very_active_7 %}
+    {% assign male_very_active_7_price = all_products[male_very_active_7].metafields.mealplanDetails.mealplanDetails.mealplan_price %}
+    {% assign male_very_active_7_quantity = all_products[male_very_active_7].metafields.mealplanDetails.mealplanDetails.meals_quantity %}
+    {% assign male_very_active_7_regular_price = all_products[male_very_active_7].metafields.mealplanDetails.mealplanDetails.mealplan_regular_price %}
+    {% assign male_very_active_7_discount_type = all_products[male_very_active_7].metafields.mealplanDetails.mealplanDetails.mealplan_discount_type %}
+
+    {% include 'quiz-goal-meals-pack' %}
+
+    <script>
+
+        let meal_packs_test_answers = {
+            female : {
+                sedentary : [
+                    {'{{ female_sedentary_5 }}' : ["{{ female_sedentary_5_price }}", "{{ female_sedentary_5_quantity }}", "{{ female_sedentary_5_discount_type }}", "{{ female_sedentary_5_regular_price }}"] },
+                    {'{{ female_sedentary_6 }}' : ["{{ female_sedentary_6_price }}", "{{ female_sedentary_6_quantity }}", "{{ female_sedentary_6_discount_type }}", "{{ female_sedentary_6_regular_price }}"] },
+                    {'{{ female_sedentary_7 }}' : ["{{ female_sedentary_7_price }}", "{{ female_sedentary_7_quantity }}", "{{ female_sedentary_7_discount_type }}", "{{ female_sedentary_7_regular_price }}"] }
+                ],
+                active : [
+                    {'{{ female_active_5 }}': ["{{ female_active_5_price }}", "{{ female_active_5_quantity }}", "{{ female_active_5_discount_type }}", "{{ female_active_5_regular_price }}"] },
+                    {'{{ female_active_6 }}': ["{{ female_active_6_price }}", "{{ female_active_6_quantity }}", "{{ female_active_6_discount_type }}", "{{ female_active_6_regular_price }}"] },
+                    {'{{ female_active_7 }}': ["{{ female_active_7_price }}", "{{ female_active_7_quantity }}", "{{ female_active_7_discount_type }}", "{{ female_active_7_regular_price }}"] }
+                ],
+                very_active : [
+                    {'{{ female_very_active_5 }}': ["{{ female_very_active_5_price }}", "{{ female_very_active_5_quantity }}", "{{ female_very_active_5_discount_type }}", "{{ female_very_active_5_regular_price }}"] },
+                    {'{{ female_very_active_6 }}': ["{{ female_very_active_6_price }}", "{{ female_very_active_6_quantity }}", "{{ female_very_active_6_discount_type }}", "{{ female_very_active_6_regular_price }}"] },
+                    {'{{ female_very_active_7 }}': ["{{ female_very_active_7_price }}", "{{ female_very_active_7_quantity }}", "{{ female_very_active_7_discount_type }}", "{{ female_very_active_7_regular_price }}"] }
+                ]
+            },
+            male : {
+                sedentary : [
+                    {'{{ male_sedentary_5 }}': ["{{ male_sedentary_5_price }}", "{{ male_sedentary_5_quantity }}", "{{ male_sedentary_5_discount_type }}", "{{ male_sedentary_5_regular_price }}"] },
+                    {'{{ male_sedentary_6 }}': ["{{ male_sedentary_6_price }}", "{{ male_sedentary_6_quantity }}", "{{ male_sedentary_6_discount_type }}", "{{ male_sedentary_6_regular_price }}"] },
+                    {'{{ male_sedentary_7 }}': ["{{ male_sedentary_7_price }}", "{{ male_sedentary_7_quantity }}", "{{ male_sedentary_7_discount_type }}", "{{ male_sedentary_7_regular_price }}"] }
+                ],
+                active : [
+                    {'{{ male_active_5 }}': ["{{ male_active_5_price }}", "{{ male_active_5_quantity }}", "{{ male_active_5_discount_type }}", "{{ male_active_5_regular_price }}"] },
+                    {'{{ male_active_6 }}': ["{{ male_active_6_price }}", "{{ male_active_6_quantity }}", "{{ male_active_6_discount_type }}", "{{ male_active_6_regular_price }}"] },
+                    {'{{ male_active_7 }}': ["{{ male_active_7_price }}", "{{ male_active_7_quantity }}", "{{ male_active_7_discount_type }}", "{{ male_active_7_regular_price }}"] }
+                ],
+                very_active : [
+                    {'{{ male_very_active_5 }}': ["{{ male_very_active_5_price }}", "{{ male_very_active_5_quantity }}", "{{ male_very_active_5_discount_type }}", "{{ male_very_active_5_regular_price }}"] },
+                    {'{{ male_very_active_6 }}': ["{{ male_very_active_6_price }}", "{{ male_very_active_6_quantity }}", "{{ male_very_active_6_discount_type }}", "{{ male_very_active_6_regular_price }}"] },
+                    {'{{ male_very_active_7 }}': ["{{ male_very_active_7_price }}", "{{ male_very_active_7_quantity }}", "{{ male_very_active_7_discount_type }}", "{{ male_very_active_7_regular_price }}"] }
+                ]
+            }
+        };
+    </script>
+
+{% endif %}
+
+{% schema %}
+    {
+    "name": "Quiz meal pack section",
+    "class": "test-meal-pack",
+    "settings": [
+    {
+    "type": "checkbox",
+    "id": "show",
+    "label": "Show",
+    "default": true
+    },
+    {
+    "type": "text",
+    "id": "quiz_header",
+    "label": "Quiz header",
+    "default": "Start Meal Pack Questionnaire"
+    },
+    {
+    "type": "text",
+    "id": "quiz_info",
+    "label": "Quiz subheader"
+    },
+    {
+    "type": "text",
+    "id": "text_chose_types",
+    "label": "Question about program",
+    "default": "I want to have a FREE Personal Trainer and Nutritionist with my meal pack"
+    },
+    {
+    "type": "text",
+    "id": "btn_first_type",
+    "label": "Text for first program button",
+    "default": "Yes join WM360"
+    },
+    {
+    "type": "text",
+    "id": "btn_second_type",
+    "label": "Text for second program button",
+    "default": "No standard meal pack"
+    },
+    {
+    "type": "text",
+    "id": "help_day_text",
+    "label": "Text for day button",
+    "default": "Purchase with the discounted price"
+    },
+    {
+    "type": "header",
+    "content": "FEMALE"
+    },
+    {
+    "type": "header",
+    "content": "Female Sedentary"
+    },
+    {
+    "type": "product",
+    "id": "female_sedentary_5",
+    "label": "For 5 days"
+    },
+    {
+    "type": "product",
+    "id": "female_sedentary_6",
+    "label": "For 6 days"
+    },
+    {
+    "type": "product",
+    "id": "female_sedentary_7",
+    "label": "For 7 days"
+    },
+    {
+    "type": "header",
+    "content": "Female Active"
+    },
+    {
+    "type": "product",
+    "id": "female_active_5",
+    "label": "For 5 days"
+    },
+    {
+    "type": "product",
+    "id": "female_active_6",
+    "label": "For 6 days"
+    },
+    {
+    "type": "product",
+    "id": "female_active_7",
+    "label": "For 7 days"
+    },
+    {
+    "type": "header",
+    "content": "Female Very Active"
+    },
+    {
+    "type": "product",
+    "id": "female_very_active_5",
+    "label": "For 5 days"
+    },
+    {
+    "type": "product",
+    "id": "female_very_active_6",
+    "label": "For 6 days"
+    },
+    {
+    "type": "product",
+    "id": "female_very_active_7",
+    "label": "For 7 days"
+    },
+    {
+    "type": "header",
+    "content": "MALE"
+    },
+    {
+    "type": "header",
+    "content": "Male Sedentary"
+    },
+    {
+    "type": "product",
+    "id": "male_sedentary_5",
+    "label": "For 5 days"
+    },
+    {
+    "type": "product",
+    "id": "male_sedentary_6",
+    "label": "For 6 days"
+    },
+    {
+    "type": "product",
+    "id": "male_sedentary_7",
+    "label": "For 7 days"
+    },
+    {
+    "type": "header",
+    "content": "Male Active"
+    },
+    {
+    "type": "product",
+    "id": "male_active_5",
+    "label": "For 5 days"
+    },
+    {
+    "type": "product",
+    "id": "male_active_6",
+    "label": "For 6 days"
+    },
+    {
+    "type": "product",
+    "id": "male_active_7",
+    "label": "For 7 days"
+    },
+    {
+    "type": "header",
+    "content": "Male Very Active"
+    },
+    {
+    "type": "product",
+    "id": "male_very_active_5",
+    "label": "For 5 days"
+    },
+    {
+    "type": "product",
+    "id": "male_very_active_6",
+    "label": "For 6 days"
+    },
+    {
+    "type": "product",
+    "id": "male_very_active_7",
+    "label": "For 7 days"
+    }
+    ]
+    }
+
+{% endschema %}

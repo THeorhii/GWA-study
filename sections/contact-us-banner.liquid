@@ -1,0 +1,146 @@
+{% if section.settings.show %}
+    <section id="section-{{ section.id }}" class="contact-us-hero-section"  {% if section.settings.image %} style="background-image: url('{{ section.settings.image | img_url: 'x690' }}');"{% endif %}>
+
+        <div class="page-width">
+            <div class="title-wrapper">
+                {%- if section.settings.title != blank -%}
+                    <h2>{{ section.settings.title | escape }}</h2>
+                {%- endif -%}
+                {%- if section.settings.subtitle != blank -%}
+                    <p>{{ section.settings.subtitle | strip_html }}</p>
+                {%- endif -%}
+                {%- if section.settings.address != blank -%}
+                    <p class="address">{{ section.settings.address }}</p>
+                {%- endif -%}
+                {%- if section.settings.phone != blank -%}
+                    <p class="phone">{{ section.settings.phone }}</p>
+                {%- endif -%}
+            </div>
+            <div class="btn-wrapper">
+                <a href="{{ section.settings.btn_fb_link }}" class="btn-fb">{{ section.settings.btn_fb | escape }} <span>{% include 'icon-fb-messenger' %}</span></a>
+                <a href="{{ section.settings.btn_chat_link }}" class="btn-chat">{{ section.settings.btn_chat | escape }} <span>{% include 'icon-chat' %}</span></a>
+            </div>
+        </div>
+
+    </section>
+{%- endif -%}
+
+<style>
+    #section-{{ section.id }} h2{
+        font-size: {{ section.settings.font_size }}px;
+    }
+
+    {%- if section.settings.image_size == 'small' -%}
+    #section-{{ section.id }} {
+        min-height: 440px;
+    }
+    {%- elsif section.settings.image_size == 'medium' -%}
+    #section-{{ section.id }} {
+        min-height: 690px;
+    }
+    {%- elsif section.settings.image_size == 'large' -%}
+    #section-{{ section.id }} {
+        min-height: 880px;
+    }
+    {%- endif -%}
+
+</style>
+
+
+{% schema %}
+    {
+        "name": "Contact us banner",
+        "settings": [
+            {
+                "type": "checkbox",
+                "id": "show",
+                "label": "Show section",
+                "default": true
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "range",
+                "id": "font_size",
+                "min": 24,
+                "max": 72,
+                "step": 12,
+                "unit": "px",
+                "label": "Font size",
+                "default": 72
+            },
+            {
+                "type": "richtext",
+                "id": "subtitle",
+                "label": "Subtitle"
+            },
+            {
+                "type": "text",
+                "id": "address",
+                "label": "Address"
+            },
+            {
+                "type": "text",
+                "id": "phone",
+                "label": "Phone"
+            },
+            {
+                "type": "text",
+                "id": "btn_fb",
+                "label": "Button text",
+                "default": "Facebook chat"
+            },
+            {
+                "type": "url",
+                "id": "btn_fb_link",
+                "label": "Button link"
+            },
+            {
+                "type": "text",
+                "id": "btn_chat",
+                "label": "Button text",
+                "default": "Live chat"
+            },
+            {
+                "type": "url",
+                "id": "btn_chat_link",
+                "label": "Button link"
+            },
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Background image"
+            },
+            {
+                "type": "select",
+                "id": "image_size",
+                "label": "Image size",
+                "options": [
+                    {
+                        "value": "small",
+                        "label": "Small"
+                    },
+                    {
+                        "value": "medium",
+                        "label": "Medium"
+                    },
+                    {
+                        "value": "large",
+                        "label": "Large"
+                    }
+                ],
+                "default": "medium"
+            }
+        ],
+        "presets": [
+            {
+                "category": "STORE INFORMATION",
+                "name": "Contact us banner",
+                "settings": {}
+            }
+        ]
+    }
+{% endschema %}

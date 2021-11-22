@@ -1,0 +1,455 @@
+<div data-section-id="{{ section.id }}" data-section-type="collection-filters">
+    {% include 'collection-filters' %}
+
+    <div class="grid collection-page-collection-section filtering-show hide"></div>
+    {%- for block in section.blocks -%}
+        <div class="collection-section">
+            {%- assign collection_section = collections[block.settings.collection_section] -%}
+            {%- assign ad_1 = block.settings.position_ad_1 | minus: 1 -%}
+            {%- assign ad_2 = block.settings.position_ad_2 | minus: 1 -%}
+            {%- assign ad_3 = block.settings.position_ad_3 | minus: 1 -%}
+            {%- assign ad_4 = block.settings.position_ad_4 | minus: 1 -%}
+            {%- assign ad_5 = block.settings.position_ad_5 | minus: 1 -%}
+            {%- assign ad_6 = block.settings.position_ad_6 | minus: 1 -%}
+            {%- assign ad_7 = block.settings.position_ad_7 | minus: 1 -%}
+            {%- assign ad_8 = block.settings.position_ad_8 | minus: 1 -%}
+            {%- assign ad_9 = block.settings.position_ad_9 | minus: 1 -%}
+            <h3 class="collection-section-title">{{ block.settings.collection_section | replace: '-', ' ' }}</h3>
+            <div class="grid collection-page-collection-section filtering-hide">
+                {%- assign product_ind = 0 -%}
+                {%- assign loops = collection_section.products.size | plus: 8 -%}
+                {%- for loop in (0..loops)  -%}
+                    {%- assign is_add = false -%}
+                    {%- for i in (1..9) %}
+                        {%- assign ad_var = 'ad_' | append: i -%}
+                        {%- assign ad_num = [ad_var] -%}
+                        {%- if ad_num == loop -%}
+                            {%- assign is_add = true -%}
+                            {%- assign ad_img_set = 'image_' | append: ad_var -%}
+                            {%- assign ad_img_set_mobile = ad_img_set | append: '_mobile' -%}
+                            {%- assign ad_text_set = 'main_' | append: ad_var -%}
+                            {%- assign ad_color_set = 'color_' | append: ad_var -%}
+                            {%- assign ad_sub_text_set = 'bottom_' | append: ad_var -%}
+                            {%- assign ad_name_set = 'name_' | append: ad_var -%}
+                            {%- assign ad_img = block.settings[ad_img_set] -%}
+                            {%- assign ad_text = block.settings[ad_text_set] -%}
+                            {%- assign ad_color = block.settings[ad_color_set] -%}
+                            {%- assign ad_sub_text = block.settings[ad_sub_text_set] -%}
+                            {%- assign ad_name = block.settings[ad_name_set] -%}
+                            {% unless block.settings[ad_img_set_mobile] == blanck %}
+                                {%- assign ad_img_mobile = block.settings[ad_img_set_mobile] -%}
+                            {% else %}
+                                {%- assign ad_img_mobile = ad_img -%}
+                            {% endunless %}
+                            <div class="grid__item medium-up--one-quarter mobile-up--one-half mobile--one-whole ad-grid-item" data-initial-position="{{ ad_num }}">
+                                {% include 'collections-ad-block' %}
+                            </div>
+                            {% break %}
+                        {% endif %}
+                    {%- endfor -%}
+                    {%- unless is_add -%}
+                    {%- assign product = collection_section.products[product_ind] -%}
+                    {%- if product -%}
+                        <div class="grid__item medium-up--one-quarter mobile-up--one-half mobile--one-whole product-grid-item" data-tags="{{ product.tags | join: ',' }}">
+                            {% include 'collections-product-block' %}
+                        </div>
+                    {%- endif -%}
+                    {%- assign product_ind = product_ind | plus: 1 -%}
+                    {%- endunless -%}
+                {%- endfor -%}
+            </div>
+        </div>
+    {%- endfor -%}
+</div>
+<script>
+    pintrk('track', 'pagevisit');
+</script>
+
+{% schema %}
+{
+"name": "Collection products",
+"class": "collection-products-section",
+"blocks": [
+{
+"type": "single-meal-section",
+"name": "Single Meal Section",
+"settings": [
+{
+"type": "collection",
+"id": "collection_section",
+"label": "Collection for section"
+},
+{
+"type": "header",
+"content": "Ad #1"
+},
+{
+"type": "text",
+"id": "position_ad_1",
+"label": "Number"
+},
+{
+"type": "image_picker",
+"id": "image_ad_1",
+"label": "Image"
+},
+    {
+    "type": "image_picker",
+    "id": "image_ad_1_mobile",
+    "label": "Image for mobile"
+    },
+{
+"type": "text",
+"id": "main_ad_1",
+"label": "Main text"
+},
+{
+"type": "color",
+"id": "color_ad_1",
+"label": "Main text color",
+"default": "#fbb03b"
+},
+{
+"type": "text",
+"id": "bottom_ad_1",
+"label": "Text",
+"default": "trust the process and the results will come"
+},
+{
+"type": "text",
+"id": "name_ad_1",
+"label": "Name"
+},
+{
+"type": "header",
+"content": "Ad #2"
+},
+{
+"type": "text",
+"id": "position_ad_2",
+"label": "Number"
+},
+{
+"type": "image_picker",
+"id": "image_ad_2",
+"label": "Image"
+},
+    {
+    "type": "image_picker",
+    "id": "image_ad_2_mobile",
+    "label": "Image for mobile"
+    },
+{
+"type": "text",
+"id": "main_ad_2",
+"label": "Main text"
+},
+{
+"type": "color",
+"id": "color_ad_2",
+"label": "Main text color",
+"default": "#fbb03b"
+},
+{
+"type": "text",
+"id": "bottom_ad_2",
+"label": "Text",
+"default": "trust the process and the results will come"
+},
+{
+"type": "text",
+"id": "name_ad_2",
+"label": "Name"
+},
+{
+"type": "header",
+"content": "Ad #3"
+},
+{
+"type": "text",
+"id": "position_ad_3",
+"label": "Number"
+},
+{
+"type": "image_picker",
+"id": "image_ad_3",
+"label": "Image"
+},
+    {
+    "type": "image_picker",
+    "id": "image_ad_3_mobile",
+    "label": "Image for mobile"
+    },
+{
+"type": "text",
+"id": "main_ad_3",
+"label": "Main text"
+},
+{
+"type": "color",
+"id": "color_ad_3",
+"label": "Main text color",
+"default": "#fbb03b"
+},
+{
+"type": "text",
+"id": "bottom_ad_3",
+"label": "Text",
+"default": "trust the process and the results will come"
+},
+{
+"type": "text",
+"id": "name_ad_3",
+"label": "Name"
+},
+{
+"type": "header",
+"content": "Ad #4"
+},
+{
+"type": "text",
+"id": "position_ad_4",
+"label": "Number"
+},
+{
+"type": "image_picker",
+"id": "image_ad_4",
+"label": "Image"
+},
+    {
+    "type": "image_picker",
+    "id": "image_ad_4_mobile",
+    "label": "Image for mobile"
+    },
+{
+"type": "text",
+"id": "main_ad_4",
+"label": "Main text"
+},
+{
+"type": "color",
+"id": "color_ad_4",
+"label": "Main text color",
+"default": "#fbb03b"
+},
+{
+"type": "text",
+"id": "bottom_ad_4",
+"label": "Text",
+"default": "trust the process and the results will come"
+},
+{
+"type": "text",
+"id": "name_ad_4",
+"label": "Name"
+},
+{
+"type": "header",
+"content": "Ad #5"
+},
+{
+"type": "text",
+"id": "position_ad_5",
+"label": "Number"
+},
+{
+"type": "image_picker",
+"id": "image_ad_5",
+"label": "Image"
+},
+    {
+    "type": "image_picker",
+    "id": "image_ad_5_mobile",
+    "label": "Image for mobile"
+    },
+{
+"type": "text",
+"id": "main_ad_5",
+"label": "Main text"
+},
+{
+"type": "color",
+"id": "color_ad_5",
+"label": "Main text color",
+"default": "#fbb03b"
+},
+{
+"type": "text",
+"id": "bottom_ad_5",
+"label": "Text",
+"default": "trust the process and the results will come"
+},
+{
+"type": "text",
+"id": "name_ad_5",
+"label": "Name"
+},
+{
+"type": "header",
+"content": "Ad #6"
+},
+{
+"type": "text",
+"id": "position_ad_6",
+"label": "Number"
+},
+{
+"type": "image_picker",
+"id": "image_ad_6",
+"label": "Image"
+},
+    {
+    "type": "image_picker",
+    "id": "image_ad_6_mobile",
+    "label": "Image for mobile"
+    },
+{
+"type": "text",
+"id": "main_ad_6",
+"label": "Main text"
+},
+{
+"type": "color",
+"id": "color_ad_6",
+"label": "Main text color",
+"default": "#fbb03b"
+},
+{
+"type": "text",
+"id": "bottom_ad_6",
+"label": "Text",
+"default": "trust the process and the results will come"
+},
+{
+"type": "text",
+"id": "name_ad_6",
+"label": "Name"
+},
+{
+"type": "header",
+"content": "Ad #7"
+},
+{
+"type": "text",
+"id": "position_ad_7",
+"label": "Number"
+},
+{
+"type": "image_picker",
+"id": "image_ad_7",
+"label": "Image"
+},
+{
+"type": "image_picker",
+"id": "image_ad_7_mobile",
+"label": "Image for mobile"
+},
+{
+"type": "text",
+"id": "main_ad_7",
+"label": "Main text"
+},
+{
+"type": "color",
+"id": "color_ad_7",
+"label": "Main text color",
+"default": "#fbb03b"
+},
+{
+"type": "text",
+"id": "bottom_ad_7",
+"label": "Text",
+"default": "trust the process and the results will come"
+},
+{
+"type": "text",
+"id": "name_ad_7",
+"label": "Name"
+},
+{
+"type": "header",
+"content": "Ad #8"
+},
+{
+"type": "text",
+"id": "position_ad_8",
+"label": "Number"
+},
+{
+"type": "image_picker",
+"id": "image_ad_8",
+"label": "Image"
+},
+{
+"type": "image_picker",
+"id": "image_ad_8_mobile",
+"label": "Image for mobile"
+},
+{
+"type": "text",
+"id": "main_ad_8",
+"label": "Main text"
+},
+{
+"type": "color",
+"id": "color_ad_8",
+"label": "Main text color",
+"default": "#fbb03b"
+},
+{
+"type": "text",
+"id": "bottom_ad_8",
+"label": "Text",
+"default": "trust the process and the results will come"
+},
+{
+"type": "text",
+"id": "name_ad_8",
+"label": "Name"
+},
+{
+"type": "header",
+"content": "Ad #9"
+},
+{
+"type": "text",
+"id": "position_ad_9",
+"label": "Number"
+},
+{
+"type": "image_picker",
+"id": "image_ad_9",
+"label": "Image"
+},
+{
+"type": "image_picker",
+"id": "image_ad_9_mobile",
+"label": "Image for mobile"
+},
+{
+"type": "text",
+"id": "main_ad_9",
+"label": "Main text"
+},
+{
+"type": "color",
+"id": "color_ad_9",
+"label": "Main text color",
+"default": "#fbb03b"
+},
+{
+"type": "text",
+"id": "bottom_ad_9",
+"label": "Text",
+"default": "trust the process and the results will come"
+},
+{
+"type": "text",
+"id": "name_ad_9",
+"label": "Name"
+}
+]
+}
+]
+}
+{% endschema %}

@@ -1,0 +1,108 @@
+{% if section.settings.show %}
+
+    <section data-section-id="{{ section.id }}"  id="section-{{ section.id }}" class="meal-packs-builder-section">
+        <div class="page-width">
+
+            {% if section.settings.title != blank %}
+                <h3>{{ section.settings.title }}</h3>
+            {% endif %}
+
+            <div class="meal-pack-builder">
+                <div class="meal-pack-title">
+                    {% if section.settings.subtitle != blank %}
+                        <h4>{{ section.settings.subtitle }}</h4>
+                    {% endif %}
+                    {% if section.settings.text != blank %}
+                        <p>{{ section.settings.text }}</p>
+                    {% endif %}
+                    {% if section.settings.btn_text != blank %}
+                        <a href="{{ section.settings.btn_link }}" class="btn std-btn btn-dark">
+                            {{ section.settings.btn_text | escape }}
+                        </a>
+                    {% endif %}
+                </div>
+                <div class="meal-pack-content">
+                    {% for block in section.blocks %}
+                        <div class="meal">
+                            <img class="lazyload"
+                                 src="{{ block.settings.meal_image | img_url: '168x' }}"
+                                 data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048]"
+                                 data-aspectratio="{{ block.settings.meal_image.aspect_ratio }}"
+                                 data-sizes="auto"
+                                 data-parent-fit="contain"
+                                 alt="{{ block.settings.meal_image.alt | escape }}">
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+{%- endif -%}
+
+{% schema %}
+    {
+        "name": "Meal Pack Builder",
+        "max_blocks": 4,
+        "settings": [
+            {
+                "type": "checkbox",
+                "id": "show",
+                "label": "Show section",
+                "default": true
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title",
+                "default": "Meal Pack Builder"
+            },
+            {
+                "type": "text",
+                "id": "subtitle",
+                "label": "Subtitle"
+            },
+            {
+                "type": "textarea",
+                "id": "text",
+                "label": "Text"
+            },
+            {
+                "type": "text",
+                "id": "btn_text",
+                "label": "btn text",
+                "default": "Explore All"
+            },
+            {
+                "id": "btn_link",
+                "type": "url",
+                "label": "Button link"
+            }
+        ],
+        "blocks": [
+        {
+            "type": "meal",
+            "name": "Meal",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "meal_image",
+                    "label": "Meal image"
+                }
+            ]
+        }
+        ],
+        "presets": [
+        {
+            "category": "Text",
+            "name": "Meal Pack Builder",
+            "blocks": [
+                {
+                    "type": "meal"
+                }
+            ]
+        }
+        ]
+    }
+{% endschema %}

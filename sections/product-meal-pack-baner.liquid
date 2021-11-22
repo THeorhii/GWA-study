@@ -1,0 +1,36 @@
+{% if section.settings.show %}
+    <div class="collection-header-img">
+
+        {%- assign icon = product.featured_image -%}
+        {%- assign img_url = icon | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <img class="lazyload"
+             src="{{ icon | img_url: '50x' }}"
+             data-src="{{ img_url }}"
+             data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+             data-sizes="auto"
+             alt="{{ icon.alt | default: 'Workout Meals ™' | escape }}">
+
+        <div class="product-header-text">
+            <h2>{{ product.title | escape }}</h2>
+            <p>{{ product.description }}</p>
+        </div>
+    </div>
+
+    <div class="product-header-text-mobile">{{ product.description }}</div>
+
+{%- endif -%}
+
+
+{% schema %}
+    {
+    "name": "Text with image copy",
+    "settings": [
+    {
+    "type": "checkbox",
+    "id": "show",
+    "label": "Show section",
+    "default": true
+    }
+    ]
+    }
+{% endschema %}

@@ -1,0 +1,27 @@
+{% if section.settings.show %}
+    {% render 'wm-360--section-action-call', header: section.settings.header, phone: section.settings.phone_number %}
+{% endif %}
+
+{% schema %}
+    {
+    "name": "Section Call to",
+    "settings": [
+    {
+    "type": "checkbox",
+    "id": "show",
+    "label": "Show",
+    "default": true
+    },
+    {
+    "type": "text",
+    "id": "header",
+    "label": "Block header"
+    },
+    {
+    "type": "text",
+    "id": "phone_number",
+    "label": "Phone number"
+    }
+    ]
+    }
+{% endschema %}

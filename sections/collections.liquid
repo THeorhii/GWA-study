@@ -1,0 +1,79 @@
+<section data-section-id="{{ section.id }}"  id="section-{{ section.id }}" class="collections-section">
+    {% if section.settings.title != blank %}
+        <h1>{{ section.settings.title | escape }}</h1>
+    {% endif %}
+
+    {% include 'product-pop-up' %}
+
+    <div class="collections-wrapper">
+        <div class="tab-collection">
+            {% for block in section.blocks %}
+                {%- assign collection = collections[block.settings.collection] -%}
+                <button class="tablinks-collection" data-collection-handle="{{ collection.handle }}">{{ block.settings.collection }}</button>
+            {% endfor %}
+        </div>
+
+        {% for block in section.blocks %}
+            {%- assign collection = collections[block.settings.collection] -%}
+            <div id="tabcontent-{{ collection.handle }}" class="tabcontent-collection">
+                <div class="grid">
+                    {% for product in collection.products limit: 4 %}
+                    {% comment %}{% include 'product-card-grid' %}{% endcomment %}
+                        <div class="grid__item medium-up--one-quarter mobile-up--one-half mobile--one-whole ">
+                            {% include 'collections-product-block' %}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                {% if section.settings.show_link_to_collection %}
+                    <a href="{{ collection.url }}" class="btn std-btn btn-yellow link-to-collection">VIEW All {{ collection.title }} MENU</a>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% schema %}
+    {
+        "name": "Collection",
+        "class": "popular-menu",
+        "settings": [
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title",
+                "default": "the Most Popular menu"
+            },
+            {
+                "type": "checkbox",
+                "id": "show_link_to_collection",
+                "label": "Show link to collection"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "one-collection",
+                "name": "Collection",
+                "settings": [
+                    {
+                        "id": "collection",
+                        "type": "collection",
+                        "label": "Collection"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "Collections",
+                "category": "Collection",
+                "blocks": [
+                    {
+                        "type": "one-collection"
+                    }
+                ]
+            }
+        ]
+    }
+
+{% endschema %}

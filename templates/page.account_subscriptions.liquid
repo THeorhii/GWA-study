@@ -1,0 +1,80 @@
+<div class="customer-page customer-subscriptions-page all-subscriptions-page">
+    <div class="customer-bar">
+        <div>
+            <h3>MY ACCOUNT</h3>
+            <a href="/account" class="customer-bar-link">{% include 'icon-order-history' %}  Order History</a>
+            <a href="/{{ shop.metafields.gwa.app_proxy }}/subscriptions/{{ customer.id }}" class="customer-bar-link active">{% include 'icon-subscriptions' %} Subscriptions</a>
+            <a href="/account/addresses" class="customer-bar-link">{% include 'icon-address' %} Address </a>
+            <a href="/account/logout" id="customer_logout_link" class="customer-bar-link">{% include 'icon-log-out' %} Log out</a>
+        </div>
+    </div>
+    <div class="customer-content">
+        <div class="customer-content-wrapper">
+            <h1 class="customer-subscriptions-title text-center">This is your Workout Meals ™ subscriptions system</h1>
+
+            <h2 class="subscriptions-block-title text-left">Active Subscription</h2>
+
+            {% comment %}PSEUDO LOOP OF ACTIVE SUBSCRIPTIONS FOR EXAMPLE{% endcomment %}
+            {% for i in (1..2) %}
+            <div class="subscriptions-block active-subscriptions text-center">
+                <p class="subscriptions-block-title active-subscriptions-title">YOUR NEXT SHIPMENT</p>
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24" class="subscription-calendar-icon">
+                    <defs>
+                        <path id="prefix__a" d="M113.8 2.4h-3.6V1.2c0-.664-.536-1.2-1.2-1.2-.664 0-1.2.536-1.2 1.2v1.2h-9.6V1.2C98.2.536 97.664 0 97 0c-.664 0-1.2.536-1.2 1.2v1.2h-3.6c-.664 0-1.2.536-1.2 1.2v19.2c0 .664.536 1.2 1.2 1.2h21.6c.664 0 1.2-.536 1.2-1.2V3.6c0-.664-.536-1.2-1.2-1.2zM93.4 21.6h19.2v-12H93.4v12zm0-14.4h19.2V4.8H93.4v2.4zm4.8 4.8c-.664 0-1.2.536-1.2 1.2 0 .664.536 1.2 1.2 1.2.664 0 1.2-.536 1.2-1.2 0-.664-.536-1.2-1.2-1.2m0 4.8c-.664 0-1.2.536-1.2 1.2 0 .664.536 1.2 1.2 1.2.664 0 1.2-.536 1.2-1.2 0-.664-.536-1.2-1.2-1.2m4.8 0c-.664 0-1.2.536-1.2 1.2 0 .664.536 1.2 1.2 1.2.664 0 1.2-.536 1.2-1.2 0-.664-.536-1.2-1.2-1.2m0-4.8c-.664 0-1.2.536-1.2 1.2 0 .664.536 1.2 1.2 1.2.664 0 1.2-.536 1.2-1.2 0-.664-.536-1.2-1.2-1.2m4.8 0c-.664 0-1.2.536-1.2 1.2 0 .664.536 1.2 1.2 1.2.664 0 1.2-.536 1.2-1.2 0-.664-.536-1.2-1.2-1.2"/>
+                    </defs>
+                    <g fill="none" fill-rule="evenodd" transform="translate(-91)">
+                        <use fill="#FBB03B" xlink:href="#prefix__a"/>
+                    </g>
+                </svg>
+
+                <p class="active-subscription-date">May 05. 2020</p>
+                <p class="active-subscription-subtitle">You have complete control of your subscription order</p>
+                <div class="active-subscription-buttons">
+                    <a href="" class="btn std-btn btn-yellow details-btn">Details</a>
+                    {% comment %}
+                    <a href="#" class="btn std-btn btn-light next-delivery-day-btn">Next delivery date</a>
+                    {% endcomment %}
+                </div>
+            </div>
+            {% endfor %}
+
+            <h2 class="subscriptions-block-title previous-subscriptions-title text-left">Previous Subscriptions</h2>
+            <div class="subscriptions-block subscriptions-table-block previous-subscriptions">
+                <table>
+                    <tr>
+                        <th class="subscriptions-block-title text-left" style="width:25%;">Subscription ID</th>
+                        <th class="subscriptions-block-title text-right">Last order date</th>
+                        <th class="subscriptions-block-title text-center">orders</th>
+                        <th class="subscriptions-block-title text-right">Last order price</th>
+                        <th>&nbsp;</th>
+                    </tr>
+
+                    {% comment %}EXAMPLE OF CANCELLED PREVIOUS SUBSCRIPTION{% endcomment %}
+                    <tr>
+                        <td>
+                            <a href="#" class="previous-subscription-id">#43772063</a>
+                            <span class="subscription-label label-cancelled text-center">Cancel</span>
+                        </td>
+                        <td class="text-right">Jun 10/01/2019</td>
+                        <td class="text-center">6</td>
+                        <td class="text-right">$ 154.92</td>
+                        <td class="text-center"><a href="" class="btn std-btn btn-light details-btn">Details</a></td>
+                    </tr>
+
+                    {% comment %}EXAMPLE OF HELD PREVIOUS SUBSCRIPTION{% endcomment %}
+                    <tr>
+                        <td>
+                            <a href="#" class="previous-subscription-id">#43772063</a>
+                            <span class="subscription-label label-hold text-center">Hold</span>
+                        </td>
+                        <td class="text-right">Jun 10/01/2019</td>
+                        <td class="text-center">6</td>
+                        <td class="text-right">$ 154.92</td>
+                        <td class="text-center"><a href="" class="btn std-btn btn-light details-btn">Details</a></td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

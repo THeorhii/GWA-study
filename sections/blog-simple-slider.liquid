@@ -1,0 +1,169 @@
+<div data-section-id="{{ section.id }}"  id="slick-{{ section.id }}" class="slideshow-section simple-slider-section" data-slide-speed="{{ section.settings.slide_speed }}">
+    {% for block in section.blocks %}
+        <div class="slide">
+            <div class="slideshow-content-wrapper page-width" style="top: {{ block.settings.slide_block_position_top | divided_by: 2 }}%">
+                <div class="slideshow__text-content">
+                    {% if block.settings.slider_title != blank %}
+                        <h2 style="color: {{ block.settings.slide_title_color }}; font-size: {{ block.settings.slide_title_size }}px; margin-bottom: {{ block.settings.slide_title_space }}px">
+                            {{ block.settings.slider_title }}</h2>
+                    {% endif %}
+                    <div class="slideshow__button-wrapper">
+                        {% if block.settings.button_label %}
+                            <a href="{{ block.settings.button_link }}" class="btn std-btn btn-light"
+                               style="color: {{ block.settings.button_label_color }}; background-color: {{ block.settings.button_background_color }}; border-color: {{ block.settings.button_border_color }}">
+                                {{ block.settings.button_label | escape }}
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {%- assign icon_desktop = block.settings.slideshow_image -%}
+            {%- assign img_url_desktop = icon_desktop | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+            {%- assign icon_tablet = block.settings.slideshow_image_tablet -%}
+            {%- assign img_url_tablet = icon_tablet | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+            {%- assign icon_mobile = block.settings.slideshow_image_mobile -%}
+            {%- assign img_url_mobile = icon_mobile | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+            <div class="banner-collection-image">
+            <img class="lazyload blog-slide-desktop"
+                 data-help="{{ img_url_desktop }}"
+                 src="{{ icon_desktop | img_url: '50x' }}"
+                 data-src="{{ img_url_desktop }}"
+                 data-widths="[50, 100, 250, 300, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                 data-sizes="auto"
+                 alt="{{ icon_desktop.alt | default: 'Workout Meals ™' | escape }}">
+
+            <img class="lazyload blog-slide-tablet"
+                 data-help="{{ img_url_tablet }}"
+                 src="{{ icon_tablet | img_url: '50x' }}"
+                 data-src="{{ img_url_tablet }}"
+                 data-widths="[50, 100, 250, 300, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                 data-sizes="auto"
+                 alt="{{ icon_tablet.alt | default: 'Workout Meals ™' | escape }}">
+
+            <img class="lazyload blog-slide-mobile"
+                 data-help="{{ img_url_mobile }}"
+                 src="{{ icon_mobile | img_url: '50x' }}"
+                 data-src="{{ img_url_mobile }}"
+                 data-widths="[50, 100, 250, 300, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                 data-sizes="auto"
+                 alt="{{ icon_mobile.alt | default: 'Workout Meals ™' | escape }}">
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% schema %}
+    {
+    "name": "Blog Slideshow",
+    "class": "blog-banner-slider",
+        "settings": [
+        {
+        "type": "range",
+        "id": "slide_speed",
+        "min": 1,
+        "max": 15,
+        "step": 1,
+        "unit": "sec",
+        "label": "Change slides every",
+        "default": 5
+        }
+        ],
+        "blocks" : [
+        {
+        "type": "slide",
+        "name": "Slide",
+            "settings": [
+                {
+                "type": "header",
+                "content": "Slide"
+                },
+                {
+                "type": "range",
+                "id": "slide_block_position_top",
+                "min":       0,
+                "max":       100,
+                "step":      10,
+                "unit":      "%",
+                "label": "Slide title space to top",
+                "default":   10
+                },
+                {
+                "type": "text",
+                "id": "slider_title",
+                "label": "Title"
+                },
+                {
+                "type": "color",
+                "id": "slide_title_color",
+                "label": "Title color",
+                "default": "#ffffff"
+                },
+                {
+                "type": "range",
+                "id": "slide_title_size",
+                "min":       20,
+                "max":       80,
+                "step":      2,
+                "unit":      "px",
+                "label": "Slide title size",
+                "default":   72
+                },
+                {
+                "type": "range",
+                "id": "slide_title_space",
+                "min":       5,
+                "max":       60,
+                "step":      1,
+                "unit":      "px",
+                "label": "Slide title space to button",
+                "default":   10
+                },
+                {
+                "type": "text",
+                "id": "button_label",
+                "label": "Button label"
+                },
+                {
+                "type": "url",
+                "id": "button_link",
+                "label": "Button link"
+                },
+                {
+                "type": "color",
+                "id": "button_label_color",
+                "label": "Button label color",
+                "default": "#010101"
+                },
+                {
+                "type": "color",
+                "id": "button_background_color",
+                "label": "Button background color",
+                "default": "#010101"
+                },
+                {
+                "type": "color",
+                "id": "button_border_color",
+                "label": "Button border color",
+                "default": "#010101"
+                },
+                {
+                "type": "image_picker",
+                "id": "slideshow_image",
+                "label": "Image for desktop"
+                },
+                {
+                "type": "image_picker",
+                "id": "slideshow_image_tablet",
+                "label": "Image for tablet"
+                },
+                {
+                "type": "image_picker",
+                "id": "slideshow_image_mobile",
+                "label": "Image for mobile"
+                }
+            ]
+        }
+        ]
+    }
+{% endschema %}

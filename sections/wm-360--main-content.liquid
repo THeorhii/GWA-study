@@ -1,0 +1,311 @@
+{% if section.settings.show %}
+    <section class="grid wm-360-main__header page-width">
+        <div>
+            <h2>{{ section.settings.header }}</h2>
+            <div class="wm-360-main__header-text">{{ section.settings.main-content }}</div>
+        </div>
+        <div class="wm-360-main__header-image-wrap">
+            {%- assign icon_full = section.settings.general-image.src -%}
+            {%- assign img_url_full = icon_full | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+            <img class="image__full lazyload"
+                 src="{{ icon_full | img_url: '100x' }}"
+                 data-src="{{ img_url_full }}"
+                 data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                 data-sizes="auto"
+                 alt="{{ icon_full.alt | default: 'Workout Meals ™' | escape }}">
+        </div>
+    </section>
+    {% for block in section.blocks %}
+        {% if block.type == "expert" %}
+        <section class="wm-360-main__expert {{ block.settings.experts_type }} page-width">
+           <div class="wm-360-main__expert-image-block">
+               <div class="wm-360-main__expert-image-wrap">
+                   {%- assign icon_full = block.settings.image.src -%}
+                   {%- assign img_url_full = icon_full | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                   <img class="image__full lazyload"
+                        src="{{ icon_full | img_url: '100x' }}"
+                        data-src="{{ img_url_full }}"
+                        data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                        data-sizes="auto"
+                        alt="{{ icon_full.alt | default: 'Workout Meals ™' | escape }}">
+                   {% if block.settings.experts_type == "expert-trainer"  %}
+                       {% include 'svg-border-trainer' %}
+                   {% elsif block.settings.experts_type == "expert-nutritionist" %}
+                       {% include 'svg-border-nutritionist' %}
+                   {% else %}
+                       {% include 'svg-border-chef' %}
+                   {% endif %}
+               </div>
+           </div>
+           <div class="wm-360-main__expert-content">
+               <h3>{{ block.settings.header }}</h3>
+               <div>{{ block.settings.content }}</div>
+               <div>
+                   {% if block.settings.first-btn-title != "" %}
+                       <a href="{{ block.settings.first-btn-url }}">{{ block.settings.first-btn-title }}</a>
+                   {% endif %}
+
+                   {% if block.settings.second-btn-title != "" %}
+                       <a href="{{ block.settings.second-btn-url }}">{{ block.settings.second-btn-title }}</a>
+                   {% endif %}
+               </div>
+           </div>
+        </section>
+        {% elsif block.type == "video-block" %}
+            <section class="wm-360-main__video">
+                <div class="page-width">{{ block.settings.context }}</div>
+                <a href="{{ block.settings.btn-url }}">{{ block.settings.btn-title }}</a>
+                <div class="wm-360-main__video-wrap">
+                    <video playsinline {% if block.settings.video_autoplay %}allow="autoplay" muted autoplay class="video-play-active video-autoplay-block"{% endif %}
+                           src-webm="{{ block.settings.video_webm }}"
+                           src-mp4="{{ block.settings.video_mp4 }}"
+                           src-ogg="{{ block.settings.video_ogg }}">
+                        <source src="{{ block.settings.video_webm }}" type='video/webm'>
+                        <source src="{{ block.settings.video_mp4 }}" type='video/mp4'>
+                        <source src="{{ block.settings.video_ogg }}" type='video/ogg'>
+                        Your browser does not support the video tag.
+                    </video>
+                    <button class="video-play">{% include 'icon-btn-play' %}</button>
+                    <button class="video-sound video-sound-on{% unless block.settings.video_autoplay %} hide{% endunless %}">{% include 'icon-sound-off' %}</button>
+                    <button class="video-sound video-sound-off{% if block.settings.video_autoplay %} hide{% endif %}">{% include 'icon-sound-on' %}</button>
+                </div>
+            </section>
+        {% elsif block.type == "special-header" %}
+            <section class="wm-360-main__special-header page-width">
+                <p>{{ block.settings.header }}</p>
+            </section>
+        {% elsif block.type == "text-block" %}
+            <section class="wm-360-main__text">
+                <div class="page-width">{{ block.settings.context }}</div>
+                <a href="{{ block.settings.btn-url }}">{{ block.settings.btn-title }}</a>
+            </section>
+        {% elsif block.type == "action-call" %}
+            {% render 'wm-360--section-action-call', header: block.settings.header, phone: block.settings.phone_number %}
+        {% elsif block.type == "buy-meals-pack" %}
+            {% render 'wm-360--section-buy-meals-pack', header: block.settings.header, small: block.settings.small_pack,
+                medium: block.settings.medium_pack, large: block.settings.large_pack, small_qty: block.settings.small_quantity_of_meals,
+                medium_qty: block.settings.medium_quantity_of_meals, large_qty: block.settings.large_quantity_of_meals %}
+        {% endif %}
+
+    {% endfor %}
+
+{% endif %}
+
+
+{% schema %}
+    {
+    "name": "Full Why WM360",
+    "class": "wm-360-main",
+    "settings": [
+    {
+    "type": "checkbox",
+    "id": "show",
+    "label": "Show",
+    "default": true
+    },
+    {
+    "type": "text",
+    "id": "header",
+    "label": "Header section",
+    "default": "Why WM360"
+    },
+    {
+    "type": "richtext",
+    "id": "main-content",
+    "label": "Main info"
+    },
+    {
+    "type": "image_picker",
+    "id": "general-image",
+    "label": "General Image"
+    }
+    ],
+    "blocks": [
+    {
+    "type": "buy-meals-pack",
+    "name": "Meals-pack cards",
+    "settings": [
+    {
+    "type": "text",
+    "id": "header",
+    "label": "Block header"
+    },
+    {
+    "type": "product",
+    "id": "small_pack",
+    "label": "Small meal-pack"
+    },
+    {
+    "type": "number",
+    "id": "small_quantity_of_meals",
+    "label": "Quantity of meals",
+    "default": 7
+    },
+    {
+    "type": "product",
+    "id": "medium_pack",
+    "label": "Medium meal-pack"
+    },
+    {
+    "type": "number",
+    "id": "medium_quantity_of_meals",
+    "label": "Quantity of meals",
+    "default": 14
+    },
+    {
+    "type": "product",
+    "id": "large_pack",
+    "label": "Large meal-pack"
+    },
+    {
+    "type": "number",
+    "id": "large_quantity_of_meals",
+    "label": "Quantity of meals",
+    "default": 21
+    }
+    ]
+    },
+    {
+    "type": "action-call",
+    "name": "Call to",
+    "settings": [
+    {
+    "type": "text",
+    "id": "header",
+    "label": "Block header"
+    },
+    {
+    "type": "text",
+    "id": "phone_number",
+    "label": "Phone number"
+    }
+    ]
+    },
+    {
+    "type": "expert",
+    "name": "Expert",
+    "settings": [
+    {
+    "type": "select",
+    "id": "experts_type",
+    "options": [
+    { "value": "expert-trainer", "label": "Trainer"},
+    { "value": "expert-nutritionist", "label": "Nutritionist"},
+    { "value": "expert-chef", "label": "Chef"}
+    ],
+    "label": "Type of experts"
+    },
+    {
+    "type": "text",
+    "id": "header",
+    "label": "Block header"
+    },
+    {
+    "type": "richtext",
+    "id": "content",
+    "label": "Content"
+    },
+    {
+    "type": "text",
+    "id": "first-btn-title",
+    "label": "First button title"
+    },
+    {
+    "type": "url",
+    "id": "first-btn-url",
+    "label": "First button link"
+    },
+    {
+    "type": "text",
+    "id": "second-btn-title",
+    "label": "Second button title"
+    },
+    {
+    "type": "url",
+    "id": "second-btn-url",
+    "label": "Second button link"
+    },
+    {
+    "type": "image_picker",
+    "id": "image",
+    "label": "Block Image"
+    }
+    ]
+    },
+    {
+    "type": "video-block",
+    "name": "Video",
+    "settings": [
+    {
+    "type": "richtext",
+    "id": "context",
+    "label": "Context"
+    },
+    {
+    "type": "text",
+    "id": "btn-title",
+    "label": "Button title"
+    },
+    {
+    "type": "url",
+    "id": "btn-url",
+    "label": "Button link"
+    },
+    {
+    "type": "checkbox",
+    "id": "video_autoplay",
+    "label": "Autoplay",
+    "default": true
+    },
+    {
+    "type": "text",
+    "id": "video_webm",
+    "label": "Format: .webm"
+    },
+    {
+    "type": "text",
+    "id": "video_mp4",
+    "label": "Format: .mp4"
+    },
+    {
+    "type": "text",
+    "id": "video_ogg",
+    "label": "Format: .ogg / .ogv / .ogm"
+    }
+    ]
+    },
+    {
+    "type": "special-header",
+    "name": "Special-header",
+    "settings": [
+    {
+    "type": "text",
+    "id": "header",
+    "label": "Title"
+    }
+    ]
+    },
+    {
+    "type": "text-block",
+    "name": "Text",
+    "settings": [
+    {
+    "type": "richtext",
+    "id": "context",
+    "label": "Context"
+    },
+    {
+    "type": "text",
+    "id": "btn-title",
+    "label": "Button title"
+    },
+    {
+    "type": "url",
+    "id": "btn-url",
+    "label": "Button link"
+    }
+    ]
+    }
+    ]
+    }
+{% endschema %}

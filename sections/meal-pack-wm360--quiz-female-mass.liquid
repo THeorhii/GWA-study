@@ -1,0 +1,117 @@
+<section data-section-mealPack-WM360
+         class="grid"
+         data-pack-gender="{{ section.settings.gender }}"
+         data-pack-goal="{{ section.settings.goal }}">
+
+    {% include 'snippet-meals-pack--wm360-quiz' %}
+</section>
+
+<script>
+    $(document).ready(function() {
+        theme.MealPackWM360.initQuiz();
+    });
+</script>
+
+{% schema %}
+{
+"name": "Meal Pack WM360 Quiz",
+"class": "mealPack-WM360__quiz",
+"settings": [
+{
+"type": "text",
+"id": "gender",
+"label": "Meal Pack WM360 - gender",
+"default": "male"
+},
+{
+"type": "text",
+"id": "goal",
+"label": "Meal Pack WM360 - goal",
+"default": "lose"
+},
+{
+"type": "text",
+"id": "header",
+"label": "Header",
+"default": "Answer these questions to start your journey today!"
+},
+{
+"type": "header",
+"content": "Question about days quantity"
+},
+{
+"type": "text",
+"id": "days_long_question",
+"label": "Question - small text",
+"default": "How many meals would you like us to cater for"
+},
+{
+"type": "text",
+"id": "days_short_question",
+"label": "Question - Large text",
+"default": "Days"
+},
+{
+"type": "header",
+"content": "Question about meals quantity"
+},
+{
+"type": "text",
+"id": "meals_long_question",
+"label": "Question - small text",
+"default": "How many meals would you like us to cater for"
+},
+{
+"type": "text",
+"id": "meals_short_question",
+"label": "Question - Large text",
+"default": "Days"
+},
+{
+"type": "header",
+"content": "Question about allergens"
+},
+{
+"type": "text",
+"id": "allergens_long_question",
+"label": "Question - small text",
+"default": "Do you have any"
+},
+{
+"type": "text",
+"id": "allergens_short_question",
+"label": "Question - Large text",
+"default": "ALLERGEN"
+},
+{
+"type": "header",
+"content": "Results text"
+},
+{
+"type": "text",
+"id": "success_message",
+"label": "Success message",
+"default": "Enjoy your meals!"
+},
+{
+"type": "text",
+"id": "error_message",
+"label": "Error message",
+"default": "Sorry,..."
+},
+{
+"type": "text",
+"id": "meals-start__ad--text",
+"label": "Ad title text",
+"default": "text"
+},
+{
+"type": "color",
+"id": "meals-start__text--color",
+"label": "Ad title - color",
+"default": "#010101"
+}
+
+]
+}
+{% endschema %}

@@ -1,0 +1,20 @@
+<!-- snippets/ndis-information-card -->
+<div class="ndis-information-card" >
+    {%- assign card_img = block.settings.InfCardImg.src -%}
+    {%- assign card_url = card_img | img_url: '600x' | replace: '_1x1.', '_{width}x.' -%}
+    <img class="ndis-card__img lazyload"
+         data-help="{{ card_url }}"
+         src="{{ card_img | img_url: '600x' }}"
+         data-src="{{ card_url }}"
+         data-widths="[50, 100, 250, 300, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+         data-sizes="auto"
+         alt="{{ card_img.alt | default: 'Workout Meals ™' | escape }}">
+    <div class="ndis-card__title-container">
+        <p class="ndis-card__title ndis-card__title--p"  style="color:{{ block.settings.InfCardTextColor }}">{{ block.settings.InfCardText}}</p>
+        <h4 class="ndis-card__title ndis-card__title--h4" style="color:{{ block.settings.InfCardTitleColor }}" >{{ block.settings.InfCardTitle}}</h4>
+    </div>
+<div class="ndis-card__content">
+<p>{{ block.settings.CardContent }}</p>
+
+</div>
+</div>

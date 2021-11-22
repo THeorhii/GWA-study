@@ -1,0 +1,264 @@
+/*===============================================
+* Section contact us banner Styles
+* ================================================*/
+.contact-us-hero-section {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.contact-us-hero-section .page-width {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 35px;
+}
+.contact-us-hero-section .page-width > div {
+    width: 45%;
+}
+.contact-us-hero-section .page-width .title-wrapper h2 {
+    margin-bottom: 32px;
+}
+.contact-us-hero-section .page-width .title-wrapper p {
+    font: calc(var(--font-size-base) + 12px) var(--font-stack-body);
+    line-height: 1.29;
+    letter-spacing: normal;
+    color: var(--color-light-grey);
+}
+.contact-us-hero-section .page-width .title-wrapper .address, .contact-us-hero-section .page-width .title-wrapper .phone {
+    display: flex;
+    align-items: center;
+    margin-top: 55px;
+    font: bold calc(var(--font-size-base) + 8px) var(--font-stack-header);
+    line-height: 1.33;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-dark-text);
+}
+.contact-us-hero-section .page-width .title-wrapper .address::before, .contact-us-hero-section .page-width .title-wrapper .phone::before {
+    content: '';
+    display: inline-block;
+    height: 52px;
+    width: 52px;
+    margin-right: 24px;
+}
+.contact-us-hero-section .page-width .title-wrapper .address::before {
+    background: url("icon-address.svg") no-repeat 0 0;
+    background-size: 52px 52px;
+}
+.contact-us-hero-section .page-width .title-wrapper .phone::before {
+    background: url("icon-phone.svg") no-repeat 0 0;
+    background-size: 52px 52px;
+}
+.contact-us-hero-section .page-width .btn-wrapper {
+    display: none;
+    flex-direction: column;
+    align-self: flex-end;
+}
+.contact-us-hero-section .page-width .btn-wrapper a {
+    max-width: 568px;
+    width: 100%;
+    border: solid 2px var(--color-light-grey);
+    border-radius: 4px;
+    margin-top: 32px;
+    padding: 21px 32px 20px 24px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font: bold calc(var(--font-size-base) + 2px) var(--font-stack-body);
+    line-height: normal;
+    letter-spacing: 1px;
+    color: var(--color-dark-text);
+    transition: color .2s ease, background-color .2s ease;
+}
+.contact-us-hero-section .page-width .btn-wrapper a:hover {
+    background-color: var(--color-dark-text);
+    border-color: var(--color-dark-text);
+    color: #f9f9f9;
+}
+.contact-us-hero-section .page-width .btn-wrapper a:hover span svg path {
+    fill: #f9f9f9;
+}
+.contact-us-hero-section .page-width .btn-wrapper a span {
+    float: right;
+}
+@media only screen and (max-width: 1439px) {
+    .contact-us-hero-section .page-width .title-wrapper {
+        width: 70%;
+    }
+}
+@media only screen and (max-width: 965px) {
+    .contact-us-hero-section {
+        min-height: 565px !important;
+    }
+    .contact-us-hero-section .page-width {
+        flex-direction: column;
+        padding-bottom: 32px;
+    }
+    .contact-us-hero-section .page-width > div {
+        width: 80%;
+    }
+    .contact-us-hero-section .page-width .title-wrapper h2 {
+        margin-bottom: 24px;
+        font-size: calc(var(--font-size-base) * 3) !important;
+    }
+    .contact-us-hero-section .page-width .title-wrapper .address, .contact-us-hero-section .page-width .title-wrapper .phone {
+        margin-top: 24px;
+    }
+    .contact-us-hero-section .page-width .btn-wrapper {
+        align-self: flex-start;
+    }
+}
+@media only screen and (max-width: 750px) {
+    .contact-us-hero-section .page-width > div {
+        width: 100%;
+    }
+    .contact-us-hero-section .page-width .title-wrapper {
+        width: 95%;
+    }
+    .contact-us-hero-section .page-width .title-wrapper p {
+        max-width: 460px;
+    }
+}
+@media only screen and (max-width: 480px) {
+    .contact-us-hero-section {
+        min-height: 350px !important;
+    }
+    .contact-us-hero-section .page-width .title-wrapper {
+        width: 95%;
+    }
+    .contact-us-hero-section .page-width .title-wrapper h2 {
+        margin: 0 0 16px;
+        font-size: calc(var(--font-size-base) * 2) !important;
+    }
+    .contact-us-hero-section .page-width .title-wrapper p {
+        margin-top: 0;
+        font-size: calc(var(--font-size-base) + 2px);
+        max-width: 325px;
+    }
+    .contact-us-hero-section .page-width .title-wrapper .address, .contact-us-hero-section .page-width .title-wrapper .phone {
+        font-size: calc(var(--font-size-base) - 2px);
+    }
+    .contact-us-hero-section .page-width .title-wrapper .address::before, .contact-us-hero-section .page-width .title-wrapper .phone::before {
+        width: 32px;
+        height: 32px;
+        background-size: 32px 32px;
+        margin-right: 16px;
+    }
+    .contact-us-hero-section .page-width .btn-wrapper {
+        margin-top: 16px;
+    }
+    .contact-us-hero-section .page-width .btn-wrapper a {
+        margin-top: 24px;
+        padding: 10px 16px;
+        font-size: var(--font-size-base);
+    }
+}
+
+/*===============================================
+* Section contact faq Styles
+* ================================================*/
+.contact-faq-section {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.contact-faq-section h2 {
+    margin: 32px auto 56px;
+    text-align: center;
+    letter-spacing: 1px;
+    color: #fff;
+}
+.contact-faq-section p {
+    max-width: 700px;
+    width: 100%;
+    font: normal calc(var(--font-size-base) + 12px) var(--font-stack-body);
+    line-height: 1.29;
+    letter-spacing: normal;
+    color: #f9f9f9;
+}
+.contact-faq-section .page-width {
+    padding-bottom: 104px;
+}
+.contact-faq-section .content-wrapper {
+    max-width: 966px;
+    width: 100%;
+    /*================ FAQS ================*/
+}
+.contact-faq-section .content-wrapper p.faq-question {
+    max-width: none;
+    border: 2px solid var(--color-product-text);
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font: calc(var(--font-size-base) + 12px) var(--font-stack-body);
+    line-height: 1.14;
+    margin-top: 40px;
+    margin-bottom: 0;
+    padding: 16px 24px;
+    color: #fcfcfc;
+    cursor: pointer;
+    background-color: rgba(1, 1, 1, 0.5);
+}
+.contact-faq-section .content-wrapper p.faq-question path {
+    fill: var(--color-bright);
+}
+.contact-faq-section .content-wrapper .faq-answer {
+    background-color: var(--color-bright);
+    border-radius: 4px;
+    border: 2px solid var(--color-product-text);
+    margin-top: 32px;
+    display: none;
+}
+.contact-faq-section .content-wrapper .faq-answer p:first-child {
+    max-width: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--color-body-text);
+    font: calc(var(--font-size-base) + 12px) var(--font-stack-body);
+    line-height: 1.14;
+    padding: 16px 24px;
+    margin: 0;
+}
+.contact-faq-section .content-wrapper .faq-answer p:first-child svg {
+    cursor: pointer;
+}
+.contact-faq-section .content-wrapper .faq-answer p:last-child {
+    max-width: 745px;
+    color: var(--color-light-grey);
+    font: var(--font-size-base) var(--font-stack-body);
+    line-height: 1.56;
+    margin-top: 8px;
+    padding: 0 24px 40px;
+}
+@media screen and (max-width: 550px) {
+    .contact-faq-section .content-wrapper p.faq-question {
+        font-size: var(--font-size-base);
+    }
+    .contact-faq-section .content-wrapper .faq-answer p:first-child {
+        font-size: var(--font-size-base);
+    }
+    .contact-faq-section .content-wrapper .faq-answer p:last-child {
+        font-size: calc(var(--font-size-base) - 2px);
+    }
+}
+@media only screen and (max-width: 480px) {
+    .contact-faq-section h2 {
+        margin-bottom: 32px;
+        font-size: calc(var(--font-size-base) * 2) !important;
+    }
+    .contact-faq-section p {
+        font-size: calc(var(--font-size-base) + 2px)
+    }
+    .contact-faq-section .content-wrapper > p {
+        font-size: calc(var(--font-size-base) + 2px)
+    }
+    .contact-faq-section .content-wrapper p.faq-question {
+        margin-top: 24px;
+    }
+    .contact-faq-section .content-wrapper .faq-answer {
+        margin-top: 16px;
+    }
+}
+
+

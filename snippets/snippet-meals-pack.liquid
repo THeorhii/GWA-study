@@ -1,0 +1,530 @@
+{% assign mealplanMain = product.metafields.mealplanDetails.mealplanDetails %}
+{% assign count_days = mealplanMain.mealplan_days %}
+{% assign mealpackDiscount = mealplanMain.mealplan_discount | times: 1 %}
+{% assign mealPackIsFixed = false %}
+{% if mealplanMain.mealplan_type == 'fixed' %}
+    {% assign mealPackIsFixed = true %}
+{% endif %}
+
+<div class="days-meal-plan{% if mealpackDiscount > 0 %} meal-pack-has-discount{% endif %}{% if mealPackIsFixed %} meal-pack-fixed{% endif %}"
+     data-discount-type="{{ mealplanMain.mealplan_discount_type }}"
+     data-discount="{% if mealplanMain.mealplan_discount_type == 'FIXED' %}{{ mealpackDiscount | times: 100 }}{% else %}{{ mealpackDiscount }}{% endif %}">
+    {%- unless mealPackIsFixed -%}
+        {%- for i in (1..count_days) -%}
+            {% capture count_day %}mealplansettings-{{ i }}{% endcapture %}
+            <div class="daily-meal-plan" data-day="{{ i }}" data-title="{{ product.title }}" data-id="{{ product.id }}">
+                {% assign mealplanMain = product.metafields.mealplanDetails.mealplanDetails %}
+                {% assign mealplanPlan = product.metafields.mealplansettings[count_day] %}
+                {% assign mealplanSize = product.metafields.mealplansettings[count_day].size %}
+
+                {% assign dayProtein = mealplanPlan[0].protein | times: 1 %}
+                {% assign dayFat = mealplanPlan[0].fat | times: 1 %}
+                {% assign dayCarbs = mealplanPlan[0].carbs | times: 1 %}
+                {% assign dayCalories = mealplanPlan[0].calories | times: 1 %}
+                {%- for i in (1..mealplanSize) -%}
+                    {% assign protein = mealplanPlan[i].protein | times: 1 %}
+                    {% assign dayProtein = dayProtein | plus: protein %}
+                    {% assign fat = mealplanPlan[i].fat | times: 1 %}
+                    {% assign dayFat = dayFat | plus: fat %}
+                    {% assign carbs = mealplanPlan[i].carbs | times: 1 %}
+                    {% assign dayCarbs = dayCarbs | plus: carbs %}
+                    {% assign calories = mealplanPlan[i].calories | times: 1 %}
+                    {% assign dayCalories = dayCalories | plus: calories %}
+                {%- endfor -%}
+
+                <h4>Day {{ i }}</h4>
+
+                <div class="day-nutrition">
+                    <p>PROTEIN: <span><span class="day-protein">{{ dayProtein }}</span>G</span></p>
+                    <p>FAT: <span><span class="day-fat">{{ dayFat }}</span>G</span></p>
+                    <p>CARBS: <span><span class="day-carbs">{{ dayCarbs }}</span>G</span></p>
+                    <p>CAL: <span class="day-cal">{{ dayCalories }}</span></p>
+                </div>
+
+                <div class="package-plan">
+                    {%- assign sortedMealplanPlan = mealplanPlan | sort: "mealSortOrder" -%}
+                    {%- for i in (0..mealplanSize) -%}
+                        {% if sortedMealplanPlan[i] %}
+                            {% assign product_key = sortedMealplanPlan[i].handle %}
+                            {%- paginate collections['all'].products by 500 -%}
+                                {%- for product in collections['all'].products -%}
+                                    {% if product.handle == product_key %}
+                                        {% assign meal_product = product %}
+                                        <div class="meal" data-variant="{{ sortedMealplanPlan[i].variantId }}"
+                                             data-variant-price="{{ sortedMealplanPlan[i].price }}"
+                                             data-variant-price_discount="{{ sortedMealplanPlan[i].discountedPrice }}"
+                                             data-special="{%- for tag in meal_product.tags -%}{%- if tag == 'wm_clean_vegan' -%}wm_clean_vegan{%- endif -%}{%- endfor -%}">
+                                            <div class="meal-image">
+                                                <img srcset="{{ sortedMealplanPlan[i].imgSmall | replace: '.jpg', '_250x.jpg' }},
+                                             {{ sortedMealplanPlan[i].imgSmall | replace: '.jpg', '_375x.jpg' }} 1.5x,
+                                             {{ sortedMealplanPlan[i].imgSmall | replace: '.jpg', '_500x.jpg' }} 2x"
+                                                     src="{{ sortedMealplanPlan[i].imgSmall | replace: '.jpg', '_300x.jpg' }}"
+                                                     alt="{{ sortedMealplanPlan[i].title }}">
+                                            </div>
+                                            <div class="meal-content">
+                                                <p class="meal-number">meal {{ i | plus: 1 }}</p>
+                                                <p class="meal-title">{{ sortedMealplanPlan[i].title }}</p>
+                                                <div class="meal-nutrition">
+                                                    <p>
+                                                        <span class="to-day-protein">{{ sortedMealplanPlan[i].protein }}</span>Protein
+                                                        (g)</p>
+                                                    <p>
+                                                        <span class="to-day-cal">{{ sortedMealplanPlan[i].calories }}</span>Calories
+                                                    </p>
+                                                    <p>
+                                                        <span class="to-day-carbs">{{ sortedMealplanPlan[i].carbs }}</span>Carbs
+                                                        (g)</p>
+                                                    <p><span class="to-day-fat">{{ sortedMealplanPlan[i].fat }}</span>Fat
+                                                        (g)</p>
+                                                </div>
+                                            </div>
+                                            <div class="meal-event">
+                                                <button class="change-meal"
+                                                        data-find-calories="{{ sortedMealplanPlan[i].calories }}"
+                                                        data-meal-number="{{ i | plus: 1 }}">
+                                                    <span>SWAP</span> {% include 'icon-edit-pen' %}</button>
+
+                                                <button class="delete-meal hide">{% include 'icon-circle-delete' %}</button>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {%- endfor -%}
+                            {%- endpaginate -%}
+                        {% endif %}
+                    {%- endfor -%}
+                    {% comment %}
+                        {% if mealplanMain.mealplan_breakfast == true %}
+                            <div class="meal empty-meal" data-variant="">
+                                <img src="{{ mealplanPlan[0].imgSmall }}">
+                                <p class="num-meal">BREAKFAST</p>
+                            </div>
+                        {% endif %}
+                        {% if mealplanMain.mealplan_snacks == true %}
+                            <div class="meal empty-meal" data-variant="">
+                                <img src="{{ mealplanPlan[0].imgSmall }}">
+                                <p class="num-meal">SNACKS</p>
+                            </div>
+                        {% endif %}
+                    {% endcomment %}
+
+                    {% if mealplanSize == 1 %}
+                        <div class="meal empty-meal" data-variant="" data-variant-price=""
+                             data-special="{%- for tag in meal_product.tags -%}{%- if tag == 'wm_clean_vegan' -%}wm_clean_vegan{%- endif -%}{%- endfor -%}">
+                            <div class="meal-image">
+                            </div>
+                            <div class="meal-content">
+                                <p class="meal-number">meal {{ mealplanSize | plus: 1 }}</p>
+                                <p class="meal-title">Choose a meal {{ mealplanSize | plus: 1 }}</p>
+                                <div class="meal-nutrition">
+                                    <p><span>0</span>Protein (g)</p>
+                                    <p><span>0</span>Calories</p>
+                                    <p><span>0</span>Carbs (g)</p>
+                                    <p><span>0</span>Fat (g)</p>
+                                </div>
+                            </div>
+                            <div class="meal-event">
+                                <button class="change-meal hide"
+                                        data-find-calories="{{ mealplanPlan[i].calories }}"
+                                        data-meal-number="2"><span>SWAP</span>{% include 'icon-edit-pen' %}</button>
+                                <button class="delete-meal hide">{% include 'icon-circle-delete' %}</button>
+                            </div>
+                        </div>
+                        <div class="meal empty-meal" data-variant="" data-variant-price=""
+                             data-special="{%- for tag in meal_product.tags -%}{%- if tag == 'wm_clean_vegan' -%}wm_clean_vegan{%- endif -%}{%- endfor -%}">
+                            <div class="meal-image">
+                            </div>
+                            <div class="meal-content">
+                                <p class="meal-number">meal {{ mealplanSize | plus: 2 }}</p>
+                                <p class="meal-title">Choose a meal {{ mealplanSize | plus: 2 }}</p>
+                                <div class="meal-nutrition">
+                                    <p><span>0</span>Protein (g)</p>
+                                    <p><span>0</span>Calories</p>
+                                    <p><span>0</span>Carbs (g)</p>
+                                    <p><span>0</span>Fat (g)</p>
+                                </div>
+                            </div>
+                            <div class="meal-event">
+                                <button class="change-meal hide"
+                                        data-find-calories="{{ mealplanPlan[i].calories }}"
+                                        data-meal-number="3"><span>SWAP</span>{% include 'icon-edit-pen' %}</button>
+                                <button class="delete-meal hide">{% include 'icon-circle-delete' %}</button>
+                            </div>
+                        </div>
+                        <div class="meal empty-meal" data-variant="" data-variant-price=""
+                             data-special="{%- for tag in meal_product.tags -%}{%- if tag == 'wm_clean_vegan' -%}wm_clean_vegan{%- endif -%}{%- endfor -%}">
+                            <div class="meal-image">
+                            </div>
+                            <div class="meal-content">
+                                <p class="meal-number">meal {{ mealplanSize | plus: 3 }}</p>
+                                <p class="meal-title">Choose a meal {{ mealplanSize | plus: 3 }}</p>
+                                <div class="meal-nutrition">
+                                    <p><span>0</span>Protein (g)</p>
+                                    <p><span>0</span>Calories</p>
+                                    <p><span>0</span>Carbs (g)</p>
+                                    <p><span>0</span>Fat (g)</p>
+                                </div>
+                            </div>
+                            <div class="meal-event">
+                                <button class="change-meal hide"
+                                        data-find-calories="{{ mealplanPlan[i].calories }}"
+                                        data-meal-number="4"><span>SWAP</span>{% include 'icon-edit-pen' %}</button>
+                                <button class="delete-meal hide">{% include 'icon-circle-delete' %}</button>
+                            </div>
+                        </div>
+                    {% elsif mealplanSize == 2 %}
+                        <div class="meal empty-meal" data-variant="" data-variant-price=""
+                             data-special="{%- for tag in meal_product.tags -%}{%- if tag == 'wm_clean_vegan' -%}wm_clean_vegan{%- endif -%}{%- endfor -%}">
+                            <div class="meal-image">
+                            </div>
+                            <div class="meal-content">
+                                <p class="meal-number">meal {{ mealplanSize | plus: 1 }}</p>
+                                <p class="meal-title">Choose a meal {{ mealplanSize | plus: 1 }}</p>
+                                <div class="meal-nutrition">
+                                    <p><span>0</span>Protein (g)</p>
+                                    <p><span>0</span>Calories</p>
+                                    <p><span>0</span>Carbs (g)</p>
+                                    <p><span>0</span>Fat (g)</p>
+                                </div>
+                            </div>
+                            <div class="meal-event">
+                                <button class="change-meal hide"
+                                        data-find-calories="{{ mealplanPlan[i].calories }}"
+                                        data-meal-number="3"><span>SWAP</span>{% include 'icon-edit-pen' %}</button>
+                                <button class="delete-meal hide">{% include 'icon-circle-delete' %}</button>
+                            </div>
+                        </div>
+                        <div class="meal empty-meal" data-variant="" data-variant-price=""
+                             data-special="{%- for tag in meal_product.tags -%}{%- if tag == 'wm_clean_vegan' -%}wm_clean_vegan{%- endif -%}{%- endfor -%}">
+                            <div class="meal-image">
+                            </div>
+                            <div class="meal-content">
+                                <p class="meal-number">meal {{ mealplanSize | plus: 2 }}</p>
+                                <p class="meal-title">Choose a meal {{ mealplanSize | plus: 2 }}</p>
+                                <div class="meal-nutrition">
+                                    <p><span>0</span>Protein (g)</p>
+                                    <p><span>0</span>Calories</p>
+                                    <p><span>0</span>Carbs (g)</p>
+                                    <p><span>0</span>Fat (g)</p>
+                                </div>
+                            </div>
+                            <div class="meal-event">
+                                <button class="change-meal hide"
+                                        data-find-calories="{{ mealplanPlan[i].calories }}"
+                                        data-meal-number="4"><span>SWAP</span>{% include 'icon-edit-pen' %}</button>
+                                <button class="delete-meal hide">{% include 'icon-circle-delete' %}</button>
+                            </div>
+                        </div>
+                    {% elsif mealplanSize == 3 %}
+                        <div class="meal empty-meal" data-variant="" data-variant-price=""
+                             data-special="{%- for tag in meal_product.tags -%}{%- if tag == 'wm_clean_vegan' -%}wm_clean_vegan{%- endif -%}{%- endfor -%}">
+                            <div class="meal-image">
+                            </div>
+                            <div class="meal-content">
+                                <p class="meal-number">meal {{ mealplanSize | plus: 1 }}</p>
+                                <p class="meal-title">Choose a meal {{ mealplanSize | plus: 1 }}</p>
+                                <div class="meal-nutrition">
+                                    <p><span>0</span>Protein (g)</p>
+                                    <p><span>0</span>Calories</p>
+                                    <p><span>0</span>Carbs (g)</p>
+                                    <p><span>0</span>Fat (g)</p>
+                                </div>
+                            </div>
+                            <div class="meal-event">
+                                <button class="change-meal hide"
+                                        data-find-calories="{{ mealplanPlan[i].calories }}"
+                                        data-meal-number="4"><span>SWAP</span>{% include 'icon-edit-pen' %}</button>
+                                <button class="delete-meal hide">{% include 'icon-circle-delete' %}</button>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% assign vegan_check = 0 %}
+                    {%- for tag in meal_product.tags -%}
+                        {%- if tag == 'wm_clean_vegan' -%}
+                            {% assign vegan_check = vegan_check | plus: 1 %}
+                        {% endif %}
+                    {%- endfor -%}
+
+                    {% if vegan_check > 0 %}
+                        <div class="meal empty-meal" data-variant="" data-variant-price=""
+                             data-special="wm_clean_vegan">
+                            <div class="meal-image">
+                            </div>
+                            <div class="meal-content">
+                                <p class="meal-number">meal 6</p>
+                                <p class="meal-title">Choose a meal 6</p>
+                                <div class="meal-nutrition">
+                                    <p><span>0</span>Protein (g)</p>
+                                    <p><span>0</span>Calories</p>
+                                    <p><span>0</span>Carbs (g)</p>
+                                    <p><span>0</span>Fat (g)</p>
+                                </div>
+                            </div>
+                            <div class="meal-event">
+                                <button class="change-meal hide"
+                                        data-find-calories="{{ mealplanPlan[i].calories }}"
+                                        data-meal-number="6"><span>SWAP</span>{% include 'icon-edit-pen' %}</button>
+                                <button class="delete-meal hide">{% include 'icon-circle-delete' %}</button>
+                            </div>
+                        </div>
+                    {% else %}
+                        {% comment %}
+                        <div class="meal empty-meal" data-variant="" data-variant-price="" data-breakfast="wm_breakfast">
+                            <div class="meal-image">
+                                {%- assign icon = settings.empty_breakfast_img -%}
+                                {%- assign img_url = icon | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                                    <img class="lazyload"
+                                         src="{{ icon | img_url: '50x' }}"
+                                         srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                         data-src="{{ img_url }}"
+                                         data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                                         data-sizes="auto"
+                                         alt="{{ icon.alt | default: 'Workout Meals ™' | escape }}">
+                            </div>
+                            <div class="meal-content">
+                                <p class="meal-number">BREAKFAST</p>
+                                <p class="meal-title">Choose a breakfast</p>
+                                <div class="meal-nutrition">
+                                    <p><span>0</span>Protein (g)</p>
+                                    <p><span>0</span>Calories</p>
+                                    <p><span>0</span>Carbs (g)</p>
+                                    <p><span>0</span>Fat (g)</p>
+                                </div>
+                            </div>
+                            <div class="meal-event">
+                                <button class="change-meal hide"
+                                        data-find-calories="{{ mealplanPlan[i].calories }}"
+                                        data-meal-number="BREAKFAST"><span>SWAP</span>{% include 'icon-edit-pen' %}</button>
+                                <button class="delete-meal hide">{% include 'icon-circle-delete' %}</button>
+                            </div>
+                        </div>
+                        {% endcomment %}
+                        <div class="meal empty-meal" data-variant="" data-variant-price="" data-special="juice">
+                            <div class="meal-image">
+                            </div>
+                            <div class="meal-content">
+                                <p class="meal-number">juice</p>
+                                <p class="meal-title">Choose a juice</p>
+                                <div class="meal-nutrition">
+                                    <p><span>0</span>Protein (g)</p>
+                                    <p><span>0</span>Calories</p>
+                                    <p><span>0</span>Carbs (g)</p>
+                                    <p><span>0</span>Fat (g)</p>
+                                </div>
+                            </div>
+                            <div class="meal-event">
+                                <button class="change-meal hide"
+                                        data-find-calories="{{ mealplanPlan[i].calories }}"
+                                        data-meal-number="juice"><span>SWAP</span>{% include 'icon-edit-pen' %}</button>
+                                <button class="delete-meal hide">{% include 'icon-circle-delete' %}</button>
+                            </div>
+                        </div>
+
+                        <div class="meal empty-meal" data-variant="" data-variant-price="" data-special="snack">
+                            <div class="meal-image">
+                            </div>
+                            <div class="meal-content">
+                                <p class="meal-number">snack</p>
+                                <p class="meal-title">Choose a snack</p>
+                                <div class="meal-nutrition">
+                                    <p><span>0</span>Protein (g)</p>
+                                    <p><span>0</span>Calories</p>
+                                    <p><span>0</span>Carbs (g)</p>
+                                    <p><span>0</span>Fat (g)</p>
+                                </div>
+                            </div>
+                            <div class="meal-event">
+                                <button class="change-meal hide"
+                                        data-find-calories="{{ mealplanPlan[i].calories }}"
+                                        data-meal-number="snack"><span>SWAP</span>{% include 'icon-edit-pen' %}</button>
+                                <button class="delete-meal hide">{% include 'icon-circle-delete' %}</button>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                </div>
+            </div>
+        {%- endfor -%}
+
+    {%- else -%}
+
+        <div class="daily-meal-plan" data-title="{{ product.title }}" data-id="{{ product.id }}">
+            {%- assign mealplanMain = product.metafields.mealplanDetails.mealplanDetails -%}
+            {%- assign dayProtein = 0 -%}
+            {%- assign dayFat = 0 -%}
+            {%- assign dayCarbs = 0 -%}
+            {%- assign dayCalories = 0 -%}
+
+            {%- capture package_plan -%}
+                <div class="package-plan">
+                    {% assign meals_count = 0 %}
+                    {%- for i in (1..count_days) -%}
+                        {% capture count_day %}mealplansettings-{{ i }}{% endcapture %}
+                        {%- assign mealplanPlan = product.metafields.mealplansettings[count_day] -%}
+                        {%- assign mealplanSize = product.metafields.mealplansettings[count_day].size -%}
+                        {%- for i in (0..mealplanSize) -%}
+                            {%- assign protein = mealplanPlan[i].protein | times: 1 -%}
+                            {%- assign dayProtein = dayProtein | plus: protein -%}
+                            {%- assign fat = mealplanPlan[i].fat | times: 1 -%}
+                            {%- assign dayFat = dayFat | plus: fat -%}
+                            {%- assign carbs = mealplanPlan[i].carbs | times: 1 -%}
+                            {%- assign dayCarbs = dayCarbs | plus: carbs -%}
+                            {%- assign calories = mealplanPlan[i].calories | times: 1 -%}
+                            {%- assign dayCalories = dayCalories | plus: calories -%}
+                        {%- endfor -%}
+                        {%- assign sortedMealplanPlan = mealplanPlan | sort: "mealSortOrder" -%}
+                        {%- for i in (0..mealplanSize) -%}
+                            {%- if sortedMealplanPlan[i] -%}
+                                {%- assign product_key = sortedMealplanPlan[i].handle -%}
+                                {%- paginate collections['all'].products by 500 -%}
+                                    {%- for product in collections['all'].products -%}
+                                        {% if product.handle == product_key %}
+                                            {% assign meal_product = product %}
+                                            {% assign meals_count = meals_count | plus: 1 %}
+                                            <div class="meal" data-variant="{{ sortedMealplanPlan[i].variantId }}"
+                                                 data-variant-price="{{ sortedMealplanPlan[i].price }}"
+                                                 data-variant-price_discount="{{ sortedMealplanPlan[i].discountedPrice }}"
+                                                 data-vegan="{%- for tag in meal_product.tags -%}{%- if tag == 'wm_clean_vegan' -%}wm_clean_vegan{%- endif -%}{%- endfor -%}">
+                                                <div class="meal-image">
+                                                    <img srcset="{{ sortedMealplanPlan[i].imgSmall | replace: '.jpg', '_250x.jpg' }},
+                                             {{ sortedMealplanPlan[i].imgSmall | replace: '.jpg', '_375x.jpg' }} 1.5x,
+                                             {{ sortedMealplanPlan[i].imgSmall | replace: '.jpg', '_500x.jpg' }} 2x"
+                                                         src="{{ sortedMealplanPlan[i].imgSmall | replace: '.jpg', '_300x.jpg' }}"
+                                                         alt="{{ sortedMealplanPlan[i].title }}">
+                                                </div>
+                                                <div class="meal-content">
+                                                    <p class="meal-number">meal {{ meals_count }}</p>
+                                                    <p class="meal-title">{{ sortedMealplanPlan[i].title }}</p>
+                                                    <div class="meal-nutrition">
+                                                        <p>
+                                                            <span class="to-day-protein">{{ sortedMealplanPlan[i].protein }}</span>Protein
+                                                            (g)</p>
+                                                        <p>
+                                                            <span class="to-day-cal">{{ sortedMealplanPlan[i].calories }}</span>Calories
+                                                        </p>
+                                                        <p>
+                                                            <span class="to-day-carbs">{{ sortedMealplanPlan[i].carbs }}</span>Carbs
+                                                            (g)</p>
+                                                        <p>
+                                                            <span class="to-day-fat">{{ sortedMealplanPlan[i].fat }}</span>Fat
+                                                            (g)</p>
+                                                    </div>
+                                                </div>
+                                                <div class="meal-event"></div>
+                                            </div>
+                                        {% endif %}
+                                    {%- endfor -%}
+                                {%- endpaginate -%}
+                            {%- endif -%}
+                        {%- endfor -%}
+                    {%- endfor -%}
+                </div>
+            {%- endcapture -%}
+            <h4>{{ meals_count }} Meals Set</h4>
+            <div class="day-nutrition">
+                <p>PROTEIN: <span><span class="day-protein">{{ dayProtein }}</span>G</span></p>
+                <p>FAT: <span><span class="day-fat">{{ dayFat }}</span>G</span></p>
+                <p>CARBS: <span><span class="day-carbs">{{ dayCarbs }}</span>G</span></p>
+                <p>CAL: <span class="day-cal">{{ dayCalories }}</span></p>
+            </div>
+            {{ package_plan }}
+        </div>
+
+    {%- endunless -%}
+</div>
+{% assign r_price = mealplanMain.mealplan_regular_price | times: 100 %}
+{% assign d_price = mealplanMain.mealplan_price | times: 100 %}
+<div class="block-add-meal-pack{% if r_price > d_price %} pack-with-discount{% endif %}">
+    <div>
+        <div class="bottom-fixed-logo">
+            {% include 'icon-wm-logo-black-text' %}
+        </div>
+        <p>
+            {% include 'icon-bottom-truck' %}
+            <span>free delivery if you subscribe</span>
+        </p>
+        <button class="add-to-cart-plan" data-type-discount="{{ mealplanMain.mealplan_discount_type }}"
+                data-add-meal-pack-to-cart
+                data-show-discount="{{ mealpackDiscount }}"
+                onclick="pintrk('track', 'addtocart', {value: 100, order_quantity: 1, currency: 'USD'});">
+
+            $ {% if r_price > d_price %}
+                <span class="old-pack-sum">{{ mealplanMain.mealplan_regular_price | times: 100 | money_without_currency }}</span>
+            {% endif %}
+            <span class="new-pack-sum">{{ mealplanMain.mealplan_price | times: 100 | money_without_currency }}</span>
+
+            | Add to cart
+        </button>
+    </div>
+</div>
+
+{% comment %}add if create section if section btn add to cart jpen pop up / else add to cart
+if yes? add to cart than cclose pop Up
+{% endcomment %}
+{% if settings.meal_packs_offer_enable %}
+    <section class="meal-pack-offer hide">
+        <div class="mpo__header">
+            <h3 class="mpo-header__title">LIMITED TIME OFFER <span class="mpo-header__title--diff-1">JOIN WM 360</span>
+                <span class="mpo-header__title--diff-2">FREE!</span></h3>
+        </div>
+        <div class="mpo__main-wrap">
+            <div class="mpo__main">
+                <div class="mpo-main__titles">{{ settings.meal_packs_offer_titles }}</div>
+                <p class="mpo-main__phrase">No more guess work, no more confusion! Click Yes to add
+                    <svg xmlns="http://www.w3.org/2000/svg" width="90" height="18" viewBox="0 0 278 63">
+                        <g fill="none" fill-rule="evenodd">
+                            <g fill-rule="nonzero">
+                                <g>
+                                    <g>
+                                        <path fill="#FBB03C"
+                                              d="M28.58 46.28L22 62.46 0 .11h15.09c1.825-.018 3.463 1.116 4.09 2.83L29 29.88c1.906 5.328 1.76 11.174-.41 16.4M57.25 46.28l-6.59 16.18L28.68.11h15.09c1.824-.015 3.46 1.118 4.09 2.83l9.81 26.94c1.897 5.33 1.747 11.174-.42 16.4M68.12 16.29L74.71.11l22 62.35h-15.1c-1.826.02-3.466-1.114-4.09-2.83l-9.81-26.94c-1.906-5.328-1.76-11.174.41-16.4"
+                                              transform="translate(-821 -2618) translate(0 2618) translate(821)"></path>
+                                        <path fill="#231F20"
+                                              d="M275.54 3.44c-1.8-2.287-4.467-3.433-8-3.44h-20.36c-.578.006-1.156.043-1.73.11H116.78l22 62.29v.06h117.59c3.375.06 6.658-1.098 9.25-3.26 2.663-2.192 4.44-5.277 5-8.68l6.8-38.32c.607-3.547-.02-6.467-1.88-8.76z"
+                                              transform="translate(-821 -2618) translate(0 2618) translate(821)"></path>
+                                        <path fill="#FBB03C"
+                                              d="M96.82 16.29L103.41.11l22 62.35H110.3c-1.826.02-3.466-1.114-4.09-2.83L96.4 32.69c-1.903-5.329-1.753-11.175.42-16.4"
+                                              transform="translate(-821 -2618) translate(0 2618) translate(821)"></path>
+                                        <path fill="#FFF"
+                                              d="M142.13 44.74l.77-4.54h6.71l-.77 4.4c-.49 2.8.35 3.84 3 3.84h12.58c2.65 0 3.84-1 4.33-3.84l1.47-8.39c.49-2.79-.28-3.84-2.94-3.84H155l1-6h11.74c2.59 0 3.85-1.05 4.34-3.77l1.18-7.06c.49-2.8-.28-3.85-2.86-3.85h-11.49c-2.66 0-3.85 1.05-4.34 3.85l-.83 4.4H147l.84-4.54c1.18-6.64 4.75-9.79 11.25-9.79h13.13c6.43 0 8.95 3.15 7.83 9.79l-1.16 6.6c-.406 3.332-2.606 6.172-5.73 7.4 3.22 1.12 4.34 3.57 3.71 7.41l-1.4 7.9c-1.19 6.64-4.82 9.78-11.32 9.78H150c-6.54.03-9-3.11-7.87-9.75zM184.62 44.74l5.17-29.35c1.12-6.64 4.75-9.79 11.21-9.79h12.65c6.5 0 9 3.15 7.9 9.79l-.7 4.12h-6.71l.7-3.91c.42-2.52-.63-3.85-3-3.85h-11.08c-2.37 0-3.91 1.33-4.33 3.85L194 29.43c3.5-3.14 7-5.59 14.75-5.59 9 0 11.46 3.15 10.27 9.79l-1.88 11.11c-1.19 6.64-4.83 9.78-11.33 9.78h-13.36c-6.45 0-9.02-3.14-7.83-9.78zm21.45 3.63c2.66 0 3.85-1 4.34-3.84l1.88-10.76c.49-2.8-.34-3.85-5.31-3.85-4.855-.172-9.65 1.12-13.76 3.71l-1.89 10.9c-.49 2.8.35 3.84 3 3.84h11.74zM226.9 44.74l5.17-29.35c1.11-6.64 4.75-9.79 11.25-9.79H258c6.5 0 9 3.15 7.9 9.79l-5.17 29.35c-1.19 6.64-4.82 9.78-11.32 9.78h-14.69c-6.5 0-9.01-3.14-7.82-9.78zm22.85 3.63c2.65 0 3.77-1 4.26-3.84l5.17-28.93c.42-2.8-.35-3.85-3-3.85H243c-2.66 0-3.84 1.05-4.33 3.85l-5.07 28.93c-.48 2.8.35 3.84 3 3.84h13.15z"
+                                              transform="translate(-821 -2618) translate(0 2618) translate(821)"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                    to your order.
+                </p>
+            </div>
+        </div>
+        <div class="mpo__footer">
+            <button class="mpo__btn"
+                    data-meal-pack-offer__disagree>{{ settings.meal_packs_offer_btn__disagree }}</button>
+            <button class="mpo__btn" data-meal-pack-offer__agree>{{ settings.meal_packs_offer_btn__agree }}</button>
+        </div>
+        <div class="mpo__close">
+            <button data-meal-pack-offer__disagree>
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24">
+                    <defs>
+                        <path d="M12 0C5.371 0 0 5.371 0 12s5.371 12 12 12 12-5.371 12-12S18.629 0 12 0zm5.884 15.15a.581.581 0 0 1 0 .823l-1.916 1.91a.581.581 0 0 1-.823 0L12 14.71l-3.15 3.174a.581.581 0 0 1-.823 0l-1.91-1.916a.581.581 0 0 1 0-.823L9.29 12 6.116 8.85a.581.581 0 0 1 0-.823l1.916-1.916a.581.581 0 0 1 .823 0L12 9.291l3.15-3.175a.581.581 0 0 1 .823 0l1.916 1.916a.581.581 0 0 1 0 .823L14.709 12l3.175 3.15z" id="a"/>
+                    </defs>
+                    <g fill="none" fill-rule="evenodd">
+                        <mask id="b" fill="#fff">
+                            <use xlink:href="#a"/>
+                        </mask>
+                        <g mask="url(#b)" fill="#FFF">
+                            <path d="M0 0h24v24H0z"/>
+                        </g>
+                    </g>
+                </svg>
+            </button>
+        </div>
+    </section>
+{% endif %}
+
+<div class="custom-spinner hide">
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+

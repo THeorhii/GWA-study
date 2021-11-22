@@ -1,0 +1,44 @@
+{% if section.settings.show_section %}
+    <section data-section-id="{{ section.id }}"  id="section-{{ section.id }}">
+        <h3>{{ section.settings.title | escape }}</h3>
+
+        {%- if blog.articles_count > 0 -%}
+            <div class="blogs-container">
+                <div class="blogs-wrapper blogs-slider">
+                    {% for article in blog.articles %}
+                        <div class="slide">
+                            {% include 'blog-grid-item' %}
+                        </div>
+                    {%- endfor -%}
+                </div>
+            </div>
+        {%- endif -%}
+    </section>
+{% endif %}
+
+{% schema %}
+    {
+        "name": "Related atricles",
+        "settings": [
+        {
+            "type": "checkbox",
+            "id": "show_section",
+            "label": "Show section",
+            "default": true
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Blog posts"
+        }
+        ],
+        "presets": [
+            {
+                "name": "Related articles",
+                "category": "Blog",
+                "settings": {}
+            }
+        ]
+    }
+{% endschema %}

@@ -1,0 +1,94 @@
+{% if section.settings.header != blank and section.settings.header != '' %}
+    <h2>{{ section.settings.header }}</h2>
+{% endif %}
+<section>
+    {% for block in section.blocks %}
+        <a class="index-what-we-do__block" href="{{ block.settings.link_url }}">
+
+            {%- assign icon_full = block.settings.image.src -%}
+            {%- assign img_url_full = icon_full | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+            <img class="lazyload index-what-we-do__block-full-image"
+                 src="{{ icon_full | img_url: '100x' }}"
+                 data-src="{{ img_url_full }}"
+                 data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                 data-sizes="auto"
+                 alt="{{ icon_full.alt | default: 'Workout Meals ™' | escape }}">
+
+            {%- assign icon_mobile = block.settings.image_mobile.src -%}
+            {%- assign img_url_mobile = icon_mobile | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+            <img class="lazyload index-what-we-do__block-mobile-image"
+                 src="{{ icon_mobile | img_url: '100x' }}"
+                 data-src="{{ img_url_mobile }}"
+                 data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728]"
+                 data-sizes="auto"
+                 alt="{{ icon_mobile.alt | default: 'Workout Meals ™' | escape }}">
+
+            <div>
+                <p>{{ block.settings.link_title }}</p>
+                {% render 'icon-arrow-right-thin' %}
+            </div>
+        </a>
+    {% endfor %}
+</section>
+
+{% schema %}
+    {
+    "name": "What We Do",
+    "class": "index-what-we-do",
+    "max_blocks": 3,
+    "settings": [
+    {
+    "type": "text",
+    "id": "header",
+    "label": "Section header",
+    "default": "WHAT WE DO"
+    }],
+
+    "blocks": [
+    {
+    "type": "what-we-do-element",
+    "name": "What we do block",
+    "settings": [
+    {
+    "type": "text",
+    "id": "link_title",
+    "label": "Link title"
+    },
+    {
+    "type": "url",
+    "id": "link_url",
+    "label": "Link url"
+    },
+    {
+    "type": "image_picker",
+    "id": "image",
+    "label": "Image"
+    },
+    {
+    "type": "image_picker",
+    "id": "image_mobile",
+    "label": "Image for mobile"
+    }
+    ]
+    }
+    ],
+
+    "presets": [
+    {
+    "name": "What We Do",
+    "category": "Information",
+    "blocks": [
+    {
+    "type": "what-we-do-element"
+    },
+    {
+    "type": "what-we-do-element"
+    },
+    {
+    "type": "what-we-do-element"
+    }
+    ]
+    }
+    ]
+    }
+{% endschema %}

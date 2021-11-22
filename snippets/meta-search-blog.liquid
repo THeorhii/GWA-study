@@ -1,0 +1,30 @@
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ shop.url }}{{ article.url }}"
+      },
+      "headline": "Article headline",
+      "image":  [
+            "{{ article.image.src | img_url: '600x600' }}",
+            "{{ article.image.src | img_url: '800x600' }}",
+            "{{ article.image.src | img_url: '1600x900' }}"
+        ],
+      "datePublished": "{{ article.published_at }}",
+      "dateModified": "{{ article.updated_at }}",
+      "author": {
+        "@type": "Person",
+        "name": "{{ article.author }}"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{ shop.name }}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://cdn.shopify.com/s/files/1/2780/3998/files/workout-meals_110x.png?v=1588960317"
+        }
+      }
+    }
+  </script>

@@ -1,0 +1,132 @@
+<section class="WM360-compare__container">
+    <div class="WM360-compare__wrap">
+        {% if section.settings.image_desktop == blank and section.settings.image_tablet == blank and section.settings.image_mobile == blank %}
+        {% else %}
+            {%- assign icon_desktop = section.settings.image_desktop.src -%}
+            {%- assign img_url_desktop = icon_desktop | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+            <img class="WM360-compare__img lazyload wm360-banner-meal-pack--image-desktop"
+                 src="{{ icon_desktop | img_url: '50x' }}"
+                 data-src="{{ img_url_desktop }}"
+                 data-widths="[50, 100, 180, 250, 300, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                 data-sizes="auto"
+                 alt="{{ icon_desktop.alt | default: 'Workout Meals ™' | escape }}">
+            {%- assign icon_tablet = section.settings.image_tablet.src -%}
+            {%- assign img_url_tablet = icon_tablet | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+            <img class="WM360-compare__img lazyload wm360-banner-meal-pack--image-tablet"
+                 src="{{ icon_tablet | img_url: '50x' }}"
+                 data-src="{{ img_url_tablet }}"
+                 data-widths="[50, 100, 180, 250, 300, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                 data-sizes="auto"
+                 alt="{{ icon_tablet.alt | default: 'Workout Meals ™' | escape }}">
+
+            {%- assign icon_mobile = section.settings.image_mobile.src -%}
+            {%- assign img_url_mobile = icon_mobile | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+            <img class="WM360-compare__img lazyload wm360-banner-meal-pack--image-mobile"
+                 src="{{ icon_mobile | img_url: '50x' }}"
+                 data-src="{{ img_url_mobile }}"
+                 data-widths="[50, 100, 180, 250, 300, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                 data-sizes="auto"
+                 alt="{{ icon_mobile.alt | default: 'Workout Meals ™' | escape }}">
+        {% endif %}
+        <div class="wm360-compare__content-wrap">
+            <div class="wm360-compare__title--main">{{ section.settings.main_title }}</div>
+            <div class="wm360-compare__content">
+                {% if section.settings.block_title != blank %}
+                    <h2 class="wm360-compare__content-title"{% if section.settings.title_uppercase %} style="text-transform: uppercase;"{% endif %}>{{ section.settings.block_title }}</h2>
+                {% endif %}
+                {% if section.settings.block_title != blank %}
+                    <div class="wm360-compare__content-text"{% if section.settings.text_uppercase %} style="text-transform: uppercase;"{% endif %}>{{ section.settings.compare_text }}</div>
+                {% endif %}
+                {% assign lines = section.settings.compare_richtext | split: '</p>' %}
+                <ul>
+                    {% for line in lines %}
+                        {% assign line2 = line | remove: '--' | remove: '<p>' | strip %}
+                        {% unless line2 == "" %}
+                            <li{% if section.settings.list_uppercase %} style="text-transform: uppercase;"{% endif %}>{{ line2 }}</li>
+                        {% endunless %}
+                    {% endfor %}
+                </ul>
+                {% if section.settings.button_link != blank and section.settings.button_title %}
+                    <a href="{{ section.settings.button_link }}" class="btn">{{ section.settings.button_title }}</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+</section>
+
+{% schema %}
+{
+"name": "WM360 Article",
+"class": "wm360-section-compare",
+"settings": [
+{
+"type": "text",
+"id": "main_title",
+"label": "Main title",
+"default": "Your title"
+},
+{
+"type": "text",
+"id": "block_title",
+"label": "Title",
+"default": "Your title"
+},
+{
+"type": "image_picker",
+"id": "image_desktop",
+"label": "Desktop Image"
+},
+{
+"type": "image_picker",
+"id": "image_tablet",
+"label": "Tablet Image"
+},
+{
+"type": "image_picker",
+"id": "image_mobile",
+"label": "Mobile Image"
+},
+{
+"type": "richtext",
+"id": "compare_text",
+"label": "Text of compare"
+},
+{
+"type": "richtext",
+"id": "compare_richtext",
+"label": "List of compare"
+},
+{
+"type": "checkbox",
+"id": "list_uppercase",
+"label": "Content list style - uppercase",
+"default": true
+},
+{
+"type": "checkbox",
+"id": "text_uppercase",
+"label": "Content text style - uppercase",
+"default": false
+},
+{
+"type": "checkbox",
+"id": "title_uppercase",
+"label": "Content title style - uppercase",
+"default": true
+},
+{
+"type": "text",
+"id": "button_title",
+"label": "Button title",
+"default": "VIEW THE MENU"
+},
+{
+"type": "url",
+"id": "button_link",
+"label": "Link for button"
+}
+]
+}
+{% endschema %}

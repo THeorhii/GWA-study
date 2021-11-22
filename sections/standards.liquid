@@ -1,0 +1,79 @@
+<section data-section-id="{{ section.id }}"  id="section-{{ section.id }}" class="standards-section" {% if section.settings.background_image %} style="background-image: url('{{ section.settings.background_image | img_url: 'master' }}'); background-size: cover;"{% endif %}>
+        {% if section.settings.title != blank %}
+    <div class="page-width">
+        <h3>{{ section.settings.title }}</h3>
+    </div>
+        {% endif %}
+    <div class="standards page-width">
+        {% if section.settings.image != blank %}
+            {%- assign icon = section.settings.image.src -%}
+            {%- assign img_url = icon | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+            <img class="lazyload"
+                 src="{{ icon | img_url: '50x' }}"
+                 srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                 data-src="{{ img_url }}"
+                 data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                 data-sizes="auto"
+                 data-parent-fit="contain"
+                 alt="{{ icon.alt | default: 'Workout Meals ™' | escape }}">
+        {% endif %}
+
+        {% if section.settings.title != blank %}
+            <h3 hidden>{{ section.settings.title }}</h3>
+        {% endif %}
+
+        {% assign lines = section.settings.standards_richtext | split: '</p>' %}
+        <ul>
+            {% for line in lines %}
+                {% assign line2 = line | remove: '--' | remove: '<p>' | strip %}
+                {% unless line2 == "" %}
+                    <li{% if section.settings.list_uppercase %} style="text-transform: uppercase;"{% endif %}>{{ line2 }}</li>
+                {% endunless %}
+            {% endfor %}
+        </ul>
+
+    </div>
+</section>
+
+
+{% schema %}
+    {
+    "name": "Standards",
+    "class": "home-section-standards",
+    "settings": [
+    {
+    "type": "text",
+    "id": "title",
+    "label": "Title",
+    "default": "Uncompromising nutrition standards come standard"
+    },
+    {
+    "type": "image_picker",
+    "id": "background_image",
+    "label": "Background image"
+    },
+    {
+    "type": "image_picker",
+    "id": "image",
+    "label": "Photo of standards"
+    },
+    {
+    "type": "richtext",
+    "id": "standards_richtext",
+    "label": "List of standards"
+    },
+    {
+    "type": "checkbox",
+    "id": "list_uppercase",
+    "label": "Content text style - uppercase",
+    "default": true
+    }
+    ],
+    "presets": [
+    {
+    "category": "Text",
+    "name": "Standards"
+    }
+    ]
+    }
+{% endschema %}

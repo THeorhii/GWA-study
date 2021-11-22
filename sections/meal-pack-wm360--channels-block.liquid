@@ -1,0 +1,96 @@
+{% if section.settings.show %}
+    <section class="wm360--channels-block" data-slide-speed="{{ section.settings.slide_speed }}">
+        <div class="page-width">
+            {% if section.settings.section_title !=blank %}
+                <h2 style="color:{{ section.settings.color_title }}; font-size: {{ section.settings.font_size }}px; text-align: center;">{{ section.settings.section_title }}</h2>
+            {% endif %}
+                <div class="channels-slider">
+                    {% for block in section.blocks %}
+                        <div class="channel-image">
+                            {%- assign icon = block.settings.review-banner_image.src -%}
+                            {%- assign img_url = icon | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                            <img class="lazyload"
+                                 data-help="{{ img_url }}"
+                                 src="{{ icon | img_url: '50x' }}"
+                                 data-src="{{ img_url }}"
+                                 data-widths="[50, 100, 250, 300, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                                 data-sizes="auto"
+                                 alt="{{ icon.alt | default: 'Workout Meals ™' | escape }}">
+                        </div>
+                    {% endfor %}
+                </div>
+        </div>
+
+    </section>
+{%- endif -%}
+
+
+{% schema %}
+    {
+    "name": "Channels Block",
+    "class": "section-channels",
+    "settings": [
+    {
+    "type": "checkbox",
+    "id": "show",
+    "label": "Show section",
+    "default": true
+    },
+    {
+    "type": "text",
+    "id": "section_title",
+    "label": "Title"
+    },
+    {
+    "type": "color",
+    "id": "color_title",
+    "label": "Text color",
+    "default": "#fbb03b"
+    },
+    {
+    "type": "range",
+    "id": "font_size",
+    "min": 16,
+    "max": 72,
+    "step": 4,
+    "unit": "px",
+    "label": "Font size",
+    "default": 48
+    },
+    {
+    "type": "range",
+    "id": "slide_speed",
+    "min": 1,
+    "max": 15,
+    "step": 1,
+    "unit": "sec",
+    "label": "Change slides every",
+    "default": 5
+    }
+    ],
+    "blocks": [
+    {
+    "type": "image",
+    "name": "Image",
+    "settings": [
+    {
+    "type": "image_picker",
+    "id": "review-banner_image",
+    "label": "Image"
+    }
+    ]
+    }
+    ],
+    "presets": [
+    {
+    "name": "Channels Block",
+    "category": "Image",
+    "blocks": [
+    {
+    "type": "image"
+    }
+    ]
+    }
+    ]
+    }
+{% endschema %}

@@ -1,0 +1,135 @@
+{{ 'blog-template.css' | asset_url | stylesheet_tag }}
+{% section 'blog-simple-slider' %}
+
+<div class="blogs-container page-width">
+  {% paginate blog.articles by 6 %}
+
+    {% comment %}
+    {%- assign blog_title = blog.title -%}
+
+    {% if current_tags %}
+      {% capture blog_title %}{{ blog.title | link_to: blog.url }} &mdash; {{ current_tags.first }}{% endcapture %}
+    {% endif %}
+    {% endcomment %}
+
+    {% if blog.all_tags.size > 0 %}
+      <h2>{{ 'blogs.general.categories' | t }}</h2>
+
+      <ul>
+        {% for tag in blog.all_tags %}
+
+          {% if current_tags contains tag %}
+            <li>{{ tag }}</li>
+          {% else %}
+            <li>{{ tag | link_to_tag: tag }}</li>
+          {% endif %}
+
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+
+    {% comment %}
+
+    Article Previews
+    ====================
+    {% endcomment %}
+
+    <div class="blogs-wrapper">
+      {% for article in blog.articles %}
+
+        {% comment %}
+        <div class="blog-content">
+
+          {% if article.image %}
+              {{ article | img_url: '369x405' | img_tag: article.title }}
+          {% endif %}
+
+          <div class="blog-info">
+            <h4>
+              <a href="{{ article.url }}">{{ article.title }}</a>
+            </h4>
+
+            {% capture date %}{{ article.published_at | time_tag: format: 'month_day_year' }}{% endcapture %}
+
+            <p class="info-about-post">
+              {{ 'blogs.article.author_on_date_html' | t: author: article.author, date: date }}
+            </p>
+
+            <div class="rte">
+              {% if article.excerpt.size > 0 %}
+                {{ article.excerpt | strip_html | truncatewords: 60 }}
+              {% else %}
+                <p>
+                  {{ article.content | strip_html | truncatewords: 60 }}
+                </p>
+              {% endif %}
+            </div>
+
+            {% if blog.comments_enabled? or article.tags.size > 0 %}
+              <ul>
+                {% if blog.comments_enabled? %}
+                  <li>
+                    <a href="{{ article.url }}#comments">
+                      {{ 'blogs.comments.with_count' | t: count: article.comments_count }}
+                    </a>
+                  </li>
+                {% endif %}
+
+                {% if article.tags.size > 0 %}
+                  {% for tag in article.tags %}
+                    <li>
+                      <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>
+                      {% unless forloop.last %}, {% endunless %}
+                    </li>
+                  {% endfor %}
+                {% endif %}
+              </ul>
+            {% endif %}
+
+            <a href="{{ article.url }}" class="btn std-btn btn-yellow">{{ 'blogs.article.read_more' | t }}</a>
+
+          </div>
+
+        </div>
+        {% endcomment %}
+
+        {% include 'blog-grid-item' %}
+
+      {% endfor %}
+    </div>
+
+
+    {%- if paginate.pages > 1 -%}
+      <div class="pagination">
+          {%- if paginate.previous-%}
+            <span class="prev">
+              <a href="{{ paginate.previous.url }}">&laquo;</a>
+            </span>
+          {%- endif -%}
+
+          {%- for part in paginate.parts -%}
+            {%- if part.is_link -%}
+              <span class="page">
+                <a href="{{ part.url }}">{{ part.title }}</a>
+              </span>
+            {%- else -%}
+              {%- if part.title == paginate.current_page -%}
+                <span class="current page" aria-current="page">{{ part.title }}</span>
+              {%- else -%}
+                <span>{{ part.title }}</span>
+              {%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- if paginate.next -%}
+            <span class="next">
+              <a href="{{ paginate.next.url }}">&raquo;</a>
+            </span>
+          {%- endif -%}
+      </div>
+    {%- endif -%}
+
+  {% endpaginate %}
+</div>
+

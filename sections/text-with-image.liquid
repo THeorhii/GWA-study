@@ -1,0 +1,117 @@
+{% if section.settings.show %}
+    <section id="section-{{ section.id }}" class="text-with-image-section">
+
+        {% if section.settings.image %}
+            <picture>
+                {% if section.settings.image_mob %}
+                    <source srcset="{{ section.settings.image_mob | img_url: 'x332' }}" media="(max-width: 350px)">
+                {% endif %}
+                {% if section.settings.image_tab %}
+                    <source srcset="{{ section.settings.image_tab | img_url: 'x470' }}" media="(max-width: 769px)">
+                {% endif %}
+                <source srcset="{{ section.settings.image | img_url: 'x686' }}" media="(min-width: 770px)">
+                <img src="{{ section.settings.image | img_url: 'x686' }}" alt="{{ section.settings.image.alt}}">
+            </picture>
+        {% endif %}
+
+        <div class="page-width">
+            {%- if section.settings.title != blank -%}
+                <h2>{{ section.settings.title | escape }}</h2>
+            {%- endif -%}
+        </div>
+
+    </section>
+{%- endif -%}
+
+<style>
+    #section-{{ section.id }} h2{
+        font-size: {{ section.settings.font_size }}px;
+    }
+
+    {%- if section.settings.image_size == 'small' -%}
+        #section-{{ section.id }} {
+            min-height: 440px;
+        }
+    {%- elsif section.settings.image_size == 'medium' -%}
+        #section-{{ section.id }} {
+            min-height: 686px;
+        }
+    {%- elsif section.settings.image_size == 'large' -%}
+        #section-{{ section.id }} {
+            min-height: 880px;
+        }
+    {%- endif -%}
+
+</style>
+
+
+{% schema %}
+    {
+        "name": "Text with image",
+        "settings": [
+            {
+                "type": "checkbox",
+                "id": "show",
+                "label": "Show section",
+                "default": true
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "range",
+                "id": "font_size",
+                "min": 24,
+                "max": 72,
+                "step": 12,
+                "unit": "px",
+                "label": "Font size",
+                "default": 72
+            },
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Background image"
+            },
+            {
+                "type": "select",
+                "id": "image_size",
+                "label": "Image size",
+                "options": [
+                    {
+                        "value": "small",
+                        "label": "Small"
+                    },
+                    {
+                        "value": "medium",
+                        "label": "Medium"
+                    },
+                    {
+                        "value": "large",
+                        "label": "Large"
+                    }
+                ],
+                "default": "medium"
+            },
+            {
+                "type": "image_picker",
+                "id": "image_tab",
+                "label": "Background image for tablet"
+            },
+            {
+                "type": "image_picker",
+                "id": "image_mob",
+                "label": "Background image for mobile"
+            }
+        ],
+        "presets": [
+            {
+                "category": "Text",
+                "name": "Text with image",
+                "settings": {}
+            }
+        ]
+    }
+{% endschema %}

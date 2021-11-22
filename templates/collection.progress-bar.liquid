@@ -1,0 +1,15 @@
+{% paginate collection.products by 50 %}
+
+  {% section 'collection-menu--banner' %}
+
+  {% comment %}{% section 'collection-header' %}{% endcomment %}
+
+  {% include 'product-pop-up' %}
+  
+  {% section 'collection-page' %}
+
+  {% if settings.prog_bar_enable %}
+    {% include 'collection_progress-bar' %}
+  {% endif %}
+
+{% endpaginate %}

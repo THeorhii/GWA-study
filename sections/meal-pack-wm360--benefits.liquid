@@ -1,0 +1,98 @@
+<div class="wm360-benefits__container">
+    <h3 class="wm360-benefits__title">{{ section.settings.wm360BenefitsTitle }}</h3>
+    <div class="wm360-benefits__subtitle-text" style="color:{{ section.settings.wm360BenefitsSubTitleTextColor }}">{{ section.settings.wm360BenefitsSubTitleText }}</div>
+    <div class="wm360-benefits__wrapper">
+        {% for block in section.blocks %}
+            <div class="wm360-card">
+                {%- assign wm360Benefits_img = block.settings.wm360BenefitsCardImg.src -%}
+                {%- assign wm360Benefits_url = wm360Benefits_img | img_url: '600x600' | replace: '_1x1.', '_{width}x.' -%}
+                <img class="wm360-card__img lazyload"
+                     data-help="{{ wm360Benefits_url }}"
+                     src="{{ wm360Benefits_img | img_url: '600x600' }}"
+                     data-src="{{ wm360Benefits_url }}"
+                     data-widths="[50, 100, 250, 300, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                     data-sizes="auto"
+                     alt="{{ wm360Benefits_img | default: 'wm360 Meals ™ -benefit' | escape }}">
+                <h4 class="wm360-card__title" style="color: {{ block.settings.wm360BenefitsCardTitleColor }}" >{{ block.settings.wm360BenefitsCardTitle }}</h4>
+                <div class="wm360-card__text" style="color: {{ block.settings.wm360BenefitsCardTextColor }}" >{{  block.settings.wm360BenefitsCardText }}</div>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% if section.settings.button_link != blank and section.settings.button_title %}
+    <div class="wm360__btn-wrap">
+    <a href="{{ section.settings.button_link }}" class="wm360__btn">{{ section.settings.button_title }}</a>
+    </div>
+{% endif %}
+{% schema %}
+{
+"name": "wm360 benefits",
+"settings": [
+{
+"type": "text",
+"id": "wm360BenefitsTitle",
+"label": "Title",
+"default": "Your title"
+},
+{
+"type": "richtext",
+"id": "wm360BenefitsSubTitleText",
+"label": "Text",
+"default": "<p>Your text</p>"
+},
+{
+"type": "color",
+"id": "wm360BenefitsSubTitleTextColor",
+"label": "Color (text)",
+"default": "#181818"
+},
+{
+"type": "url",
+"id": "button_link",
+"label": "Button"
+},
+{
+"type": "text",
+"id": "button_title",
+"label": "Button title"
+}
+],
+"blocks": [
+{
+"type": "text",
+"name": "Advantage",
+"settings": [
+{
+"type": "image_picker",
+"id": "wm360BenefitsCardImg",
+"label": "Image"
+},
+{
+"type": "text",
+"id": "wm360BenefitsCardTitle",
+"label": "Title",
+"default": "Your title"
+},
+{
+"type": "color",
+"id": "wm360BenefitsCardTitleColor",
+"label": "Color (title)",
+"default": "#010101"
+},
+{
+"type": "richtext",
+"id": "wm360BenefitsCardText",
+"label": "Text",
+"default": "<p>Your text</p>"
+},
+{
+"type": "color",
+"id": "wm360BenefitsCardTextColor",
+"label": "Color (text)",
+"default": "#010101"
+}
+]
+}]
+}
+{% endschema %}

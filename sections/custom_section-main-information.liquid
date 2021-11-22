@@ -1,0 +1,158 @@
+<section data-section-id="{{ section.id }}" id="section-{{ section.id }}" class="collections-section">
+    {% if section.settings.title != blank %}
+        <h3>{{ section.settings.title | escape }}</h3>
+    {% endif %}
+
+    <div class="collections-wrapper">
+        <div class="tab-collection">
+            {% for block in section.blocks %}
+                <button class="tablinks-collection" data-collection-handle="{{ block.settings.tab_title | downcase | replace: ' ', '-' }}">
+                    <span>{{ block.settings.tab_title }}</span>
+                </button>
+            {% endfor %}
+        </div>
+
+        {% for block in section.blocks %}
+            <div id="tabcontent-{{ block.settings.tab_title | downcase | replace: ' ', '-' }}" class="tabcontent-container custom-tabcontent-container tabcontent-collection custom-tabcontent-collection">
+                <div class="tab grid custom-grid">
+                    {%- if block.settings.icon != '' or  block.settings.title != '' or block.settings.text != '' -%}
+                        <div class="tab__content custom-tab__content">
+                            {%- if block.settings.icon != '' -%}
+                                <div>{{ block.settings.icon }}</div>
+                            {%- endif -%}
+                            {%- if block.settings.title != '' -%}
+                                <h2 class="tab__title custom-tab__title">{{ block.settings.title }}</h2>
+                            {%- endif -%}
+                            {%- if block.settings.text != '' -%}
+                                <div style="text-align: {{ block.settings.text-align }}" class="tab__subtitle custom-tab__subtitle {% if block.settings.checkIcon == true %} custom-tab__subtitle--check custom-tab__subtitle--before {%endif%}">{{ block.settings.text }}</div>
+                            {%- endif -%}
+                            {% if block.settings.checkButton != false %}
+                                <a class="custom-mf__link" href="{{ block.settings.titleLink }}">{{ block.settings.buttonTitle }}</a>
+
+                            {% endif %}
+                        </div>
+                    {%- endif -%}
+                    <div class="tab__image">
+                        {% if block.settings.image != blank %}
+                            <img class="lazyload"
+                                 src="{{ block.settings.image | img_url: 'master' }}"
+                                 data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048]"
+                                 data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+                                 data-sizes="auto"
+                                 data-parent-fit="contain"
+                                 alt="{{ block.settings.image.alt | escape }}">
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+</section>
+<script>
+
+</script>
+
+
+{% schema %}
+
+{
+"name": "Main information",
+"class": "main-information",
+"settings": [
+{
+"type": "text",
+"id": "title",
+"label": "Title"
+},
+{
+"type": "checkbox",
+"id": "show_link_to_collection",
+"label": "Show link to collection"
+}
+],
+"blocks": [
+{
+"type": "information",
+"name": "Item",
+"settings": [
+{
+"id": "tab_title",
+"type": "text",
+"label": "Tab menu title"
+},
+{
+"id": "icon",
+"type": "html",
+"label": "Icon"
+},
+{
+"id": "title",
+"type": "text",
+"label": "Title"
+},
+{
+"id": "text",
+"type": "richtext",
+"label": "Text"
+},
+{
+"type": "checkbox",
+"id": "checkIcon",
+"label": "List item - check",
+"default": false
+},
+{
+"type": "checkbox",
+"id": "checkButton",
+"label": "Button",
+"default": false
+},
+{
+"type": "url",
+"id": "titleLink",
+"label": "Link button"
+},
+{
+"id": "buttonTitle",
+"type": "text",
+"label": "Button title"
+},
+{
+"type": "radio",
+"id": "text-align",
+"label": "Text align",
+"options": [
+{
+"value": "left",
+"label": "Left"
+},
+{
+"value": "center",
+"label": "Center"
+},
+{
+"value": "right",
+"label": "Right"
+}],
+"default": "left"
+},
+{
+"type": "image_picker",
+"id": "image",
+"label": "Image"
+}
+]
+}
+],
+"presets": [
+{
+"name": "Main information",
+"category": "Information"
+}
+]
+}
+
+{% endschema %}
+

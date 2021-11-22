@@ -1,0 +1,915 @@
+<div class="delivery-map" data-section-type="deliveryMap">
+    <div id="map"></div>
+    <di class="delivery-map__background-img-wrap">
+        {%- assign icon_full = section.settings.image_full.src -%}
+        {%- assign img_url_full = icon_full | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <img class="lazyload"
+             src="{{ icon_full | img_url: '100x' }}"
+             data-src="{{ img_url_full }}"
+             data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+             data-sizes="auto"
+             alt="{{ icon_full.alt | default: 'Workout Meals ™' | escape }}">
+    </di>
+    <div class="delivery-search__wrap">
+        <div class="delivery-search">
+            <h2>Delivery information</h2>
+            <p>We deliver to over 3,000+ locations. Check if we deliver to you!</p>
+
+            <div class="delivery-middle">
+                <p>Check your Delivery Days</p>
+                <div class="input-region">
+                    <input id="searchFormMap"  type="text" class="delivery-location" placeholder="Enter suburb name or postcode" autocomplete="off">
+                    {% include 'icon-search' %}
+                </div>
+                <p class="region-error hide"></p>
+                <ul id="searchBlockMap" style="cursor: pointer; background-color: white"></ul>
+                <div class="delivery-date hide">
+                    <button class="close-available-days">{% include 'icon-close' %}</button>
+                    <ul class="available-delivery-days">
+                    </ul>
+                </div>
+            </div>
+
+            <!--<button class="location light-btn">Use current location</button>-->
+            <div class="location-buttons hide">
+                <a class="order dark-btn" href="/collections/menu">ORDER NOW</a>
+                <button class="back light-btn">GO BACK</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ section.settings.google_map_key }}&libraries=places&callback=initMap" async defer></script>
+
+<script>
+    $('body').addClass('delivery-information');
+    var map,
+        markers = [],
+        service,
+        infowindow,
+        kitchen_centre_key = window.theme.kitchenCentreKey;
+
+    function initMap() {
+        var center_map = new google.maps.LatLng(-33.8678, 151.2073);
+        infowindow = new google.maps.InfoWindow();
+        map = new google.maps.Map(document.getElementById('map'),
+            {
+                center: center_map,
+                zoom: 10,
+                styles: [
+                    {
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#f5f5f5"
+                            }
+                        ]
+                    },
+                    {
+                        "elementType": "labels.icon",
+                        "stylers": [
+                            {
+                                "visibility": "off"
+                            }
+                        ]
+                    },
+                    {
+                        "elementType": "labels.text.fill",
+                        "stylers": [
+                            {
+                                "color": "#616161"
+                            }
+                        ]
+                    },
+                    {
+                        "elementType": "labels.text.stroke",
+                        "stylers": [
+                            {
+                                "color": "#f5f5f5"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative.country",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#f8f8f8"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative.land_parcel",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#f8f8f8"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative.land_parcel",
+                        "elementType": "labels.text.fill",
+                        "stylers": [
+                            {
+                                "color": "#bdbdbd"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative.locality",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#f8f8f8"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative.neighborhood",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#f8f8f8"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative.province",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#f8f8f8"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "landscape.man_made",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#f8f8f8"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "landscape.natural",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#f8f8f8"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "landscape.natural.landcover",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#f8f8f8"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "landscape.natural.terrain",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#f8f8f8"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#eeeeee"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi.attraction",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#f8f8f8"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi.business",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#f8f8f8"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi.government",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#f8f8f8"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi.medical",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#f8f8f8"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi.park",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#f8f8f8"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi.park",
+                        "elementType": "geometry.stroke",
+                        "stylers": [
+                            {
+                                "color": "#f8f8f8"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi.place_of_worship",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#f8f8f8"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi.place_of_worship",
+                        "elementType": "geometry.stroke",
+                        "stylers": [
+                            {
+                                "color": "#f8f8f8"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi.school",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#f8f8f8"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi.sports_complex",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#f8f8f8"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#ffffff"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.highway",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#dadada"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.highway",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#fbe597"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.highway",
+                        "elementType": "geometry.stroke",
+                        "stylers": [
+                            {
+                                "color": "#fbe597"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "water",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#c9c9c9"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "water",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#F4F4F2"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "water",
+                        "elementType": "labels.text.fill",
+                        "stylers": [
+                            {
+                                "color": "#9e9e9e"
+                            }
+                        ]
+                    }
+                ]
+            });
+
+    }
+
+    function findPlaceMap(delivery_datails, get_day_cutoff, days_map_cut_off, days_map_delivery) {
+        var request = {},
+            full_region_name = delivery_datails.split(','),
+            region_name = full_region_name[1] + ' - ' + full_region_name[0],
+            cut_off_days = days_map_cut_off.join(', '),
+            cut_off_time = '',
+            delivery_days = days_map_delivery.join(', '),
+            before = '6 AM',
+            delivery_price = '$15';
+
+        request['query'] = delivery_datails.replace(/,/g, "") + ' Australia';
+        request['fields'] = ['name', 'geometry'];
+
+        service = new google.maps.places.PlacesService(map);
+
+        service.findPlaceFromQuery(request, function (results, status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                for (var i = 0; i < results.length; i++) {
+                    createMarker(results[i], region_name, cut_off_days, cut_off_time, delivery_days, before, delivery_price);
+                }
+                map.setCenter(results[0].geometry.location);
+            }
+        });
+    }
+
+    function createMarker(place, region_name, cut_off_days, cut_off_time, delivery_days, before, delivery_price) {
+        var markerImage = "https://cdn.shopify.com/s/files/1/0082/0772/8751/files/icon-maps-place.png?v=1582620104",
+            marker = new google.maps.Marker({
+                map: map,
+                position: place.geometry.location,
+                icon: markerImage
+            });
+        markers.push(marker);
+
+        var popupContent = '<p class="content main">' + region_name + '</p><div class="main">' +
+            '<p>Delivery Cut-Off <span>' + cut_off_days + '</span></p>' +
+            '<p>Delivery Day <span>' + delivery_days + '</span></p>' +
+            '<p>Before <span>' + before + '</span></p>' +
+            '<p>Delivery Price <span>' + delivery_price + '</span></p>' +
+            '</div>';
+
+
+        google.maps.event.addListener(marker, 'click', function () {
+            //infowindow.setContent(place.name);
+            infowindow.setContent(popupContent);
+            infowindow.open(map, this);
+        });
+    }
+
+    function setMapOnAll(map) {
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(map);
+        }
+    }
+
+    function clearMarkers() {
+        setMapOnAll(null);
+    }
+
+    function deleteMarkers() {
+        clearMarkers();
+    }
+
+    var arr_week_map = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+        arr_monthes_map = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        all_regions_map = [],
+        all_delivery_places_map = [];
+
+    function mainDeliveryMap(all_info) {
+        var general_info = all_info.general,
+            regions = all_info.regions,
+            kitchen_time_zone = general_info.time,
+            general_delivery_hours = general_info.hours,
+            cutoff_time = general_info.cutoff_time;
+
+        for (var i = 0; regions.length > i; i++) {
+            var name_region = regions[i]['name'];
+            all_regions_map.push(name_region);
+        }
+        for (var i = 0; i < regions.length; i++) {
+            var places_arr = regions[i]['places'];
+            for (var j = 0; j < places_arr.length; j++) {
+                all_delivery_places_map.push(places_arr[j]);
+            }
+        }
+        $('button.location').click(function () {
+            $('.region-error').addClass('hide');
+            searchGeolocation(all_delivery_places_map, regions, kitchen_time_zone, general_delivery_hours, cutoff_time);
+        });
+
+        searchPlacesMap(all_delivery_places_map, regions, kitchen_time_zone, general_delivery_hours, cutoff_time);
+    }
+
+    function searchGeolocation(data, regions, kitchen_time_zone, general_delivery_hours, cutoff_time) {
+        $.ajax({
+            url: "https://geoip-db.com/jsonp",
+            jsonpCallback: "callback",
+            dataType: "jsonp",
+            success: function (location) {
+                var postal = location.postal.toUpperCase(),
+                    city = location.city.toUpperCase(),
+                    count_checker = 0;
+
+                for (let i = 0; i < regions.length; i++) {
+                    // console.log(regions[i].places);
+                    var region = regions[i];
+                    var region_places = region.places;
+                    //console.log(region_places);
+                    for (let j = 0; region_places.length > j; j++) {
+                        let place = region_places[j].toUpperCase();
+
+                        if (place.indexOf(postal) != -1 && place.indexOf(city) != -1) {
+                            count_checker += 1;
+                            var region = regions[i],
+                                delivery_datails = region_places[j];
+
+                            showDayBlocks(region, kitchen_time_zone, general_delivery_hours, delivery_datails, cutoff_time);
+                        }
+
+                    }
+
+                }
+
+                if(count_checker < 1 ){
+                    $('.region-error').text("Sorry, seems like we don’t deliver to " + city + " " + postal + ", try another! ").removeClass('hide');
+                }
+            }
+        });
+    }
+
+    function searchPlacesMap(data, regions, kitchen_time_zone, general_delivery_hours, cutoff_time) {
+        $('#searchFormMap').on('input', function () {
+            $('.region-error').addClass('hide');
+            var str = $(this).val();
+            if (str.length > 2) {
+                var input_val = $(this).val().toLowerCase();
+                if (data.length != undefined && data.length > 0) {
+                    $("#searchBlockMap").html('');
+                    var count_li = 0;
+                    for (var i = 0; data.length > i; i++) {
+                        if (data[i].toLowerCase().indexOf(input_val) != -1) {
+                            var li_val = removeСomma(data[i]);
+                            $('#searchBlockMap').append('<li class="delivery_place" data-place="' + data[i] + '"><span></span>' + li_val + '</li>');
+                            count_li++;
+                        }
+                    }
+                    if (count_li > 0) {
+                        $('#searchBlockMap').css('display', 'block');
+                    } else {
+                        $('#searchBlockMap').css('display', 'none');
+                    }
+                }
+            } else {
+                $('.delivery-date-wrapper').addClass('hide');
+                $('#searchBlockMap').css('display', 'none');
+            }
+            showBlocPlacesMap(regions, kitchen_time_zone, general_delivery_hours, cutoff_time);
+        });
+    }
+
+    $('.back').click(function () {
+        clearDelivery();
+    });
+
+    $('.close-available-days').click(function () {
+        clearDelivery();
+    });
+
+    function clearDelivery() {
+        $('.delivery-search>p').html('We deliver to over 3,000+ locations.<br/>Check if we deliver to you!');
+        $('.delivery-middle>p').text('Check your Delivery Days');
+
+        $('div.input-region').removeClass('hide');
+        $('.location').removeClass('hide');
+
+        $('div.delivery-date').addClass('hide');
+        $('div.location-buttons').addClass('hide');
+
+        $('#searchFormMap').val('').attr('placeholder', 'Enter suburb name or postcode');
+
+        deleteMarkers();
+    }
+
+    function removeСomma(first_str) {
+        var change_str = first_str.replace(/,/ig, '');
+        return change_str;
+    }
+
+    function showBlocPlacesMap(regions, kitchen_time_zone, general_delivery_hours, cutoff_time) {
+        $('#searchBlockMap > li').on('click', function () {
+            $('#searchFormMap').val($(this).text());
+            var delivery_datails = $(this).data('place');
+
+            searchRegionMap(delivery_datails, regions, kitchen_time_zone, general_delivery_hours, delivery_datails, cutoff_time);
+            $('#searchBlockMap').css('display', 'none');
+        });
+    }
+
+    function searchRegionMap(region_key, regions, kitchen_time_zone, general_delivery_hours, delivery_datails, cutoff_time) {
+        var delivery_address = delivery_datails;
+        for (let i = 0; i < regions.length; i++) {
+            if (regions[i]['places'].indexOf(region_key) != -1) {
+                var region = regions[i];
+                if(region.regionDeliverySettings.length > 0){
+                    perRegionFindDeliveryBlockMap(region, kitchen_time_zone, delivery_address, cutoff_time);
+                }/*else {
+                    showDayBlocksMap(region, kitchen_time_zone, general_delivery_hours, delivery_datails, cutoff_time);
+                }*/
+            }
+        }
+    }
+
+    function perRegionFindDeliveryBlockMap(region, kitchen_time_zone, delivery_details, cutoff_time){
+        sessionStorage.removeItem('sdd_ndd');
+
+        $('.available-delivery-days').empty();
+
+         var b_day = new Date(),
+             booking_day_t_z = getKitchenTime(b_day, kitchen_time_zone),
+             key_region = region.name;
+
+        searchSameDeliveryRegionDaysMap(region, booking_day_t_z);
+
+        var booking_day = checkCutoffTime(booking_day_t_z, cutoff_time);
+        var booking_day_number = booking_day.getDay();
+        var days = [];
+        var arr_variants_delivery = region.regionDeliverySettings;
+
+        for( var i= 0; arr_variants_delivery.length > i; i++){
+            if((arr_variants_delivery[i].cutoff || arr_variants_delivery[i].cutoff == 0) && (arr_variants_delivery[i].delivery || arr_variants_delivery[i].delivery == 0 )){
+                var day = [arr_variants_delivery[i].cutoff, arr_variants_delivery[i].delivery];
+                days.push(day);
+            }
+        }
+        days = copySorted(days);
+
+        var get_day_cutoff = getDayCutoffMap(booking_day, days, booking_day_number, kitchen_time_zone, cutoff_time, key_region),
+            days_map_cut_off = allMapDays(days, 0),
+            days_map_delivery = allMapDays(days, 1);
+
+        showDeliveryDaysMapPerRegion(delivery_details, get_day_cutoff, region);
+        findPlaceMap(delivery_details, get_day_cutoff, days_map_cut_off, days_map_delivery);
+
+        localStorage.setItem("wm_d_l", delivery_details);
+    }
+
+    function searchSameDeliveryRegionDaysMap(region, booking_day_t_z, is_after_ndd){
+        var region_days = region.regionDeliverySettings;
+        var today = booking_day_t_z.getDay()*1;
+
+        if(is_after_ndd){
+            var tomorrow1 = today === 6 ? 0 : today + 1;
+            var tomorrow = tomorrow1 === 6 ? 0 : today + 1;
+        }else{
+            var tomorrow = today === 6 ? 0 : today + 1;
+        }
+
+        $.each(region_days, function(ind, day){
+            if (day.sddAllowed && day.delivery == tomorrow){
+                checkSameDayDeliveryTimeMap(region, day, booking_day_t_z, true, is_after_ndd);
+            }
+            /* if(day.sddAllowed && day.delivery == today){
+                 checkSameDayDeliveryTime(day, booking_day_t_z);
+             }*/
+        });
+
+    }
+
+    function checkSameDayDeliveryTimeMap(region, day, booking_day_t_z, is_ndd, is_after_ndd){
+        var today_hours = booking_day_t_z.getHours();
+        var today_minutes = booking_day_t_z.getMinutes();
+        var arr_SDD_time = [];
+        var arr_NDD_time = [];
+
+        $.each(day.deliveryHours, function(ind, time_block){
+            if(!is_ndd){
+                var time_block_hours = time_block.sddCutoff.split(':')[0];
+                var time_block_minutes = time_block.sddCutoff.split(':')[1];
+            }else{
+                if(time_block.nddCutoff){
+                    var time_block_hours = time_block.nddCutoff.split(':')[0];
+                    var time_block_minutes = time_block.nddCutoff.split(':')[1];
+                }
+            }
+
+            if (!time_block.title){
+                return;
+            }
+
+            if (!is_ndd){
+                /* if((time_block_hours*1>today_hours*1) || (time_block_hours*1 == today_hours*1 && today_minutes*1 < time_block_minutes*1)){
+                   arr_SDD_time.push(time_block);
+                   arr_NDD_time.push(time_block);
+                 }*/
+            }else if((time_block_hours*1>today_hours*1) || (time_block_hours*1 == today_hours*1 && today_minutes*1 < time_block_minutes*1)){
+                arr_NDD_time.push(time_block);
+            }
+
+            if(is_after_ndd){
+                arr_NDD_time.push(time_block);
+            }
+        });
+
+        if (arr_NDD_time.length>0){
+            var next_day;
+
+            if(!is_after_ndd) {
+                next_day = new Date(+booking_day_t_z + 24 * 3600 * 1000);
+            }else{
+                next_day = new Date(+booking_day_t_z + 48 * 3600 * 1000);
+            }
+            createNDDBlockDayMap(arr_NDD_time, next_day, is_after_ndd);
+        }else{
+            if(!is_after_ndd){
+                searchSameDeliveryRegionDaysMap(region, booking_day_t_z, true);
+            }
+        }
+
+        /* else if(arr_SDD_time.length>0){ Uncomment this when Kitchen will be ready !!!
+             createSDDBlockDay(arr_SDD_time, booking_day_t_z);
+         }*/
+
+    }
+
+    function createNDDBlockDayMap(arr_NDD_time, day, is_after_ndd){
+
+        if(!is_after_ndd){
+            is_after_ndd = 0;
+        }else{
+            is_after_ndd = 1;
+        }
+
+        var date_day = arr_week[day.getDay()] +', '+ day.getDate() +' '+ arr_monthes[day.getMonth()]+' '+day.getFullYear();
+        var visible_date_day = arr_week[day.getDay()] +', '+ day.getDate() +' '+ arr_monthes[day.getMonth()];
+        var times_block = '';
+
+        for (let i = 0; arr_NDD_time.length > i; i++) {
+            if (arr_NDD_time[i]) {
+                times_block += '<li> <b>' + arr_NDD_time[i].sddTitle + ' - </b>' + arr_NDD_time[i].sddHelpText + '</li>';
+            }
+        }
+
+        var block_place = $('.delivery-middle').find('.available-delivery-days');
+
+        var ndd_block = '<li><p id="delivery-date-ndd">' +
+            '<svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-calendar" viewBox="0 0 20 20"><defs><path id="a" d="M19 2h-3V1a1 1 0 1 0-2 0v1H6V1a1 1 0 1 0-2 0v1H1a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1zM2 18h16V8H2v10zM2 6h16V4H2v2zm4 4a1 1 0 1 0 0 2 1 1 0 1 0 0-2m0 4a1 1 0 1 0 0 2 1 1 0 1 0 0-2m4 0a1 1 0 1 0 0 2 1 1 0 1 0 0-2m0-4a1 1 0 1 0 0 2 1 1 0 1 0 0-2m4 0a1 1 0 1 0 0 2 1 1 0 1 0 0-2"></path></defs><use fill="#FBB03B" xlink:href="#a" fill-rule="evenodd"></use></svg>' +
+            '<span>'+visible_date_day+'</span></p>\n' +
+            '<ul class="">'+times_block+'</ul></li>';
+
+        block_place.prepend(ndd_block);
+
+        if(arr_NDD_time.length>0){
+            block_place.addClass('set-ndd');
+        /*}else{
+            block_place.removeClass('set-ndd');
+            $('#CartDrawer').find('#delivery-date-ndd').parent().parent().addClass('hide');*/
+        }
+
+        if(date_day){
+            sessionStorage.setItem('sdd_ndd', date_day);
+        }
+    }
+
+    function allMapDays(days, number) {
+        let arr_cut_off = [];
+        for (let i = 0; days.length > i; i++) {
+            arr_cut_off.push(arr_week_map[days[i][number]]);
+        }
+        return arr_cut_off
+    }
+
+    function copySorted(arr) {
+        return arr.slice().sort();
+    }
+
+    function getKitchenTimeMap(client_day, kitchen_time_zone) {
+        var client_time_zone = new Date().getTimezoneOffset() * (-1);
+        var time_zone = 0;
+        if (+kitchen_time_zone > +client_time_zone) {
+            time_zone = kitchen_time_zone - client_time_zone;
+        }
+        var kitchen_day = new Date(time_zone * 60 * 1000 + Date.now());
+        return kitchen_day;
+    }
+
+    function checkCutoffTimeMap(booking_day, cutoff_time) {
+        var change_time = 24 - cutoff_time[0];
+
+        if (booking_day.getHours() * 1 === cutoff_time[0] * 1) {
+            if (booking_day.getMinutes() * 1 === cutoff_time[1] * 1) {
+                if (booking_day.getMinutes() * 1 > cutoff_time[2] * 1) {
+                    booking_day = new Date(booking_day.getTime() + change_time * 60 * 60 * 1000);
+                } else {
+                    console.log('sec<');
+                }
+            } else if (booking_day.getMinutes() * 1 > cutoff_time[1] * 1) {
+                booking_day = new Date(booking_day.getTime() + change_time * 60 * 60 * 1000);
+            }
+            booking_day = new Date(booking_day.getTime() + change_time * 60 * 60 * 1000);
+        } else if (booking_day.getHours() * 1 > cutoff_time[0] * 1) {
+            booking_day = new Date(booking_day.getTime() + change_time * 60 * 60 * 1000);
+        }
+        return booking_day;
+    }
+
+    function getDayCutoffMap(booking_day, days, booking_day_number, kitchen_time_zone, cutoff_time, key_region) {
+        for (var y = 0; arr_week_map.length > y; y++) {
+            var resCheckCutoff = checkCutoff(booking_day_number, days),
+                str = '0, 1, 2, 3, 4, 5, 6';
+            if (str.indexOf(resCheckCutoff) == -1) {
+                booking_day_number += 1;
+                if (booking_day_number > 6) {
+                    booking_day_number = 0;
+                }
+                checkCutoffMap(booking_day_number, days);
+            } else {
+                var next_cutoff_day = checkCutoffMap(booking_day_number, days),
+                    get_all_cutoffs = getAllCutoffsMap(next_cutoff_day, kitchen_time_zone, days, key_region);
+                $('.delivery-middle>p').text('Order by ' + cutoff_time[0] + ':' + cutoff_time[1] + ' ' + arr_week_map[next_cutoff_day] + ' for delivery on:');
+                return get_all_cutoffs;
+            }
+        }
+    }
+
+    function checkCutoffMap(booking_day_number, days) {
+        for (var d = 0; d < days.length; d++) {
+            if ((booking_day_number * 1) == (days[d][0] * 1)) {
+                var next_cutoff_day = days[d][0];
+                return next_cutoff_day;
+            }
+        }
+    }
+
+    function getAllCutoffsMap(next_cutoff_day, kitchen_time_zone, days, key_region) {
+        var arr_7_days_regions = ['MEL METRO', 'MELBOURNE REGIONAL', 'BNE METRO', 'SYDNEY', 'SYD REGIONAL', 'SYD SOUTHWEST', 'GOLD COAST'];
+
+        var arr_cutoff = [],
+            arr_delivery = [];
+
+        for (var k = 0; k < days.length; k++) {
+            arr_cutoff.push(days[k][0]);
+            arr_delivery.push(days[k][1]);
+        }
+        //console.log('arr_cutoff = '+arr_cutoff+', arr_delivery = '+arr_delivery);
+
+        var day_1_key = arr_cutoff.indexOf(next_cutoff_day),
+            day_2_key,
+            day_3_key;
+        (day_1_key + 1) < days.length ? (day_2_key = day_1_key + 1) : (day_2_key = 0);
+        (day_2_key + 1) < days.length ? (day_3_key = day_2_key + 1) : (day_3_key = 0);
+
+        var booking_day = new Date(),
+            booking_day_number = booking_day.getDay();
+
+        var cutoff_change = getCutoffDataMap(booking_day_number, next_cutoff_day),
+            first_delivery_change = getDaliveryDataMap(next_cutoff_day, arr_delivery[day_1_key]),
+            second_delivery_change = getDaliveryDataMap(arr_delivery[day_1_key], arr_delivery[day_2_key]),
+            third_delivery_change = getDaliveryDataMap(arr_delivery[day_2_key], arr_delivery[day_3_key]);
+
+        var first_delivery_day = new Date(first_delivery_change + cutoff_change + Date.now()),
+            second_delivery_day = new Date(second_delivery_change + first_delivery_change + cutoff_change + Date.now()),
+            third_delivery_day = new Date(third_delivery_change + second_delivery_change + first_delivery_change + cutoff_change + Date.now());
+
+        var delivery_days_arr = [];
+        delivery_days_arr.push(first_delivery_day, second_delivery_day, third_delivery_day);
+
+        if(arr_7_days_regions.indexOf(key_region.toUpperCase()) > -1) {
+            var third_block_change = third_delivery_day.getTime();
+            var day_4_key, day_5_key, day_6_key;
+            (day_3_key + 1) < days.length ? (day_4_key = day_3_key + 1) : (day_4_key = 0);
+            (day_4_key + 1) < days.length ? (day_5_key = day_4_key + 1) : (day_5_key = 0);
+            (day_5_key + 1) < days.length ? (day_6_key = day_5_key + 1) : (day_6_key = 0);
+            var fourth_delivery_change = getDaliveryDataMap(arr_delivery[day_3_key], arr_delivery[day_4_key]),
+                fifth_delivery_change = getDaliveryDataMap(arr_delivery[day_4_key], arr_delivery[day_5_key]),
+                sixth_delivery_change = getDaliveryDataMap(arr_delivery[day_5_key], arr_delivery[day_6_key]);
+
+            var fourth_delivery_change_f = third_block_change + fourth_delivery_change;
+            var fifth_delivery_change_f = fourth_delivery_change_f + fifth_delivery_change;
+            var sixth_delivery_change_f = fifth_delivery_change_f + sixth_delivery_change;
+
+            var fourth_delivery_day = new Date(fourth_delivery_change_f),
+                fifth_delivery_day = new Date(fifth_delivery_change_f),
+                sixth_delivery_day = new Date(sixth_delivery_change_f);
+
+            delivery_days_arr.push(fourth_delivery_day, fifth_delivery_day, sixth_delivery_day);
+        }
+
+        return delivery_days_arr;
+    }
+
+    function getCutoffDataMap(previous_day, next_day) {
+        var change;
+        (+previous_day > +next_day) ?
+            (change = 7 + next_day - previous_day) :
+            (change = next_day - previous_day);
+        return change * 24 * 60 * 60 * 1000;
+    }
+
+    function getDaliveryDataMap(previous_day, next_day) {
+        var change;
+        (+previous_day >= +next_day) ?
+            (change = 7 + next_day - previous_day) :
+            (change = next_day - previous_day);
+        return change * 24 * 60 * 60 * 1000;
+    }
+
+    function showDeliveryDaysMapPerRegion(delivery_datails, days, region){
+        var regionDeliverySettings = region.regionDeliverySettings;
+        $('.delivery-date').removeClass('hide');
+        $('.location-buttons').removeClass('hide');
+        $('.available-delivery-hours').children().remove();
+
+        if(days.length > 0){
+            for(let d = 0; d < days.length; d++){
+                let val_block_m = arr_week_map[days[d].getDay()] + ', ' + days[d].getDate() + ' ' + arr_monthes_map[days[d].getMonth()];
+                $('.available-delivery-days').append('<li><p id="delivery-date-'+d+'"><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-calendar" viewBox="0 0 20 20">' +
+                    '<defs><path id="a" d="M19 2h-3V1a1 1 0 1 0-2 0v1H6V1a1 1 0 1 0-2 0v1H1a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1zM2 18h16V8H2v10zM2 6h16V4H2v2zm4 4a1 1 0 1 0 0 2 1 1 0 1 0 0-2m0 4a1 1 0 1 0 0 2 1 1 0 1 0 0-2m4 0a1 1 0 1 0 0 2 1 1 0 1 0 0-2m0-4a1 1 0 1 0 0 2 1 1 0 1 0 0-2m4 0a1 1 0 1 0 0 2 1 1 0 1 0 0-2"></path></defs><use fill="#FBB03B" xlink:href="#a" fill-rule="evenodd"></use></svg>' +
+                    '<span>'+ val_block_m +'</span></p><ul class = "available-delivery-hours"></ul></li>')
+            }
+        }
+
+        for(var j = 0; days.length> j ; j++){
+            for(var k = 0;  regionDeliverySettings.length > k ; k++){
+                if( regionDeliverySettings[k].delivery == days[j].getDay()){
+                    var deliveryHours = regionDeliverySettings[k].deliveryHours;
+                    $.each(deliveryHours, function (ind, block_time) {
+                        var parent = $('#searchBlockMap').next('.delivery-date').find('#delivery-date-'+j+'').parent();
+                        parent.find('.available-delivery-hours').append('<li> <b>' + block_time.title + ' - </b>' + block_time.helpText + '</li>');
+                    });
+                }
+            }
+        }
+
+        let full_place = delivery_datails.split(','),
+            place = full_place[0] + ', ' + full_place[1];
+
+        $('.delivery-search>p').text('Yes we deliver to ' + place + '!')
+        $('div.input-region').addClass('hide');
+        $('.location').addClass('hide');
+
+
+        if($('#delivery-date-ndd span').text().toLowerCase() == $('#delivery-date-0 span').text().toLowerCase()){
+            $('#delivery-date-0').parent().css('display', 'none');
+        }else if($('#delivery-date-ndd span').length>0){
+            $('.available-delivery-days li:last-child').css('display', 'none');
+        }
+    }
+
+</script>
+
+{% schema %}
+    {
+    "name": "Delivery map section",
+    "settings": [
+    {
+    "type": "text",
+    "id": "google_map_key",
+    "label": "Google map key"
+    },
+    {
+    "type": "image_picker",
+    "id": "image_full",
+    "label": "Image"
+    }
+    ]
+    }
+{% endschema %}

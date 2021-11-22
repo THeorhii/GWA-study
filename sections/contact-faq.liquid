@@ -1,0 +1,145 @@
+{% if section.settings.show %}
+    <section id="section-{{ section.id }}" class="contact-faq-section"
+            {% if section.settings.image != blank %}
+                style="background-image: url('{{ section.settings.image | img_url: 'x628' }}');"
+            {% else %}
+                style="background-color: {{ section.settings.background_color }};"
+            {% endif %}>
+
+        <div class="page-width">
+            {%- if section.settings.title != blank -%}
+                <h2>{{ section.settings.title | escape }}</h2>
+            {%- endif -%}
+
+            {%- if section.settings.subtitle != blank -%}
+                <p>{{ section.settings.subtitle | strip_html }}</p>
+            {%- endif -%}
+
+            <div class="content-wrapper">
+                {% for block in section.blocks %}
+                    <div>
+                        <p class="faq-question"><span>{{ block.settings.question }}</span> {% include 'icon-plus' %}</p>
+                        <div class="faq-answer">
+                            <p><span>{{ block.settings.question }}</span> {% include 'icon-close' %}</p>
+                            <p>{{ block.settings.answer }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+
+    </section>
+{%- endif -%}
+
+<style>
+    #section-{{ section.id }} h2{
+        font-size: {{ section.settings.font_size }}px;
+    }
+
+    {%- if section.settings.image_size == 'small' -%}
+    #section-{{ section.id }} {
+        min-height: 440px;
+    }
+    {%- elsif section.settings.image_size == 'medium' -%}
+    #section-{{ section.id }} {
+        min-height: 628px;
+    }
+    {%- elsif section.settings.image_size == 'large' -%}
+    #section-{{ section.id }} {
+        min-height: 880px;
+    }
+    {%- endif -%}
+
+</style>
+
+
+{% schema %}
+    {
+        "name": "FAQ",
+        "settings": [
+        {
+            "type": "checkbox",
+            "id": "show",
+            "label": "Show section",
+            "default": true
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+        },
+        {
+            "type": "range",
+            "id": "font_size",
+            "min": 24,
+            "max": 72,
+            "step": 12,
+            "unit": "px",
+            "label": "Font size",
+            "default": 72
+        },
+        {
+            "type": "richtext",
+            "id": "subtitle",
+            "label": "Subtitle"
+        },
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Background image"
+        },
+        {
+            "type": "select",
+            "id": "image_size",
+            "label": "Section height",
+            "options": [
+                {
+                    "value": "small",
+                    "label": "Small"
+                },
+                {
+                    "value": "medium",
+                    "label": "Medium"
+                },
+                {
+                    "value": "large",
+                    "label": "Large"
+                }
+            ],
+            "default": "medium"
+        },
+        {
+            "type": "color",
+            "id": "background_color",
+            "label": "Background color",
+            "default": "#181818"
+        }
+        ],
+        "blocks": [
+            {
+                "type": "text",
+                "name": "Question",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "question",
+                        "label": "Question"
+                    },
+                    {
+                        "type": "text",
+                        "id": "answer",
+                        "label": "Answer"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "category": "STORE INFORMATION",
+                "name": "FAQ",
+                "settings": {}
+            }
+        ]
+    }
+{% endschema %}

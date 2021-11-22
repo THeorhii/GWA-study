@@ -1,0 +1,22 @@
+<div data-section-id="{{ section.id }}">
+    <div class="collection-section">
+        <div class="grid collection-page-collection-section filtering-hide">
+            {%- for product in collection.products  -%}
+                {%- if product -%}
+                    <div class="grid__item medium-up--one-quarter mobile-up--one-half mobile--one-whole product-grid-item">
+                       {% include 'collections-product-block' %}
+                    </div>
+                {%- endif -%}
+            {%- endfor -%}
+        </div>
+   </div>
+</div>
+<script>
+    pintrk('track', 'pagevisit');
+</script>
+{% schema %}
+{
+"name": "S-Collection products",
+"class": "collection-products-section"
+}
+{% endschema %}

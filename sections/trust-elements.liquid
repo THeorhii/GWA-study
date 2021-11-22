@@ -1,0 +1,58 @@
+{% if section.settings.show %}
+    <section class="grid">
+        {% for block in section.blocks %}
+            <div class="trust-element">
+                {{ block.settings.element_icon }}
+                <p>{{ block.settings.element_text }}</p>
+            </div>
+        {% endfor %}
+    </section>
+{% endif %}
+
+{% schema %}
+{
+"name": "Trust elements",
+"class": "trust-elements",
+"max_blocks": 6,
+"settings": [
+{
+"type": "checkbox",
+"id": "show",
+"label": "Show trust elements section",
+"default": true
+}
+],
+
+"blocks": [
+{
+"type": "trust-element",
+"name": "Trust element",
+"settings": [
+{
+"type": "html",
+"id": "element_icon",
+"label": "Trust element icon",
+"default": "<div><p>Your SVG icon</p></div>"
+},
+{
+"type": "text",
+"id": "element_text",
+"label": "Trust element text"
+}
+]
+}
+],
+
+"presets": [
+{
+"name": "Trust elements",
+"category": "Information",
+"blocks": [
+{
+"type": "trust-element"
+}
+]
+}
+]
+}
+{% endschema %}

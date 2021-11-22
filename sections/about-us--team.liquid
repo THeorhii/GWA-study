@@ -1,0 +1,112 @@
+{% if section.settings.show %}
+    <section id="section-{{ section.id }}" class="about-us-team">
+
+        <h3>{{ section.settings.section_title | escape }}</h3>
+        <div class="about-us-team__subtitle">{{ section.settings.section_subtitle | escape }}</div>
+
+        <div class="team">
+            {% for block in section.blocks %}
+
+                {% if forloop.index == 4 %}
+                    <div class="hidden--co-worker">
+                {% endif %}
+
+                <div class="co-worker">
+                    {% if block.settings.image != blank %}
+                        <img class="lazyload"
+                             src="{{ block.settings.image | img_url: 'master' }}"
+                             data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048]"
+                             data-aspectratio="{{  block.settings.about_us_image.aspect_ratio }}"
+                             data-sizes="auto"
+                             data-parent-fit="contain"
+                             alt="{{ block.settings.image.alt | escape }}">
+                    {% endif %}
+
+                    <div class="co-worker__info">
+                        {% if block.settings.description != blank %}
+                            <div class="co-worker__description">{{ block.settings.description }}</div>
+                        {% endif %}
+                        {% if block.settings.name != blank %}
+                            <p class="co-worker__name">{{ block.settings.name }}</p>
+                        {% endif %}
+                        {% if block.settings.position != blank %}
+                            <p class="co-worker__position">{{ block.settings.position }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                {% if forloop.index == section.blocks.size %}
+                    </div>
+                {% endif %}
+
+            {% endfor %}
+
+        </div>
+
+        <button class="dark-btn co-worker_all">See all</button>
+
+    </section>
+{%- endif -%}
+
+{% schema %}
+    {
+    "name": "About us team",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "show",
+            "label": "Show section",
+            "default": true
+        },
+        {
+            "type": "text",
+            "id": "section_title",
+            "label": "Title"
+        },
+        {
+            "type": "textarea",
+            "id": "section_subtitle",
+            "label": "Subtitle"
+        }
+    ],
+    "blocks": [
+    {
+        "type": "co-worker",
+        "name": "Co-worker",
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Image"
+            },
+            {
+                "type": "richtext",
+                "id": "description",
+                "label": "Description"
+            },
+            {
+                "type": "text",
+                "id": "name",
+                "label": "Name"
+            },
+            {
+                "type": "text",
+                "id": "position",
+                "label": "Position"
+            }
+        ]
+    }
+    ],
+    "presets": [
+        {
+            "name": "About us team",
+            "category": "STORE INFORMATION",
+            "blocks": [
+                {
+                    "type": "co-worker"
+                }
+            ]
+        }
+    ]
+    }
+{% endschema %}

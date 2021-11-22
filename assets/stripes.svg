@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1308px" height="1372px" viewBox="0 0 1308 1372" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>Stripe</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Subscribe" transform="translate(-860.000000, 50.000000)" fill="#FBB03B" fill-rule="nonzero">
+            <g transform="translate(0.000000, -50.000000)" id="Stripe">
+                <g transform="translate(860.000000, 0.000000)">
+                    <path d="M1269.4585,1015.97811 L1123.85807,1372 L638,0 L971.464929,0 C1012.42331,0 1048.08119,24.5345518 1061.85315,62.1954758 L1278.69163,655.002877 C1320.73808,769.951508 1317.44276,898.614724 1269.4585,1015.97811" id="Fill-4"></path>
+                    <path d="M632.387784,1015.97811 L486.58865,1372 L0,0 L333.95567,0 C374.974324,0 410.684682,24.5345518 424.49248,62.1954758 L641.65006,655.002877 C683.758395,769.951508 680.458222,898.614724 632.387784,1015.97811" id="Fill-1"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

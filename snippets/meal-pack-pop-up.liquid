@@ -1,0 +1,32 @@
+<div class="pop-up-change-meal hide" data-price="">
+    <button class="close-pop-up-change-meal">{% include 'icon-close' %}</button>
+    <h2 class="pop-up-header">SELECT A MEAL FOR <span class="meal-number"></span></h2>
+    <label class="checkbox-all-meals">
+        <input type="checkbox" name="show-all-meal">
+        <span class="checkbox__text">EACH MEAL AVAILABLE HAS BEEN DESIGNED TO HELP YOU ACHIEVE YOUR GOAL. <br/>
+            IF YOU WANT THE COMPLETE MENU AND NOT SPECIFIC TO YOUR GOAL CLICK THE ORANGE TICK </span>
+    </label>
+
+    <div class="pop-up-change-meal-tabs mobile-hide">
+        <span class="active" data-tag="all">All</span>
+        <span data-tag="wm_black_label">Black Label</span>
+        <span data-tag="wm_low_carb">Low Carb</span>
+        <span class="special-tag" data-tag="wm_breakfast">Breakfast</span>
+        <span data-tag="wm_clean_meals">Clean</span>
+        <span class="special-tag" data-tag="wm_clean_vegan">Vegan</span>
+        <span class="special-tag" data-tag="juice">juice</span>
+        <span class="special-tag" data-tag="snack">snack</span>
+    </div>
+    <select class="pop-up-change-meal-tabs mobile-show">
+        <option value="all">All</option>
+        <option value="wm_black_label">Black Label</option>
+        <option value="wm_low_carb">Low Carb</option>
+        <option class="special-tag" value="wm_breakfast">Breakfast</option>
+        <option value="wm_clean_meals">Clean</option>
+        <option class="special-tag" value="wm_clean_vegan">Vegan</option>
+        <option class="special-tag" value="juice">juice</option>
+        <option class="special-tag" value="snack">snack</option>
+    </select>
+    <h3 class="hide">SORRY, SEEMS LIKE WE DON’T FIND PRODUCTS WITH THIS FILTER, TRY ANOTHER!</h3>
+    <div class="collection-meals-block"></div>
+</div>

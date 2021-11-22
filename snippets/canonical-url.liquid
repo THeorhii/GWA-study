@@ -1,0 +1,13 @@
+{% if canonical_url contains '/news?page=' %}
+    <link rel="canonical" href="{{ shop.url }}/blogs/news">
+{% elsif canonical_url contains 'collections/all' %}
+    <link rel="canonical" href="{{ shop.url }}/collections/menu">
+{% elsif canonical_url contains 'collections/main-menu' %}
+    <link rel="canonical" href="{{ shop.url }}/collections/menu">
+{% elsif canonical_url contains '/products/keto-meal-pack' %}
+    <link rel="canonical" href="{{ shop.url }}/collections/keto">
+{% elsif canonical_url contains '/products/low-carb-meal-pack' %}
+    <link rel="canonical" href="{{ shop.url }}/collections/low-carb">
+{% else %}
+    <link rel="canonical" href="{{ canonical_url }}">
+{% endif %}

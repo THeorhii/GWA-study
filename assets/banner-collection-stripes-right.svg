@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="430px" height="470px" viewBox="0 0 430 470" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Stripes_right</title>
+    <defs>
+        <polygon id="path-1" points="429 0 429 470 120.719214 470 -6.82121026e-13 0"></polygon>
+    </defs>
+    <g id="Stripes_right" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(298.500000, 235.000000) scale(1, -1) translate(-298.500000, -235.000000) translate(1.000000, 0.000000)">
+            <g id="Bg-Copy-2" fill="#F9F9F9" fill-rule="nonzero">
+                <polygon id="path-1" points="594.860367 2.60902411e-14 594.860367 470 167.002502 470 -6.25482576e-13 0"></polygon>
+            </g>
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <g id="path-1"></g>
+            <path d="M172.098598,-5 L367,545 L193.194474,545 L-2,-5 L172.098598,-5 Z M427.098598,-5 L622,545 L448.194474,545 L253,-5 L427.098598,-5 Z" id="Combined-Shape" fill="#FBB03B" fill-rule="nonzero" mask="url(#mask-2)"></path>
+        </g>
+    </g>
+</svg>

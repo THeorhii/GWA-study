@@ -1,0 +1,74 @@
+{% if section.settings.header_icon != blank or section.settings.header_icon != "" %}
+    <div class="index-section-wm-360__header">{{ section.settings.header_icon }}</div>
+{% endif %}
+
+<section class="page-width">
+    <div class="index-section-wm-360__image">
+        <div class="index-section-wm-360__image-wrap">
+            {%- assign icon_full = section.settings.image.src -%}
+            {%- assign img_url_full = icon_full | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+            <img class="lazyload"
+                 src="{{ icon_full | img_url: '100x' }}"
+                 data-src="{{ img_url_full }}"
+                 data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                 data-sizes="auto"
+                 alt="{{ icon_full.alt | default: 'Workout Meals ™' | escape }}">
+
+                {% include 'svg-all-experts-frame' %}
+        </div>
+    </div>
+    <div class="index-section-wm-360__content">
+        <h3>{{ section.settings.header }}</h3>
+        <div>{{ section.settings.content }}</div>
+        <div>
+            {% if section.settings.btn-title != "" %}
+                <a class="btn" href="{{ section.settings.btn-url }}">{{ section.settings.btn-title }}</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% schema %}
+    {
+    "name": "Section WM360",
+    "class": "index-section-wm-360",
+    "settings": [
+    {
+    "type": "html",
+    "id": "header_icon",
+    "label": "Header icon"
+    },
+    {
+    "type": "text",
+    "id": "header",
+    "label": "Header"
+    },
+    {
+    "type": "richtext",
+    "id": "content",
+    "label": "Content"
+    },
+    {
+    "type": "text",
+    "id": "btn-title",
+    "label": "Button title"
+    },
+    {
+    "type": "url",
+    "id": "btn-url",
+    "label": "Button link"
+    },
+    {
+    "type": "image_picker",
+    "id": "image",
+    "label": "Image"
+    }
+    ],
+    "presets": [
+    {
+    "category": "Text",
+    "name": "Section WM360"
+    }
+    ]
+    }
+{% endschema %}

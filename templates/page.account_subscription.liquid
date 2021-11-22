@@ -1,0 +1,145 @@
+<div class="customer-page customer-subscriptions-page subscription-details-page">
+    {% comment %}customer-bar will be the same on both types of pages, but different from current version{% endcomment %}
+    <div class="customer-bar">
+        <div>
+            <h3>MY ACCOUNT</h3>
+            <a href="/account" class="customer-bar-link">{% include 'icon-order-history' %}  Order History</a>
+            <a href="/{{ shop.metafields.gwa.app_proxy }}/subscriptions/{{ customer.id }}" class="customer-bar-link active">{% include 'icon-subscriptions' %} Subscriptions</a>
+            <a href="/account/addresses" class="customer-bar-link">{% include 'icon-address' %} Address </a>
+            <a href="/account/logout" id="customer_logout_link" class="customer-bar-link">{% include 'icon-log-out' %} Log out</a>
+        </div>
+    </div>
+
+    <div class="customer-content">
+        <div class="customer-content-wrapper">
+            <h1 class="customer-subscriptions-title text-center">This is your Workout Meals ™ subscriptions system</h1>
+            <p class="customer-subscriptions-subtitle text-center"><span class="subscription-id text-center">#43772063 </span> <span class="subscription-label">Completed</span></p>
+            <div class="subscription-items-header">
+                <h2 class="subscriptions-block-title subscription-items-title text-left">Subscription Items</h2>
+                <div class="subscription-action-buttons">
+                    <button class="btn std-btn btn-light cancel-btn">Cancel</button>
+                    <button class="btn std-btn btn-yellow hold-btn">Hold</button>
+                </div>
+            </div>
+
+            <div class="subscriptions-block subscriptions-table-block subscription-items">
+                <table>
+                    <tr>
+                        <th class="subscriptions-block-title text-left" style="width:50%;">Name</th>
+                        <th class="subscriptions-block-title text-center">Qty</th>
+                        <th class="subscriptions-block-title text-right">Price</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                    </tr>
+
+                    {% comment %}PSEUDO LOOP OF SUBSCRIPTION ITEMS{% endcomment %}
+                    {% assign example_product = all_products['honey-mustard-chicken-1'] %}
+                    {% assign example_variant = example_product.variants[0] %}
+                    {% for i in (1..3) %}
+                    <tr>
+                        <td>
+                            <div class="subscription-product">
+                                <div class="subscription-product-image">
+                                    <img src="{{ example_product.featured_image | img_url: '200x' }}" alt="">
+                                </div>
+                                <div class="subscription-product-info">
+                                    <h3 class="text-left subscription-product-title">{{ example_product.title }}</h3>
+                                    <span class="subscription-variant-title">{{ example_variant.title }}</span>
+                                    {% comment %}
+                                    <div class="nutrition-details">
+                                        {%- assign nutrition = example_variant.metafields.nutrition.nutridata -%}
+                                        <div class="nutrition-details-item text-center">
+                                            <div class="nutrition-details-item-inner text-left">
+                                                <p class="nutrition-details-value">{{ nutrition.Protein }}</p>
+                                                <span class="nutrition-details-name">Protein (g)</span>
+                                            </div>
+                                        </div>
+                                        <div class="nutrition-details-item text-center">
+                                            <div class="nutrition-details-item-inner text-left">
+                                                <p class="nutrition-details-value">{{ nutrition.Calories }}</p>
+                                                <span class="nutrition-details-name">Calories</span>
+                                            </div>
+                                        </div>
+                                        <div class="nutrition-details-item text-center">
+                                            <div class="nutrition-details-item-inner text-left">
+                                                <p class="nutrition-details-value">{{ nutrition.Carbohydrate }}</p>
+                                                <span class="nutrition-details-name">Carbs (g)</span>
+                                            </div>
+                                        </div>
+                                        <div class="nutrition-details-item text-center">
+                                            <div class="nutrition-details-item-inner text-left">
+                                                <p class="nutrition-details-value">{{ nutrition.Fat_Total }}</p>
+                                                <span class="nutrition-details-name">Fat (g)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endcomment %}
+                                </div>
+                            </div>
+                        </td>
+                        <td class="text-center">1</td>
+                        <td class="text-right">$75.00</td>
+
+                        <td class="text-right">
+                            <a href="#" class="subscription-edit" style="display: none;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21">
+                                    <path fill="#212B36" fill-rule="evenodd" d="M17.086 3.444c-1.22-1.236-3.198-1.234-4.414 0l-9.379 9.521c-.128.13-.219.293-.263.471l-1 4.061c-.086.346.015.712.263.964.19.193.445.298.707.298.081 0 .162-.01.242-.03l4-1.016c.176-.044.337-.137.465-.267l9.38-9.521c1.216-1.236 1.216-3.246 0-4.481zm-1.414 3.045L15 7.172l-1.586-1.61.672-.683c.438-.442 1.15-.442 1.586 0 .437.445.437 1.167 0 1.61zM5.414 13.683L12 6.997l1.586 1.61L7 15.293l-1.586-1.61z"/>
+                                </svg>
+                            </a>
+                        </td>
+                        <td class="text-right">
+                            <a href="#" class="subscription-delete">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21">
+                                    <path fill="#212B36" fill-rule="evenodd" d="M11 16.73h3V8.61h-3v8.12zm-5 0h3V8.61H6v8.12zM8 6.58h4v-2.03H8v2.03zm9 0h-3v-2.03c0-1.12-.897-2.031-2-2.031H8c-1.103 0-2 .91-2 2.03v2.03H3c-.553 0-1 .456-1 1.016s.447 1.015 1 1.015h1v9.137c0 .56.447 1.015 1 1.015h10c.553 0 1-.455 1-1.015V8.609h1c.553 0 1-.455 1-1.015 0-.56-.447-1.015-1-1.015z"/>
+                                </svg>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+            <h2 class="subscriptions-block-title subscription-details-title text-left">Subscriptions details</h2>
+            <div class="subscriptions-block subscription-details-block">
+                <div class="subscription-details">
+                    <div class="details-item">
+                        <p class="subscriptions-block-title">next delivery day</p>
+                        <input type="text" id="account_deliveryDate" class="datepicker details-item-input" value="08.10.2019" readonly="readonly">
+                    </div>
+                    <div class="details-item">
+                        <p class="subscriptions-block-title">next payment date</p>
+                        <div id="account_paymentDate" class="next-payment-date details-item-input">08.10.2019</div>
+                    </div>
+                    <div class="details-item">
+                        <p class="subscriptions-block-title">order notes</p>
+                        <input type="text" class="details-item-input" placeholder="Type something">
+                    </div>
+                </div>
+                <div class="change-address text-right">
+                    <a href="/account/addresses" class="change-address-link">Change shipping address</a>
+                </div>
+            </div>
+
+            <div class="update-btn-wrapper text-right">
+                <button type="button" class="btn std-btn btn-yellow btn-update-subscription">Update</button>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        $( "#account_deliveryDate" ).datepicker({
+            dateFormat: "mm.dd.yy",
+            firstDay: 1,
+            maxDate: 60,
+            minDate: 2
+        });
+        $( "#account_deliveryDate" ).on('change', function(){
+            // change NEXT PAYMENT DATE
+        });
+    });
+</script>

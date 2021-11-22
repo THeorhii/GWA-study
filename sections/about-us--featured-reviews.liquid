@@ -1,0 +1,120 @@
+{% if section.settings.show %}
+    <section id="section-{{ section.id }}" class="about-us-featured-reviews" data-slide-speed="{{ section.settings.slide_speed }}">
+
+        <div class="page-width">
+            <h3>{{ section.settings.section_title | escape }}</h3>
+
+            <div class="featured-reviews-content">
+                {% for block in section.blocks %}
+
+                    <div class="review" data-thumb="{{ block.settings.image | img_url: '103x103' }}">
+                        {% if block.settings.text != blank %}
+                            <div class="review__text">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="41" height="27" viewBox="0 0 41 27">
+                                    <path fill="#FBB03B" fill-rule="evenodd" d="M39.717 2.564c-6.166 0-11.492 3.666-13.939 8.938 1.262-.774 2.744-1.221 4.329-1.221 4.592 0 8.334 3.748 8.334 8.357 0 4.609-3.742 8.357-8.334 8.357-4.593 0-8.328-3.748-8.328-8.357 0-.164.006-.326.015-.488-.006-.051-.015-.1-.015-.152 0-9.927 8.046-18.001 17.938-18.001.714 0 1.283.571 1.283 1.28 0 .717-.569 1.287-1.283 1.287zm-21.78 0c-6.168 0-11.498 3.669-13.947 8.943 1.264-.777 2.749-1.226 4.337-1.226 4.592 0 8.328 3.748 8.328 8.357 0 4.609-3.736 8.357-8.328 8.357C3.735 26.995 0 23.247 0 18.638c0-.163.006-.326.015-.487C.009 18.1 0 18.05 0 17.998 0 8.071 8.045-.003 17.937-.003c.707 0 1.284.571 1.284 1.28 0 .717-.577 1.287-1.284 1.287z"/>
+                                </svg>
+                                <p>{{ block.settings.text }}</p>
+                                <svg width="118px" height="24px" viewBox="0 0 118 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <title>Stars rating</title>
+                                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="WM-(About-Us-Page)" transform="translate(-902.000000, -2719.000000)" fill="#FBB03A">
+                                            <g id="Featured-Reviews" transform="translate(0.000000, 2316.000000)">
+                                                <g id="Stars-rating" transform="translate(902.000000, 403.000000)">
+                                                    <polygon id="-↳Color" points="10 17.27 16.18 21 14.54 13.97 20 9.24 12.81 8.63 10 2 7.19 8.63 0 9.24 5.46 13.97 3.82 21"></polygon>
+                                                    <polygon id="-↳Color" points="34 17.27 40.18 21 38.54 13.97 44 9.24 36.81 8.63 34 2 31.19 8.63 24 9.24 29.46 13.97 27.82 21"></polygon>
+                                                    <polygon id="-↳Color" points="58 17.27 64.18 21 62.54 13.97 68 9.24 60.81 8.63 58 2 55.19 8.63 48 9.24 53.46 13.97 51.82 21"></polygon>
+                                                    <polygon id="-↳Color" points="82 17.27 88.18 21 86.54 13.97 92 9.24 84.81 8.63 82 2 79.19 8.63 72 9.24 77.46 13.97 75.82 21"></polygon>
+                                                    <polygon id="-↳Color" points="106 17.27 112.18 21 110.54 13.97 116 9.24 108.81 8.63 106 2 103.19 8.63 96 9.24 101.46 13.97 99.82 21"></polygon>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                        {% endif %}
+
+                        <div class="review__info">
+                            {% if block.settings.author_name != blank %}
+                                <p class="review__author-name">{{ block.settings.author_name }}</p>
+                            {% endif %}
+                            {% if block.settings.author_info != blank %}
+                                <p class="review__author-info">{{ block.settings.author_info }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                {% endfor %}
+            </div>
+        </div>
+
+    </section>
+{%- endif -%}
+
+{% schema %}
+    {
+        "name": "Featured Reviews",
+        "max_blocks": 5,
+        "settings": [
+            {
+                "type": "checkbox",
+                "id": "show",
+                "label": "Show section",
+                "default": true
+            },
+            {
+                "type": "text",
+                "id": "section_title",
+                "label": "Title"
+            },
+            {
+                "type": "range",
+                "id": "slide_speed",
+                "min": 1,
+                "max": 15,
+                "step": 1,
+                "unit": "sec",
+                "label": "Change slides every",
+                "default": 5
+            }
+        ],
+        "blocks": [
+        {
+            "type": "review",
+            "name": "Review",
+            "settings": [
+                {
+                    "type": "richtext",
+                    "id": "text",
+                    "label": "Text"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                },
+                {
+                    "type": "text",
+                    "id": "author_name",
+                    "label": "Author name"
+                },
+                {
+                    "type": "text",
+                    "id": "author_info",
+                    "label": "Author info"
+                }
+            ]
+        }
+        ],
+        "presets": [
+        {
+            "name": "Featured Reviews",
+            "category": "STORE INFORMATION",
+            "blocks": [
+                {
+                    "type": "review"
+                }
+            ]
+        }
+        ]
+    }
+{% endschema %}

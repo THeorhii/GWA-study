@@ -1,0 +1,57 @@
+{% if section.settings.show %}
+    {% render 'wm-360--section-buy-meals-pack', header: section.settings.header, small: section.settings.small_pack,
+        medium: section.settings.medium_pack, large: section.settings.large_pack, small_qty: section.settings.small_quantity_of_meals,
+        medium_qty: section.settings.medium_quantity_of_meals, large_qty: section.settings.large_quantity_of_meals %}
+{% endif %}
+
+{% schema %}
+{
+    "name": "Meals-pack cards",
+    "settings": [
+        {
+        "type": "checkbox",
+        "id": "show",
+        "label": "Show",
+        "default": true
+        },
+        {
+        "type": "text",
+        "id": "header",
+        "label": "Block header"
+        },
+        {
+        "type": "product",
+        "id": "small_pack",
+        "label": "Small meal-pack"
+        },
+        {
+        "type": "number",
+        "id": "small_quantity_of_meals",
+        "label": "Quantity of meals",
+        "default": 7
+        },
+        {
+        "type": "product",
+        "id": "medium_pack",
+        "label": "Medium meal-pack"
+        },
+        {
+        "type": "number",
+        "id": "medium_quantity_of_meals",
+        "label": "Quantity of meals",
+        "default": 14
+        },
+        {
+        "type": "product",
+        "id": "large_pack",
+        "label": "Large meal-pack"
+        },
+        {
+        "type": "number",
+        "id": "large_quantity_of_meals",
+        "label": "Quantity of meals",
+        "default": 21
+        }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,109 @@
+<script>
+    $(function() {
+
+        let currentAjaxRequest = null,
+            searchForms = $('.search-overlay__content form[action="/search"]').css('position','relative').each(function() {
+
+            let input = $(this).find('input[name="q"]'),
+                titleCreated  = false;
+
+            $('<ul class="search-results-product"></ul>').appendTo($(this));
+            $('<ul class="search-results-article"></ul>').appendTo($(this));
+
+            $('.search-results-product').wrap("<div class='search-result-wrapper'></div>");
+            $('.search-results-article').appendTo($('.search-result-wrapper'));
+            $('.search-result-wrapper').hide();
+
+            $('.search-results-product').wrap("<div class='search-result-list-wrapper'></div>");
+            $('.search-results-article').wrap("<div class='search-result-list-wrapper'></div>");
+
+            function createTitle(){
+                $('.search-results-product').parent().prepend('<h4>Products</h4>');
+                $('.search-results-article').parent().prepend('<h4>Articles</h4>');
+            }
+
+            input.attr('autocomplete', 'off').bind('keyup change', function() {
+                let term = $(this).val(),
+                    form = $(this).closest('form'),
+                    searchURL = '/search?&q=' + term,
+                    resultProduct = false,
+                    resultArticle = false;
+
+                if (term.length > 3 && term != $(this).attr('data-old-term')) {
+                    $(this).attr('data-old-term', term);
+                    if (currentAjaxRequest != null) currentAjaxRequest.abort();
+                    currentAjaxRequest = $.getJSON(searchURL + '&view=json', function(data) {
+                        $('.search-results-product').empty();
+                        $('.search-results-article').empty();
+
+                        if(data.results_count == 0) {
+                            $('.search-result-wrapper').hide();
+                            $('.search-overlay__content.search-overlay__content').removeClass('full-height');
+                        } else {
+                            $('.search-overlay__content.search-overlay__content').addClass('full-height');
+                            $.each(data.results, function (index, item) {
+                                if (item.type == "product" && item.type_product != "Free Item" ) {
+
+                                    let link = $('<a></a>').attr('href', item.url);
+                                    link.append('<div class="thumbnail"><img src="' + item.thumbnail + '" /></div>');
+                                    if( item.type_product != "MealPack"){
+                                        link.append('<div class="item-info"> <p class="title">' + item.title + '</p><p class="price">' + item.price + '</p></div>');
+                                    } else {
+                                        link.append('<div class="item-info"> <p class="title">' + item.title + '</p></div>');
+                                    }
+                                    link.wrap('<li data-type=' + item.type + '></li>');
+                                    $('.search-results-product').append(link.parent());
+                                    resultProduct = true;
+                                    resultArticle = false;
+                                }
+                                if (item.type == "article") {
+                                    let link = $('<a></a>').attr('href', item.url);
+                                    link.append('<div class="thumbnail"><img src="' + item.thumbnail + '" /></div>');
+                                    link.append('<div class="item-info"> <p class="title">' + item.title + '</p>');
+                                    link.wrap('<li data-type=' + item.type + '></li>');
+                                    $('.search-results-article').append(link.parent());
+                                    resultProduct = false;
+                                    resultArticle = true;
+                                }
+                            });
+
+                            if (!titleCreated) {
+                                createTitle();
+                                titleCreated = true;
+                            }
+
+                            if (data.results_count > 3) {
+                               if (resultProduct) {
+                                   $('.search-results-product').append('<li class="link-view-all_wrapper"><span class="link-view-all"><a href="' + searchURL + '">View all matches </a></span></li>');
+                               }
+                               if (resultArticle) {
+                                   $('.search-results-article').append('<li class="link-view-all_wrapper"><span class="link-view-all"><a href="' + searchURL + '">View all matches </a></span></li>');
+                               }
+                            }
+
+                            if ($('.search-results-product').is(':empty')) {
+                                $('.search-results-product').append('<li>No products found</li>');
+                            }
+                            if ($('.search-results-article').is(':empty')) {
+                                $('.search-results-article').append('<li>No articles found</li>');
+                            }
+
+                            $('.search-result-wrapper').fadeIn(300);
+                        }
+                    });
+                }
+            });
+        });
+
+    });
+
+
+    $(window).on('load', function(){
+        if ($(window).width() <= 750) {
+            $('.search-overlay__content').appendTo('.search-overlay-mob');
+        } else {
+            $('.search-overlay__content').appendTo('.search-overlay');
+        }
+    });
+
+</script>

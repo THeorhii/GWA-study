@@ -1,0 +1,118 @@
+{% include 'product-meal-pack--banner' %}
+
+
+{% schema %}
+{
+"name": "Snacks banner",
+"class": "collection-header-section",
+"settings": [
+{
+"type": "text",
+"id": "product_title",
+"label": "Collection  Title"
+},
+{
+"type": "image_picker",
+"id": "image_desktop",
+"label": "Desktop Image"
+},
+{
+"type": "image_picker",
+"id": "image_tablet",
+"label": "Tablet Image"
+},
+{
+"type": "image_picker",
+"id": "image_mobile",
+"label": "Mobile Image"
+},
+{
+"type": "select",
+"id": "content_position",
+"label": "Content position",
+"options": [
+{
+"label": "Top",
+"value": "banner-meal-pack--content-top"
+},
+{
+"label": "Center",
+"value": ""
+},
+{
+"label": "Bottom",
+"value": "banner-meal-pack--content-bottom"
+}
+]
+},
+{
+"type": "richtext",
+"id": "sub_headline_d",
+"label": "Sub-headline desktop"
+},
+{
+"type": "richtext",
+"id": "sub_headline_m",
+"label": "Sub-headline mobile"
+},
+{
+"type": "color",
+"id": "sub_header_color",
+"label": "Sub-headline color",
+"default": "#000000"
+},
+{
+"type": "richtext",
+"id": "headline_d",
+"label": "Headline desktop"
+},
+{
+"type": "richtext",
+"id": "headline_m",
+"label": "Headline mobile"
+},
+{
+"type": "color",
+"id": "header_color",
+"label": "Headline color",
+"default": "#000000"
+},
+{
+"type": "richtext",
+"id": "paragraph_d",
+"label": "Paragraph desktop"
+},
+{
+"type": "richtext",
+"id": "paragraph_m",
+"label": "Paragraph mobile"
+},
+{
+"type": "color",
+"id": "paragraph_color",
+"label": "Paragraph color",
+"default": "#000000"
+},
+{
+"type": "text",
+"id": "button",
+"label": "Button"
+},
+{
+"type": "url",
+"id": "button_link",
+"label": "Button link"
+},
+{
+"type": "color",
+"id": "button_color",
+"label": "Button color"
+},
+{
+"type": "color",
+"id": "button_background",
+"label": "Button background"
+}
+]
+}
+{% endschema %}

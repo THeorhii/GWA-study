@@ -1,0 +1,184 @@
+{% if section.settings.show %}
+    <section class="grid wm-360-banner__content page-width">
+        {% if section.settings.sub_header != "" %}<h3 style="color: {{ section.settings.second-row-color }}">{{ section.settings.sub_header }}</h3>{% endif %}
+        <h1>
+            {% if section.settings.first-row-content != "" %}<span style="color: {{ section.settings.first-row-color }}">{{ section.settings.first-row-content }}</span>{% endif %}
+            {% if section.settings.second-row-content != "" %}<span style="color: {{ section.settings.second-row-color }}">{{ section.settings.second-row-content }}</span>{% endif %}
+        </h1>
+        {%- if section.settings.content_d != blank -%}<div style="color: {{ section.settings.second-row-color }}" class="banner-content__desktop">{{ section.settings.content_d }}</div>{%- endif -%}
+        {%- if section.settings.content_m != blank -%}<div style="color: {{ section.settings.second-row-color }}" class="banner-content__mobile">{{ section.settings.content_m }}</div>{%- endif -%}
+        <div>
+            {% if section.settings.first-btn-title != "" %}
+                <a style="color:{{ section.settings.first-btn-color }}; border-color: {{ section.settings.first-btn-border }}; background-color: {{ section.settings.first-btn-background }};"
+                href="{{ section.settings.first-btn-url }}">{{ section.settings.first-btn-title }}</a>{% endif %}
+
+            {% if section.settings.second-btn-title != "" %}
+                <a style="color:{{ section.settings.second-btn-color }}; border-color: {{ section.settings.second-btn-border }}; background-color: {{ section.settings.second-btn-background }};"
+                   href="{{ section.settings.second-btn-url }}">{{ section.settings.second-btn-title }}</a>{% endif %}
+        </div>
+    </section>
+    <section class="wm-360-banner__image-wrap">
+        {%- assign icon_full = section.settings.image_full.src -%}
+        {%- assign img_url_full = icon_full | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <img class="image__full lazyload"
+             src="{{ icon_full | img_url: '100x' }}"
+             data-src="{{ img_url_full }}"
+             data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+             data-sizes="auto"
+             alt="{{ icon_full.alt | default: 'Workout Meals ™' | escape }}">
+
+        {%- assign icon_tablet = section.settings.image_tablet.src -%}
+        {%- assign img_url_tablet = icon_tablet | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <img class="image__tablet lazyload"
+             src="{{ icon_tablet | img_url: '100x' }}"
+             data-src="{{ img_url_tablet }}"
+             data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+             data-sizes="auto"
+             alt="{{ icon_tablet.alt | default: 'Workout Meals ™' | escape }}">
+
+        {%- assign icon_mobile = section.settings.image_mobile.src -%}
+        {%- assign img_url_mobile = icon_mobile | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <img class="image__mobile lazyload"
+             src="{{ icon_mobile | img_url: '100x' }}"
+             data-src="{{ img_url_mobile }}"
+             data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728]"
+             data-sizes="auto"
+             alt="{{ icon_mobile.alt | default: 'Workout Meals ™' | escape }}">
+    </section>
+{% endif %}
+
+
+{% schema %}
+    {
+    "name": "wm-360 banner",
+    "class": "wm-360-banner",
+    "settings": [
+    {
+    "type": "checkbox",
+    "id": "show",
+    "label": "Show",
+    "default": true
+    },
+    {
+    "type": "text",
+    "id": "first-row-content",
+    "label": "Firs row text"
+    },
+    {
+    "type": "color",
+    "id": "first-row-color",
+    "label": "Firs row color",
+    "default": "#010101"
+    },
+    {
+    "type": "text",
+    "id": "second-row-content",
+    "label": "Second row text"
+    },
+    {
+    "type": "color",
+    "id": "second-row-color",
+    "label": "Second row color",
+    "default": "#ffffff"
+    },
+{
+"type": "text",
+"id": "sub_header",
+"label": "Subheader"
+},
+{
+"type": "color",
+"id": "sub_header_color",
+"label": "Subheader color",
+"default": "#ffffff"
+},
+{
+"type": "richtext",
+"id": "content_d",
+"label": "Content desktop"
+},
+{
+"type": "richtext",
+"id": "content_m",
+"label": "Content mobile"
+},
+{
+"type": "color",
+"id": "content_color",
+"label": "Content color",
+"default": "#000000"
+},
+    {
+    "type": "text",
+    "id": "first-btn-title",
+    "label": "First button title"
+    },
+    {
+    "type": "url",
+    "id": "first-btn-url",
+    "label": "First button link"
+    },
+    {
+    "type": "color",
+    "id": "first-btn-color",
+    "label": "First button text color",
+    "default": "#010101"
+    },
+    {
+    "type": "color",
+    "id": "first-btn-border",
+    "label": "First button border color",
+    "default": "#010101"
+    },
+    {
+    "type": "color",
+    "id": "first-btn-background",
+    "label": "First button background color",
+    "default": "#333333"
+    },
+    {
+    "type": "text",
+    "id": "second-btn-title",
+    "label": "Second button title"
+    },
+    {
+    "type": "url",
+    "id": "second-btn-url",
+    "label": "Second button link"
+    },
+    {
+    "type": "color",
+    "id": "second-btn-color",
+    "label": "Second button text color",
+    "default": "#010101"
+    },
+    {
+    "type": "color",
+    "id": "second-btn-border",
+    "label": "First button border color",
+    "default": "#010101"
+    },
+    {
+    "type": "color",
+    "id": "second-btn-background",
+    "label": "Second button background color",
+    "default": "#333333"
+    },
+    {
+    "type": "image_picker",
+    "id": "image_full",
+    "label": "Image for desktop"
+    },
+    {
+    "type": "image_picker",
+    "id": "image_tablet",
+    "label": "Image for tablet"
+    },
+    {
+    "type": "image_picker",
+    "id": "image_mobile",
+    "label": "Image for mobile"
+    }
+    ]
+    }
+{% endschema %}

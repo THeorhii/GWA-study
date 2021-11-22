@@ -1,0 +1,50 @@
+{% if section.settings.show %}
+    <video playsinline {% if section.settings.video_autoplay %}allow="autoplay" muted autoplay class="video-play-active video-autoplay-block"{% endif %}
+            src-webm="{{ section.settings.video_webm }}"
+            src-mp4="{{ section.settings.video_mp4 }}"
+            src-ogg="{{ section.settings.video_ogg }}">
+        <source src="{{ section.settings.video_webm }}" type='video/webm'>
+        <source src="{{ section.settings.video_mp4 }}" type='video/mp4'>
+        <source src="{{ section.settings.video_ogg }}" type='video/ogg'>
+        Your browser does not support the video tag.
+    </video>
+    <button class="video-play">{% include 'icon-btn-play' %}</button>
+    <button class="video-sound video-sound-on{% unless section.settings.video_autoplay %} hide{% endunless %}">{% include 'icon-sound-off' %}</button>
+    <button class="video-sound video-sound-off{% if section.settings.video_autoplay %} hide{% endif %}">{% include 'icon-sound-on' %}</button>
+{% endif %}
+
+{% schema %}
+    {
+    "name": "Video wm-360",
+    "class": "wm-360-video",
+    "settings": [
+    {
+    "type": "checkbox",
+    "id": "show",
+    "label": "Show",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "video_autoplay",
+    "label": "Autoplay",
+    "default": true
+    },
+    {
+    "type": "text",
+    "id": "video_webm",
+    "label": "Format: .webm"
+    },
+    {
+    "type": "text",
+    "id": "video_mp4",
+    "label": "Format: .mp4"
+    },
+    {
+    "type": "text",
+    "id": "video_ogg",
+    "label": "Format: .ogg / .ogv / .ogm"
+    }
+    ]
+    }
+{% endschema %}

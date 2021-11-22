@@ -1,0 +1,380 @@
+<section data-section-id="{{ section.id }}"  id="section-{{ section.id }}" >
+    <div class="gender-and-goal" id="gender-and-goal">
+        <div class="tab">
+            <button class="tablinks-gender active" data-gender="male">I'm male</button>
+            <button class="tablinks-gender" data-gender="female">I'm female</button>
+        </div>
+
+        <div id="tabcontent-male" class="tabcontent tabcontent-goal" style="display: block; opacity: 1; height: max-content;">
+            {% if section.settings.title != blank %}
+                <h3>{{ section.settings.title }}</h3>
+            {% endif %}
+
+            <div class="goal-info-male">
+                {%- for block in section.blocks -%}
+                    {% if block.type == 'goal-male' %}
+                        <div class="one-goal-information" data-title="{{ block.settings.button_male }}">
+                            <div class="one-goal">
+                                {% if block.settings.slide-male-title != blank %}
+                                    <h4>{{ block.settings.slide-male-title }}</h4>
+                                {% endif %}
+                                {% if block.settings.slide-male-subtitle != blank %}
+                                    <p>{{ block.settings.slide-male-subtitle }}</p>
+                                {% endif %}
+                                <div class="trainer-information">
+                                    {% if block.settings.trainer-male-icon != blank %}
+                                        <img src="{{ block.settings.trainer-male-icon | img_url: '84x84' }}" alt="{{ block.settings.trainer-male-icon.alt | escape }}">
+
+                                    {% endif %}
+                                    <div>
+                                        {% if block.settings.trainer-male-name != blank %}
+                                            <p>{{ block.settings.trainer-male-name }}</p>
+                                        {% endif %}
+                                        {% if block.settings.trainer-male-info != blank %}
+                                            <span>{{ block.settings.trainer-male-info }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="meals-of-goal">
+                                    <div>
+                                        {% if block.settings.meal_male_1 != blank %}
+                                            <img class="lazyload"
+                                                 src="{{ block.settings.meal_male_1 | img_url: '168x232' }}"
+                                                 data-widths="[180, 370, 540, 740, 900, 1080, 1296, 1512, 1728, 2048]"
+                                                 data-aspectratio="{{ block.settings.meal_male_1.aspect_ratio }}"
+                                                 data-sizes="auto"
+                                                 alt="{{ block.settings.meal_male_1.alt | escape }}">
+                                        {% endif %}
+                                        {% if block.settings.meal_male_title_1 != blank %}
+                                            <p>{{ block.settings.meal_male_title_1 }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div>
+                                        {% if block.settings.meal_male_2 != blank %}
+                                            <img class="lazyload"
+                                                 src="{{ block.settings.meal_male_2 | img_url: '168x232' }}"
+                                                 data-widths="[180, 370, 540, 740, 900, 1080, 1296, 1512, 1728, 2048]"
+                                                 data-aspectratio="{{ block.settings.meal_male_2.aspect_ratio }}"
+                                                 data-sizes="auto"
+                                                 alt="{{ block.settings.meal_male_2.alt | escape }}">
+                                        {% endif %}
+                                        {% if block.settings.meal_male_title_2 != blank %}
+                                            <p>{{ block.settings.meal_male_title_2 }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div>
+                                        {% if block.settings.meal_male_3 != blank %}
+                                            <img class="lazyload"
+                                                 src="{{ block.settings.meal_male_3 | img_url: '168x232' }}"
+                                                 data-widths="[180, 370, 540, 740, 900, 1080, 1296, 1512, 1728, 2048]"
+                                                 data-aspectratio="{{ block.settings.meal_male_3.aspect_ratio }}"
+                                                 data-sizes="auto"
+                                                 alt="{{ block.settings.meal_male_3.alt | escape }}">
+                                        {% endif %}
+                                        {% if block.settings.meal_male_title_3 != blank %}
+                                            <p>{{ block.settings.meal_male_title_3 }}</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% if block.settings.button_text_male != blank %}
+                                    <a href="{{ block.settings.button_link_male }}" class="btn std-btn">{{ block.settings.button_text_male }}</a>
+                                {% endif %}
+                            </div>
+                            <div class="goal-image">
+                                {% if block.settings.trainer-male-photo != blank %}
+                                    <img class="lazyload"
+                                         src="{{ block.settings.trainer-male-photo | img_url: '650x730' }}"
+                                         data-widths="[180, 370, 540, 740, 900, 1080, 1296, 1512, 1728, 2048]"
+                                         data-aspectratio="{{ block.settings.trainer-male-photo.aspect_ratio }}"
+                                         data-sizes="auto"
+                                         alt="{{ block.settings.trainer-male-photo.alt | escape }}">
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {%- endfor -%}
+            </div>
+        </div>
+
+        <div id="tabcontent-female" class="tabcontent tabcontent-goal" style="height: 0;">
+            {% if section.settings.title != blank %}
+                <h3>{{ section.settings.title }}</h3>
+            {% endif %}
+
+            <div class="goal-info-female">
+                {%- for block in section.blocks -%}
+                    {% if block.type == 'goal-female' %}
+                        <div class="one-goal-information" data-title="{{ block.settings.button_female }}">
+                            <div class="one-goal">
+                                {% if block.settings.slide-female-title != blank %}
+                                    <h4>{{ block.settings.slide-female-title }}</h4>
+                                {% endif %}
+                                {% if block.settings.slide-female-subtitle != blank %}
+                                    <p>{{ block.settings.slide-female-subtitle }}</p>
+                                {% endif %}
+                                <div class="trainer-information">
+                                    {% if block.settings.trainer-female-icon != blank %}
+                                        <img src="{{ block.settings.trainer-female-icon | img_url: '84x84' }}" alt="{{ block.settings.trainer-female-icon.alt | escape }}">
+                                    {% endif %}
+                                    <div>
+                                        {% if block.settings.trainer-female-name != blank %}
+                                            <p>{{ block.settings.trainer-female-name }}</p>
+                                        {% endif %}
+                                        {% if block.settings.trainer-female-info != blank %}
+                                            <span>{{ block.settings.trainer-female-info }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="meals-of-goal">
+                                    <div>
+                                        {% if block.settings.meal_female_1 != blank %}
+                                            <img class="lazyload"
+                                                 src="{{ block.settings.meal_female_1 | img_url: '168x232' }}"
+                                                 data-widths="[180, 370, 540, 740, 900, 1080, 1296, 1512, 1728, 2048]"
+                                                 data-aspectratio="{{ block.settings.meal_female_1.aspect_ratio }}"
+                                                 data-sizes="auto"
+                                                 alt="{{ block.settings.meal_female_1.alt | escape }}">
+                                        {% endif %}
+                                        {% if block.settings.meal_female_title_1 != blank %}
+                                            <p>{{ block.settings.meal_female_title_1 }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div>
+                                        {% if block.settings.meal_female_2 != blank %}
+                                            <img class="lazyload"
+                                                 src="{{ block.settings.meal_female_2 | img_url: '168x232' }}"
+                                                 data-widths="[180, 370, 540, 740, 900, 1080, 1296, 1512, 1728, 2048]"
+                                                 data-aspectratio="{{ block.settings.meal_female_2.aspect_ratio }}"
+                                                 data-sizes="auto"
+                                                 alt="{{ block.settings.meal_female_2.alt | escape }}">
+                                        {% endif %}
+                                        {% if block.settings.meal_female_title_2 != blank %}
+                                            <p>{{ block.settings.meal_female_title_2 }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div>
+                                        {% if block.settings.meal_female_3 != blank %}
+                                            <img class="lazyload"
+                                                 src="{{ block.settings.meal_female_3 | img_url: '168x232' }}"
+                                                 data-widths="[180, 370, 540, 740, 900, 1080, 1296, 1512, 1728, 2048]"
+                                                 data-aspectratio="{{ block.settings.meal_female_3.aspect_ratio }}"
+                                                 data-sizes="auto"
+                                                 alt="{{ block.settings.meal_female_3.alt | escape }}">
+                                        {% endif %}
+                                        {% if block.settings.meal_female_title_3 != blank %}
+                                            <p>{{ block.settings.meal_female_title_3 }}</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <a href="{{ block.settings.button_link_female }}" class="btn std-btn">{{ block.settings.button_text_female }}</a>
+                            </div>
+                            <div class="goal-image">
+                                {% if block.settings.trainer-female-photo != blank %}
+                                    <img class="lazyload"
+                                         src="{{ block.settings.trainer-female-photo | img_url: '650x730' }}"
+                                         data-widths="[180, 370, 540, 740, 900, 1080, 1296, 1512, 1728, 2048]"
+                                         data-aspectratio="{{ block.settings.trainer-female-photo.aspect_ratio }}"
+                                         data-sizes="auto"
+                                         alt="{{ block.settings.trainer-female-photo.alt | escape }}">
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {%- endfor -%}
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% schema %}
+    {
+        "name": "The goal",
+        "class": "the-goal-section",
+        "max_blocks": 6,
+        "settings": [
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title",
+                "default": "My goal is to:"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "goal-male",
+                "name": "Goal for male",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "button_male",
+                        "label": "Button"
+                    },
+                    {
+                        "type": "text",
+                        "id": "slide-male-title",
+                        "label": "Title"
+                    },
+                    {
+                        "type": "text",
+                        "id": "slide-male-subtitle",
+                        "label": "Subtitle"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "trainer-male-icon",
+                        "label": "Trainer icon"
+                    },
+                    {
+                        "type": "text",
+                        "id": "trainer-male-name",
+                        "label": "Trainer name"
+                    },
+                    {
+                        "type": "text",
+                        "id": "trainer-male-info",
+                        "label": "Trainer info"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "trainer-male-photo",
+                        "label": "Trainer photo"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "meal_male_1",
+                        "label": "Meal 1"
+                    },
+                    {
+                        "type": "text",
+                        "id": "meal_male_title_1",
+                        "label": "Meal title"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "meal_male_2",
+                        "label": "Meal 2"
+                    },
+                    {
+                        "type": "text",
+                        "id": "meal_male_title_2",
+                        "label": "Meal title"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "meal_male_3",
+                        "label": "Meal 3"
+                    },
+                    {
+                        "type": "text",
+                        "id": "meal_male_title_3",
+                        "label": "Meal title"
+                    },
+                    {
+                        "type": "text",
+                        "id": "button_text_male",
+                        "label": "Button text"
+                    },
+                    {
+                        "type": "url",
+                        "id": "button_link_male",
+                        "label": "Button link"
+                    }
+                ]
+            },
+            {
+                "type": "goal-female",
+                "name": "Goal for female",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "button_female",
+                        "label": "Button"
+                    },
+                    {
+                        "type": "text",
+                        "id": "slide-female-title",
+                        "label": "Title"
+                    },
+                    {
+                        "type": "text",
+                        "id": "slide-female-subtitle",
+                        "label": "Subtitle"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "trainer-female-icon",
+                        "label": "Trainer icon"
+                    },
+                    {
+                        "type": "text",
+                        "id": "trainer-female-name",
+                        "label": "Trainer name"
+                    },
+                    {
+                        "type": "text",
+                        "id": "trainer-female-info",
+                        "label": "Trainer info"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "trainer-female-photo",
+                        "label": "Trainer photo"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "meal_female_1",
+                        "label": "Meal 1"
+                    },
+                    {
+                        "type": "text",
+                        "id": "meal_female_title_1",
+                        "label": "Meal title"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "meal_female_2",
+                        "label": "Meal 2"
+                    },
+                    {
+                        "type": "text",
+                        "id": "meal_female_title_2",
+                        "label": "Meal title"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "meal_female_3",
+                        "label": "Meal 3"
+                    },
+                    {
+                        "type": "text",
+                        "id": "meal_female_title_3",
+                        "label": "Meal title"
+                    },
+                    {
+                        "type": "text",
+                        "id": "button_text_female",
+                        "label": "Button text"
+                    },
+                    {
+                        "type": "url",
+                        "id": "button_link_female",
+                        "label": "Button link"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+        {
+            "category": "Information",
+            "name": "The goal",
+            "blocks": [
+                {
+                    "type": "goal-male"
+                }
+            ]
+        }
+        ]
+    }
+{% endschema %}

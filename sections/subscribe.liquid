@@ -1,0 +1,29 @@
+{% if section.settings.show %}
+    <div class="grid">
+        {% if section.settings.header != '' %}
+            <h2>{{ section.settings.header }}</h2>
+        {% endif %}
+        <!-- Klavio div here -->
+    </div>
+{% endif %}
+
+{% schema %}
+{
+"name": "Subscribe to news",
+"class": "subscribe-section",
+"settings": [
+{
+"type": "checkbox",
+"id": "show",
+"label": "Show",
+"default": true
+},
+{
+"type": "text",
+"id": "header",
+"label": "Header",
+"default": "Subscribe to news"
+}
+]
+}
+{% endschema %}

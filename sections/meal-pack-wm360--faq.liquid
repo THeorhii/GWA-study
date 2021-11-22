@@ -1,0 +1,56 @@
+{% if section.settings.show %}
+    <div class="grid">
+        {% if section.settings.header != '' %}
+            <h2>{{ section.settings.header }}</h2>
+        {% endif %}
+
+        {% for block in section.blocks %}
+            <div class="wm360-faqs-block">
+                <p class="wm360-faqs-block__question">{{ block.settings.question }}</p>
+                <div class="wm360-faqs-block__answer">
+                    {{ block.settings.answer }}
+                </div>
+                <button>{% include 'icon-plus' %}</button>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% schema %}
+{
+"name": "wm360 FAQS",
+"class": "wm360-faqs-section",
+"settings": [
+    {
+    "type": "checkbox",
+    "id": "show",
+    "label": "Show",
+    "default": true
+    },
+    {
+    "type": "text",
+    "id": "header",
+    "label": "Header",
+    "default": "wm360 FAQS"
+    }
+],
+"blocks": [
+    {
+    "type": "text",
+    "name": "Next Question",
+    "settings": [
+    {
+    "type": "text",
+    "id": "question",
+    "label": "Question"
+    },
+    {
+    "type": "text",
+    "id": "answer",
+    "label": "Answer"
+    }
+    ]
+    }
+]
+}
+{% endschema %}

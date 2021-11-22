@@ -1,0 +1,59 @@
+<div class="collection-filters-wrapper">
+    <ul class="collection-filters">
+        <li class="collection-filter collection-filter-single">
+            <span class="collection-filter-btn collection-filter-item" data-filter-name="meal-types" data-filter-value="wm_new">New</span>
+        </li>
+        <li class="collection-filter collection-filter-has-dropdown">
+            <span class="collection-filter-btn" data-filter-name="meal-types">Meal type
+                <span class="filter-icon-plus">{%- include 'icon-plus' -%}</span>
+                <span class="filter-icon-minus">{%- include 'icon-minus' -%}</span>
+            </span>
+            <div class="collection-filter-dropdown">
+                <ul class="collection-filter-dropdown-inner">
+                    <li class="collection-filter-item" data-filter-name="meal-types" data-filter-value="wm_black_label">Black Label</li>
+                    <li class="collection-filter-item" data-filter-name="meal-types" data-filter-value="wm_breakfast">Breakfast</li>
+                    <li class="collection-filter-item" data-filter-name="meal-types" data-filter-value="wm_clean_meals">Clean Meals</li>
+                    <li class="collection-filter-item" data-filter-name="meal-types" data-filter-value="wm_low_carb">Low Carbs</li>
+                    <li class="collection-filter-item" data-filter-name="meal-types" data-filter-value="wm_clean_vegan">Vegan</li>
+                </ul>
+            </div>
+        </li>
+        <li class="collection-filter collection-filter-has-dropdown">
+            <span class="collection-filter-btn" data-filter-name="protein-types">Protein type
+                <span class="filter-icon-plus">{%- include 'icon-plus' -%}</span>
+                <span class="filter-icon-minus">{%- include 'icon-minus' -%}</span>
+            </span>
+            <div class="collection-filter-dropdown">
+                <ul class="collection-filter-dropdown-inner">
+                    <li class="collection-filter-item" data-filter-name="protein-types" data-filter-value="wm_pt_chicken">Chicken</li>
+                    <li class="collection-filter-item" data-filter-name="protein-types" data-filter-value="wm_pt_seafood">Seafood</li>
+                    <li class="collection-filter-item" data-filter-name="protein-types" data-filter-value="wm_pt_beef">Beef</li>
+                    <li class="collection-filter-item" data-filter-name="protein-types" data-filter-value="wm_pt_lamb">Lamb</li>
+                    <li class="collection-filter-item" data-filter-name="protein-types" data-filter-value="wm_pt_turkey">Turkey</li>
+                </ul>
+            </div>
+        </li>
+        <li class="collection-filter collection-filter-has-dropdown" data-exception-rule="true">
+            <span class="collection-filter-btn" data-filter-name="allergens">Allergens
+                <span class="filter-icon-plus">{%- include 'icon-plus' -%}</span>
+                <span class="filter-icon-minus">{%- include 'icon-minus' -%}</span>
+            </span>
+            <div class="collection-filter-dropdown">
+                <ul class="collection-filter-dropdown-inner">
+                    <li class="collection-filter-item" data-filter-name="allergens" data-filter-value="kc_al_gluten">No Gluten</li>
+                    <li class="collection-filter-item" data-filter-name="allergens" data-filter-value="kc_al_peanuts">No Peanuts</li>
+                    <li class="collection-filter-item" data-filter-name="allergens" data-filter-value="kc_al_treenuts">No Treenuts</li>
+                    <li class="collection-filter-item" data-filter-name="allergens" data-filter-value="kc_al_eggs">No Eggs</li>
+                    <li class="collection-filter-item" data-filter-name="allergens" data-filter-value="kc_al_dairy">No Dairy</li>
+                    <li class="collection-filter-item" data-filter-name="allergens" data-filter-value="kc_al_sesame">No Sesame</li>
+                    <li class="collection-filter-item" data-filter-name="allergens" data-filter-value="kc_al_soy">No Soy</li>
+                </ul>
+            </div>
+        </li>
+        <li class="clear-all-filters-wrapper"><div class="clear-all-filters text-center" title="Clear filters" style="display: none;">{% include 'icon-close' %}</div></li>
+    </ul>
+</div>
+
+<h2 class="no-filter-results text-center" style="display: none;">
+    SORRY, SEEMS LIKE WE DON’T find products with all these filters, TRY ANOTHER!
+</h2>

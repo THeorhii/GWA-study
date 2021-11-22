@@ -1,0 +1,76 @@
+
+<div class="grid__item medium-up--one-quarter mobile-up--one-half mobile--one-whole {% unless product.available %}grid-view-item--sold-out{% endunless %}">
+  <div class="product-card">
+    <a href="{{ product.url | within: collection }}">
+
+      {% capture img_id %}ProductCardImage-{{ section.id }}-{{ product.id }}{% endcapture %}
+      {% capture wrapper_id %}ProductCardImageWrapper-{{ section.id }}-{{ product.id }}{% endcapture %}
+
+      <div id="{{ wrapper_id }}" class="product-card__image-wrapper">
+
+          <img id="{{ img_id }}"
+               class="lazyload"
+               src="{{ product.featured_image | img_url: '368x295' }}"
+               data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048]"
+               data-aspectratio="{{ product.featured_image.aspect_ratio }}"
+               data-sizes="auto"
+               data-parent-fit="contain"
+               alt="{{ product.featured_image.alt | escape }}">
+
+        <div class="collection-title-wrapper">
+          <span>{{ collection.title }}</span>
+        </div>
+      </div>
+    </a>
+
+      <div class="prod-info">
+        <div class="prod-title wrap-content">{{ product.title }}</div>
+
+        <div class="prod-description wrap-content">
+            {%- for tag in product.tags -%}
+                {%- if tag contains 'kc_al_broccoli' -%}
+                    <span class="allergen">
+                        {%- include 'icon-broccoli' -%}
+                    </span>
+                {%- elsif tag contains 'kc_al_milk' -%}
+                    <span class="allergen">
+                        {%- include 'icon-milk' -%}
+                    </span>
+                {%- elsif tag contains 'kc_al_egg' -%}
+                    <span class="allergen">
+                        {%- include 'icon-egg' -%}
+                    </span>
+                {%- elsif tag contains 'kc_al_wheat' -%}
+                    <span class="allergen">
+                        {%- include 'icon-wheat' -%}
+                    </span>
+                {%- elsif tag contains 'kc_al_nuts' -%}
+                    <span class="allergen">
+                        {%- include 'icon-nuts' -%}
+                     </span>
+                {%- endif -%}
+            {%- endfor -%}
+        </div>
+
+        <div class="product-variant">
+            <form class="product-form" action="/cart/add" data-productid="{{product.id}}"  method="post">
+                <div class="tab" data-product-id="{{ product.id }}">
+                  {%- for variant in product.variants -%}
+                      <button class="tablinks tablinks-{{product.id}} {% if product.variants[0].title == variant.option1 %}active{% endif %}" data-variant="{{ variant.id }}" data-product-id="{{ product.id }}">{{ variant.title }}</button>
+                  {%- endfor -%}
+                </div>
+
+                <div class="product-variant-footer wrap-content">
+                     {%- for variant in product.variants -%}
+                        <div id="tabcontent-{{ variant.id }}-{{ variant.title }}" class="tabcontent tabcontent-{{product.id}}" data-product-id="{{ product.id }}" {% if product.variants[0].title == variant.option1 %}style="display: block"{% endif %}>
+                            <div class="product-price">{{ variant.price | money }}</div>
+                        </div>
+                        <input type="hidden" name="id" data-productid="{{product.id}}" class="product-select" value="{{ variant.id }}" data-variant-title="{{variant.title }}" />
+                     {%- endfor -%}
+                    <input type="submit" value="Add To Cart" class="btn std-btn btn-yellow" />
+                </div>
+            </form>
+        </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,77 @@
+{% if section.settings.show %}
+<section>
+    {% if section.settings.banner_image != blanck %}
+    {%- assign icon = section.settings.banner_image.src -%}
+    {%- assign img_url = icon | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+    <img class="lazyload image-banner"
+         data-help="{{ img_url }}"
+         src="{{ icon | img_url: '50x' }}"
+         data-src="{{ img_url }}"
+         data-widths="[50, 100, 250, 300, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+         data-sizes="auto"
+         alt="{{ icon.alt | default: 'Workout Meals ™' | escape }}">
+    {% else %}
+        {{ 'lifestyle-2' | placeholder_svg_tag }}
+    {% endif %}
+</section>
+
+<section class="banner-refer__info">
+    <h1>Give
+        {%- assign icon_give = section.settings.image_give.src -%}
+        {%- assign img_url_give = icon_give | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <img class="lazyload"
+             data-help="{{ img_url_give }}"
+             src="{{ icon_give | img_url: '50x' }}"
+             data-src="{{ img_url_give }}"
+             data-widths="[50, 100, 180, 250, 300, 360, 540, 720, 900]"
+             data-sizes="auto"
+             alt="{{ icon_give.alt | default: 'Workout Meals ™' | escape }}">
+        Get
+        {%- assign icon_get = section.settings.image_get.src -%}
+        {%- assign img_url_get = icon_get | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <img class="lazyload"
+             data-help="{{ img_url_get }}"
+             src="{{ icon_get | img_url: '50x' }}"
+             data-src="{{ img_url_get }}"
+             data-widths="[50, 100, 180, 250, 300, 360, 540, 720, 900]"
+             data-sizes="auto"
+             alt="{{ icon_get.alt | default: 'Workout Meals ™' | escape }}">
+    </h1>
+    <div>{{ section.settings.section_sub_title }}</div>
+</section>
+{% endif %}
+
+{% schema %}
+    {
+    "name": "Banner Refer a Friend",
+    "class": "banner-refer",
+    "settings": [
+    {
+    "type": "checkbox",
+    "id": "show",
+    "label": "Show section",
+    "default": true
+    },
+    {
+    "type": "image_picker",
+    "id": "banner_image",
+    "label": "Image"
+    },
+    {
+    "type": "image_picker",
+    "id": "image_give",
+    "label": "Title Image Give"
+    },
+    {
+    "type": "image_picker",
+    "id": "image_get",
+    "label": "Title Image Get"
+    },
+    {
+    "type": "text",
+    "id": "section_sub_title",
+    "label": "SubTitle"
+    }
+    ]
+    }
+{% endschema %}

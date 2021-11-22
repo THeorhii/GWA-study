@@ -1,0 +1,86 @@
+{% if section.settings.show %}
+    <section id="section-{{ section.id }}" class="review-banner-section">
+
+        <div class="page-width">
+            {% if section.settings.section_title !=blank %}
+                <h2 style="color:{{ section.settings.color_title }}; font-size: {{ section.settings.font_size }}px; text-align: center;">{{ section.settings.section_title }}</h2>
+            {% endif %}
+            <div class="review-banner-images">
+                {% for block in section.blocks %}
+
+                    <div class="review-banner-image">
+                        <img class="lazyload"
+                             src="{{ block.settings.review-banner_image | img_url: '342x81' }}"
+                             data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048]"
+                             data-aspectratio="{{  block.settings.review-banner_image.aspect_ratio }}"
+                             data-sizes="auto"
+                             data-parent-fit="contain"
+                             alt="{{ block.settings.review-banner_image.alt | escape }}">
+                    </div>
+
+                {% endfor %}
+            </div>
+        </div>
+
+    </section>
+{%- endif -%}
+
+
+{% schema %}
+    {
+    "name": "Review Banner",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "show",
+            "label": "Show section",
+            "default": true
+        },
+        {
+        "type": "text",
+        "id": "section_title",
+        "label": "Title"
+        },
+        {
+        "type": "color",
+        "id": "color_title",
+        "label": "Text color",
+        "default": "#fbb03b"
+        },
+        {
+        "type": "range",
+        "id": "font_size",
+        "min": 16,
+        "max": 72,
+        "step": 4,
+        "unit": "px",
+        "label": "Font size",
+        "default": 48
+        }
+    ],
+    "blocks": [
+    {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "review-banner_image",
+                "label": "Image"
+            }
+        ]
+    }
+    ],
+    "presets": [
+    {
+        "name": "Review Banner",
+        "category": "Image",
+        "blocks": [
+            {
+                "type": "image"
+            }
+        ]
+    }
+    ]
+    }
+{% endschema %}

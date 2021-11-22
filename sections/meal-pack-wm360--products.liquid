@@ -1,0 +1,17 @@
+{% include 'meal-pack-pop-up' %}
+
+<section class="grid"
+         data-section-mealPack-WM360-products
+         data-ajax-template="ajax-meal-pack">
+
+    <div class="meal-pack-page">
+        {% include 'snippet-meals-pack' %}
+    </div>
+</section>
+
+{% schema %}
+{
+"name": "Meal Pack Products",
+"class": "meal-pack-products"
+}
+{% endschema %}

@@ -1,0 +1,197 @@
+{% assign shippingPrice = settings.cart_min_sum_free_shipping | times: 1 %}
+{% assign firstGiftPrice = settings.cart_min_sum_first_gift | times: 1 %}
+{% assign secondGiftPrice = settings.cart_min_sum_second_gift | times: 1 %}
+{% assign thirdGiftPrice = settings.cart_min_sum_third_gift | times: 1 %}
+{% assign fourthGiftPrice = settings.cart_min_sum_fourth_gift | times: 1 %}
+
+{% if settings.free_shipping %}
+    {% capture shipping_block %}
+        <div class="progress-bar__block-dot" data-gift-sum="{{ shippingPrice | times: 100 }}">
+            <div>
+                <span class="progress-bar__gift-prices">{{ shippingPrice | times: 100 | money }}</span>
+                <span class="progress-bar__dot"></span>
+                <span class="progress-bar__gift-titles">free shipping</span>
+            </div>
+        </div>
+    {% endcapture %}
+{% endif %}
+
+{% if settings.free_shipping or settings.free_gift %}
+<div class="cart-drawer__progress-bar-wrapper">
+    <div class="cart-drawer__progress-bar">
+        <div class="progress-bar__stripe"></div>
+        <div class="progress-bar__dots">
+            {% if settings.free_gift %}
+            {% if settings.first_gift_product != blank and shippingPrice < firstGiftPrice %}
+                {{ shipping_block }}
+            {% endif %}
+            {% if settings.first_gift_product != blank and settings.cart_min_sum_first_gift | times: 1 > 0 %}
+                <div class="progress-bar__block-dot" data-gift-sum="{{ settings.cart_min_sum_first_gift | times: 100 }}" data-gift-product="{{ all_products[settings.first_gift_product].selected_or_first_available_variant.id }}">
+                    <div>
+                        <span class="progress-bar__gift-prices">{{ settings.cart_min_sum_first_gift | times: 100 | money }}</span>
+                        <span class="progress-bar__dot"></span>
+                        <span class="progress-bar__gift-titles">{{ all_products[settings.first_gift_product].title }}</span>
+                    </div>
+                </div>
+            {% endif %}
+            {% if settings.second_gift_product != blank %}
+                {% if shippingPrice > firstGiftPrice and shippingPrice < secondGiftPrice %}
+                    {{ shipping_block }}
+                {% endif %}
+            {% else %}
+                {% if shippingPrice > firstGiftPrice %}
+                    {{ shipping_block }}
+                {% endif %}
+            {% endif %}
+            {% if settings.second_gift_product != blank and settings.cart_min_sum_second_gift | times: 1  > 0 %}
+                <div class="progress-bar__block-dot" data-gift-sum="{{ settings.cart_min_sum_second_gift | times: 100 }}" data-gift-product="{{ all_products[settings.second_gift_product].selected_or_first_available_variant.id }}">
+                    <div>
+                        <span class="progress-bar__gift-prices">{{ settings.cart_min_sum_second_gift | times: 100 | money }}</span>
+                        <span class="progress-bar__dot"></span>
+                        <span class="progress-bar__gift-titles">{{ all_products[settings.second_gift_product].title }}</span>
+                    </div>
+                </div>
+            {% endif %}
+            {% if settings.third_gift_product != blank %}
+                {% if shippingPrice > secondGiftPrice and shippingPrice < thirdGiftPrice %}
+                    {{ shipping_block }}
+                {% endif %}
+            {% else %}
+                {% if settings.second_gift_product != blank and shippingPrice > secondGiftPrice %}
+                    {{ shipping_block }}
+                {% endif %}
+            {% endif %}
+            {% if settings.third_gift_product != blank and settings.cart_min_sum_third_gift | times: 1  > 0 %}
+                <div class="progress-bar__block-dot" data-gift-sum="{{ settings.cart_min_sum_third_gift | times: 100 }}" data-gift-product="{{ all_products[settings.third_gift_product].selected_or_first_available_variant.id }}">
+                    <div>
+                        <span class="progress-bar__gift-prices">{{ settings.cart_min_sum_third_gift | times: 100 | money }}</span>
+                        <span class="progress-bar__dot"></span>
+                        <span class="progress-bar__gift-titles">{{ all_products[settings.third_gift_product].title }}</span>
+                    </div>
+                </div>
+            {% endif %}
+            {% if settings.fourth_gift_product != blank %}
+                {% if shippingPrice > thirdGiftPrice and shippingPrice < fourthGiftPrice %}
+                    {{ shipping_block }}
+                {% endif %}
+            {% else %}
+                {% if shippingPrice > thirdGiftPrice %}
+                    {{ shipping_block }}
+                {% endif %}
+            {% endif %}
+            {% if settings.fourth_gift_product != blank and settings.cart_min_sum_fourth_gift | times: 1  > 0 %}
+                <div class="progress-bar__block-dot" data-gift-sum="{{ settings.cart_min_sum_fourth_gift | times: 100 }}" data-gift-product="{{ all_products[settings.fourth_gift_product].selected_or_first_available_variant.id }}">
+                    <div>
+                        <span class="progress-bar__gift-prices">{{ settings.cart_min_sum_fourth_gift | times: 100 | money }}</span>
+                        <span class="progress-bar__dot"></span>
+                        <span class="progress-bar__gift-titles">{{ all_products[settings.fourth_gift_product].title }}</span>
+                    </div>
+                </div>
+            {% endif %}
+            {% if settings.fourth_gift_product != blank and shippingPrice > fourthGiftPrice %}
+                {{ shipping_block }}
+            {% endif %}
+            {% else %}
+                {{ shipping_block }}
+            {% endif %}
+        </div>
+    </div>
+    {% if settings.free_gift %}
+    <div class="cart-drawer__gifts">
+        {% if settings.cart_gift_title != blanck %}
+        <h5>{{ settings.cart_gift_title }}</h5>
+        {% endif %}
+        <div class="gifts-block">
+            {% if settings.first_gift_product != blank %}
+                {% assign first_product = all_products[settings.first_gift_product] %}
+            <div class="gifts-block__gift gift-block-{{ all_products[settings.first_gift_product].selected_or_first_available_variant.id }} locked"
+            data-gift-variant-id="{{ all_products[settings.first_gift_product].selected_or_first_available_variant.id }}" data-gift-variant-sum="{{ firstGiftPrice }}">
+                {% if first_product.featured_image != blank %}
+                    {%- assign icon_first = first_product.featured_image.src -%}
+                    {%- assign img_url_first = icon_first | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                    <img class="lazyload"
+                         src="{{ icon_first | img_url: '50x' }}"
+                         srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                         data-src="{{ img_url_first }}"
+                         data-widths="[10, 50, 100, 180, 250, 300, 360]"
+                         data-sizes="auto"
+                         alt="{{ icon_first.alt | default: 'Workout Meals ™' | escape }}">
+                {% else %}
+                    {{ 'product-1' | placeholder_svg_tag }}
+                {% endif %}
+                <p>{{ first_product.title }}<br/>
+                    {% include 'icon-checkbox' %}
+                </p>
+            </div>
+            {% endif %}
+            {% if settings.second_gift_product != blank %}
+                {% assign second_product = all_products[settings.second_gift_product] %}
+                <div class="gifts-block__gift gift-block-{{ all_products[settings.second_gift_product].selected_or_first_available_variant.id }} locked"
+                     data-gift-variant-id="{{ all_products[settings.second_gift_product].selected_or_first_available_variant.id }}" data-gift-variant-sum="{{ secondGiftPrice }}">
+                    {% if second_product.featured_image != blank %}
+                        {%- assign icon_second = second_product.featured_image.src -%}
+                        {%- assign img_url_second = icon_second | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                        <img class="lazyload"
+                             src="{{ icon_second | img_url: '50x' }}"
+                             srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                             data-src="{{ img_url_second }}"
+                             data-widths="[10, 50, 100, 180, 250, 300, 360]"
+                             data-sizes="auto"
+                             alt="{{ icon_second.alt | default: 'Workout Meals ™' | escape }}">
+                    {% else %}
+                        {{ 'product-1' | placeholder_svg_tag }}
+                    {% endif %}
+                    <p>{{ second_product.title }}<br/>
+                        {% include 'icon-checkbox' %}
+                    </p>
+                </div>
+            {% endif %}
+            {% if settings.third_gift_product != blank %}
+                {% assign third_product = all_products[settings.third_gift_product] %}
+                <div class="gifts-block__gift gift-block-{{ all_products[settings.third_gift_product].selected_or_first_available_variant.id }} locked"
+                     data-gift-variant-id="{{ all_products[settings.third_gift_product].selected_or_first_available_variant.id }}" data-gift-variant-sum="{{ thirdGiftPrice }}">
+                    {% if third_product.featured_image != blank %}
+                        {%- assign icon_third = third_product.featured_image.src -%}
+                        {%- assign img_url_third = icon_third | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                        <img class="lazyload"
+                             src="{{ third | img_url: '50x' }}"
+                             srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                             data-src="{{ img_url_third }}"
+                             data-widths="[10, 50, 100, 180, 250, 300, 360]"
+                             data-sizes="auto"
+                             alt="{{ icon_third.alt | default: 'Workout Meals ™' | escape }}">
+                    {% else %}
+                        {{ 'product-1' | placeholder_svg_tag }}
+                    {% endif %}
+                    <p>{{ third_product.title }}<br/>
+                        {% include 'icon-checkbox' %}
+                    </p>
+                </div>
+            {% endif %}
+            {% if settings.fourth_gift_product != blank %}
+                {% assign fourth_product = all_products[settings.fourth_gift_product] %}
+                <div class="gifts-block__gift gift-block-{{ all_products[settings.fourth_gift_product].selected_or_first_available_variant.id }} locked"
+                     data-gift-variant-id="{{ all_products[settings.fourth_gift_product].selected_or_first_available_variant.id }}" data-gift-variant-sum="{{ fourthGiftPrice }}">
+                    {% if fourth_product.featured_image != blank %}
+                        {%- assign icon_fourth = fourth_product.featured_image.src -%}
+                        {%- assign img_url_fourth = icon_fourth | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                        <img class="lazyload"
+                             src="{{ icon_fourth | img_url: '50x' }}"
+                             srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                             data-src="{{ img_url_fourth }}"
+                             data-widths="[10, 50, 100, 180, 250, 300, 360]"
+                             data-sizes="auto"
+                             alt="{{ icon_fourth.alt | default: 'Workout Meals ™' | escape }}">
+                    {% else %}
+                        {{ 'product-1' | placeholder_svg_tag }}
+                    {% endif %}
+                    <p>{{ fourth_product.title }}<br/>
+                        {% include 'icon-checkbox' %}
+                    </p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endif %}

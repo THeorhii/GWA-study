@@ -1,5 +1,3 @@
-{{ 'sus-template.css' | asset_url | stylesheet_tag }}
-<section class="sustainability-page__container">
 {% for block in section.blocks limit: section.blocks.size %}
 <div class="sus-block__container {% if block.settings.sustainability-block__img--position == true %} sus-block__container--position {% endif %}">
 
@@ -18,9 +16,8 @@
     </div>
 
 </div>
-
 {% endfor %}
-</section>
+
 {% schema %}
 {
 "name": "Sustainability block",
@@ -73,10 +70,6 @@
 "label": "Text",
 "default": "<p>Your text</p>"
 }]
-}],"presets": [
-{
-"name": "Sustainability section"
-}
-]
+}]
 }
 {% endschema %}

@@ -1,0 +1,117 @@
+<section data-section-id="{{ section.id }}"  id="section-{{ section.id }}" class="why-workout-meals steps-with-image-section">
+    <div class="page-width">
+        {% if section.settings.title != blank %}
+            <h3>{{ section.settings.title }}</h3>
+        {% endif %}
+        <div class="steps-with-image">
+            <div class="image-wrapper">
+                <img class="lazyload"
+                     src="{{ section.settings.image | img_url: 'master' }}"
+                     data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048]"
+                     data-aspectratio="{{ section.settings.image.aspect_ratio }}"
+                     data-sizes="auto"
+                     data-parent-fit="contain"
+                     alt="{{ section.settings.image.alt | escape }}">
+            </div>
+            <div class="steps-slider points-slider">
+
+                {% assign number = 0 %}
+
+                {% for block in section.blocks %}
+
+                    {% assign number = number | plus: 1 %}
+                    {% capture points %}point_{{ number }}{% endcapture %}
+                    {% capture point %}{% include points %}{% endcapture %}
+
+                    <div class="step-content" data-point='{{ point }}'>
+                    <div class="step-content-wrappper">
+                        <div class="step-title-wrappper">
+                            {% if block.settings.step_title != blank %}
+                                <h4>{{ block.settings.step_title }}</h4>
+                            {% endif %}
+
+                            {% if block.settings.step_text != blank %}
+                                <p>{{ block.settings.step_text }}</p>
+                            {% endif %}
+                        </div>
+                        <div class="small-screen-img" hidden>
+                            <img class="lazyload"
+                                 src="{{ section.settings.image | img_url: '136x127' }}"
+                                 data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048]"
+                                 data-aspectratio="{{ section.settings.image.aspect_ratio }}"
+                                 data-sizes="auto"
+                                 data-parent-fit="contain"
+                                 alt="{{ section.settings.image.alt | escape }}">
+                        </div>
+                        <a href="{{ block.settings.btn_link }}" class="btn std-btn btn-dark">
+                            {{ block.settings.btn_text | escape }}
+                        </a>
+                    </div>
+                </div>
+
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% schema %}
+    {
+        "name": "Why Workout Meals ™",
+        "max_blocks": 4,
+        "settings": [
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Image"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "step",
+                "name": "Step",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "step_title",
+                        "label": "Step title"
+                    },
+                    {
+                        "type": "textarea",
+                        "id": "step_text",
+                        "label": "Step text"
+                    },
+                    {
+                        "type": "text",
+                        "id": "btn_text",
+                        "label": "btn text",
+                        "default": "Explore All"
+                    },
+                    {
+                        "id": "btn_link",
+                        "type": "url",
+                        "label": "Button link"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "category": "Steps sliders",
+                "name": "Why Workout Meals ™",
+                "blocks": [
+                    {
+                        "type": "step"
+                    }
+                ]
+            }
+        ]
+    }
+{% endschema %}

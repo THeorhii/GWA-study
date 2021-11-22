@@ -1,0 +1,82 @@
+{% if section.settings.show %}
+    <section id="section-{{ section.id }}" class="about-us-choice-section">
+
+        <div class="page-width">
+            <div class="about-us-choice-heading">
+                {% if section.settings.section_title != blank %}
+                    <h3>{{ section.settings.section_title | escape }}</h3>
+                {% endif %}
+            </div>
+            <div class="about-us-content">
+                {% for block in section.blocks %}
+
+                    <div class="about-us-choice-content">
+                        <img class="lazyload"
+                             src="{{ block.settings.about_us_image | img_url: 'master' }}"
+                             data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048]"
+                             data-aspectratio="{{  block.settings.about_us_image.aspect_ratio }}"
+                             data-sizes="auto"
+                             data-parent-fit="contain"
+                             alt="{{ block.settings.about_us_image.alt | escape }}">
+
+                        {% if block.settings.text != blank %}
+                            <div class="about-us__text">
+                                <p>{{ block.settings.text }}</p>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                {% endfor %}
+            </div>
+        </div>
+
+    </section>
+{%- endif -%}
+
+{% schema %}
+    {
+    "name": "About us additional info",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "show",
+            "label": "Show section",
+            "default": true
+        },
+        {
+            "type": "text",
+            "id": "section_title",
+            "label": "Title"
+        }
+    ],
+    "blocks": [
+    {
+        "type": "block",
+        "name": "Block",
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "about_us_image",
+                "label": "Image"
+            },
+            {
+                "type": "richtext",
+                "id": "text",
+                "label": "Text"
+            }
+        ]
+    }
+    ],
+    "presets": [
+    {
+        "name": "About us additional info",
+        "category": "Text",
+        "blocks": [
+            {
+                "type": "block"
+            }
+        ]
+    }
+    ]
+    }
+{% endschema %}

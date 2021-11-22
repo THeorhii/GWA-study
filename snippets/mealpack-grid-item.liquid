@@ -1,0 +1,59 @@
+{% comment %}
+<div class="collection-product-block mealpack-grid-item">
+    <div data-block-id="{{ product.id }}">
+        {% if product.featured_image != blank %}
+            <a href="{{ product.url | within: collection }}">
+                {%- assign icon = product.featured_image.src -%}
+                    {%- assign img_url = icon | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                    <img class="lazyload"
+                     src="{{ icon | img_url: '50x' }}"
+                     srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                     data-src="{{ img_url }}"
+                     data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                     data-sizes="auto"
+                     alt="{{ icon.alt | default: 'Workout Meals ™' | escape }}">
+            </a>
+        {% endif %}
+        <p class="product-label">Meal Pack</p>
+    </div>
+    <div class="content">
+        <p class="product-title">
+            {% comment %}<a href="{{ product.url | within: collection }}">{% endcomment %}{{ product.title }}{% comment %}</a>{% endcomment %}
+        </p>
+    </div>
+</div>
+{% endcomment %}
+
+
+<div class="mealpack-grid-item grid__item medium-up--one-quarter mobile--one-whole {% unless product.available %}grid-view-item--sold-out{% endunless %}">
+    <div class="product-card">
+        <a href="{{ product.url | within: collection }}">
+
+            {% capture img_id %}ProductCardImage-{{ section.id }}-{{ product.id }}{% endcapture %}
+            {% capture wrapper_id %}ProductCardImageWrapper-{{ section.id }}-{{ product.id }}{% endcapture %}
+
+            <div id="{{ wrapper_id }}" class="product-card__image-wrapper">
+
+                <img id="{{ img_id }}"
+                     class="lazyload"
+                     src="{{ product.featured_image | img_url: '368x295' }}"
+                     data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048]"
+                     data-aspectratio="{{ product.featured_image.aspect_ratio }}"
+                     data-sizes="auto"
+                     data-parent-fit="contain"
+                     alt="{{ product.featured_image.alt | escape }}">
+
+                <div class="collection-title-wrapper">
+                    <span>Meal Pack</span>
+                </div>
+            </div>
+        </a>
+        <div class="prod-info">
+            <div class="prod-title wrapper">{{ product.title }}</div>
+            <div class="prod-desc wrapper">{{ product.description | truncate: 200 }}</div>
+            <div class="prod-link">
+                <a href="{{ product.url | within: collection }}">Order now</a>
+            </div>
+        </div>
+    </div>
+</div>

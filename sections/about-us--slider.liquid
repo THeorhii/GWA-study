@@ -1,0 +1,464 @@
+<section class="about-us--slider">
+    <div data-section-id="{{ section.id }}"  id="slick-{{ section.id }}" class="slideshow-section slider-after-video" data-slide-speed="{{ section.settings.slide_speed }}">
+        {% for block in section.blocks %}
+
+            <div class="slide slide-{{ block.id }} {% if block.type == 'slide' %}stnd-slide{% endif %}" {% if block.settings.slideshow_image %} style="background-image: url('{{ block.settings.slideshow_image | img_url: 'x686' }}'); background-size: cover;"{% endif %}>
+                <style>
+                    {% if block.settings.slide_picture_tablet %}
+                    @media screen and (max-width: 768px){
+                        .slide-{{ block.id }}{
+                            background-image: url('{{ block.settings.slide_picture_tablet | img_url: 'x356' }}') !important;
+                        }
+                    }
+                    {% endif %}
+                    {% if block.settings.slide_picture_mobile %}
+                    @media screen and (max-width: 350px){
+                        .slide-{{ block.id }}{
+                            background-image: url('{{ block.settings.slide_picture_mobile | img_url: 'x274' }}') !important;
+                        }
+                    }
+                    {% endif %}
+                </style>
+                {% if block.type == 'slide' or block.type == 'slide-with-dish' %}
+                    <div class="slideshow-content-wrapper page-width">
+                        <div class="slideshow__text-content">
+                            <div class="slideshow__main-title">
+                                {% if block.settings.slider_title_1 != blank or block.settings.slider_title_2 != blank %}
+                                    <h2>
+                                    <span class="title-fade-in">
+                                        {{ block.settings.slider_title_1 }}
+                                    </span>
+                                        <span class="title-fade-in">
+                                        {{ block.settings.slider_title_2 }}
+                                    </span>
+                                    </h2>
+                                {% endif %}
+                                {% if block.settings.slider_subtitle %}
+                                    <h2>
+                                        <span class="title-fade-in">
+                                            {{ block.settings.slider_subtitle }}
+                                        </span>
+                                    </h2>
+                                {% endif %}
+                            </div>
+                            <div class="slideshow__button-wrapper">
+                                {% if block.settings.button_link %}
+                                    <a href="{{ block.settings.button_link }}" class="btn std-btn btn-light" {% if block.settings.button_background_color != blank %}style="background-color: {{ block.settings.button_background_color }}; border-color: {{ block.settings.button_background_color }} " {% endif %}>
+                                        {{ block.settings.button_label | escape }}
+                                    </a>
+                                {% endif %}
+                                {% if block.settings.button_link_2 %}
+                                    <a href="{{ block.settings.button_link_2 }}" class="btn std-btn btn-light" {% if block.settings.button_background_color2 != blank %}style="background-color: {{ block.settings.button_background_color2 }}; border-color: {{ block.settings.button_background_color2 }} " {% endif %}>
+                                        {{ block.settings.button_label_2 | escape }}
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </div>{% comment %}
+                    {% elsif block.type == 'slide-video' %}
+                    <video {% if block.settings.video_sound == false %}muted{% endif %} playsinline id="homepage-slider-video-{{ block.id }}"
+                           class="homepage-slider-video homepage-video-with-mobile{% if block.settings.video_autoplay %} homepage-slider-video-autoplay{% endif %}"
+                           src-webm="{{ block.settings.video_webm }}"
+                           src-mp4="{{ block.settings.video_mp4 }}"
+                           src-ogg="{{ block.settings.video_ogg }}"
+                           src-webm-mob="{{ block.settings.video_webm_mob }}"
+                           src-mp4-mob="{{ block.settings.video_mp4_mob }}"
+                           src-ogg-mob="{{ block.settings.video_ogg_mob }}">
+                        <source src="{{ block.settings.video_webm }}" type='video/webm'>
+                        <source src="{{ block.settings.video_mp4 }}" type='video/mp4'>
+                        <source src="{{ block.settings.video_ogg }}" type='video/ogg'>
+                        Your browser does not support the video tag.
+                    </video>
+
+                    <button id="video-play-{{ block.id }}" class="video-play">{% include 'icon-play' %}</button>
+                    <button id="video-mute-{{ block.id }}" class="video-mute" {% if block.settings.video_sound == false %}hidden{% endif %}>{% include 'icon-sound-on' %}</button>
+
+                    {% capture icon-sound-off %}{% include 'icon-sound-off' %}{% endcapture %}
+                    {% capture icon-sound-on %}{% include 'icon-sound-on' %}{% endcapture %}
+                    {% capture icon-play %}{% include 'icon-play' %}{% endcapture %}
+                    {% capture icon-pause %}{% include 'icon-pause' %}{% endcapture %}
+
+                    {% assign video_autoplay = block.settings.video_autoplay %}
+                    <script>
+                        // Play/Pause and Mute for video
+                        let video{{ block.id }} = document.getElementById("homepage-slider-video-{{ block.id }}"),
+                            playBtn{{ block.id }} = document.getElementById("video-play-{{ block.id }}"),
+                            muteBtn{{ block.id }} = document.getElementById("video-mute-{{ block.id }}");
+
+                        if({{ video_autoplay }}){
+                            $('.template-index .slideshow-section').addClass('video');
+                            video{{ block.id }}.play();
+                            playBtn{{ block.id }}.classList.add('video-play-active');
+                            playBtn{{ block.id }}.innerHTML = {{ icon-pause | json }};
+                        };
+
+                        playBtn{{ block.id }}.addEventListener("click", function () {
+                            if(video{{ block.id }}.paused || video{{ block.id }}.ended) {
+                                video{{ block.id }}.play();
+                                playBtn{{ block.id }}.classList.add('video-play-active');
+                                playBtn{{ block.id }}.innerHTML = {{ icon-pause | json }};
+                            } else {
+                                video{{ block.id }}.pause();
+                                playBtn{{ block.id }}.classList.remove('video-play-active');
+                                playBtn{{ block.id }}.innerHTML = {{ icon-play | json}};
+                            }
+                        }, false);
+
+                        muteBtn{{ block.id }}.addEventListener("click", function () {
+                            if (video{{ block.id }}.muted) {
+                                video{{ block.id }}.muted = false;
+                                muteBtn{{ block.id }}.innerHTML = {{ icon-sound-on | json }};
+                            } else {
+                                video{{ block.id }}.muted = true;
+                                muteBtn{{ block.id }}.innerHTML = {{ icon-sound-off | json}};
+                            }
+                        }, false);
+                    </script>
+
+                {% if block.settings.slide_video_title != blank %}
+                    <div class="video-content">
+                        <h2 style="font-size:{{ block.settings.font_size }}px; color:{{ block.settings.color_title }};">{{ block.settings.slide_video_title }}</h2>
+                    </div>
+                {% endif %}{% endcomment %}
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+<script>
+    let video = document.getElementById("homepage-slider-video"),
+        playBtn = document.getElementById("video-play"),
+        muteBtn = document.getElementById("main-video-mute"),
+        section = document.getElementsByClassName("main-video-banner")[0],
+        slider = document.getElementsByClassName("main-slider-banner")[0],
+        $main_section = $(".main-video-slider-banner"),
+        $section = $(".main-video-banner"),
+        $slider = $main_section.find(".main-slider-banner"),
+        $image = $(".img-before-video"),
+        $video = $("#homepage-slider-video video");
+
+    video.addEventListener('canplay', (event) => {
+        console.log('Video can start, but not sure it will play through.');
+        // $image.addClass("hidden");
+        $image.addClass("hid");
+        console.log(slider);
+        // if({{ video_autoplay }}){
+        // video.play();
+        // playBtn.classList.add('video-play-active');
+        //  playBtn.innerHTML = {{ icon-pause | json }};
+        //  };
+    });
+
+    video.addEventListener('ended', (event) => {
+        $section.addClass("hid");
+        slider.classList.add("act");
+        Slideshow();
+        SimpleSlider();
+        setTimeout(slider.classList.add("active"), 400);
+    });
+
+    /*playBtn.addEventListener("click", function () {
+        if(video.paused || video.ended) {
+            video.play();
+            playBtn.classList.add('video-play-active');
+            playBtn.innerHTML = {{ icon-pause | json }};
+            } else {
+                video.pause();
+                playBtn.classList.remove('video-play-active');
+                playBtn.innerHTML = {{ icon-play | json}};
+            }
+        }, false);*/
+
+    muteBtn.addEventListener("click", function () {
+        if (video.muted) {
+            video.muted = false;
+            muteBtn.innerHTML = {{ icon-sound-on | json }};
+        } else {
+            video.muted = true;
+            muteBtn.innerHTML = {{ icon-sound-off | json}};
+        }
+    }, false);
+</script>
+
+{% schema %}
+    {
+    "name": "Slideshow",
+    "class": "main-video-slider-banner about-us-slider",
+    "settings": [
+    {
+    "type": "range",
+    "id": "slide_speed",
+    "min": 1,
+    "max": 15,
+    "step": 1,
+    "unit": "sec",
+    "label": "Change slides every",
+    "default": 5
+    }
+    ],
+    "blocks" : [
+    {
+    "type": "slide-with-dish",
+    "name": "Slide with dish",
+    "settings": [
+    {
+    "type": "header",
+    "content": "Slide"
+    },
+    {
+    "type": "image_picker",
+    "id": "slideshow_image",
+    "label": "Image"
+    },
+    {
+    "type": "text",
+    "id": "slider_title_1",
+    "label": "Title part 1"
+    },
+    {
+    "type": "text",
+    "id": "slider_title_2",
+    "label": "Title part 2"
+    },
+    {
+    "type": "text",
+    "id": "slider_subtitle",
+    "label": "Subtitle"
+    },
+    {
+    "type": "text",
+    "id": "button_label",
+    "label": "Button label"
+    },
+    {
+    "type": "color",
+    "id": "button_background_color",
+    "label": "Button background color"
+    },
+    {
+    "type": "url",
+    "id": "button_link",
+    "label": "Button link"
+    },
+    {
+    "type": "text",
+    "id": "button_label_2",
+    "label": "Button label"
+    },
+    {
+    "type": "color",
+    "id": "button_background_color2",
+    "label": "Button background color"
+    },
+    {
+    "type": "url",
+    "id": "button_link_2",
+    "label": "Button link"
+    },
+    {
+    "type": "image_picker",
+    "id": "slide_picture",
+    "label": "Picture on a slide"
+    },
+    {
+    "type": "image_picker",
+    "id": "slide_picture_tablet",
+    "label": "Picture on a slide for tablet"
+    },
+    {
+    "type": "image_picker",
+    "id": "slide_picture_mobile",
+    "label": "Picture on a slide for mobile"
+    },
+    {
+    "type": "text",
+    "id": "stripe_text_1",
+    "label": "Description 1"
+    },
+    {
+    "type": "text",
+    "id": "stripe_text_2",
+    "label": "Description 2"
+    },
+    {
+    "type": "text",
+    "id": "stripe_text_3",
+    "label": "Description 3"
+    },
+    {
+    "type": "text",
+    "id": "stripe_text_4",
+    "label": "Description 4"
+    }
+    ]
+    },
+    {
+    "type": "slide",
+    "name": "Slide",
+    "settings": [
+    {
+    "type": "header",
+    "content": "Slide"
+    },
+    {
+    "type": "image_picker",
+    "id": "slideshow_image",
+    "label": "Image"
+    },
+    {
+    "type": "image_picker",
+    "id": "slide_picture_tablet",
+    "label": "Picture on a slide for tablet"
+    },
+    {
+    "type": "image_picker",
+    "id": "slide_picture_mobile",
+    "label": "Picture on a slide for mobile"
+    },
+    {
+    "type": "textarea",
+    "id": "slider_title_1",
+    "label": "Title part 1"
+    },
+    {
+    "type": "textarea",
+    "id": "slider_title_2",
+    "label": "Title part 2"
+    },
+    {
+    "type": "textarea",
+    "id": "slider_subtitle",
+    "label": "Subtitle"
+    },
+    {
+    "type": "text",
+    "id": "button_label",
+    "label": "Button label"
+    },
+    {
+    "type": "color",
+    "id": "button_background_color",
+    "label": "Button background color"
+    },
+    {
+    "type": "url",
+    "id": "button_link",
+    "label": "Button link"
+    },
+    {
+    "type": "text",
+    "id": "button_label_2",
+    "label": "Button label"
+    },
+    {
+    "type": "color",
+    "id": "button_background_color2",
+    "label": "Button background color"
+    },
+    {
+    "type": "url",
+    "id": "button_link_2",
+    "label": "Button link"
+    }
+    ]
+    },
+    {
+    "type": "slide-video",
+    "name": "Slide (video)",
+    "settings": [
+    {
+    "type": "header",
+    "content": "Slide"
+    },
+    {
+    "type": "text",
+    "id": "slide_video_title",
+    "label": "Title"
+    },
+    {
+    "type": "range",
+    "id": "font_size",
+    "min": 24,
+    "max": 72,
+    "step": 12,
+    "unit": "px",
+    "label": "Font size",
+    "default": 72
+    },
+    {
+    "type": "color",
+    "id": "color_title",
+    "label": "Text color",
+    "default": "#fff"
+    },
+    {
+    "type": "header",
+    "content": "Video"
+    },
+    {
+    "type": "checkbox",
+    "id": "video_autoplay",
+    "label": "Video autoplay",
+    "default": false
+    },
+    {
+    "type": "checkbox",
+    "id": "video_sound",
+    "label": "Turn on the sound",
+    "default": false
+    },
+    {
+    "type": "text",
+    "id": "video_webm",
+    "label": "Format: .webm"
+    },
+    {
+    "type": "text",
+    "id": "video_mp4",
+    "label": "Format: .mp4"
+    },
+    {
+    "type": "text",
+    "id": "video_ogg",
+    "label": "Format: .ogg / .ogv / .ogm"
+    },
+    {
+    "type": "paragraph",
+    "content": "Only if need a different video for mobile"
+    },
+    {
+    "type": "text",
+    "id": "video_webm_mob",
+    "label": "Format: .webm (mobile)"
+    },
+    {
+    "type": "text",
+    "id": "video_mp4_mob",
+    "label": "Format: .mp4 (mobile)"
+    },
+    {
+    "type": "text",
+    "id": "video_ogg_mob",
+    "label": "Format: .ogg / .ogv / .ogm (mobile)"
+    }
+    ]
+    }
+    ],
+    "presets": [{
+    "name": "Slideshow",
+    "category": "Image",
+    "settings": {},
+    "blocks": [
+    {
+    "type": "slide-with-dish"
+    },
+    {
+    "type": "slide"
+    }
+    ]
+    }]
+    }
+{% endschema %}
+

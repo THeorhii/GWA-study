@@ -1,0 +1,130 @@
+<div class="cart-drawer--city-banner">
+    {%- assign icon_full_1 = settings.cart_drawer_city_image_1.src -%}
+    {%- assign img_url_full_1 = icon_full_1 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+    <img class="drawer-banner-city-main lazyload"
+         src="{{ icon_full_1 | img_url: '100x' }}"
+         data-src="{{ img_url_full_1 }}"
+         data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+         data-sizes="auto"
+         alt="{{ icon_full_1.alt | default: 'Workout Meals ™' | escape }}">
+
+    {% if settings.cart_drawer_city_image_2 != blank %}
+    {%- assign cityBannerClass_2 = 'drawer-banner-city-' | append: settings.cart_drawer_city_name_2 | downcase -%}
+    {%- assign icon_full_2 = settings.cart_drawer_city_image_2.src -%}
+    {%- assign img_url_full_2 = icon_full_2 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+    <img class="{{ cityBannerClass_2 }} lazyload hide"
+         src="{{ icon_full_2 | img_url: '100x' }}"
+         data-src="{{ img_url_full_2 }}"
+         data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+         data-sizes="auto"
+         alt="{{ icon_full.alt | default: 'Workout Meals ™' | escape }}">
+    {% endif %}
+
+    {% if settings.cart_drawer_city_image_3 != blank %}
+    {%- assign cityBannerClass_3 = 'drawer-banner-city-' | append: settings.cart_drawer_city_name_3 | downcase -%}
+    {%- assign icon_full_3 = settings.cart_drawer_city_image_3.src -%}
+    {%- assign img_url_full_3 = icon_full_3 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+    <img class="{{ cityBannerClass_3 }} lazyload hide"
+         src="{{ icon_full_3 | img_url: '100x' }}"
+         data-src="{{ img_url_full_3 }}"
+         data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+         data-sizes="auto"
+         alt="{{ icon_full_3.alt | default: 'Workout Meals ™' | escape }}">
+    {% endif %}
+
+    {% if settings.cart_drawer_city_image_4 != blank %}
+        {%- assign cityBannerClass_4 = 'drawer-banner-city-' | append: settings.cart_drawer_city_name_4 | downcase -%}
+        {%- assign icon_full_4 = settings.cart_drawer_city_image_4.src -%}
+        {%- assign img_url_full_4 = icon_full_4 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <img class="{{ cityBannerClass_4 }} lazyload hide"
+             src="{{ icon_full_4 | img_url: '100x' }}"
+             data-src="{{ img_url_full_4 }}"
+             data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+             data-sizes="auto"
+             alt="{{ icon_full_4.alt | default: 'Workout Meals ™' | escape }}">
+    {% endif %}
+
+    {% if settings.cart_drawer_city_image_5 != blank %}
+        {%- assign cityBannerClass_5 = 'drawer-banner-city-' | append: settings.cart_drawer_city_name_5 | downcase -%}
+        {%- assign icon_full_5 = settings.cart_drawer_city_image_5.src -%}
+        {%- assign img_url_full_5 = icon_full_5 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <img class="{{ cityBannerClass_5 }} lazyload hide"
+             src="{{ icon_full_5 | img_url: '100x' }}"
+             data-src="{{ img_url_full_5 }}"
+             data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+             data-sizes="auto"
+             alt="{{ icon_full_5.alt | default: 'Workout Meals ™' | escape }}">
+    {% endif %}
+
+    {% if settings.cart_drawer_city_image_6 != blank %}
+        {%- assign cityBannerClass_6 = 'drawer-banner-city-' | append: settings.cart_drawer_city_name_6 | downcase -%}
+        {%- assign icon_full_6 = settings.cart_drawer_city_image_6.src -%}
+        {%- assign img_url_full_6 = icon_full_6 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <img class="{{ cityBannerClass_6 }} lazyload hide"
+             src="{{ icon_full_6 | img_url: '100x' }}"
+             data-src="{{ img_url_full_6 }}"
+             data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+             data-sizes="auto"
+             alt="{{ icon_full_6.alt | default: 'Workout Meals ™' | escape }}">
+    {% endif %}
+
+    {% if settings.cart_drawer_city_image_7 != blank %}
+        {%- assign cityBannerClass_7 = 'drawer-banner-city-' | append: settings.cart_drawer_city_name_7 | downcase -%}
+        {%- assign icon_full_7 = settings.cart_drawer_city_image_7.src -%}
+        {%- assign img_url_full_7 = icon_full_7 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <img class="{{ cityBannerClass_7 }} lazyload hide"
+             src="{{ icon_full_7 | img_url: '100x' }}"
+             data-src="{{ img_url_full_7 }}"
+             data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+             data-sizes="auto"
+             alt="{{ icon_full_7.alt | default: 'Workout Meals ™' | escape }}">
+    {% endif %}
+
+    {% if settings.cart_drawer_city_image_8 != blank %}
+        {%- assign cityBannerClass_8 = 'drawer-banner-city-' | append: settings.cart_drawer_city_name_8 | downcase -%}
+        {%- assign icon_full_8 = settings.cart_drawer_city_image_8.src -%}
+        {%- assign img_url_full_8 = icon_full_8 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <img class="{{ cityBannerClass_8 }} lazyload hide"
+             src="{{ icon_full_8 | img_url: '100x' }}"
+             data-src="{{ img_url_full_8 }}"
+             data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+             data-sizes="auto"
+             alt="{{ icon_full_8.alt | default: 'Workout Meals ™' | escape }}">
+    {% endif %}
+
+    {% if settings.cart_drawer_city_image_9 != blank %}
+        {%- assign cityBannerClass_9 = 'drawer-banner-city-' | append: settings.cart_drawer_city_name_9 | downcase -%}
+        {%- assign icon_full_9 = settings.cart_drawer_city_image_9.src -%}
+        {%- assign img_url_full_9 = icon_full_9 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <img class="{{ cityBannerClass_9 }} lazyload hide"
+             src="{{ icon_full_9 | img_url: '100x' }}"
+             data-src="{{ img_url_full_9 }}"
+             data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+             data-sizes="auto"
+             alt="{{ icon_full_9.alt | default: 'Workout Meals ™' | escape }}">
+    {% endif %}
+
+    {% if settings.cart_drawer_city_image_10 != blank %}
+        {%- assign cityBannerClass_10 = 'drawer-banner-city-' | append: settings.cart_drawer_city_name_10 | downcase -%}
+        {%- assign icon_full_10 = settings.cart_drawer_city_image_10.src -%}
+        {%- assign img_url_full_10 = icon_full_10 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <img class="{{ cityBannerClass_10 }} lazyload hide"
+             src="{{ icon_full_10 | img_url: '100x' }}"
+             data-src="{{ img_url_full_10 }}"
+             data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+             data-sizes="auto"
+             alt="{{ icon_full_10.alt | default: 'Workout Meals ™' | escape }}">
+    {% endif %}
+    {% if settings.cart_drawer_city_image_11 != blank %}
+        {%- assign cityBannerClass_11 = 'drawer-banner-city-' | append: settings.cart_drawer_city_name_11 | downcase -%}
+        {%- assign icon_full_11 = settings.cart_drawer_city_image_11.src -%}
+        {%- assign img_url_full_11 = icon_full_11 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <img class="{{ cityBannerClass_11 }} lazyload hide"
+             src="{{ icon_full_11 | img_url: '100x' }}"
+             data-src="{{ img_url_full_11 }}"
+             data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+             data-sizes="auto"
+             alt="{{ icon_full_11.alt | default: 'Workout Meals ™' | escape }}">
+    {% endif %}
+
+</div>

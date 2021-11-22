@@ -1,0 +1,219 @@
+<!-- /snippets/ajax-cart-template.liquid -->
+{% comment %}
+
+    This snippet provides the default handlebars.js templates for
+    the ajax cart plugin. Use the raw liquid tags to keep the
+    handlebar.js template tags as available hooks.
+{% endcomment %}
+
+<script id="CartTemplate" type="text/template">
+    {% raw %}
+    <form action="/cart" method="post" novalidate class="cart ajaxcart my-cart">
+        <div class="ajaxcart__inner ajaxcart__inner--has-fixed-footer">
+            <div class="cart-drawer-clear-all">
+                <button>clear all items {% endraw %}{% include 'icon-cart' %}{% raw %}</button>
+            </div>
+            {% endraw %}{% if settings.cart_drawer_city_banner %}{% include 'cart-drawer--city-banner' %}{% endif %}{% raw %}
+            {% endraw %}{% if settings.cart_drawer_announce != blanck %}<p class="cart-drawer_announce">{{ settings.cart_drawer_announce }}</p>{% endif %}{% raw %}
+            {% endraw %}{% if settings.cart_gifts_place_top %}{% include 'cart-drawer--progress-bar' %}{% endif %}{% raw %}
+            {{#items}}
+            <div class="ajaxcart__product {{#if mealPack }}ajaxcart__product-hidden{{/if}}" {{#if mealPack }}style="display:none;"{{/if}}>
+                <div class="ajaxcart__row" data-line="{{line}}" data-variant="{{itemId}}" {{#if mealPack }}data-meal-pack-id="{{mealPackId}}"{{/if}}>
+                    <div class="ajaxcart__product--section clearfix">
+                        <div class="ajaxcart__product-image">
+                            {{#if itemPrice}}
+                            <a href="#">
+                                <img {{fullImg}} alt="{{name}}">
+                            </a>
+                            {{else}}
+                            <a href="{{url}}">
+                                <img {{fullImg}} alt="{{name}}">
+                            </a>
+                            {{/if}}
+                        </div>
+                        <div class="ajaxcart__product-description">
+                            <div class="ajaxcart__product-name--wrapper{{#if variation}}{{else}} without-variants{{/if}} this_item_p">
+                                <a href="{{#if itemPrice}}#{{else}}{{url}}{{/if}}" class="ajaxcart__product-name">{{{name}}}</a>
+                                {{#if variation}}
+                                <p class="ajaxcart__product-meta">{{variation}}</p>
+                                {{/if}}
+                                {{#propertiesSubscribe}}
+                                <p class="ajaxcart__product-meta" data-variant="{{itemId}}" data-{{ @key }}="{{ this }}">
+                                    <span>{% endraw %}{{ 'cart.drawer.shipping_interval' | t }}{% raw %}: </span> {{ subscribeFrequency }} {% endraw %}{{ 'cart.drawer.weeks' | t }}{% raw %}
+                                </p>
+                                {{/propertiesSubscribe}}
+                            </div>
+                            {{#if itemVolume}}
+                            <div class="mefields-volume">
+                                Inhalt: {{ itemVolume }}
+                            </div>
+                            {{/if}}
+                            <div class="ajaxcart__product-price--wrapper grid--full">
+                                {{#if itemPrice}}<span>{{itemQty}}</span>{{/if}}
+                                <div {{#if productUpsell}}class="no-qty-drawer"{{else}}{{#if mealPack}}class="no-qty-drawer"{{else}}class="qty-drawer"{{/if}}{{/if}}>
+                                {{#if productUpsell}}
+                                <div class="ajaxcart__qty" style="display: none">
+                                    <input type="text" name="updates[]" class="ajaxcart__qty-num" value="{{itemQty}}" min="0" data-id="{{key}}" data-line="{{line}}" aria-label="quantity" pattern="[0-9]*">
+                                </div>
+                                {{else}}
+                                    {{#if mealPack}}
+                                    <div class="ajaxcart__qty" style="display: none">
+                                        <input type="text" name="updates[]" class="ajaxcart__qty-num" value="{{itemQty}}" min="0" data-id="{{key}}" data-line="{{line}}" aria-label="quantity" pattern="[0-9]*">
+                                    </div>
+                                    {{else}}
+                                <div class="ajaxcart__qty"{{#if itemPrice}} style="display: none"{{/if}}>
+                                    <button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--minus btn-qty-drawer" data-id="{{key}}" data-qty="{{itemMinus}}" data-line="{{line}}" aria-label="{% endraw %}{{ 'cart.general.reduce_quantity' | t }}{% raw %}">
+                                        {% endraw %}{% include 'icon-minus' %}{% raw %}
+                                    </button>
+                                    <input type="text" name="updates[]" class="ajaxcart__qty-num  input-qty-drawer" value="{{itemQty}}" min="0" data-id="{{key}}" data-variant-id="{{itemId}}" data-line="{{line}}" aria-label="quantity" pattern="[0-9]*">
+                                    <button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--plus btn-qty-drawer" data-id="{{key}}" data-line="{{line}}" data-qty="{{itemAdd}}" aria-label="{% endraw %}{{ 'cart.general.increase_quantity' | t }}{% raw %}">
+                                        {% endraw %}{% include 'icon-plus' %}{% raw %}
+                                    </button>
+                                </div>
+                                {{/if}}
+                                {{/if}}
+                            </div>
+                            <div class="text-right">
+                                {{#if itemPrice}}
+                                <span class="ajaxcart__price">free</span>
+                                {{else}}
+                                {{#if discountsApplied}}
+                                <span class="ajaxcart__price">{{{discountedPrice}}}</span>
+                                {{else}}
+                                <span class="ajaxcart__price">{{{price}}}</span>
+                                {{/if}}
+                                {{/if}}
+                                <span class="ajaxcart__price--text drawer-available">{% endraw %}{% comment %}{{ 'cart.general.drawer_available' | t }}{% endcomment %}{% raw %}</span>
+                                {{#if mealPack}}
+                                {{else}}
+                                {{#if itemPrice}}
+                                {{else}}
+                            <button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--remove" data-qty="{{itemQty}}" data-id="{{key}}" data-qty="{{itemMinus}}" data-line="{{line}}" aria-label="{% endraw %}{{ 'cart.general.reduce_quantity' | t }}{% raw %}">
+                                {% endraw %}{% include 'icon-remove' %}{% raw %}
+                            </button>
+                                {{/if}}
+                                {{/if}}
+                        </div>
+                        </div>
+                        {{#if discountsApplied}}
+                        <div class="grid--full display-table">
+                            <div class="grid__item text-right">
+                                {{#each discounts}}
+                                <small class="ajaxcart__discount">{{this.title}}</small>
+                                {{/each}}
+                            </div>
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/items}}
+        {{#if mealPacksInCart }}
+        {{#mealPacks}}
+        <div class="ajaxcart__meal-pack" data-meal-pack-id="{{id}}">
+            <div class="ajaxcart__product ajaxcart__meal-pack-product">
+                <div class="ajaxcart__row">
+                    <h3 class="ajaxcart__meal-pack-header">Meal Pack</h3>
+                    <div class="ajaxcart__product--section clearfix">
+                        <div class="ajaxcart__product-image">
+                            <a href="{{url}}"><img src="{{thumb}}" alt="{{title}}"></a>
+                        </div>
+                        <div class="ajaxcart__product-description">
+                            <div class="ajaxcart__product-name--wrapper{{#if variation}}{{else}} without-variants{{/if}}">
+                                <a href="{{url}}" class="ajaxcart__product-name">{{{title}}} <span>({{count}} Meals)</span></a>
+                            </div>
+
+                            <div class="ajaxcart__product-price--wrapper">
+                                <span class="ajaxcart__meal-pack-view-items">View Items{% endraw %}{% include 'icon-angle-down' %}{% raw %}</span>
+                                <div class="text-right">
+                                    <span class="ajaxcart__price">{{{price}}}</span>
+                                    <button type="button" class="ajaxcart__qty--remove remove-meal-pack-btn" data-meal-pack-id="{{id}}">
+                                        {% endraw %}{% include 'icon-remove' %}{% raw %}
+                                    </button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ajaxcart__meal-pack-items" style="display: none;">
+                {{#this.items}}
+                <div class="ajaxcart__meal-pack-day">
+                    <h4 class="ajaxcart__meal-pack-day-title"><span>{{this.[0].day}}</span></h4>
+                    {{#this}}
+                    <div class="ajaxcart__product ajaxcart__meal-pack-item">
+                        <div class="ajaxcart__row">
+                            <div class="ajaxcart__product--section clearfix">
+                                <div class="ajaxcart__product-image">
+                                    <img {{fullImg}} alt="{{name}}">
+                                </div>
+                                <div class="ajaxcart__product-description">
+                                    <div class="ajaxcart__product-name--wrapper{{#if variation}}{{else}} without-variants{{/if}}">
+                                        <p class="ajaxcart__product-name">{{{name}}} x {{itemQty}}</p>
+                                        {{#if variation}}
+                                        <p class="ajaxcart__product-meta">{{variation}}</p>
+                                        {{/if}}
+                                    </div>
+
+                                    <div class="ajaxcart__product-price--wrapper text-right">
+                                        <span class="ajaxcart__price">{{{price}}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/this}}
+                </div>
+                {{/this.items}}
+            </div>
+        </div>
+        {{/mealPacks}}
+        {{/if}}
+        {% endraw %}{% unless settings.cart_gifts_place_top %}{% include 'cart-drawer--progress-bar' %}{% endunless %}{% raw %}
+        </div>
+
+            <footer>
+                <div class="cart-drawer-delivery">
+                    <button>
+                        {% endraw %}{% include 'icon-delivery' %}{% raw %}
+                        <span class="button-region-info">
+                            <span class="drawer-button-area">CHECK DELIVERY AREA. </span>
+                            <span class="drawer-button-date">Delivery Date. </span>
+                            <span class="drawer-button-hours">Delivery hours. </span>
+                            <span class="drawer-button-subscription"></span>
+                        </span>
+                        <span class="change-region hide">CHANGE</span>
+                    </button>
+                </div>
+                <div class="cart-drawer-buttons">
+                    <button class="cart-drawer-button-continue hide">Continue Shopping</button>
+                    <button class="cart-drawer-button-checkout empty-delivery">
+                        <span>{{{subtotalPrice}}}</span>
+                        <span class="active-checkout"><span>{% endraw %}{{ 'cart.general.checkout' | t }}{% raw %}</span>{% endraw %}{% include 'icon-arrow-left' %}{% raw %}</span>
+                        <span class="disable-checkout hide">MINIMUM ORDER VALUE IS {% endraw %}{{ settings.cart_min_order_sum | times: 100 | money }}{% raw %}</span>
+                    </button>
+                </div>
+            </footer>
+        </div>
+    </form>
+
+    {% endraw %}
+
+</script>
+
+<script id="AjaxQty" type="text/template">
+    {% raw %}
+    <div class="ajaxcart__qty">
+        <button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--minus icon-fallback-text" data-id="{{key}}" data-qty="{{itemMinus}}" aria-label="{% endraw %}{{ 'cart.general.reduce_quantity' | t }}{% raw %}">
+            <span class="icon icon-minus" aria-hidden="true"></span>
+        </button>
+        <input type="text" class="ajaxcart__qty-num" value="{{itemQty}}" min="0" data-id="{{key}}" data-variant-id="{{itemId}}" aria-label="quantity" pattern="[0-9]*">
+        <button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--plus icon-fallback-text" data-id="{{key}}" data-qty="{{itemAdd}}" aria-label="{% endraw %}{{ 'cart.general.increase_quantity' | t }}{% raw %}">
+            <span class="icon icon-plus" aria-hidden="true"></span>
+        </button>
+    </div>
+    {% endraw %}
+</script>

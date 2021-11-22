@@ -1,0 +1,96 @@
+{% if section.settings.show %}
+{% if section.settings.title != blank %}
+    <h3 style="margin-top: 40px">{{ section.settings.title }}</h3>
+{% endif %}
+<section {% unless section.settings.title != blank %}style="margin-top: 40px"{% endunless %}>
+    {% assign step_number = 0 %}
+    {% for block in section.blocks %}
+        {% assign step_number = step_number | plus: 1 %}
+        <div class="step-content">
+            <div class="step-content__image">
+                {%- assign icon = block.settings.step_image.src -%}
+                {%- assign img_url = icon | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                <img class="lazyload"
+                     data-help="{{ img_url }}"
+                     src="{{ icon | img_url: '50x' }}"
+                     srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                     data-src="{{ img_url }}"
+                     data-widths="[50, 100, 250, 300, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                     data-sizes="auto"
+                     alt="{{ icon.alt | default: 'Workout Meals ™' | escape }}">
+            {% include 'svg-border-simple-circle' %}
+            </div>
+            <div class="step-content__information">
+                <h4>{{ block.settings.step_title }}</h4>
+                <p>{{ block.settings.step_text }}</p>
+                <div class="step-number-wrapper">
+                    <p class="step-number">0{{ step_number }}</p>
+                </div>
+                <div class="icon-wrapper">{{ block.settings.step_icon }}</div>
+            </div>
+        </div>
+    {% endfor %}
+</section>
+{% endif %}
+
+{% schema %}
+    {
+    "name": "How it works",
+    "class": "how-it-works",
+    "max_blocks": 4,
+    "settings": [
+    {
+    "type": "checkbox",
+    "id": "show",
+    "label": "Show",
+    "default": true
+    },
+    {
+    "type": "text",
+    "id": "title",
+    "label": "Title",
+    "default": "How it works"
+    }
+    ],
+    "blocks": [
+    {
+    "type": "step",
+    "name": "Step",
+    "settings": [
+    {
+    "type": "image_picker",
+    "id": "step_image",
+    "label": "Image"
+    },
+    {
+    "type": "text",
+    "id": "step_title",
+    "label": "Heading"
+    },
+    {
+    "type": "text",
+    "id": "step_text",
+    "label": "Text"
+    },
+    {
+    "type": "html",
+    "id": "step_icon",
+    "label": "Step icon",
+    "default": "<div><p>Your SVG icon</p></div>"
+    }
+    ]
+    }
+    ],
+    "presets": [
+    {
+    "category": "Information",
+    "name": "How it works",
+    "blocks": [
+    {
+    "type": "step"
+    }
+    ]
+    }
+    ]
+    }
+{% endschema %}

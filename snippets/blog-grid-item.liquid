@@ -1,0 +1,58 @@
+{%- assign blog_title = blog.title -%}
+
+{% if current_tags %}
+    {% capture blog_title %}{{ blog.title | link_to: blog.url }} &mdash; {{ current_tags.first }}{% endcapture %}
+{% endif %}
+
+<div class="blog-content">
+
+    {% if article.image %}
+        {{ article | img_url: '369x405' | img_tag: article.title }}
+    {% endif %}
+
+    <div class="blog-info">
+        <h4>
+            <a href="{{ article.url }}">{{ article.title }}</a>
+        </h4>
+
+        {% capture date %}{{ article.published_at | time_tag: format: 'month_day_year' }}{% endcapture %}
+
+        <p class="info-about-post">
+            {{ 'blogs.article.author_on_date_html' | t: author: article.author, date: date }}
+        </p>
+
+        <div class="rte">
+            {% if article.excerpt.size > 0 %}
+                {{ article.excerpt | strip_html | truncatewords: 60 }}
+            {% else %}
+                <p>
+                    {{ article.content | strip_html | truncatewords: 60 }}
+                </p>
+            {% endif %}
+        </div>
+
+        {% if blog.comments_enabled? or article.tags.size > 0 %}
+            <ul>
+                {% if blog.comments_enabled? %}
+                    <li>
+                        <a href="{{ article.url }}#comments">
+                            {{ 'blogs.comments.with_count' | t: count: article.comments_count }}
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% if article.tags.size > 0 %}
+                    {% for tag in article.tags %}
+                        <li>
+                            <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>
+                            {% unless forloop.last %}, {% endunless %}
+                        </li>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        {% endif %}
+
+        <a href="{{ article.url }}" class="btn std-btn btn-yellow">{{ 'blogs.article.read_more' | t }}</a>
+    </div>
+
+</div>

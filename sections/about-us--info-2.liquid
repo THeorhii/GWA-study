@@ -1,0 +1,101 @@
+{% if section.settings.show %}
+    <section id="section-{{ section.id }}" class="about-us-info-section">
+
+        <div class="page-width  {%- if section.settings.content_position == 'Right' -%} about-us-content_right {% else %} about-us-content_left {%- endif -%}">
+            <div class="about-us-content" >
+                {% if section.settings.section_title != blank %}
+                    <div class="about-us__heading">
+                        <h3>{{ section.settings.section_title | escape }}</h3>
+                    </div>
+                {% endif %}
+
+                {% if section.settings.text != blank %}
+                    <div class="about-us__text">
+                        <p>{{ section.settings.text }}</p>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="about-us-images">
+                {% for block in section.blocks %}
+
+                    <div class="about-us-image">
+                        <img class="lazyload"
+                             src="{{ block.settings.about_us_image | img_url: 'master' }}"
+                             data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048]"
+                             data-aspectratio="{{  block.settings.about_us_image.aspect_ratio }}"
+                             data-sizes="auto"
+                             data-parent-fit="contain"
+                             alt="{{ block.settings.about_us_image.alt | escape }}">
+                    </div>
+
+                {% endfor %}
+            </div>
+        </div>
+
+    </section>
+{%- endif -%}
+
+{% schema %}
+    {
+    "name": "About us info",
+    "max_blocks": 4,
+    "settings": [
+    {
+    "type": "checkbox",
+    "id": "show",
+    "label": "Show section",
+    "default": true
+    },
+    {
+    "type": "text",
+    "id": "section_title",
+    "label": "Title"
+    },
+    {
+    "type": "richtext",
+    "id": "text",
+    "label": "Text"
+    },
+    {
+    "type": "select",
+    "id": "content_position",
+    "label": "Content position",
+    "options": [
+    {
+    "value": "Left",
+    "label": "Left"
+    },
+    {
+    "value": "Right",
+    "label": "Right"
+    }
+    ],
+    "default": "Right"
+    }
+    ],
+    "blocks": [
+    {
+    "type": "image",
+    "name": "Image",
+    "settings": [
+    {
+    "type": "image_picker",
+    "id": "about_us_image",
+    "label": "Image"
+    }
+    ]
+    }
+    ],
+    "presets": [
+    {
+    "name": "About us info",
+    "category": "Text",
+    "blocks": [
+    {
+    "type": "image"
+    }
+    ]
+    }
+    ]
+    }
+{% endschema %}

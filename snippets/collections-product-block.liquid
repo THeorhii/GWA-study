@@ -1,0 +1,144 @@
+<!-- snippets/collections-product-block -->
+<div class="collection-product-block"
+     {% if product.featured_image != blank %}
+        style="background-image: url({{ product.featured_image.src | img_url: '50x50' }});
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position-y: 20%;"{% endif %}>
+
+    <div class="product-block-image" data-block-id="{{ product.id }}">
+        {% if product.featured_image != blank %}
+            {%- assign icon = product.featured_image.src -%}
+            {%- assign img_url = icon | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+            <img class="lazyload"
+                 data-help="{{ img_url }}"
+                 src="{{ icon | img_url: '50x' }}"
+                 srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                 data-src="{{ img_url }}"
+                 data-widths="[50, 100, 250, 300, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                 data-sizes="auto"
+                 alt="{{ icon.alt | default: 'Workout Meals ™' | escape }}">
+        {% endif %}
+        <p class="product-label">
+            {{- product.type -}}
+        </p>
+        {%- for tag in product.tags -%}
+            {%- if tag contains 'new_horizonal' -%}
+                <p class="product-label product-label__horizonal">New & Improved</p>
+            {%- endif -%}
+        {%- endfor -%}
+        <div class="product-block-nutrition">
+            {%- assign nutrition = product.variants[0].metafields.nutrition.nutridata -%}
+            <p><span class="calories_count">{{- nutrition.Calories -}}</span><br>Calories</p>
+            <hr>
+            <p><span class="protein_count">{{- nutrition.Protein -}}</span><br>Protein (g)</p>
+            <hr>
+            <p><span class="carbs_count">{{- nutrition.Carbohydrate -}}</span><br>Carbs (g)</p>
+            <hr>
+            <p><span class="fat_count">{{- nutrition.Fat_Total -}}</span><br>Fat (g)</p>
+        </div>
+    </div>
+    <div class="content">
+        <p class="product-title">
+           <a class="collection-block-product-link" href="{{ product.url | within: collection }}">{{ product.title }}</a>
+        </p>
+        <p class="allergens">
+            {%- for tag in product.tags -%}
+                {%- if tag contains 'kc_al_peanuts' -%}
+                    <span class="allergen">
+                        {%- include 'icon-peanuts-black' -%}
+                        <span>contains peanuts</span>
+                    </span>
+                {%- elsif tag contains 'kc_al_dairy' -%}
+                    <span class="allergen">
+                        {%- include 'icon-milk-black' -%}
+                    <span>contains dairy</span>
+                    </span>
+                {%- elsif tag contains 'kc_al_treenuts' -%}
+                    <span class="allergen">
+                        {%- include 'icon-treenuts-black' -%}
+                    <span>contains treenuts</span></span>
+                {%- elsif tag contains 'kc_al_sesame' -%}
+                    <span class="allergen">
+                        {%- include 'icon-sesame-black' -%}
+                    <span>contains sesame</span></span>
+                {%- elsif tag contains 'kc_al_soy' -%}
+                    <span class="allergen">
+                        {%- include 'icon-soy-black' -%}
+                    <span>contains soy</span></span>
+                {%- elsif tag contains 'kc_al_eggs' -%}
+                    <span class="allergen">
+                        {%- include 'icon-egg-black' -%}
+                    <span>contains egg</span></span>
+                {%- elsif tag contains 'kc_al_gluten' -%}
+                    <span class="allergen">
+                        {%- include 'icon-wheat-black' -%}
+                    <span>contains gluten</span></span>
+                {%- endif -%}
+            {%- endfor -%}
+            {% if product.type == 'Vegan' %}
+            <span class="allergen vegan-icon">
+                {%- include 'icon-leaf' -%}
+                <span>vegan</span>
+            </span>
+            {% endif %}
+        </p>
+            <p class="product-variants">
+                {%- for variant in product.variants -%}
+                    {%- assign nutrition = variant.metafields.nutrition.nutridata -%}
+                    <span class="variant-{{- variant.id -}}{% if product.variants[0].title == variant.option1 %} active{% endif %}"
+                          data-count-variant="{{ count_variant }}"
+                          data-variant-id="{{ variant.id }}"
+                          data-qty="0"
+                          data-price="{{ variant.price | money }}"
+                          data-calories="{{- nutrition.Calories -}}"
+                          data-protein="{{- nutrition.Protein -}}"
+                          data-fat_total="{{- nutrition.Fat_Total -}}"
+                          data-carbohydrate="{{- nutrition.Carbohydrate -}}">
+                            {% unless product.has_only_default_variant %}{{- variant.title -}}{% else %}REGULAR{% endunless %}
+                        <span class="product-variant-weight">({{- variant.weight -}}{% if product.type == 'Juice' %}ml{% else %}g{% endif %})</span><span class="variant-count"></span>
+                    </span>
+                {%- endfor -%}
+
+            </p>
+
+        <div class="content-product-add">
+            <p class="product-price">
+                {%- if product.compare_at_price > product.price -%}
+                    {%- if product.price_varies -%}
+                        {%- assign sale_price = product.price | money -%}
+                        {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+                    {%- else -%}
+                        {{ 'products.product.on_sale' | t }}
+                        {{ product.price | money }}
+                    {%- endif -%}
+                {%- else -%}
+                    {%- if product.price_varies -%}
+                        {%- assign price = product.price | money -%}
+                        {{ 'products.product.from_text_html' | t: price: price }}
+                    {%- else -%}
+                        {{ product.price | money }}
+                    {%- endif -%}
+                {%- endif -%}
+                {%- if product.compare_at_price > product.price -%}
+                    <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+                    <s>{{ product.compare_at_price | money }}</s>
+                {%- endif -%}
+                {%- unless product.available -%}
+                    {{ 'products.product.sold_out' | t }}
+                {%- endunless -%}
+            </p>
+
+            <input type="hidden" id="variant" name="variant" value="{{ product.first_available_variant.id }}" min="1">
+            <input type="hidden" id="quantity" name="quantity" value="0" min="0">
+
+            <button class="product-content-add" onclick="pintrk('track', 'addtocart', {value: 100, order_quantity: 1, currency: 'USD'});">Add to cart</button>
+            <div class="product-content-count hide">
+                <button class="product-remove">{%- include 'icon-minus' -%}</button>
+                <span class="product-count">0</span>
+                <button class="product-add" onclick="pintrk('track', 'addtocart', {value: 100, order_quantity: 1, currency: 'USD'});">{%- include 'icon-plus' -%}</button>
+            </div>
+
+        </div>
+    </div>
+</div>

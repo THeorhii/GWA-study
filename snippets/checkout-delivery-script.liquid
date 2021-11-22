@@ -1,0 +1,175 @@
+{% assign cart_subscription = false %}
+{% assign frequency_weeks = false %}
+{% assign frequency_weeks_options_num = 2 %}
+
+{% for attr in checkout.attributes %}
+    {% if attr.first == 'delivery_location' and attr.last.size > 0 %}
+        {% assign delivery_location = attr.last %}
+        {% elsif attr.first == 'delivery_details' and attr.last.size > 0 %}
+        {% assign delivery_details = attr.last %}
+        {% elsif attr.first == 'delivery_day' and attr.last.size > 0 %}
+        {% assign delivery_day = attr.last %}
+        {% elsif attr.first == 'delivery_hours' and attr.last.size > 0 %}
+        {% assign delivery_hours = attr.last %}
+        {% elsif attr.first == 'cart_subscription' and attr.last.size > 0 %}
+        {% assign cart_subscription = attr.last %}
+        {% elsif attr.first == 'frequency_weeks' and attr.last.size > 0 %}
+        {% assign frequency_weeks = attr.last %}
+        {% elsif attr.first == 'is_same_day_delivery' and attr.last.size > 0 %}
+        {% assign is_same_day_delivery = attr.last %}
+        {% elsif attr.first == 'is_next_day_delivery' and attr.last.size > 0 %}
+        {% assign is_next_day_delivery = attr.last %}
+    {% endif %}
+{% endfor %}
+
+{% assign hide_one-time_discount = 0 %}
+{% assign product_with_vendor_WM360 = 0 %}
+{% for line_item in checkout.line_items %}
+    {% assign special_meals_pack_product = line_item.product %}
+    {% if special_meals_pack_product.metafields.meals-pack.hide_one-time > 0 %}
+        {% assign hide_one-time_discount = hide_one-time_discount | plus: 1 %}
+        {% assign frequency_weeks_options_num = 1 %}
+        {% assign cart_subscription = true %}
+        {% assign frequency_weeks = true %}
+    {% endif %}
+    {% if special_meals_pack_product.vendor == 'WM360' %}
+        {% assign product_with_vendor_WM360 = product_with_vendor_WM360 | plus: 1 %}
+    {% endif %}
+{% endfor %}
+
+{% comment %}
+{% assign subscription_line_item = false %}
+{% assign subscription_line_item_action = '' %}
+{% for item in checkout.line_items %}
+    {% for prop in item.properties %}
+        {% if prop.first == '_subscription' and prop.last == 'true' %}
+            {% assign subscription_line_item = true %}
+            {% break %}
+        {% endif %}
+    {% endfor %}
+    {% if subscription_line_item %}
+        {% break %}
+    {% endif %}
+{% endfor %}
+{% if subscription_line_item and cart_subscription != "true" %}
+    {% assign subscription_line_item_action = "remove" %}
+    {% elsif subscription_line_item == false and cart_subscription == "true" %}
+    {% assign subscription_line_item_action = "add" %}
+{% endif %}
+{% endcomment %}
+
+<div class="field search-field" data-autocomplete-field-container="false" style="display:none;">
+    <div class="field__input-wrapper">
+        <label class="field__label field__label--visible" for="search-location">
+            <span>Enter subu&zwnj;rb n&zwnj;ame or po&zwnj;stcode</span>
+        </label>
+        <input type="text" id="search-location" class="field__input" placeholder="Enter suburb name or postcode" autocomplete="off">
+        <div class="search-result-box" style="display:none;"></div>
+    </div>
+</div>
+
+<div class="subscription-block" style="display: none;">
+    <div class="section__header">
+        <h2 class="section__title">Make this entire cart recurring?</h2>
+        <p class="section__subtitle">{% if special_meals_pack > 0 %}{{ 'checkout.subscription_block.subtitle_wm360' | t }}{% else %}{{ 'checkout.subscription_block.subtitle' | t }}{% endif %}</p>
+        <p class="section__subtitle">Click to select:</p>
+    </div>
+    <div class="purchase-types ">
+        {% if hide_one-time_discount < 1 %}
+        <div class="purchase-types-item">
+            <input type="radio" id="purchase-type-1" name="purchase-type" value="false">
+            <label for="purchase-type-1">ONE-TIME PURCHASE</label>
+            <div class="delivery-radio-btn"></div>
+        </div>
+        {% endif %}
+        <div class="purchase-types-item">
+            <input type="radio" id="purchase-type-2" name="purchase-type" value="true">
+            <label for="purchase-type-2">{% if special_meals_pack > 0 %}Subscribe and start WM360 program{% else %}Subscribe and receive FREE Delivery{% endif %}</label>
+            <div class="delivery-radio-btn"></div>
+        </div>
+    </div>
+    <div class="subscription-frequency"{% unless special_meals_pack > 0 %} style="display:none;"{% endunless %}>
+        <div class="subscription-frequency-items">
+            <input type="radio" name="subscription-frequency" value="false">
+            {% for i in (1..frequency_weeks_options_num) %}
+                <div class="subscription-frequency-item">
+                    <input type="radio" id="subscription-frequency-{{ i }}" name="subscription-frequency" value="{{ i }}">
+                    <label for="subscription-frequency-{{ i }}">Deliver every {{ i }} {{ i | pluralize: 'week', 'weeks' }}</label>
+                    <div class="delivery-radio-btn"></div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="checkoutPermissionNote__field">
+            <div class="checkbox-wrapper">
+                <div class="checkbox__input">
+                    <input class="input-checkbox" data-backup="permission_note_subscriptions" data-trekkie-id="permission_note_subscriptions_field" type="checkbox" value="1" id="checkout_permission_note_subscriptions">
+                </div>
+                <label class="checkbox__label" for="checkout_permission_note_subscriptions">{{ 'checkout.permission_note_subscriptions_html' | t }}</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="checkoutPermissionNote__pop-up hide">
+    <button class="close-pop-up-icon"><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" viewBox="0 0 20 20"><path fill="#444" d="M15.89 14.696l-4.734-4.734 4.717-4.717c.4-.4.37-1.085-.03-1.485s-1.085-.43-1.485-.03L9.641 8.447 4.97 3.776c-.4-.4-1.085-.37-1.485.03s-.43 1.085-.03 1.485l4.671 4.671-4.688 4.688c-.4.4-.37 1.085.03 1.485s1.085.43 1.485.03l4.688-4.687 4.734 4.734c.4.4 1.085.37 1.485-.03s.43-1.085.03-1.485z"></path></svg></button>
+    <h2>{{ 'checkout.subscriptions_agreement_popup.content_html' | t }}</h2>
+    <div class="checkoutPermissionNote__pop-up-content"> {% include 'full-terms-and-conditions-text' %} </div>
+    <div class="checkoutPermissionNote__pop-up-navigation">
+        <p>{{ 'checkout.subscriptions_agreement_popup.agree_question' | t }}</p>
+        <button id="btn-agree-checkout-permission">{{ 'checkout.subscriptions_agreement_popup.agree_btn' | t }}</button>
+    </div>
+</div>
+
+{%- if settings.checkout_popup_enable -%}
+<div id="hasActiveSubscriptionsPopup" class="subscriptionsPopup__wrapper">
+    <button class="close-pop-up-icon"><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" viewBox="0 0 20 20"><path fill="#444" d="M15.89 14.696l-4.734-4.734 4.717-4.717c.4-.4.37-1.085-.03-1.485s-1.085-.43-1.485-.03L9.641 8.447 4.97 3.776c-.4-.4-1.085-.37-1.485.03s-.43 1.085-.03 1.485l4.671 4.671-4.688 4.688c-.4.4-.37 1.085.03 1.485s1.085.43 1.485.03l4.688-4.687 4.734 4.734c.4.4 1.085.37 1.485-.03s.43-1.085.03-1.485z"></path></svg></button>
+    <div class="subscriptionsPopup__content">
+        <h2>{{ 'checkout.active_subscriptions_popup.content' | t }}</h2>
+        <div class="subscriptionsPopup__buttons">
+            <a href="/apps/{{ shop.metafields.kitchen.centre }}/subscriptions"
+               title="{{ 'checkout.active_subscriptions_popup.manage_subscription_btn' | t }}"
+               class="btn btn-yellow">{{ 'checkout.active_subscriptions_popup.manage_subscription_btn' | t }}</a>
+            <div class="btn btn-close">{{ 'checkout.active_subscriptions_popup.continue_btn' | t }}</div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<script>
+    var checkoutDeliveryGlobal = {
+        moneyFormat: {{ shop.money_format | json }},
+        deliveryAttributes: {
+            delivery_location: {{ delivery_location | json }},
+            delivery_details: {{ delivery_details | json }},
+            delivery_day: {{ delivery_day | json }},
+            delivery_hours: {{ delivery_hours | json }},
+            cart_subscription: "{{ cart_subscription }}",
+            frequency_weeks: "{{ frequency_weeks }}",
+            is_same_day_delivery: "{{ is_same_day_delivery }}",
+            is_next_day_delivery: "{{ is_next_day_delivery }}",
+            hide_one_time_discount: "{{ hide_one-time_discount }}",
+            wm360: {% if product_with_vendor_WM360 > 0 %}true{% else %}false{% endif %},
+            product_with_vendor_wm360: {% if product_with_vendor_WM360 > 0 %}true{% else %}false{% endif %}
+        },
+        strings: {
+            noteLabel: {{ 'cart.general.note' | t | json }},
+            checkboxAgreementLabel: {{ 'checkout.permission_note_subscriptions' | t | json }}
+        },
+        customerAddresses: {{ customer.addresses | json }},
+        deliveryNote: {% if checkout.note %}{{ checkout.note | json }}{% else %}""{% endif %},
+        shippingMethod: "{{ checkout.shipping_method.title }}",
+        deliveryDataUrl: "{{ shop.url }}/apps/{{ shop.metafields.kitchen.centre }}/getDeliveryRegions",
+        subscriptionShippingMethod: {{ settings.subscriptions_shipping_method | json }},
+        standardShippingMethod: {{ settings.standard_shipping_method | json }},
+        subscriptionPaymentMethod: {{ settings.subscriptions_payment_method | json }},
+        checkboxAgreementEnable: {{ settings.checkout_checkbox_agree_enable }}
+    }
+    var hasActiveSubscriptionsPopup = {
+        enable: {{ settings.checkout_popup_enable }},
+        customerEmail: {{ customer.email | json }},
+        getUrl: "{{ shop.url }}/apps/{{ shop.metafields.kitchen.centre }}/hasActiveSubscriptions"
+    }
+
+</script>
+
+<script src="{{ 'checkout.js' | asset_url }}"></script>

@@ -1,0 +1,86 @@
+{% if section.settings.show %}
+    <section>
+    <h2>{{ section.settings.title }}</h2>
+    <div class="description-refer__steps">
+        {%- for block in section.blocks -%}
+            <div>
+                {%- assign icon = block.settings.image_step.src -%}
+                {%- assign img_url = icon | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                <img class="lazyload"
+                     data-help="{{ img_url }}"
+                     src="{{ icon | img_url: '50x' }}"
+                     data-src="{{ img_url }}"
+                     data-widths="[50, 100, 250, 300, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                     data-sizes="auto"
+                     alt="{{ icon.alt | default: 'Workout Meals ™' | escape }}">
+                <h4>{{ block.settings.step_title }}</h4>
+                <div>{{ block.settings.step_description }}</div>
+            </div>
+        {%- endfor -%}
+    </div>
+    <h3>{{ section.settings.button_info }}</h3>
+    <a href="{{ section.settings.button_url }}" class="btn">{{ section.settings.button_title }}</a>
+    </section>
+{% endif %}
+
+{% schema %}
+    {
+    "name": "Description Refer",
+    "class": "description-refer",
+    "max_blocks": 3,
+    "settings": [
+    {
+    "type": "checkbox",
+    "id": "show",
+    "label": "Show section",
+    "default": true
+    },
+    {
+    "type": "text",
+    "id": "title",
+    "label": "Title",
+    "default": "How it works"
+    },
+    {
+    "type": "text",
+    "id": "button_info",
+    "label": "Title before button",
+    "default": "Hit the button below to refer a friend today!"
+    },
+    {
+    "type": "text",
+    "id": "button_title",
+    "label": "Button label",
+    "default": "refer a friend"
+    },
+    {
+    "type": "url",
+    "id": "button_url",
+    "label": "Button Link"
+    }
+    ],
+    "blocks": [
+    {
+    "type": "steps",
+    "name": "Refer step",
+    "settings": [
+    {
+    "type": "image_picker",
+    "id": "image_step",
+    "label": "Image"
+    },
+    {
+    "type": "text",
+    "id": "step_title",
+    "label": "Title"
+    },
+    {
+    "type": "richtext",
+    "id": "step_description",
+    "label": "Description"
+    }
+    ]
+    }
+    ]
+    }
+{% endschema %}

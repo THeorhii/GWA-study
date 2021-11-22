@@ -1,0 +1,312 @@
+<section class="banner-city-main">
+    {% if section.settings.city_banner_link != blank and section.settings.button == "" %}<a href="{{ section.settings.city_banner_link }}">{% endif %}
+        <div class="city-banner__image-wrap">
+            {%- assign icon_full = section.settings.city_image_full.src -%}
+            {%- assign img_url_full = icon_full | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+            <img class="city-image__full lazyload"
+                 src="{{ icon_full | img_url: '100x' }}"
+                 data-src="{{ img_url_full }}"
+                 data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                 data-sizes="auto"
+                 alt="{{ icon_full.alt | default: 'Workout Meals ™' | escape }}">
+
+            {%- assign icon_tablet = section.settings.city_image_tablet.src -%}
+            {%- assign img_url_tablet = icon_tablet | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+            <img class="city-image__tablet lazyload"
+                 src="{{ icon_tablet | img_url: '100x' }}"
+                 data-src="{{ img_url_tablet }}"
+                 data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                 data-sizes="auto"
+                 alt="{{ icon_tablet.alt | default: 'Workout Meals ™' | escape }}">
+
+            {%- assign icon_mobile = section.settings.city_image_mobile.src -%}
+            {%- assign img_url_mobile = icon_mobile | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+            <img class="city-image__mobile lazyload"
+                 src="{{ icon_mobile | img_url: '100x' }}"
+                 data-src="{{ img_url_mobile }}"
+                 data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728]"
+                 data-sizes="auto"
+                 alt="{{ icon_mobile.alt | default: 'Workout Meals ™' | escape }}">
+        </div>
+        <div class="city-banner__content page-width section-id-{{ section.id }}">
+            {%- if section.settings.sub_headline != blank -%}<h3>{{ section.settings.sub_headline }}</h3>{%- endif -%}
+            {%- if section.settings.headline != blank -%}<h2>{{ section.settings.headline }}</h2>{%- endif -%}
+            {%- if section.settings.paragraph_d != blank -%}<div class="city-banner__content-content banner-content__desktop">{{ section.settings.paragraph_d }}</div>{%- endif -%}
+            {%- if section.settings.paragraph_m != blank -%}<div class="city-banner__content-content banner-content__mobile">{{ section.settings.paragraph_m }}</div>{%- endif -%}
+            {%- if section.settings.city_banner_link != blank and section.settings.button != "" -%}
+                <a href="{{ section.settings.city_banner_link }}" class="banner-meal-pack--content-link">{{ section.settings.button }}</a>{%- endif -%}
+        </div>
+        {% if section.settings.city_banner_link != blank and section.settings.button == "" %}</a>{% endif %}
+</section>
+
+{% for block in section.blocks %}
+    {% assign cityBannerClass = 'banner-city-' | append: block.settings.city_name | downcase %}
+    <section class="{{ cityBannerClass | handleize }} hide">
+        {% if block.settings.city_banner_link != blank and block.settings.button == "" %}<a href="{{ block.settings.city_banner_link }}">{% endif %}
+            <div class="city-banner__image-wrap">
+                {%- assign icon_full = block.settings.city_image_full.src -%}
+                {%- assign img_url_full = icon_full | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                <img class="city-image__full lazyload"
+                     src="{{ icon_full | img_url: '100x' }}"
+                     data-src="{{ img_url_full }}"
+                     data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                     data-sizes="auto"
+                     alt="{{ icon_full.alt | default: 'Workout Meals ™' | escape }}">
+
+                {%- assign icon_tablet = block.settings.city_image_tablet.src -%}
+                {%- assign img_url_tablet = icon_tablet | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                <img class="city-image__tablet lazyload"
+                     src="{{ icon_tablet | img_url: '100x' }}"
+                     data-src="{{ img_url_tablet }}"
+                     data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                     data-sizes="auto"
+                     alt="{{ icon_tablet.alt | default: 'Workout Meals ™' | escape }}">
+
+                {%- assign icon_mobile = block.settings.city_image_mobile.src -%}
+                {%- assign img_url_mobile = icon_mobile | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                <img class="city-image__mobile lazyload"
+                     src="{{ icon_mobile | img_url: '100x' }}"
+                     data-src="{{ img_url_mobile }}"
+                     data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728]"
+                     data-sizes="auto"
+                     alt="{{ icon_mobile.alt | default: 'Workout Meals ™' | escape }}">
+            </div>
+            <div class="city-banner__content page-width section-id-{{ block.id }}">
+                 {%- if block.settings.sub_headline != blank -%}<h3>{{ block.settings.sub_headline }}</h3>{%- endif -%}
+                 {%- if block.settings.headline != blank -%}<h2>{{ block.settings.headline }}</h2>{%- endif -%}
+                {%- if section.settings.paragraph_d != blank -%}<div class="banner-meal-pack--content-short banner-content__desktop">{{ section.settings.paragraph_d }}</div>{%- endif -%}
+                {%- if section.settings.paragraph_m != blank -%}<div class="banner-meal-pack--content-short banner-content__mobile">{{ section.settings.paragraph_m }}</div>{%- endif -%}
+                 {%- if block.settings.city_banner_link != blank and block.settings.button != "" -%}
+                      <a href="{{ block.settings.city_banner_link }}" class="banner-meal-pack--content-link">{{ block.settings.button }}</a>{%- endif -%}
+                </div>
+        {% if block.settings.city_banner_link != blank and block.settings.button == "" %}</a>{% endif %}
+    </section>
+{% endfor %}
+
+<style>
+    .section-id-{{ section.id }} h2{
+        color: {{ section.settings.header_color }}
+    }
+    .section-id-{{ section.id }} h3{
+        color: {{ section.settings.sub_header_color }}
+    }
+    .section-id-{{ section.id }} div,
+    .section-id-{{ section.id }} div p,
+    .section-id-{{ section.id }} div a{
+        color: {{ section.settings.paragraph_color }}
+    }
+    .section-id-{{ section.id }} .banner-meal-pack--content-link{
+        color: {{ section.settings.button_color }};
+        background-color: {{ section.settings.button_background }};
+    }
+    .section-id-{{ section.id }} .banner-meal-pack--content-link:hover{
+        color: {{ section.settings.button_background }};
+        background-color: {{ section.settings.button_color }};
+    }
+
+    .section-id-{{ block.id }} h2{
+        color: {{ block.settings.header_color }}
+    }
+    .section-id-{{ block.id }} h3{
+        color: {{ block.settings.sub_header_color }}
+    }
+    .section-id-{{ block.id }} div,
+    .section-id-{{ block.id }} div p,
+    .section-id-{{ block.id }} div a{
+        color: {{ block.settings.paragraph_color }}
+    }
+    .section-id-{{ block.id }} .banner-meal-pack--content-link{
+        color: {{ block.settings.button_color }};
+        background-color: {{ block.settings.button_background }};
+    }
+    .section-id-{{ block.id }} .banner-meal-pack--content-link:hover{
+        color: {{ block.settings.button_background }};
+        background-color: {{ block.settings.button_color }};
+    }
+</style>
+
+{% schema %}
+    {
+    "name": "Banner per city",
+    "class": "city-banner",
+    "max_blocks": 10,
+    "settings": [
+    {
+    "type": "header",
+    "content": "Banner for city"
+    },
+    {
+    "type": "url",
+    "id": "city_banner_link",
+    "label": "Slide image link"
+    },
+    {
+    "type": "image_picker",
+    "id": "city_image_full",
+    "label": "Image"
+    },
+    {
+    "type": "image_picker",
+    "id": "city_image_tablet",
+    "label": "Tablet image"
+    },
+    {
+    "type": "image_picker",
+    "id": "city_image_mobile",
+    "label": "Mobile image"
+    },
+{
+"type": "text",
+"id": "sub_headline",
+"label": "Sub-headline"
+},
+{
+"type": "color",
+"id": "sub_header_color",
+"label": "Sub-headline color",
+"default": "#000000"
+},
+{
+"type": "text",
+"id": "headline",
+"label": "Headline"
+},
+{
+"type": "color",
+"id": "header_color",
+"label": "Headline color",
+"default": "#000000"
+},
+{
+"type": "richtext",
+"id": "paragraph_d",
+"label": "Paragraph desktop"
+},
+{
+"type": "richtext",
+"id": "paragraph_m",
+"label": "Paragraph mobile"
+},
+{
+"type": "color",
+"id": "paragraph_color",
+"label": "Paragraph color",
+"default": "#000000"
+},
+{
+"type": "text",
+"id": "button",
+"label": "Button"
+},
+{
+"type": "color",
+"id": "button_color",
+"label": "Button color"
+},
+{
+"type": "color",
+"id": "button_background",
+"label": "Button background"
+}
+    ],
+    "blocks" : [ {
+    "type": "for-every-city",
+    "name": "Personal city banner",
+    "settings": [
+    {
+    "type": "header",
+    "content": "Banner for city"
+    },
+    {
+    "type": "text",
+    "id": "city_name",
+    "label": "City",
+    "info": "Enter city name"
+    },
+    {
+    "type": "url",
+    "id": "city_banner_link",
+    "label": "Slide image link"
+    },
+    {
+    "type": "image_picker",
+    "id": "city_image_full",
+    "label": "Image"
+    },
+    {
+    "type": "image_picker",
+    "id": "city_image_tablet",
+    "label": "Tablet image"
+    },
+    {
+    "type": "image_picker",
+    "id": "city_image_mobile",
+    "label": "Mobile image"
+    },
+{
+"type": "text",
+"id": "sub_headline",
+"label": "Sub-headline"
+},
+{
+"type": "color",
+"id": "sub_header_color",
+"label": "Sub-headline color",
+"default": "#000000"
+},
+{
+"type": "text",
+"id": "headline",
+"label": "Headline"
+},
+{
+"type": "color",
+"id": "header_color",
+"label": "Headline color",
+"default": "#000000"
+},
+{
+"type": "richtext",
+"id": "paragraph_d",
+"label": "Paragraph desktop"
+},
+{
+"type": "richtext",
+"id": "paragraph_m",
+"label": "Paragraph mobile"
+},
+{
+"type": "color",
+"id": "paragraph_color",
+"label": "Paragraph color",
+"default": "#000000"
+},
+{
+"type": "text",
+"id": "button",
+"label": "Button"
+},
+{
+"type": "color",
+"id": "button_color",
+"label": "Button color"
+},
+{
+"type": "color",
+"id": "button_background",
+"label": "Button background"
+}
+    ]
+    }
+    ],
+    "presets": [{
+    "name": "Banner per city",
+    "category": "Image",
+    "blocks": [
+    {
+    "type": "for-every-city"
+    }
+    ]
+    }]
+    }
+{% endschema %}

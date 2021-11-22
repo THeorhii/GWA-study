@@ -1,0 +1,107 @@
+<section data-section-id="{{ section.id }}"  id="section-{{ section.id }}" class="steps-with-image-section">
+    <div class="page-width">
+        {% if section.settings.title != blank %}
+            <h3>{{ section.settings.title }}</h3>
+        {% endif %}
+        <div class="steps-with-image">
+            <div class="steps-slider steps-slick-slider">
+                {% for block in section.blocks %}
+                    <div class="step-content">
+                        <div class="step-content-wrappper">
+                            <div class="step-title-wrappper">
+                                {% if block.settings.step_title != blank %}
+                                    <h4>{{ block.settings.step_title }}</h4>
+                                {% endif %}
+                                {% if block.settings.step_text != blank %}
+                                    <p>{{ block.settings.step_text }}</p>
+                                {% endif %}
+                            </div>
+                            <div class="small-screen-img" hidden>
+                                <img class="lazyload"
+                                     src="{{ section.settings.image | img_url: '250x' }}"
+                                     data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048]"
+                                     data-aspectratio="{{ section.settings.image.aspect_ratio }}"
+                                     data-sizes="auto"
+                                     data-parent-fit="contain"
+                                     alt="{{ section.settings.image.alt | escape }}">
+                            </div>
+                            <a href="{{ block.settings.btn_link }}" class="btn std-btn btn-dark">
+                                {{ block.settings.btn_text | escape }}
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div>
+                <img class="lazyload"
+                     src="{{ section.settings.image | img_url: 'master' }}"
+                     data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048]"
+                     data-aspectratio="{{ section.settings.image.aspect_ratio }}"
+                     data-sizes="auto"
+                     data-parent-fit="contain"
+                     alt="{{ section.settings.image.alt | escape }}">
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% schema %}
+    {
+        "name": "Steps with image",
+        "max_blocks": 5,
+        "settings": [
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title",
+                "default": "How it works"
+            },
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Image"
+            }
+        ],
+        "blocks": [
+        {
+            "type": "step",
+            "name": "Step",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "step_title",
+                    "label": "Step title"
+                },
+                {
+                    "type": "textarea",
+                    "id": "step_text",
+                    "label": "Step text"
+                },
+                {
+                    "type": "text",
+                    "id": "btn_text",
+                    "label": "btn text",
+                    "default": "Explore All"
+                },
+                {
+                    "id": "btn_link",
+                    "type": "url",
+                    "label": "Button link"
+                }
+            ]
+        }
+        ],
+        "presets": [
+        {
+            "category": "Steps sliders",
+            "name": "Steps with image",
+            "blocks": [
+                {
+                    "type": "step"
+                }
+            ]
+        }
+        ]
+    }
+{% endschema %}

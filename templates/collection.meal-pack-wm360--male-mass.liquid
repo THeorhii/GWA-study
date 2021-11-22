@@ -1,0 +1,29 @@
+{{ 'collection-meal-pack-WM360-template.css' | asset_url | stylesheet_tag }}
+
+{% section 'meal-pack-wm360--banner' %}
+{% section 'meal-pack-wm360--standards' %}
+{% section 'meal-pack-wm360--quiz-male-mass' %}
+{% section 'meal-pack-wm360--products' %}
+{% section 'meal-pack-wm360--included' %}
+{% section 'meal-pack-wm360--compare' %}
+{% section 'meal-pack-wm360--benefits' %}
+{% section 'meal-pack-wm360--faq' %}
+{% section 'meal-pack-wm360--channels-block' %}
+{% section 'meal-pack-wm360--instafeed' %}
+
+
+
+<script>
+    /* wm360 FAQS */
+    $('.wm360-faqs-block button').click(function () {
+        let faq_block = $(this).parent();
+        if(faq_block.hasClass('active')){
+            faq_block.find('.wm360-faqs-block__answer').fadeOut(400);
+            faq_block.removeClass('active');
+        }else{
+            faq_block.find('.wm360-faqs-block__answer').fadeIn(400);
+            faq_block.addClass('active');
+        }
+    });
+
+</script>

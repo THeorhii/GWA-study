@@ -1,0 +1,84 @@
+<div data-section-id="{{ section.id }}"  id="slick-{{ section.id }}" class="slideshow-section simple-slider-section" data-slide-speed="{{ section.settings.slide_speed }}">
+    {% for block in section.blocks %}
+        <div class="slide" {% if block.settings.slideshow_image %} style="background-image: url('{{ block.settings.slideshow_image | img_url: 'x686' }}'); background-size: cover;"{% endif %}>
+            <div class="slideshow-content-wrapper page-width">
+                <div class="slideshow__text-content">
+                    {% if block.settings.slider_title != blank %}
+                        <h2>{{ block.settings.slider_title }}</h2>
+                    {% endif %}
+                    <div class="slideshow__button-wrapper">
+                        {% if block.settings.button_label %}
+                            <a href="{{ block.settings.button_link }}" class="btn std-btn btn-light">
+                                {{ block.settings.button_label | escape }}
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+{% schema %}
+    {
+    "name": "Slideshow",
+    "settings": [
+        {
+            "type": "range",
+            "id": "slide_speed",
+            "min": 1,
+            "max": 15,
+            "step": 1,
+            "unit": "sec",
+            "label": "Change slides every",
+            "default": 5
+        }
+    ],
+    "blocks" : [
+    {
+    "type": "slide",
+    "name": "Slide",
+    "settings": [
+    {
+    "type": "header",
+    "content": "Slide"
+    },
+    {
+    "type": "text",
+    "id": "slider_title",
+    "label": "Title"
+    },
+    {
+    "type": "text",
+    "id": "button_label",
+    "label": "Button label"
+    },
+    {
+    "type": "url",
+    "id": "button_link",
+    "label": "Button link"
+    },
+    {
+    "type": "image_picker",
+    "id": "slideshow_image",
+    "label": "Image"
+    }
+    ]
+    }
+    ],
+        "presets": [{
+            "name": "Slideshow",
+            "category": "Image",
+            "settings": {},
+            "blocks": [
+                {
+                    "type": "slide"
+                },
+                {
+                    "type": "slide"
+                }
+            ]
+        }]
+    }
+{% endschema %}

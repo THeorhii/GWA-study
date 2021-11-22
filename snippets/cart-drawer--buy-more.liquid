@@ -1,0 +1,59 @@
+{% if settings.enable_cart_recommended and settings.cart_recommended_collection %}
+<div class="cart-drawer__buy-more">
+    <header>
+        {% if settings.header_recommended_text %}
+        <h4>{{ settings.header_recommended_text }}</h4>
+        {% endif %}
+        <p>(scroll down to see all)</p>
+        <button class="buy-more__close">{% include 'icon-close' %}</button>
+    </header>
+    <section>
+        {% assign buyMoreCollection = collections[settings.cart_recommended_collection].products %}
+        {%- for product in buyMoreCollection -%}
+            {% assign save_sum = 0 %}
+            {% assign save_percent = 0 %}
+            {% if product.compare_at_price > product.price %}
+                {% assign save_sum = product.compare_at_price | minus: product.price %}
+                {% assign save_percent = save_sum | times: 100 | divided_by: product.compare_at_price %}
+            {% endif %}
+            <div class="buy-more__product">
+                <div class="buy-more__product-content">
+                    <h5>{{ product.title }}</h5>
+                    <p class="price{% if product.compare_at_price > product.price %} with-discount{% endif %}"><span>{{ product.compare_at_price | money }}</span><span>{{ product.price | money }}</span></p>
+                    {% if product.compare_at_price > product.price %}
+                    <p class="save-info">
+                        {{ save_percent | round }}% Off - Save {{ save_sum | money }}
+                    </p>
+                    {% endif %}
+                    <div class="buy-more__product-buttons" data-product-id="{{ product.selected_or_first_available_variant.id }}">
+                        <button class="product-content-add" onclick="pintrk('track', 'addtocart', {value: 100, order_quantity: 1, currency: 'USD'});">Add to cart</button>
+                        <div class="product-content-count hide">
+                            <button class="product-remove">{%- include 'icon-minus' -%}</button>
+                            <span class="product-count">0</span>
+                            <button class="product-add" onclick="pintrk('track', 'addtocart', {value: 100, order_quantity: 1, currency: 'USD'});">{%- include 'icon-plus' -%}</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="buy-more__product-image">
+                    {% if product.featured_image != blank %}
+                        {%- assign icon = product.featured_image.src -%}
+                        {%- assign img_url = icon | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                        <img class="lazyload"
+                             src="{{ icon | img_url: '50x' }}"
+                             srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                             data-src="{{ img_url }}"
+                             data-widths="[10, 50, 110, 220, 330, 440]"
+                             data-sizes="auto"
+                             alt="{{ icon.alt | default: 'Workout Meals ™' | escape }}">
+                    {% else %}
+                        {{ 'product-1' | placeholder_svg_tag }}
+                    {% endif %}
+                </div>
+            </div>
+        {%- endfor -%}
+    </section>
+    <footer>
+        <button class="buy-more__close">No thanks</button>
+    </footer>
+</div>
+{% endif %}

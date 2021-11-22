@@ -1,0 +1,31 @@
+{%- if paginate.pages > 1 -%}
+    <div class="pagination pagination-custom">
+        {%- if paginate.previous-%}
+            <span class="prev">
+              <a href="{{ paginate.previous.url }}">&laquo;</a>
+            </span>
+        {%- endif -%}
+
+        {%- for part in paginate.parts -%}
+
+            {%- if part.is_link -%}
+                <span class="page">
+                    <a href="{{ part.url }}">{{ part.title }}</a>
+                </span>
+            {%- else -%}
+                {%- if part.title == paginate.current_page -%}
+                    <span class="current page" aria-current="page">{{ part.title }}</span>
+                {%- else -%}
+                    <span>{{ part.title }}</span>
+                {%- endif -%}
+            {%- endif -%}
+
+        {%- endfor -%}
+
+        {%- if paginate.next -%}
+            <span class="next">
+              <a href="{{ paginate.next.url }}">&raquo;</a>
+            </span>
+        {%- endif -%}
+    </div>
+{%- endif -%}

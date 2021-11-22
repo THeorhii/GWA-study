@@ -79,32 +79,6 @@
 .ndis-on-banner__text--mob {
     font: bold 16px/16px var(--font-stack-body);
 }
-.banner-meal-pack--image-desktop {
-    display: block;
-}
-.banner-meal-pack--image-mobile,
-.banner-meal-pack--image-tablet{
-    display: none;
-}
-@media screen and (max-width: 950px) and (min-width: 481px){
-    .banner-meal-pack--image-desktop{
-        display: none;
-    }
-    .banner-meal-pack--image-tablet{
-        display: block;
-    }
-}
-@media screen and (max-width: 480px) {
-    .banner-meal-pack--image-desktop {
-        display: none;
-    }
-
-    .banner-meal-pack--image-mobile {
-        display: block;
-    }
-}
-
-
 
 
 @media (min-width: 966px) and (max-width: 1174px)    {

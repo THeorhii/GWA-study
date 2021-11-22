@@ -1,0 +1,152 @@
+{%- assign menu_prod_count = 0 -%}
+{%- if cart.items.size > 0 -%}
+  {%- for item in cart.items -%}
+    {%- if item.properties != null and item.properties['_shop_from'] == 'menu' -%}
+      {%- assign menu_prod_count = menu_prod_count | plus: item.quantity -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- if settings.cart_min_order_sum != '' -%}
+  {%- assign min_cart_value = settings.cart_min_order_sum | times: 100 -%}
+{%- endif -%}
+
+{%- assign discount_1 = 2.5 -%}
+{%- assign count_1 = 14 -%}
+{%- assign count_1_half = count_1 | divided_by: 2 | floor -%}
+{%- assign discount_2 = 5 -%}
+{%- assign count_2 = 18 -%}
+{%- assign discount_3 = 7.5 -%}
+{%- assign count_3 = 24 -%}
+{%- assign discount_4 = 10 -%}
+{%- assign count_4 = 28 -%}
+
+{%- assign discount_value = discount_1 -%}
+{%- assign discount_value_text = discount_1 -%}
+{%- assign discount_more_text = 'meals' -%}
+
+{%- assign prog_bar_count = 5 -%}
+{%- assign prog_bar_one = 100 | divided_by: prog_bar_count -%}
+{%- assign diff = count_1_half -%}
+{%- assign step = 0.000 | plus:prog_bar_one | divided_by: diff -%}
+{%- assign n = 0 -%}
+{%- assign width = 0 -%}
+
+{%- if menu_prod_count != 0 -%}
+  {%- assign prog_width = 0 -%}
+  {%- if menu_prod_count >= count_4 -%}
+    {%- assign prog_width = 100 -%}
+    {%- assign discount_value = discount_4 -%}
+  {%- elsif menu_prod_count >= count_3 -%}
+    {%- assign prog_width = 80 -%}
+    {%- assign discount_value = discount_3 -%}
+    {%- assign discount_value_text = discount_4 -%}
+  {%- elsif menu_prod_count >= count_2 -%}
+    {%- assign prog_width = 60 -%}
+    {%- assign discount_value = discount_2 -%}
+    {%- assign discount_value_text = discount_3 -%}
+  {%- elsif menu_prod_count >= count_1 -%}
+    {%- assign prog_width = 40 -%}
+    {%- assign discount_value_text = discount_2 -%}
+  {%- elsif menu_prod_count >= count_1_half -%}
+    {%- assign prog_width = 20 -%}
+  {%- endif %}
+
+  {%- if menu_prod_count < count_1_half -%}
+    {%- assign n = count_1_half | minus: menu_prod_count -%}
+  {%- elsif menu_prod_count < count_1 -%}
+    {%- assign diff = count_1 | minus: count_1_half -%}
+    {%- assign step = 0.000 | plus: prog_bar_one | divided_by: diff -%}
+    {%- assign n = count_1 | minus: menu_prod_count -%}
+  {%- elsif menu_prod_count < count_2 -%}
+    {%- assign diff = count_2 | minus: count_1 -%}
+    {%- assign step = 0.000 | plus: prog_bar_one | divided_by: diff -%}
+    {%- assign n = count_2 | minus: menu_prod_count -%}
+  {%- elsif menu_prod_count < count_3 -%}
+    {%- assign diff = count_3 | minus: count_2 -%}
+    {%- assign step = 0.000 | plus: prog_bar_one | divided_by: diff -%}
+    {%- assign n = count_3 | minus: menu_prod_count -%}
+  {%- elsif menu_prod_count < count_4 -%}
+    {%- assign diff = count_4 | minus: count_3 -%}
+    {%- assign step = 0.000 | plus: prog_bar_one | divided_by: diff -%}
+    {%- assign n = count_4 | minus: menu_prod_count -%}
+  {%- endif %}
+
+  {%- assign range = diff | minus: n -%}
+  {%- assign width = range | times: step | plus: prog_width -%}
+
+  {%- if n > count_1_half -%}
+    {%- assign discount_more_text = 'meals' -%}
+  {%- elsif n >= 2 -%}
+    {%- assign discount_more_text = 'more meals' -%}
+  {%- else -%}
+    {%- assign discount_more_text = 'more meal' -%}
+  {%- endif -%}
+{%- endif -%}
+
+<div class="progress-bar_container">
+  <div class="grid">
+    <div class="grid__item medium-up--one-quarter small--hide">
+      {%- if settings.prog_bar_logo != blank -%}
+        <div class="progress-bar_logo">
+          {% assign img_url = settings.prog_bar_logo | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+          <img class="lazyload"
+               src="{{ settings.prog_bar_logo | img_url: '180x' }}"
+               data-src="{{ img_url }}"
+               data-widths="[180, 370, 540, 740, 900, 1080, 1296, 1512, 1728, 2048]"
+               data-aspectratio="{{ settings.prog_bar_logo.aspect_ratio }}"
+               data-sizes="auto"
+               alt="{{ settings.prog_bar_logo.alt | escape }}">
+        </div>
+      {%- endif -%}
+    </div>
+    <div class="grid__item medium-up--one-half mobile-up--two-thirds">
+      <div class="progress-bar_discount">
+        <p class="discount-message">
+          {%- if menu_prod_count < count_4 -%}
+            Purchase {% if menu_prod_count < count_1_half %}{{ count_1 }} meals{% else %}{{ n }} {{ discount_more_text }}{% endif %} to <span>Save {{ discount_value_text }}%</span>
+          {%- else -%}
+            You <span>Saved {{ discount_4 }}%</span>
+          {%- endif -%}
+        </p>
+        <span class="progress-bar_total-mobile{% if min_cart_value and min_cart_value > cart.total_price %} disabled{% endif %}">{% if cart.total_price > 0 %}{{ cart.total_price | money }}{% endif %}</span>
+      </div>
+      <div class="progress-bar_discount-bar">
+        <div class="progress-bar_line" role="progressbar" aria-valuenow="{{ menu_prod_count }}" aria-valuemin="0" aria-valuemax="{{ count_4 }}"
+             style="width: {% if menu_prod_count >= count_4 %}100{% else %}{{ width }}{% endif %}%"></div>
+        {%- for i in (1..20) -%}
+        <div class="progress-bar_divider discount-{{ i }}"></div>
+        {%- endfor -%}
+        {%- comment -%}
+          <div class="progress-bar_divider discount-{{ count_1_half }}"></div>
+          <div class="progress-bar_divider discount-{{ count_1 }}"></div>
+          <div class="progress-bar_divider discount-{{ count_2 }}"></div>
+          <div class="progress-bar_divider discount-{{ count_3 }}"></div>
+          <div class="progress-bar_divider discount-{{ count_4 }}"></div>
+        {%- endcomment -%}
+      </div>
+      <div class="progress-bar_discount text-content">
+        <div class="progress-bar_text{% if menu_prod_count >= count_1 %} active{% endif %}">
+          <div>{{ count_1 }} meals</div>
+          <div>Save {{ discount_1 }}%</div>
+        </div>
+        <div class="progress-bar_text{% if menu_prod_count >= count_2 %} active{% endif %}">
+          <div>{{ count_2 }} meals</div>
+          <div>Save {{ discount_2 }}%</div>
+        </div>
+        <div class="progress-bar_text{% if menu_prod_count >= count_3 %} active{% endif %}">
+          <div>{{ count_3 }} meals</div>
+          <div>Save {{ discount_3 }}%</div>
+        </div>
+        <div class="progress-bar_text{% if menu_prod_count >= count_4 %} active{% endif %}">
+          <div>{{ count_4 }} meals</div>
+          <div>Save {{ discount_4 }}%</div>
+        </div>
+      </div>
+    </div>
+    <div class="grid__item medium-up--one-quarter text-center mobile-up--one-third mobile--hide">
+      <p class="progress-bar_total{% if min_cart_value and min_cart_value > cart.total_price %} disabled{% endif %}">{% if cart.total_price > 0 %}Total: {{ cart.total_price | money }}{% endif %}</p>
+      <a href="/cart" class="btn btn-to-drawer js-drawer-open-button-right" aria-controls="CartDrawer">{{ settings.prog_bar_btn }}</a>
+    </div>
+  </div>
+</div>

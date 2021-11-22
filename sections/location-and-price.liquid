@@ -1,0 +1,87 @@
+{% if section.settings.show %}
+    <div class="page-width location-and-price-frame">
+        {% if section.settings.header != '' %}
+            <h2>{{ section.settings.header }}</h2>
+        {% endif %}
+
+        <div class="locations">
+            <div class="locations__states">
+                {% if section.settings.header_states != '' %}
+                    <h3>{{ section.settings.header_states }}</h3>
+                {% endif %}
+            </div>
+            <div class="locations__districts">
+                {% if section.settings.header_districts != '' %}
+                    <h3>{{ section.settings.header_districts }}</h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+<style>
+    {% if section.settings.image_full != '' %}
+        .location-and-price-section {
+            min-height: 940px;
+            background: url({{ section.settings.image_full | img_url: 'master' }}) center center no-repeat, #f3f3f3;
+            background-size: cover;
+        }
+    {% endif %}
+</style>
+
+<script>
+    {% if section.settings.location_json != '' %}
+    let storesGlobal = {
+        dataJsonFileUrl: '{{ section.settings.location_json | file_url }}'
+    };
+
+    var script = document.createElement('script');
+    script.src = '{{ 'store-location.js' | asset_url }}';
+    script.async = true;
+    document.head.appendChild(script);
+
+    {% endif %}
+</script>
+
+{% schema %}
+    {
+        "name": "Location & price",
+        "class": "location-and-price-section",
+        "settings": [
+            {
+                "type": "checkbox",
+                "id": "show",
+                "label": "Show",
+                "default": true
+            },
+            {
+                "type": "text",
+                "id": "header",
+                "label": "Header",
+                "default": "Location & Price"
+            },
+            {
+                "type": "text",
+                "id": "header_states",
+                "label": "Header states",
+                "default": "STATES WE SERVE"
+            },
+            {
+                "type": "text",
+                "id": "header_districts",
+                "label": "Header districts",
+                "default": "REGIONS WE SERVE"
+            },
+            {
+                "type": "text",
+                "id": "location_json",
+                "label": "JSON file"
+            },
+            {
+                "type": "image_picker",
+                "id": "image_full",
+                "label": "Background image"
+            }
+        ]
+    }
+{% endschema %}

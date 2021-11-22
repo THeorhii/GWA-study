@@ -1,0 +1,139 @@
+<section data-section-id="{{ section.id }}"  id="section-{{ section.id }}" class="steps-slider-section steps-slider-section-copy-second">
+    {% if section.settings.title != blank %}
+        <h3>{{ section.settings.title }}</h3>
+    {% endif %}
+
+    <div class="steps-slider page-width {% if section.settings.image_position == 'left' %}position-reverse{% endif %}" data-speed-slide="{{ section.settings.step_speed }}" data-points-style="{{ section.settings.style_points }}">
+        {% for block in section.blocks %}
+            <div class="step-content">
+                <div class="step-content-wrappper">
+                    <div class="step-title-wrappper">
+                        {% if block.settings.step_title != blank %}
+                            <h4>{{ block.settings.step_title }}</h4>
+                        {% endif %}
+                        {% if block.settings.step_text != blank %}
+                            <p>{{ block.settings.step_text }}</p>
+                        {% endif %}
+                        <div class="small-screen-img" hidden>
+                            {% if block.settings.image != blank %}
+                                <img class="lazyload"
+                                     src="{{ block.settings.image | img_url: 'master' }}"
+                                     data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048]"
+                                     data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+                                     data-sizes="auto"
+                                     data-parent-fit="contain"
+                                     alt="{{ block.settings.image.alt | escape }}">
+                            {% endif %}
+                        </div>
+                        {% if block.settings.btn_text != blank %}
+                            <a href="{{ block.settings.btn_link }}" class="btn std-btn btn-dark">
+                                {{ block.settings.btn_text | escape }}
+                            </a>
+                        {% endif %}
+                    </div>
+                    <div class="step-image-wrapper">
+                        {% if block.settings.image != blank %}
+                            <img class="lazyload"
+                                 src="{{ block.settings.image | img_url: 'master' }}"
+                                 data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048]"
+                                 data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+                                 data-sizes="auto"
+                                 data-parent-fit="contain"
+                                 alt="{{ block.settings.image.alt | escape }}">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+
+{% schema %}
+    {
+    "name": "Steps meal packs",
+    "max_blocks": 5,
+    "settings": [
+    {
+    "type": "text",
+    "id": "title",
+    "label": "Title",
+    "default": "How it works"
+    },
+    {
+    "type": "select",
+    "id": "image_position",
+    "options": [
+    { "value": "left", "label": "Left"},
+    { "value": "right", "label": "Right"}
+    ],
+    "label": "Image position",
+    "default": "right"
+    },
+    {
+    "type": "radio",
+    "id": "style_points",
+    "label": "Style of points:",
+    "options": [
+    { "value": "number", "label": "Numbers"},
+    { "value": "figure", "label": "Figures"}
+    ],
+    "default": "number"
+    },
+    {
+    "type": "range",
+    "id": "step_speed",
+    "min": 1,
+    "max": 15,
+    "step": 1,
+    "unit": "sec",
+    "label": "Change step every",
+    "default": 5
+    }
+    ],
+    "blocks": [
+    {
+    "type": "step",
+    "name": "Step",
+    "settings": [
+    {
+    "type": "text",
+    "id": "step_title",
+    "label": "Heading"
+    },
+    {
+    "type": "textarea",
+    "id": "step_text",
+    "label": "Text"
+    },
+    {
+    "type": "text",
+    "id": "btn_text",
+    "label": "Button text"
+    },
+    {
+    "id": "btn_link",
+    "type": "url",
+    "label": "Button link"
+    },
+    {
+    "type": "image_picker",
+    "id": "image",
+    "label": "Image"
+    }
+    ]
+    }
+    ],
+    "presets": [
+    {
+    "category": "Steps sliders",
+    "name": "Steps meal packs",
+    "blocks": [
+    {
+    "type": "step"
+    }
+    ]
+    }
+    ]
+    }
+{% endschema %}

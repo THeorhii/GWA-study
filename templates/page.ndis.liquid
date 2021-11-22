@@ -1,0 +1,11 @@
+{{ 'ndis-template.css' | asset_url | stylesheet_tag }}
+
+<div class="ndis-page__container">
+    {% section 'ndis-section--banner' %}
+    {% section 'ndis-section--cards' %}
+    {% section 'ndis-section--food-blocks' %}
+    {% section 'ndis-section--benefits' %}
+    {% section 'ndis-section--form' %}
+</div>
+
+<script src="{{ 'nids-page.js' | asset_url }}" defer></script>

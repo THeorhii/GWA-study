@@ -1,0 +1,101 @@
+<div class="section-search-results">
+
+    {% include 'product-pop-up' %}
+
+    <div class="section-search-results__form page-width">
+      <form action="/search" method="get" role="search">
+        <label for="Search" class="label-hidden">
+          {{ 'general.search.placeholder' | t }}
+        </label>
+        <input type="search"
+               name="q"
+               id="Search"
+               value="{{ search.terms | escape }}"
+               placeholder="{{ 'general.search.placeholder' | t }}">
+        <button type="submit" class="btn">
+          {% include 'icon-search' %}
+          <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
+        </button>
+      </form>
+    </div>
+
+    <div class="section-search-results__resutls">
+
+        <div class="tablinks-search">
+            <button class="tablinks__menu tablinks__search active" data-handle="menu">MENU</button>
+            <button class="tablinks__article tablinks__search" data-handle="article">ARTICLES</button>
+        </div>
+
+        {% assign pagination-product = false %}
+        {% assign pagination-article = false %}
+
+        {% if search.performed %}
+
+            <div id="tabcontent-menu" class="tabcontent-menu tabcontent__search collection-products-section show">
+
+                <div class="grid">
+
+                    {% for item in search.results %}
+
+                        {% if item.object_type == 'product' and item.type != "Free Item" %}
+
+                                {% assign pagination-product = true %}
+                                {% assign product = all_products[item.handle] %}
+
+                                {% if item.type == "MealPack" %}
+                                    {% include 'mealpack-grid-item' %}
+                                {% else %}
+                                    <div class="grid__item medium-up--one-quarter mobile-up--one-half mobile--one-whole">
+                                        {% include 'collections-product-block' %}
+                                    </div>
+                                {% endif %}
+
+                        {% elsif item.object_type == 'article' %}
+                            <h5>No products found.</h5>
+                            {% assign pagination-product = false %}
+                            {% break %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {% comment %}
+                    {% paginate search.results by 8 %}
+                        {% if pagination-product %}
+                            {% include 'pagination-custom' %}
+                        {% endif %}
+                    {% endpaginate %}
+                    {% endcomment %}
+
+                </div>
+            </div>
+            <div id="tabcontent-article" class="tabcontent-article tabcontent__search">
+
+                    <div class="blogs-container">
+                        <div class="blogs-wrapper">
+                            {% for item in search.results %}
+                                {% if item.object_type == 'article' %}
+                                    {% assign pagination-article = true %}
+                                    {% assign article = articles[item.handle] %}
+
+                                    {% include 'blog-grid-item' %}
+
+                                {% elsif item.object_type == 'product' %}
+                                    <h5>No articles found.</h5>
+                                    {% assign pagination-article = false %}
+                                    {% break %}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                {% comment %}
+                {% paginate search.results by 8 %}
+                    {% if pagination-article %}
+                            {% include 'pagination-custom' %}
+                        {% endif %}
+                {% endpaginate %}
+                {% endcomment %}
+
+            </div>
+        {% endif %}
+    </div>
+</div>

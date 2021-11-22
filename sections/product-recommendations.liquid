@@ -1,136 +1,116 @@
-<link rel="stylesheet" href="{{ 'component-card.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-product-grid.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'section-product-recommendations.css' | asset_url }}" media="print" onload="this.media='all'">
+{% if section.settings.show_related_products == true and product.type != "Free Item" %}
 
-<noscript>{{ 'component-card.css' | asset_url | stylesheet_tag }}</noscript>
-<noscript>{{ 'component-price.css' | asset_url | stylesheet_tag }}</noscript>
-<noscript>{{ 'component-product-grid.css' | asset_url | stylesheet_tag }}</noscript>
-<noscript>{{ 'section-product-recommendations.css' | asset_url | stylesheet_tag }}</noscript>
+    <div class="product-template__container" itemscope itemtype="http://schema.org/Product" id="ProductSection-{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="product" data-enable-history-state="true">
 
-<product-recommendations class="product-recommendations page-width" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=4">
-  {% if recommendations.performed and recommendations.products_count > 0 %}
-    <h2 class="product-recommendations__heading">{{ section.settings.heading | escape }}</h2>
-    <ul class="grid grid--2-col product-grid{% if recommendations.products_count > 3 %} grid--4-col-desktop grid--quarter-max{% else %} grid--{{ recommendations.products_count }}-col-tablet{% endif %}" role="list">
-      {% for recommendation in recommendations.products %}
-        <li class="grid__item">
-          {% render 'product-card',
-            product_card_product: recommendation,
-            media_size: section.settings.image_ratio,
-            show_secondary_image: section.settings.show_secondary_image,
-            add_image_padding: section.settings.add_image_padding,
-            show_vendor: section.settings.show_vendor,
-            show_image_outline: section.settings.show_image_outline,
-            show_rating: section.settings.show_rating
-          %}
-        </li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-</product-recommendations>
+        {% assign heading = section.settings.related_title %}
 
-{% javascript %}
-  class ProductRecommendations extends HTMLElement {
-    constructor() {
-      super();
+        {% assign same_vendor = false %}
+        {% assign same_type = false %}
 
-      const handleIntersection = (entries, observer) => {
-        if (!entries[0].isIntersecting) return;
-        observer.unobserve(this);
+        {% assign exclusions = 'frontpage,all' | split: ',' %}
 
-        fetch(this.dataset.url)
-          .then(response => response.text())
-          .then(text => {
-            const html = document.createElement('div');
-            html.innerHTML = text;
-            const recommendations = html.querySelector('product-recommendations');
-            if (recommendations && recommendations.innerHTML.trim().length) {
-              this.innerHTML = recommendations.innerHTML;
-            }
-          })
-          .catch(e => {
-            console.error(e);
-          });
-      }
+        {% if product.metafields.c_f['Related Products'] %}
+            {% assign collection = collections[product.metafields.c_f['Related Products']] %}
+        {% endif %}
 
-      new IntersectionObserver(handleIntersection.bind(this), {rootMargin: '0px 0px 200px 0px'}).observe(this);
-    }
-  }
+        {% assign found_a_collection = false %}
+        {% if collection and collection.all_products_count > 1 %}
+            {% unless exclusions contains collection.handle %}
+            {% assign found_a_collection = true %}
+            {% endunless %}
+        {% endif %}
+        {% unless found_a_collection %}
+            {% for c in product.collections %}
+                {% unless exclusions contains c.handle or c.all_products_count < 2 %}
+                {% assign found_a_collection = true %}
+                {% assign collection = c %}
+                {% break %}
+                {% endunless %}
+            {% endfor %}
+        {% endunless %}
 
-  customElements.define('product-recommendations', ProductRecommendations);
-{% endjavascript %}
+        {% if found_a_collection %}
+
+            {% assign counter = 0 %}
+            {% assign current_product = product %}
+
+            {% case number_of_related_products_per_row %}
+            {% when '1' %}
+            {% assign grid_item_width = '' %}
+            {% when '2' %}
+            {% assign grid_item_width = 'large--one-half medium--one-half' %}
+            {% when '3' %}
+            {% assign grid_item_width = 'large--one-third medium--one-half' %}
+            {% when '4' %}
+            {% assign grid_item_width = 'large--one-quarter medium--one-third small--one-half' %}
+            {% when '5' %}
+            {% assign grid_item_width = 'large--one-fifth medium--one-third small--one-half' %}
+            {% when '6' %}
+            {% assign grid_item_width = 'large--one-sixth medium--one-third small--one-half' %}
+                {% else %}
+            {% assign grid_item_width = 'large--one-quarter medium--one-third small--one-half' %}
+            {% endcase %}
+
+            {% include 'product-pop-up' %}
+
+            {% capture related_items %}
+                {% for product in collection.products %}
+                    {% unless product.handle == current_product.handle %}
+                        {% unless same_vendor and current_product.vendor != product.vendor %}
+                            {% unless same_type and current_product.type != product.type %}
+
+                                <div class="grid__item">
+                                    {% include 'collections-product-block' %}
+                                </div>
+
+                            {% assign counter = counter | plus: 1 %}
+                                {% if counter == 10%}
+                                    {% break %}
+                                {% endif %}
+                            {% endunless %}
+                        {% endunless %}
+                    {% endunless %}
+                {% endfor %}
+            {% endcapture %}
+
+            {% assign related_items = related_items | trim %}
+
+            {% unless related_items == blank %}
+
+                <div class="product-recommendations product-recommendations-wrapper">
+                    {% unless heading == blank %}
+                        <div class="section-header">
+                            <h2 class="section-header__title">{{ heading }}</h2>
+                        </div>
+                    {% endunless %}
+                    <div class="grid product-recommendations_slider">
+                        {{ related_items }}
+                    </div>
+                </div>
+            {% endunless %}
+
+        {% endif %}
+
+    </div>
+{% endif %}
+
 
 {% schema %}
-{
-  "name": "t:sections.product-recommendations.name",
-  "tag": "section",
-  "class": "spaced-section",
-  "settings": [
     {
-      "type": "paragraph",
-      "content": "t:sections.product-recommendations.settings.paragraph__1.content"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "default": "You may also like",
-      "label": "t:sections.product-recommendations.settings.heading.label"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.product-recommendations.settings.header__2.content"
-    },
-    {
-      "type": "select",
-      "id": "image_ratio",
-      "options": [
-        {
-          "value": "adapt",
-          "label": "t:sections.product-recommendations.settings.image_ratio.options__1.label"
-        },
-        {
-          "value": "portrait",
-          "label": "t:sections.product-recommendations.settings.image_ratio.options__2.label"
-        },
-        {
-          "value": "square",
-          "label": "t:sections.product-recommendations.settings.image_ratio.options__3.label"
-        }
-      ],
-      "default": "adapt",
-      "label": "t:sections.product-recommendations.settings.image_ratio.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_secondary_image",
-      "default": false,
-      "label": "t:sections.product-recommendations.settings.show_secondary_image.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "add_image_padding",
-      "default": false,
-      "label": "t:sections.product-recommendations.settings.add_image_padding.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_image_outline",
-      "default": true,
-      "label": "t:sections.product-recommendations.settings.show_image_outline.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_vendor",
-      "default": false,
-      "label": "t:sections.product-recommendations.settings.show_vendor.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_rating",
-      "default": false,
-      "label": "t:sections.product-recommendations.settings.show_rating.label",
-      "info": "t:sections.product-recommendations.settings.show_rating.info"
+        "name": "Related products",
+        "settings": [
+            {
+                "type": "checkbox",
+                "id": "show_related_products",
+                "label": "Show related products",
+                "default": false
+            },
+            {
+                "id": "related_title",
+                "type": "text",
+                "label": "Section title",
+                "default": "Related products"
+            }
+        ]
     }
-  ]
-}
 {% endschema %}

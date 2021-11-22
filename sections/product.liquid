@@ -1,0 +1,267 @@
+{% if section.settings.show %}
+
+  <div class="page-width link-to-collection__wrapper" xmlns="http://www.w3.org/1999/html">
+    {%- for collection in product.collections limit:1 -%}
+      <a href="{{ collection.url }}" class="link-to-collection"><span>{% include 'arrow-left' %}</span> Back to menu</a>
+    {%- endfor -%}
+  </div>
+
+<div class="product-section page-width" data-section-id="{{ section.id }}" data-product-id="{{ product.id }}" data-section-type="product" data-enable-history-state="true" itemscope itemtype="http://schema.org/Product">
+
+  {%- assign current_variant = product.selected_or_first_available_variant -%}
+  {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
+
+  {% include 'meta-search' %}
+
+  <div class="product-section__product-image" data-product-img="{{ featured_image }}">
+    {% if featured_image != blank %}
+      {%- assign icon = featured_image -%}
+      {%- assign img_url = icon | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+      <img class="lazyload"
+           src="{{ icon | img_url: '50x' }}"
+           data-src="{{ img_url }}"
+           data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+           data-sizes="auto"
+           alt="{{ product.title | append: ' Workout Meals ™' }}">
+    {% endif %}
+  </div>
+
+  <div class="product-section__product-info product-info" data-product-type="{{ product.type }}" >
+    <div class="product-info__header">
+      <h2 class="product-info__title" data-product-title="{{ product.title }}">{{ product.title }}</h2>
+      {% unless product.price < 1 %}
+      <p class="product-info__price" data-money-symbol="{{ cart.currency.symbol }}">{{ product.price | money }}</p>
+      {% endunless %}
+    </div>
+
+    {% unless product.price < 1 %}
+    <div class="product-info__description" data-product-tags="{% for tag in product.tags %} {{ tag }}{% endfor %}">
+      <div class="main-product-content">
+        {% if section.settings.show_ingr %}
+          {%- assign ingredients = product.variants[0].metafields.nutrition.ingredients -%}
+          {% if ingredients %}
+          <div class="ingredients indent">
+            <h4 class="ingredients-title">ingredients</h4>
+            <p class="ingredients-content">{%- for ingredient in ingredients -%} {{ ingredient.title | append: ". "}} {%- endfor -%}</p>
+          </div>
+          {% endif %}
+        {% endif %}
+
+        <div class="product-form-wrapper">
+
+          <div class="product-variants">
+            {% unless product.has_only_default_variant %}
+              {%- for variant in product.variants -%}
+                {%- assign weight = 0 -%}
+                {%- assign ingredients = variant.metafields.nutrition.ingredients -%}
+                {%- assign nutrition = variant.metafields.nutrition.nutridata -%}
+                {%- for ingredient in ingredients -%}{%- assign weight = ingredient.amount | times: 1 | plus: weight -%}{%- endfor -%}
+                <button class="product-variant variant-{{- variant.id -}}{% if product.variants[0].title == variant.option1 %} active{% endif %}"
+                      data-variant-id="{{ variant.id }}"
+                      data-qty="0"
+                      data-price="{{ variant.price | money }}"
+                      data-calories="{{- nutrition.Calories -}}"
+                      data-protein="{{- nutrition.Protein -}}"
+                      data-fat_total="{{- nutrition.Fat_Total -}}"
+                      data-carbohydrate="{{- nutrition.Carbohydrate -}}"
+                      data-energy="{{- nutrition.Energy_KJ -}}"
+                      data-saturated_fat="{{- nutrition.Saturated_Fat -}}"
+                      data-sugar="{{- nutrition.Sugar -}}"
+                      data-sodium="{{- nutrition.Sodium -}}"
+                      data-part-calories="{{- nutrition.per100Calories -}}"
+                      data-part-protein="{{- nutrition.per100Protein -}}"
+                      data-part-fat_total="{{- nutrition.per100Fat_Total -}}"
+                      data-part-carbohydrate="{{- nutrition.per100Carbohydrate -}}"
+                      data-part-energy="{{- nutrition.per100Energy_KJ -}}"
+                      data-part-saturated_fat="{{- nutrition.per100Saturated_Fat -}}"
+                      data-part-sugar="{{- nutrition.per100Sugar -}}"
+                      data-part-sodium="{{- nutrition.per100Sodium -}}">
+                              {{ variant.title }} {%- if weight > 0 -%} ({{- weight -}}g){%- endif -%}</button>
+              {%- endfor -%}
+              {% else %}
+              <button class="product-variant default-variants active variant-{{ product.first_available_variant.id }}"
+                      data-variant-id="{{ product.first_available_variant.id }}"
+                      data-qty="0">REGULAR</button>
+            {% endunless %}
+
+          </div>
+
+          <div class="product-add-container">
+            <input type="hidden" id="variant-prod" name="variant" value="{{ product.first_available_variant.id }}" min="1">
+            <input type="hidden" id="quantity-prod" name="quantity" value="0" min="0">
+
+            <button class="product-content-add" onclick="pintrk('track', 'addtocart', {value: 100, order_quantity: 1, currency: 'USD'});">Add to cart</button>
+            <div class="product-content-count hide">
+              <button class="product-remove">{%- include 'icon-minus' -%}</button>
+              <span class="product-count">0</span>
+              <button class="product-add" onclick="pintrk('track', 'addtocart', {value: 100, order_quantity: 1, currency: 'USD'});">{%- include 'icon-plus' -%}</button>
+            </div>
+
+          </div>
+        </div>
+
+        {%- assign nutrition = product.variants[0].metafields.nutrition.nutridata -%}
+
+        {% if section.settings.show_nutr_info %}
+          <div class="nutritional-info indent">
+            <h4>nutritional info</h4>
+            <div class="nutrition-content">
+              <div class="nutrition-circle">
+                <canvas id="nutritionCanvasProduct"></canvas>
+                <p class="calories-count" data-calories="{{- nutrition.Calories -}}"><span>{{- nutrition.Calories -}}</span>Calories</p>
+              </div>
+              <div class="nutrition-lines">
+                <p class="protein-number" data-protein="{{- nutrition.Protein -}}">
+                  <span>protein</span><span></span>
+                </p>
+                <div class="stripe-protein"><span class="circle-protein"></span></div>
+                <p class="carbs-number" data-carbs="{{- nutrition.Carbohydrate -}}">
+                  <span>carbs</span><span></span>
+                </p>
+                <div class="stripe-carbs"><span class="circle-carbs"></span></div>
+                <p class="fat-number" data-fat="{{- nutrition.Fat_Total -}}">
+                  <span>fat</span><span></span>
+                </p>
+                <div class="stripe-fat"><span class="circle-fat"></span></div>
+                <button>all nutrition facts</button>
+              </div>
+            </div>
+            <table class="all-nutrition-block">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>PER SERVING</th>
+                  <th>PER 100 GRAMS</th>
+                </tr>
+              </thead>
+              <tr class="block-full-calories"><td>Calories</td><td><span>{{- nutrition.Calories -}}</span> (cal)</td><td><span>{{- nutrition.per100Calories -}}</span> (cal)</td></tr>
+              <tr class="block-full-energy"><td>Energy</td><td><span>{{- nutrition.Energy_KJ -}}</span> (kj)</td><td><span>{{- nutrition.per100Energy_KJ -}}</span> (kj)</td></tr>
+              <tr class="block-full-protein"><td>Protein</td><td><span>{{- nutrition.Protein -}}</span> (g)</td><td><span>{{- nutrition.per100Protein -}}</span> (g)</td></tr>
+              <tr class="block-full-fat-total"><td>Fat</td><td><span>{{- nutrition.Fat_Total -}}</span> (g)</td><td><span>{{- nutrition.per100Fat_Total -}}</span> (g)</td></tr>
+              <tr class="block-full-saturated-fat"><td>Saturated Fat</td><td><span>{{- nutrition.Saturated_Fat -}}</span> (g)</td><td><span>{{- nutrition.per100Saturated_Fat -}}</span> (g)</td></tr>
+              <tr class="block-full-carbohydrate"><td>Carbohydrate</td><td><span>{{- nutrition.Carbohydrate -}}</span> (g)</td><td><span>{{- nutrition.per100Carbohydrate -}}</span> (g)</td></tr>
+              <tr class="block-full-sugar"><td>Sugar</td><td><span>{{- nutrition.Sugar -}}</span> (g)</td><td><span>{{- nutrition.per100Sugar -}}</span> (g)</td></tr>
+              <tr class="block-full-sodium"><td>Sodium</td><td><span>{{- nutrition.Sodium -}}</span> (mg)</td><td><span>{{- nutrition.per100Sodium -}}</span> (mg)</td></tr>
+            </table>
+          </div>
+        {% endif %}
+
+        {% if section.settings.show_contains %}
+          <div class="product-contains indent">
+            <h4>contains</h4>
+            <div class="allergens">
+              {%- for tag in product.tags -%}
+                {%- if tag contains 'kc_al_peanuts' -%}
+                  <span class="allergen">
+                      {%- include 'icon-peanuts' -%}
+                      <span>Peanuts</span>
+                  </span>
+                  {%- elsif tag contains 'kc_al_dairy' -%}
+                  <span class="allergen">
+                      {%- include 'icon-milk' -%}
+                      <span>Dairy</span>
+                  </span>
+                  {%- elsif tag contains 'kc_al_treenuts' -%}
+                  <span class="allergen">
+                      {%- include 'icon-treenuts' -%}
+                      <span>Treenuts</span>
+                  </span>
+                  {%- elsif tag contains 'kc_al_sesame' -%}
+                  <span class="allergen">
+                      {%- include 'icon-sesame' -%}
+                      <span>Sesame</span>
+                  </span>
+                  {%- elsif tag contains 'kc_al_soy' -%}
+                  <span class="allergen">
+                      {%- include 'icon-soy' -%}
+                      <span>Soy</span>
+                  </span>
+                  {%- elsif tag contains 'kc_al_eggs' -%}
+                  <span class="allergen">
+                      {%- include 'icon-egg' -%}
+                      <span>Egg</span>
+                  </span>
+                  {%- elsif tag contains 'kc_al_gluten' -%}
+                  <span class="allergen">
+                      {%- include 'icon-wheat' -%}
+                      <span>Gluten</span>
+                  </span>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if section.settings.show_desc %}
+          <div class="product-description indent">
+            <h4>description</h4>
+            <p class="description-content">{{ product.description }}</p>
+            {% if section.settings.show_share_buttons %}
+              {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
+            {% endif %}
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+    {% endunless %}
+  </div>
+
+  {% unless product == empty %}
+    <script type="application/json" data-product-json>
+      {{ product | json }}
+    </script>
+  {% endunless %}
+</div>
+{% endif %}
+
+<script>
+  $('body').addClass('single-product');
+</script>
+<script>
+  pintrk('track', 'pagevisit');
+</script>
+
+{% schema %}
+  {
+    "name": "Product pages",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show",
+        "label": "Show section",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_ingr",
+        "label": "Show ingredients for product",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_nutr_info",
+        "label": "Show nutritional info",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_contains",
+        "label": "Show contains for product",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_desc",
+        "label": "Show description for product",
+        "default": true
+      },
+      {
+      "type": "checkbox",
+      "id": "show_share_buttons",
+      "label": "Show share buttons for product",
+      "default": true
+      }
+    ]
+  }
+{% endschema %}

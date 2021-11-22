@@ -1,5 +1,3 @@
-{{ 'sus-template.css' | asset_url | stylesheet_tag }}
-<section class="sustainability-page__container">
 <div class="sus-header__container">
     <h4 class="sus-page__title">{{ section.settings.sustainability-page__title }}</h4>
     <h2 class="sus-header__title">{{ section.settings.sustainability-header__title }}</h2>
@@ -15,7 +13,7 @@
     <div class="sus-header__richtext"> {{ section.settings.sustainability-header__richtext }} </div>
 </div>
 
-</section>
+
 {% schema %}
 {
 "name": "Sustainability header",
@@ -44,10 +42,6 @@
 "default": "<p> We care about the environment just as much as you do. At Workout Meals, we have a strong commitment to recyclable solutions and to protecting the environment by reducing our carbon footprint and minimizing waste. So the Workout Meals recycling journey can continue, we have put together some steps which you can do to help the environment as recycling all of the components to your Workout Meals box has never been easier.</p>"
 }
 
-],"presets": [
-{
-"name": "Sustainability header"
-}
 ]
 
 }

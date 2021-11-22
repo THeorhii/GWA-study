@@ -1,0 +1,456 @@
+<header>
+    {% if section.settings.title !=blank %}<h3>{{ section.settings.title }}</h3>{% endif %}
+</header>
+
+<section class="general-question first-section-questions">
+    <form>
+        <label class="general-question__name full-width">
+            <p class="all-question_question">{{ section.settings.general_name }}</p>
+            <input type="text"{% if section.settings.required_general_name %}class="required-input" required{% endif %}>
+        </label>
+        <label class="general-question__last-name full-width">
+            <p class="all-question_question">{{ section.settings.general_last-name }}</p>
+            <input type="text"{% if section.settings.required_general_last-name %}class="required-input" required{% endif %}>
+        </label>
+        <div class="general-question__gender">
+            <p class="all-question_question">{{ section.settings.general_gender }}</p>
+            <div class="all-question__answer-buttons">
+                <label>
+                    <input type="radio" checked="true" name="radio-gender" value="male">
+                    <p>I'm male</p></label>
+                <label>
+                    <input type="radio" name="radio-gender" value="female">
+                    <p>I'm female</p></label>
+            </div>
+        </div>
+        <div class="general-question__sizes">
+            <label class="general-question__age short-width">
+                <p class="all-question_question">{{ section.settings.general_age }}</p>
+                <input type="number"{% if section.settings.required_general_age %}class="required-input" required{% endif %} placeholder="00" min="10" max="99">
+                <span class="field-units">years</span>
+            </label>
+            <label class="general-question__height sort-width">
+                <p class="all-question_question">{{ section.settings.general_height }}</p>
+                <input type="number"{% if section.settings.required_general_height %}class="required-input" required{% endif %} placeholder="000" min="50" max="300">
+                <span class="field-units">cm</span>
+            </label>
+            <label class="general-question__weight sort-width">
+                <p class="all-question_question">{{ section.settings.general_weight }}</p>
+                <input type="number"{% if section.settings.required_general_weight %}class="required-input" required{% endif %} placeholder="000"  min="20" max="500">
+                <span class="field-units">kg</span>
+            </label>
+        </div>
+        <div class="general-question__goal">
+            <p class="all-question_question">{{ section.settings.general_goal }}</p>
+            <div class="all-question__answer-buttons">
+                <label>
+                    <input type="radio" checked="true" name="radio-goal" value="Lose Fat & Tone Up">
+                    <p>Lose Fat & Tone Up</p></label>
+                <label>
+                    <input type="radio" name="radio-goal" value="Build Muscle & Strength">
+                    <p>Build Muscle & Strength</p></label>
+                <label>
+                    <input type="radio" name="radio-goal" value="Cut Down & Lose Body Fat">
+                    <p>Cut Down & Lose Body Fat</p></label>
+                <label>
+                    <input type="radio" name="radio-goal" value="Bulk Up & Gain Muscle">
+                    <p>Bulk Up & Gain Muscle</p></label>
+            </div>
+        </div>
+        <label class="general-question__phone full-width">
+            <p class="all-question_question">{{ section.settings.general_phone }}</p>
+            <input type="phone"{% if section.settings.required_general_phone %}class="required-input" required{% endif %}>
+        </label>
+        <label class="general-question__email full-width">
+            <p class="all-question_question">{{ section.settings.general_email }}</p>
+            <input type="email"{% if section.settings.required_general_email %}class="required-input" required{% endif %}>
+        </label>
+        <label class="general-question__date part-width item-hidden">
+            <p class="all-question_question item-hidden">{{ section.settings.general_call_date }}</p>
+            <input id="general-question__datepicker" readonly="readonly" type="hidden" value="0">
+        </label>
+        <label class="general-question__time part-width item-hidden">
+            <p class="all-question_question item-hidden">{{ section.settings.general_call_time }}</p>
+            <input id="general-question__timepicker" readonly="readonly" type="hidden" value="0">
+        </label>
+    </form>
+</section>
+<main>
+    <section class="all-question">
+        <form>
+            {% assign question_count = 1 %}
+            {% for block in section.blocks %}
+                {% if block.type == 'text-field' %}
+                    <div class="all-question__block text-field">
+                        <p class="all-question_question"><span>{{ question_count }}</span>{{ block.settings.question }}</p>
+                        <label>
+                            <input class="answer-text-field" type="text"{% if block.settings.required_question %} required{% endif %} placeholder="{{ block.settings.first_placeholder }}">
+                            {% include 'icon-edit-pen' %}
+                        </label>
+                        {% if block.settings.second_placeholder != blank %}
+                            <label>
+                                <input class="answer-text-field" type="text"{% if block.settings.required_question %} required{% endif %} placeholder="{{ block.settings.second_placeholder }}">
+                                {% include 'icon-edit-pen' %}
+                            </label>
+                        {% endif %}
+                        {% if block.settings.question_with_note %}
+                            <label><p class="notes-header">Notes:</p>
+                                <input class="answer-text-field" type="text" id="radio-answer-{{ question_count }}" placeholder="{{ block.settings.placeholder }}">
+                                {% include 'icon-edit-pen' %}</label>
+                        {% endif %}
+                    </div>
+                    {% elsif block.type == 'button-field' %}
+                    <div class="all-question__block button-field">
+                        <p class="all-question_question"><span>{{ question_count }}</span>{{ block.settings.question }}</p>
+                        <div class="all-question__answer-buttons">
+                            {% if block.settings.first_answer != blank %}
+                                <label>
+                                    <input type="radio" checked="true" name="radio-answer-{{ question_count }}" value="{{ block.settings.first_answer }}">
+                                    <p>{{ block.settings.first_answer }}</p>
+                                </label>
+                            {% endif %}
+                            {% if block.settings.second_answer != blank %}
+                                <label>
+                                    <input type="radio" name="radio-answer-{{ question_count }}" value="{{ block.settings.second_answer }}">
+                                    <p>{{ block.settings.second_answer }}</p>
+                                </label>
+                            {% endif %}
+                            {% if block.settings.third_answer != blank %}
+                                <label>
+                                    <input type="radio" name="radio-answer-{{ question_count }}" value="{{ block.settings.third_answer }}">
+                                    <p>{{ block.settings.third_answer }}</p>
+                                </label>
+                            {% endif %}
+                        </div>
+                        {% if block.settings.question_with_note %}
+                            <label><p class="notes-header">Notes:</p>
+                                <input class="answer-text-field" type="text" placeholder="{{ block.settings.placeholder }}">
+                                {% include 'icon-edit-pen' %}</label>
+                        {% endif %}
+                    </div>
+                    {% elsif block.type == 'checkbox-field' %}
+                    <div class="all-question__block checkbox-field {{ block.settings.checkbox_field_type }}">
+                        <p class="all-question_question"><span>{{ question_count }}</span>{{ block.settings.question }}</p>
+                        <div class="all-question__answer-checkboxes {% if block.settings.answers_row %}answers-row{% endif %}">
+                            {% if block.settings.first_answer != blank %}
+                                <label>
+                                    <input type="{% if block.settings.checkbox_field_type == "radio-buttons" %}radio" checked name="radio-answer-{{ question_count }}" {% else %}checkbox"{% endif %} value="{{ block.settings.first_answer }}">
+                                    <div>{{ block.settings.first_answer }}</div>
+                                </label>
+                            {% endif %}
+                            {% if block.settings.second_answer != blank %}
+                                <label>
+                                    <input type="{% if block.settings.checkbox_field_type == "radio-buttons" %}radio" name="radio-answer-{{ question_count }}" {% else %}checkbox"{% endif %} value="{{ block.settings.second_answer }}">
+                                    <div>{{ block.settings.second_answer }}</div>
+                                </label>
+                            {% endif %}
+                            {% if block.settings.third_answer != blank %}
+                                <label>
+                                    <input type="{% if block.settings.checkbox_field_type == "radio-buttons" %}radio" name="radio-answer-{{ question_count }}" {% else %}checkbox"{% endif %} value="{{ block.settings.third_answer }}">
+                                    <div>{{ block.settings.third_answer }}</div>
+                                </label>
+                            {% endif %}
+                            {% if block.settings.fourth_answer != blank %}
+                                <label>
+                                    <input type="{% if block.settings.checkbox_field_type == "radio-buttons" %}radio" name="radio-answer-{{ question_count }}"{% else %}checkbox"{% endif %} value="{{ block.settings.fourth_answer }}">
+                                    <div>{{ block.settings.fourth_answer }}</div>
+                                </label>
+                            {% endif %}
+                            {% if block.settings.fifth_answer != blank %}
+                                <label>
+                                    <input type="{% if block.settings.checkbox_field_type == "radio-buttons" %}radio" name="radio-answer-{{ question_count }}"{% else %}checkbox"{% endif %} value="{{ block.settings.fifth_answer }}">
+                                    <div>{{ block.settings.fifth_answer }}</div>
+                                </label>
+                            {% endif %}
+                        </div>
+                        {% if block.settings.question_with_note %}
+                            <label><p class="notes-header">Notes:</p>
+                                <input class="answer-text-field" type="text" id="radio-answer-{{ question_count }}" placeholder="{{ block.settings.placeholder }}">
+                                {% include 'icon-edit-pen' %}</label>
+                        {% endif %}
+                    </div>
+                {% endif %}
+                {% assign question_count = question_count | plus: 1 %}
+            {% endfor %}
+        </form>
+    </section>
+</main>
+<footer>
+    <button class="btn btn-save-form"><span class="btn-save-form__second">Submit</span></button>
+</footer>
+<style>
+    .item-hidden {
+        width: 0 !important;
+        position: absolute !important;
+        height: 0;
+        margin:0;
+        overflow: hidden
+    }
+</style>
+
+{% schema %}
+    {
+    "name": "Workout Meals 360 - Form",
+    "class": "pop-up-wm-360-form static-form",
+    "max_blocks": 20,
+    "settings": [
+    {
+    "type": "text",
+    "id": "title",
+    "label": "Form header",
+    "default": "Workout Meals 360"
+    },
+    {
+    "type": "text",
+    "id": "general_name",
+    "label": "Name Field",
+    "default": "Your name"
+    },
+    {
+    "type": "checkbox",
+    "id": "required_general_name",
+    "label": "Check if Name Field is Required",
+    "default": true
+    },
+    {
+    "type": "text",
+    "id": "general_last-name",
+    "label": "Last Name Field",
+    "default": "Your name"
+    },
+    {
+    "type": "checkbox",
+    "id": "required_general_last-name",
+    "label": "Check if Last Name Field is Required",
+    "default": true
+    },
+    {
+    "type": "text",
+    "id": "general_phone",
+    "label": "Phone Field",
+    "default": "Your Contact Phone Number"
+    },
+    {
+    "type": "checkbox",
+    "id": "required_general_phone",
+    "label": "Check if Phone Field is Required",
+    "default": true
+    },
+    {
+    "type": "text",
+    "id": "general_email",
+    "label": "Email Field",
+    "default": "Your Email Address"
+    },
+    {
+    "type": "checkbox",
+    "id": "required_general_email",
+    "label": "Check if Email Field is Required",
+    "default": true
+    },
+    {
+    "type": "text",
+    "id": "general_call_date",
+    "label": "Date for call Field",
+    "default": "pick a date for a call"
+    },
+    {
+    "type": "text",
+    "id": "general_call_time",
+    "label": "Time for call Field",
+    "default": "pick a time for a call"
+    },
+    {
+    "type": "text",
+    "id": "general_gender",
+    "label": "Field Gender",
+    "default": "Your gender"
+    },
+    {
+    "type": "text",
+    "id": "general_goal",
+    "label": "Field Goal",
+    "default": "What is your Goal"
+    },
+    {
+    "type": "text",
+    "id": "general_age",
+    "label": "Age field title",
+    "default": "Your age"
+    },
+    {
+    "type": "checkbox",
+    "id": "required_general_age",
+    "label": "Check if Age field is Required",
+    "default": false
+    },
+    {
+    "type": "text",
+    "id": "general_height",
+    "label": "Height field title",
+    "default": "Your height"
+    },
+    {
+    "type": "checkbox",
+    "id": "required_general_height",
+    "label": "Check if Height field is Required",
+    "default": false
+    },
+    {
+    "type": "text",
+    "id": "general_weight",
+    "label": "Weight field title",
+    "default": "Your weight"
+    },
+    {
+    "type": "checkbox",
+    "id": "required_general_weight",
+    "label": "Check if Weight field is Required",
+    "default": false
+    }
+    ],
+    "blocks": [
+    {
+    "type": "text-field",
+    "name": "Text Fields",
+    "settings": [
+    {
+    "type": "text",
+    "id": "question",
+    "label": "Enter the question"
+    },
+    {
+    "type": "checkbox",
+    "id": "required_question",
+    "label": "Check if this Question is Required",
+    "default": false
+    },
+    {
+    "type": "text",
+    "id": "first_placeholder",
+    "label": "Placeholder for input",
+    "default": "Type something"
+    },
+    {
+    "type": "text",
+    "id": "second_placeholder",
+    "label": "Placeholder for input"
+    },
+    {
+    "type": "checkbox",
+    "id": "question_with_note",
+    "label": "Note field for answer",
+    "default": false
+    },
+    {
+    "type": "text",
+    "id": "placeholder",
+    "label": "Placeholder for input",
+    "default": "Type something"
+    }
+    ]
+    },
+    {
+    "type": "button-field",
+    "name": "Button Field",
+    "settings": [
+    {
+    "type": "text",
+    "id": "question",
+    "label": "Enter the question"
+    },
+    {
+    "type": "text",
+    "id": "first_answer",
+    "label": "Answer variant"
+    },
+    {
+    "type": "text",
+    "id": "second_answer",
+    "label": "Answer variant"
+    },
+    {
+    "type": "text",
+    "id": "third_answer",
+    "label": "Answer variant"
+    },
+    {
+    "type": "checkbox",
+    "id": "question_with_note",
+    "label": "Note field for answer",
+    "default": false
+    },
+    {
+    "type": "text",
+    "id": "placeholder",
+    "label": "Placeholder for input",
+    "default": "Type something"
+    }
+    ]
+    },
+    {
+    "type": "checkbox-field",
+    "name": "Checkbox Field",
+    "settings": [
+    {
+    "type": "select",
+    "id": "checkbox_field_type",
+    "options": [
+    { "value": "radio-buttons", "label": "Only one"},
+    { "value": "checkbox-buttons", "label": "Multiple"}
+    ],
+    "label": "How many answers?"
+    },
+    {
+    "type": "text",
+    "id": "question",
+    "label": "Enter the question"
+    },
+    {
+    "type": "checkbox",
+    "id": "answers_row",
+    "label": "Answers in row",
+    "default": true
+    },
+    {
+    "type": "richtext",
+    "id": "first_answer",
+    "label": "Answer variant"
+    },
+    {
+    "type": "richtext",
+    "id": "second_answer",
+    "label": "Answer variant"
+    },
+    {
+    "type": "richtext",
+    "id": "third_answer",
+    "label": "Answer variant"
+    },
+    {
+    "type": "richtext",
+    "id": "fourth_answer",
+    "label": "Answer variant"
+    },
+    {
+    "type": "richtext",
+    "id": "fifth_answer",
+    "label": "Answer variant"
+    },
+    {
+    "type": "checkbox",
+    "id": "question_with_note",
+    "label": "Note field for answer",
+    "default": false
+    },
+    {
+    "type": "text",
+    "id": "placeholder",
+    "label": "Placeholder for input",
+    "default": "Type something"
+    }
+    ]
+    }
+    ]
+    }
+{% endschema %}

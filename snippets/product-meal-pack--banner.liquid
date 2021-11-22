@@ -1,0 +1,81 @@
+<section class="snippet-banner-meal-pack">
+    <div class="banner-meal-pack--image-wrap">
+        {%- assign icon_desktop = section.settings.image_desktop.src -%}
+        {%- assign img_url_desktop = icon_desktop | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <img class="lazyload banner-meal-pack--image-desktop"
+             src="{{ icon_desktop | img_url: '50x' }}"
+             data-src="{{ img_url_desktop }}"
+             data-widths="[50, 100, 180, 250, 300, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+             data-sizes="auto"
+             alt="{{ icon_desktop.alt | default: 'Workout Meals ™' | escape }}">
+
+        {%- assign icon_tablet = section.settings.image_tablet.src -%}
+        {%- assign img_url_tablet = icon_tablet | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <img class="lazyload banner-meal-pack--image-tablet"
+             src="{{ icon_tablet | img_url: '50x' }}"
+             data-src="{{ img_url_tablet }}"
+             data-widths="[50, 100, 180, 250, 300, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+             data-sizes="auto"
+             alt="{{ icon_tablet.alt | default: 'Workout Meals ™' | escape }}">
+
+        {%- assign icon_mobile = section.settings.image_mobile.src -%}
+        {%- assign img_url_mobile = icon_mobile | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <img class="lazyload banner-meal-pack--image-mobile"
+             src="{{ icon_mobile | img_url: '50x' }}"
+             data-src="{{ img_url_mobile }}"
+             data-widths="[50, 100, 180, 250, 300, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+             data-sizes="auto"
+             alt="{{ icon_mobile.alt | default: 'Workout Meals ™' | escape }}">
+    </div>
+
+    <div class="banner-meal-pack--content page-width section-id-{{ section.id }} {{ section.settings.content_position }}">
+        {%- if section.settings.sub_headline_d != blank -%}<h3 class="banner-meal-pack--content-mobile">{{ section.settings.sub_headline_m }}</h3><h3 class="banner-meal-pack--content-desktop">{{ section.settings.sub_headline_d }}</h3>{%- endif -%}
+        {%- if section.settings.headline_d != blank -%}<h1 class="banner-meal-pack--content-mobile">{{ section.settings.headline_m }}</h1><h1 class="banner-meal-pack--content-desktop">{{ section.settings.headline_d }}</h1>{%- endif -%}
+        {%- if section.settings.paragraph_d != blank -%}<div class="banner-meal-pack--content-short banner-content__desktop">{{ section.settings.paragraph_d }}</div>{%- endif -%}
+        {%- if section.settings.paragraph_m != blank -%}<div class="banner-meal-pack--content-short banner-content__mobile">{{ section.settings.paragraph_m }}</div>{%- endif -%}
+        {%- if section.settings.button_link != blank and section.settings.button != "" -%}
+            <a href="{{ section.settings.button_link }}" class="banner-meal-pack--content-link">{{ section.settings.button }}</a>{%- endif -%}
+    </div>
+</section>
+
+{% if section.settings.product_title != "" %}<h4 class="banner-meal-pack--title">{{ section.settings.product_title }}</h4>{% endif %}
+
+{% if template.name == 'product' %}
+    {% assign section_description = product.description %}
+{% else %}
+    {% assign section_description = collection.description %}
+{% endif %}
+
+{% if section_description != "" %}
+    <div class="banner-meal-pack--description page-width">
+        {% assign descriptions = section_description | split: '<span class="hide">---</span>' %}
+        <div>
+            <div class="description-first">{{ descriptions[0] }}</div>
+            <span class="description-dots">...</span>
+            <div class="description-second hide">{{ descriptions[1] }}</div>
+        </div>
+    </div>
+    <button class="banner-meal-pack--description-btn"><span>read more</span><span>read less</span> {% include 'icon-angle-down' %}</button>
+{% endif %}
+
+<style>
+    .section-id-{{ section.id }} h1{
+        color: {{ section.settings.header_color }}
+    }
+    .section-id-{{ section.id }} h3{
+        color: {{ section.settings.sub_header_color }}
+    }
+    .section-id-{{ section.id }} div,
+    .section-id-{{ section.id }} div p,
+    .section-id-{{ section.id }} div a{
+        color: {{ section.settings.paragraph_color }}
+    }
+    .section-id-{{ section.id }} .banner-meal-pack--content-link{
+        color: {{ section.settings.button_color }};
+        background-color: {{ section.settings.button_background }};
+    }
+    .section-id-{{ section.id }} .banner-meal-pack--content-link:hover{
+        color: {{ section.settings.button_background }};
+        background-color: {{ section.settings.button_color }};
+    }
+</style>

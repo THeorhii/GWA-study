@@ -1,0 +1,88 @@
+<div class="collection-product-pop-up hide">
+    <button class="close-collection-popUp">{% include 'icon-close' %}</button>
+    <div class="collection-product-pop-up-content">
+        <div class="product-pop-up-img">
+
+        </div>
+        <div class="product-pop-up-content">
+            <h2>Product title</h2>
+            <div class="main-product-content">
+                {% comment %}<div class="ingredients">
+                    <p class="ingredients-title">ingredients</p>
+                    <p class="ingredients-content"></p>
+                </div>{% endcomment %}
+                <div class="nutritional-info">
+                    <p>nutritional info</p>
+                    <div class="nutrition-content">
+                        <div class="nutrition-circle">
+                            <canvas id="nutritionCanvas"></canvas>
+                            <p class="calories-count"><span></span>Calories</p>
+                        </div>
+                        <div class="nutrition-lines">
+                            <p class="protein-number">
+                                <span>protein</span><span></span>
+                            </p>
+                            <div class="stripe-protein"><span class="circle-protein"></span></div>
+                            <p class="carbs-number">
+                                <span>carbs</span><span></span>
+                            </p>
+                            <div class="stripe-carbs"><span class="circle-carbs"></span></div>
+                            <p class="fat-number">
+                                <span>fat</span><span></span>
+                            </p>
+                            <div class="stripe-fat"><span class="circle-fat"></span></div>
+                            <button>all nutrition facts</button>
+                        </div>
+                    </div>
+                    <div class="all-nutrition-block">
+                        <p class="block-full-protein">Protein:<span></span></p>
+                        <p class="block-full-energy">Energy:<span></span></p>
+                        <p class="block-full-calories">Calories:<span></span></p>
+                        <p class="block-full-fat-total">Fat Total:<span></span></p>
+                        <p class="block-full-saturated-fat">Saturated Fat:<span></span></p>
+                        <p class="block-full-carbohydrate">Carbohydrate:<span></span></p>
+                        <p class="block-full-sugar">Sugar:<span></span></p>
+                        <p class="block-full-sodium">Sodium:<span></span></p>
+                        <p class="block-full-fiber">Fiber:<span></span></p>
+                    </div>
+                </div>
+                <div class="product-description">
+                    <p>description</p>
+                    <p class="description-content"></p>
+                </div>
+                <div class="preparation">
+                    <p>preparation</p>
+                    <b>From Fresh</b>
+                    <ol>
+                        <li>Remove cardboard sleeve</li>
+                        <li>Microwave for 1 ½ - 2 mins</li>
+                        <li>Let the meal stand for 30 / 40 seconds</li>
+                        <li>Remove the film and ENJOY!</li>
+                    </ol>
+                    <b>From Frozen</b>
+                    <ol>
+                        <li>Remove cardboard sleeve</li>
+                        <li>Microwave for 3 - 5 mins (or until hot).</li>
+                        <li>Let the meal stand for 30 / 40 seconds</li>
+                        <li>Remove the film and ENJOY!</li>
+                    </ol>
+                    <b>CAUTION:</b> FILM WILL EXPAND WHILST HEATING BE CAREFUL WHEN REMOVING THE FILM AS STEAM ESCAPES
+                </div>
+            </div>
+            <div class="product-variants">
+                <button class="product-variant active">small</button>
+                <button class="product-variant">medium</button>
+                <button class="product-variant">large</button>
+            </div>
+
+        </div>
+    </div>
+    <div class="product-pop-up-add">
+        <span class="price"></span><span class="add-button">| Add to cart</span>
+        <div class="product-content-count hide">
+            <button class="product-remove">{%- include 'icon-minus' -%}</button>
+            <span class="product-count">0</span>
+            <button class="product-add">{%- include 'icon-plus' -%}</button>
+        </div>
+    </div>
+</div>

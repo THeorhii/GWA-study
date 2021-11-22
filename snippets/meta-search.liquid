@@ -1,0 +1,52 @@
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org/",
+        "@type": "Product",
+        "name": "{{ product.title | escape }}",
+        "image": [
+            "{{ product.featured_image.src | img_url: '600x600' }}",
+            "{{ product.featured_image.src | img_url: '800x600' }}",
+            "{{ product.featured_image.src | img_url: '1600x900' }}"
+        ],
+        "description": "{% if product.description == '' %}{{ product.title }} - {{ shop.name }}{% else %}{{ product.description | strip_html | escape }}{% endif %}",
+        "sku": "{{ product.first_available_variant.sku }}",
+        "mpn": "",
+        "brand": {
+            "@type": "Brand",
+            "name": "{{ product.vendor }}"
+        },
+        "offers": {
+            "@type": "Offer",
+            "url": "{{ shop.url }}{{ current_variant.url }}",
+            "priceCurrency": "{{ shop.currency }}",
+            "price": "{% if product.price > 0 %}{{ product.price | money_without_currency }}{% else %}{{ product.metafields.mealplanDetails.mealplanDetails.mealplan_price }}{% endif %}",
+            "availability": "InStock",
+            "seller": {
+                "@type": "Organization",
+                "name": "{{ shop.name }}"
+            }
+        }
+        }
+
+</script>
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "{{ shop.name }}",
+        "item": "{{ shop.url }}"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{% if product.type == 'MealPack' %}Meal-packs{% else %}Single meals{% endif %}",
+        "item": "{{ shop.url }}/collections/{% if product.type == 'MealPack' %}meal-packs-new{% else %}menu{% endif %}"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "{{ product.title | escape }}"
+      }]
+    }
+</script>

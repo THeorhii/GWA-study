@@ -1,0 +1,110 @@
+<div class="grid">
+    <h3 class="meals-pack-goal-main-header" data-collection="{{ collection.handle }}">{{ section.settings.quiz_header }}</h3>
+    {% if section.settings.quiz_info != "" %}
+        <p class="meals-pack-goal-main-subheader">{{ section.settings.quiz_info }}</p>
+    {% endif %}
+    {% comment %}<div class="packs-or-program">
+        <p class="question-text">{{ section.settings.text_chose_types }}</p>
+        <button class="btn-meals-pack-quiz" data-action="program">{{ section.settings.btn_first_type }}</button>
+        <button class="btn-meals-pack-quiz" data-action="regular">{{ section.settings.btn_second_type }}</button>
+    </div>{% endcomment %}
+    <div class="test-content">
+        <div class="test-question">
+            <div class="question-number">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <p class="question-text">Are you male or female?</p>
+        </div>
+
+        <div class="question-content">
+            <div class="test-content-gender ">
+                <button class="btn-gender btn-meals-pack-quiz" data-gender="male">male</button>
+                <button class="btn-gender btn-meals-pack-quiz" data-gender="female">female</button>
+            </div>
+            <div class="test-content-activity">
+                <div>
+                    <label class="radio-activity">
+                        <input type="radio" name="test-activity" value="sedentary">
+                        <div class="radio__text">Sedentary<span>Office worker, light exercise</span></div>
+                    </label>
+                    <label class="radio-activity">
+                        <input type="radio" name="test-activity" value="active">
+                        <div class="radio__text">Active<span>Works out 3X per week</span></div>
+                    </label>
+                    <label class="radio-activity">
+                        <input type="radio" name="test-activity" value="very_active">
+                        <div class="radio__text">Very Active<span>Works outdoors or on feet most of the day and workout 5-6 days a week</span></div>
+                    </label>
+                </div>
+            </div>
+            <div class="test-content-days">
+                <button class="btn-days" data-days="5">
+                    <span>5 days</span>
+                    {% if section.settings.help_day_text %}
+                        <span class="help_text_pack">{{ section.settings.help_day_text }}</span>
+                    {% endif %}
+                    <span class="meals-count"></span>
+
+                    <span class="pack-price">
+                            <span class="price_old"></span>
+                            <span class="subscription-price"></span>
+                        </span>
+                    <span class="meal-price">
+                            per meal
+                            <span></span>
+                        </span>
+                </button>
+                <button class="btn-days" data-days="6">
+                    <span>6 days</span>
+                    {% if section.settings.help_day_text %}
+                        <span class="help_text_pack">{{ section.settings.help_day_text }}</span>
+                    {% endif %}
+                    <span class="meals-count"></span>
+
+                    <span class="pack-price">
+                            <span class="price_old"></span>
+                            <span class="subscription-price"></span>
+                        </span>
+                    <span class="meal-price">
+                            per meal
+                            <span></span>
+                        </span>
+                </button>
+                <button class="btn-days" data-days="7">
+                    <span>7 days</span>
+                    {% if section.settings.help_day_text %}
+                        <span class="help_text_pack">{{ section.settings.help_day_text }}</span>
+                    {% endif %}
+                    <span class="meals-count"></span>
+
+                    <span class="pack-price">
+                            <span class="price_old"></span>
+                            <span class="subscription-price"></span>
+                        </span>
+                    <span class="meal-price">
+                            per meal
+                            <span></span>
+                        </span>
+                </button>
+            </div>
+        </div>
+
+        <button class="quiz-go-back hide">{% include 'icon-arrow-left-thin' %} go back</button>
+    </div>
+    <div class="test-result hide">
+        <div class="test-result-gender">
+            <div>{% include 'icon-dumbbell-male' %}{% include 'icon-dumbbell-female' %}<span>female</span></div>
+            <p>Gender</p>
+        </div>
+        <div class="test-result-activity">
+            <div>{% include 'icon-activity-man' %}<span>very active</span></div>
+            <p>activity level</p>
+        </div>
+        <div class="test-result-days">
+            <div><span>5</span></div>
+            <p>DAYS</p>
+        </div>
+    </div>
+</div>

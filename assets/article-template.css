@@ -1,0 +1,185 @@
+.template-article .clear-article {
+    clear: both;
+}
+.template-article article header.page-width {
+    max-width: 1228px;
+}
+.template-article article header .header-content-wrapper {
+    margin-top: 56px;
+    text-align: center;
+}
+.template-article article header .header-content-wrapper h1 {
+    font-size: 48px;
+    margin-top: 0;
+    margin-bottom: 8px;
+    line-height: normal;
+    letter-spacing: 1px;
+}
+.template-article article header .header-content-wrapper h1 + p {
+    font-family: var(--font-stack-body);
+    font-size: 21px;
+    line-height: 1.52;
+    letter-spacing: normal;
+    text-align: center;
+    color: #868686;
+    margin-top: 0;
+}
+.template-article article header .header-content-wrapper .article-tag {
+    font-family: var(--font-stack-header);
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 1.5;
+    letter-spacing: 2px;
+    text-align: center;
+    color: var(--color-coca-cola);
+    text-transform: uppercase;
+    margin-bottom: 0;
+}
+.template-article article header img {
+    width: 100%;
+    height: 390px;
+    object-fit: cover;
+}
+.template-article article .article-content-wrapper {
+    max-width: 1232px;
+    width: 100%;
+    padding: 0 32px;
+    margin: 56px auto;
+    font: normal calc(var(--font-size-base) + 2px) var(--font-stack-body);
+    line-height: 1.56;
+    letter-spacing: normal;
+    color: var(--color-light-grey);
+}
+.template-article article .article-content-wrapper h1, .template-article article .article-content-wrapper h2, .template-article article .article-content-wrapper h3, .template-article article .article-content-wrapper h4, .template-article article .article-content-wrapper h5, .template-article article .article-content-wrapper h6 {
+    color: var(--color-dark-text);
+}
+.template-article article .article-content-wrapper h2 {
+    font-size: calc(var(--font-size-base) * 3.5);
+}
+.template-article article .article-content-wrapper h4 {
+    font: 500 calc(var(--font-size-base) + 12px) var(--font-stack-header);
+    line-height: 1.5;
+    letter-spacing: 2px;
+    color: var(--color-dark-text);
+}
+.template-article article .article-content-wrapper ol {
+    margin-top: 56px;
+    margin-bottom: 24px;
+    margin-left: 0;
+    padding-left: 22px;
+}
+.template-article article .article-content-wrapper ol li {
+    font: bold calc(var(--font-size-base) + 8px) var(--font-stack-header);
+    line-height: normal;
+    letter-spacing: 1px;
+    color: var(--color-dark-text);
+}
+.template-article article .article-content-wrapper img {
+    display: block;
+    max-width: 50%;
+    border: solid 1px #979797;
+    margin-bottom: 8px;
+    margin-top: 8px;
+}
+.template-article article .article-content-wrapper img:nth-child(odd) {
+    float: left;
+    margin-right: 32px;
+}
+.template-article article .article-content-wrapper img:nth-child(even) {
+    float: right;
+    margin-left: 32px;
+}
+.template-article article .article-content-wrapper strong {
+    font: bold calc(var(--font-size-base) + 2px) var(--font-stack-body);
+    line-height: 1.56;
+    letter-spacing: normal;
+    color: var(--color-dark-text);
+}
+.template-article article .rte__video-wrapper {
+    clear: both;
+}
+@media only screen and (max-width: 965px) {
+    .template-article article header.page-width {
+        padding: 0 30px;
+    }
+    .template-article article header img {
+        height: 330px;
+    }
+    .template-article article .article-content-wrapper h1 {
+        font-size: calc(var(--font-size-base) * 3.5);
+    }
+    .template-article article .article-content-wrapper h2 {
+        font-size: calc(var(--font-size-base) * 2.8);
+    }
+    .template-article article .article-content-wrapper h3 {
+        font-size: calc(var(--font-size-base) * 2.25);
+    }
+    .template-article article .article-content-wrapper h4 {
+        font-size: calc(var(--font-size-base) + 9px);
+    }
+    .template-article article .article-content-wrapper img {
+        max-width: 100%;
+    }
+    .template-article article .article-content-wrapper img:nth-child(odd) {
+        float: none;
+        margin-right: 0;
+    }
+    .template-article article .article-content-wrapper img:nth-child(even) {
+        float: none;
+        margin-left: 0;
+    }
+}
+@media only screen and (max-width: 750px) {
+    .template-article article header {
+        min-height: max-content;
+    }
+    .template-article article header .header-content-wrapper {
+        margin: 56px 0;
+        padding: 0 25px;
+    }
+    .template-article article header .header-content-wrapper h1 {
+        font-size: calc(var(--font-size-base) * 2.5);
+    }
+    .template-article article header img {
+        height: 250px;
+    }
+}
+@media only screen and (max-width: 480px) {
+    .template-article article header .header-content-wrapper {
+        max-width: none;
+        margin: 32px 0;
+    }
+    .template-article article header .header-content-wrapper h1 {
+        font-size: calc(var(--font-size-base) + 9px );
+    }
+    .template-article article header .header-content-wrapper h1 + p {
+        font-size: calc(var(--font-size-base) + 4px );
+    }
+    .template-article article header img {
+        height: 150px;
+    }
+    .template-article article .article-content-wrapper {
+        margin: 32px auto;
+        padding: 0 24px;
+    }
+    .template-article article .article-content-wrapper h1 {
+        font-size: calc(var(--font-size-base) * 2.5 );
+    }
+    .template-article article .article-content-wrapper h2 {
+        font-size: calc(var(--font-size-base) * 2);
+    }
+    .template-article article .article-content-wrapper h3 {
+        font-size: calc(var(--font-size-base) + 11px);
+    }
+    .template-article article .article-content-wrapper h4 {
+        letter-spacing: 1px;
+        font-size: calc(var(--font-size-base) + 4px);
+    }
+    .template-article article .article-content-wrapper ol {
+        margin-top: 32px;
+        margin-bottom: 16px;
+    }
+    .template-article article .article-content-wrapper ol li {
+        font-size: calc(var(--font-size-base) + 4px);
+    }
+}

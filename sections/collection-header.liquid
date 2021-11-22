@@ -1,0 +1,53 @@
+{% if section.settings.show %}
+    <div class="grid">
+        {% if section.settings.header != '' %}
+            <h1 style="color: {{ section.settings.header_color }}">{{ section.settings.header }}</h1>
+        {% endif %}
+    </div>
+    <div class="banner">
+        {%- assign icon = section.settings.image_banner -%}
+        {%- assign img_url = icon | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <img class="lazyload"
+             src="{{ icon | img_url: '100x' }}"
+             data-src="{{ img_url }}"
+             data-widths="[100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+             data-sizes="auto"
+             alt="{{ icon.alt | default: 'Workout Meals ™' | escape }}">
+    </div>
+{% endif %}
+
+<div class="show-filters-wrapper">
+<button class="show-filters">{% include 'icon-filters' %} FILTER</button>
+    <span class="close-filters" style="display: none;">{% include 'icon-close' %}</span>
+</div>
+
+{% schema %}
+    {
+    "name": "Collection header",
+    "class": "collection-header-section",
+    "settings": [
+        {
+        "type": "checkbox",
+        "id": "show",
+        "label": "Show",
+        "default": true
+        },
+        {
+        "type": "image_picker",
+        "id": "image_banner",
+        "label": "Image"
+        },
+        {
+        "type": "text",
+        "id": "header",
+        "label": "Header"
+        },
+        {
+        "type": "color",
+        "id": "header_color",
+        "label": "Color for title",
+        "default": "#010101"
+        }
+    ]
+    }
+{% endschema %}

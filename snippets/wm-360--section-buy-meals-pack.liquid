@@ -1,0 +1,66 @@
+<section class="wm-360-buy-meals-pack{% if template contains "collection" %} hide{% endif %}" data-from="{{ template }}">
+    {% if header != blanck and header != '' %}<h2> {{ header }} </h2>{% endif %}
+    {% if sub_header != blanck and sub_header != '' %}<p class="question-text"> {{ sub_header }} </p>{% endif %}
+    <div>
+        {%- paginate collections['all'].products by 500 -%}
+        {%- for product in collections['all'].products -%}
+        {% if product.handle == small %}
+        <div class="wm-360-buy-meals-pack__pack">
+            <div class="wm-360-buy-meals-pack__pack-header">
+                <h3>{{ small_qty }}{% render 'svg-border-simple-circle' %}</h3>
+                <h3>Meals</h3>
+                {% if product.tags contains 'wm360:most-popular' %}
+                    {% render 'icon-badge-most-popular' %}
+                {% endif %}
+            </div>
+            <div class="wm-360-buy-meals-pack__pack-description">{{ product.description }}</div>
+            <div class="wm-360-buy-meals-pack__pack-footer">
+                <p class="price{% if product.compare_at_price > product.price %} with-discount{% endif %}"><span>{{ product.compare_at_price | money }}</span><span>{{ product.price | money }}</span></p>
+                <button data-variant="{{ product.selected_or_first_available_variant.id }}"><span class="hide">added</span><span>add to cart</span></button>
+            </div>
+        </div>
+        {% endif %}
+        {%- endfor -%}
+        {%- endpaginate -%}
+        {%- paginate collections['all'].products by 500 -%}
+            {%- for product in collections['all'].products -%}
+        {% if product.handle == medium %}
+        <div class="wm-360-buy-meals-pack__pack">
+            <div class="wm-360-buy-meals-pack__pack-header">
+                <h3>{{ medium_qty }}{% render 'svg-border-simple-circle' %}</h3>
+                <h3>Meals</h3>
+                {% if product.tags contains 'wm360:most-popular' %}
+                    {% render 'icon-badge-most-popular' %}
+                {% endif %}
+            </div>
+            <div class="wm-360-buy-meals-pack__pack-description">{{ product.description }}</div>
+            <div class="wm-360-buy-meals-pack__pack-footer">
+                <p class="price{% if product.compare_at_price > product.price %} with-discount{% endif %}"><span>{{ product.compare_at_price | money }}</span><span>{{ product.price | money }}</span></p>
+                <button data-variant="{{ product.selected_or_first_available_variant.id }}"><span class="hide">added</span><span>add to cart</span></button>
+            </div>
+        </div>
+        {% endif %}
+            {%- endfor -%}
+        {%- endpaginate -%}
+        {%- paginate collections['all'].products by 500 -%}
+            {%- for product in collections['all'].products -%}
+        {% if product.handle == large %}
+        <div class="wm-360-buy-meals-pack__pack">
+            <div class="wm-360-buy-meals-pack__pack-header">
+                <h3>{{ large_qty }}{% render 'svg-border-simple-circle' %}</h3>
+                <h3>Meals</h3>
+                {% if product.tags contains 'wm360:most-popular' %}
+                    {% render 'icon-badge-most-popular' %}
+                {% endif %}
+            </div>
+            <div class="wm-360-buy-meals-pack__pack-description">{{ product.description }}</div>
+            <div class="wm-360-buy-meals-pack__pack-footer">
+                <p class="price{% if product.compare_at_price > product.price %} with-discount{% endif %}"><span>{{ product.compare_at_price | money }}</span><span>{{ product.price | money }}</span></p>
+                <button data-variant="{{ product.selected_or_first_available_variant.id }}"><span class="hide">added</span><span>add to cart</span></button>
+            </div>
+        </div>
+        {% endif %}
+        {%- endfor -%}
+        {%- endpaginate -%}
+    </div>
+</section>

@@ -1,0 +1,139 @@
+{% if section.settings.show %}
+    <section id="section-{{ section.id }}" class="rich-text-section" {% if section.settings.image %} style="background-image: url('{{ section.settings.image | img_url: 'x880' }}');"{% endif %}>
+
+        <div class="page-width">
+            <div class="rich-text-content">
+                {% if section.settings.section_title != blank %}
+                    <div class="rich-text__heading">
+                        <h3>{{ section.settings.section_title | escape }}</h3>
+                    </div>
+                {% endif %}
+
+                {% if section.settings.text != blank %}
+                    <div class="rich-text__text">
+                        <p>{{ section.settings.text }}</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+    </section>
+{%- endif -%}
+
+
+<style>
+
+    {%- if section.settings.content_position == 'Left' -%}
+    #section-{{ section.id }} .rich-text-content{
+        align-items: flex-start;
+    }
+    #section-{{ section.id }} .rich-text-content .rich-text__text p{
+        text-align: left;
+    }
+    {%- elsif section.settings.content_position == 'Center' -%}
+    #section-{{ section.id }} .rich-text-content{
+        align-items: center;
+    }
+    #section-{{ section.id }} .rich-text-content .rich-text__text p{
+        text-align: center;
+    }
+    {%- elsif section.settings.content_position == 'Right' -%}
+    #section-{{ section.id }} .rich-text-content{
+        align-items: flex-end;
+    }
+    #section-{{ section.id }} .rich-text-content .rich-text__text p{
+        text-align: right;
+    }
+    {%- endif -%}
+
+    {%- if section.settings.image_size == 'small' -%}
+    #section-{{ section.id }} {
+        min-height: 440px;
+    }
+    {%- elsif section.settings.image_size == 'medium' -%}
+    #section-{{ section.id }} {
+        min-height: 686px;
+    }
+    {%- elsif section.settings.image_size == 'large' -%}
+    #section-{{ section.id }} {
+        min-height: 880px;
+    }
+    {%- endif -%}
+
+</style>
+
+
+{% schema %}
+    {
+        "name": "Rich text",
+        "settings": [
+            {
+                "type": "checkbox",
+                "id": "show",
+                "label": "Show section",
+                "default": true
+            },
+            {
+                "type": "text",
+                "id": "section_title",
+                "label": "Title"
+            },
+            {
+                "type": "richtext",
+                "id": "text",
+                "label": "Text"
+            },
+            {
+                "type": "select",
+                "id": "content_position",
+                "label": "Content position",
+                "options": [
+                    {
+                    "value": "Left",
+                    "label": "left"
+                    },
+                    {
+                    "value": "Center",
+                    "label": "center"
+                    },
+                    {
+                    "value": "Right",
+                    "label": "right"
+                    }
+                ],
+                "default": "Center"
+            },
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Background image"
+            },
+            {
+                "type": "select",
+                "id": "image_size",
+                "label": "Image size",
+                    "options": [
+                    {
+                        "value": "small",
+                        "label": "Small"
+                    },
+                    {
+                        "value": "medium",
+                        "label": "Medium"
+                    },
+                    {
+                        "value": "large",
+                        "label": "Large"
+                    }
+                ],
+                "default": "medium"
+            }
+        ],
+        "presets": [
+            {
+                "name": "Rich text with image",
+                "category": "Text"
+            }
+        ]
+    }
+{% endschema %}

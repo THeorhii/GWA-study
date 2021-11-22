@@ -1,0 +1,104 @@
+{% if section.settings.show %}
+    <section id="section-{{ section.id }}" data-section-id="{{ section.id }}" class="meal-packs-grid-section">
+
+        {% for block in section.blocks %}
+
+            <div class="meal-pack" data-title="{{ block.settings.title }}">
+
+                <img class="lazyload"
+                     src="{{ block.settings.meal_pack_img | img_url: '600x720' }}"
+                     data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048]"
+                     data-aspectratio="{{  block.settings.meal_pack_img.aspect_ratio }}"
+                     data-sizes="auto"
+                     data-parent-fit="contain"
+                     alt="{{ block.settings.meal_pack_img.alt | escape }}">
+
+                {% if block.settings.title != blank %}
+                    <p class="meal-pack-title">{{ block.settings.title }}</p>
+                {% endif %}
+
+                {% if block.settings.subtitle != blank or block.settings.info != blank %}
+                    <div class="meal-pack-additional-info">
+                        <p class="meal-pack-subtitle">{{ block.settings.subtitle }}</p>
+                        <span>{{ block.settings.info }}</span>
+                    </div>
+                {% endif %}
+
+                <a href="{{ block.settings.link_to_meal_pack }}" class="btn std-btn btn-dark">ORDER NOW</a>
+
+            </div>
+
+        {% endfor %}
+    </section>
+{%- endif -%}
+
+
+<style>
+    #section-{{ section.id }} {
+        background: {{ section.settings.section_background }};
+    }
+</style>
+
+{% schema %}
+    {
+        "name": "Meal packs grid",
+        "settings": [
+        {
+        "type": "checkbox",
+        "id": "show",
+        "label": "Show section",
+        "default": true
+        },
+        {
+        "type": "color",
+        "id": "section_background",
+        "label": "Section background",
+        "default": "#ffffff"
+        }
+        ],
+        "blocks": [
+        {
+        "type": "meal-pack",
+        "name": "Meal pack",
+        "settings": [
+        {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+        },
+        {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Subtitle"
+        },
+        {
+        "type": "url",
+        "id": "link_to_meal_pack",
+        "label": "Link to meal pack"
+        },
+        {
+        "type": "image_picker",
+        "id": "meal_pack_img",
+        "label": "Image"
+        },
+        {
+        "type": "text",
+        "id": "info",
+        "label": "Information"
+        }
+        ]
+        }
+        ],
+        "presets": [
+        {
+        "name": "Meal packs grid",
+        "category": "Collection",
+        "blocks": [
+        {
+        "type": "meal-pack"
+        }
+        ]
+        }
+        ]
+    }
+{% endschema %}

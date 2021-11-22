@@ -1,0 +1,105 @@
+{% if section.settings.show %}
+    {% assign five_days = section.settings.five_days %}
+    {% assign six_days = section.settings.six_days %}
+    {% assign seven_days = section.settings.seven_days %}
+
+    <div class="grid">
+        <h3>IT ALL STARTS HERE</h3>
+
+        <p class="question-text">How many days do you want us to make your meals for?</p>
+
+        <div class="test-content-days">
+            {%- for product in collection.products -%}
+                {% assign mealplanMain = product.metafields.mealplanDetails.mealplanDetails %}
+                {% assign days = mealplanMain.mealplan_days %}
+                {% assign price = mealplanMain.mealplan_price %}
+                {% assign discount = price | divided_by: 10 %}
+                {% assign new_price = price | minus: discount %}
+                {% if days < 6 %}
+            <button class="btn-days" data-days="5"><span>5 days</span>
+                <span><span>One time purchase ${{ price }}</span><span>Subscription ${{ new_price }}</span></span></button>
+                {% endif %}
+            {%- endfor -%}
+            {%- for product in collection.products -%}
+                {% assign mealplanMain = product.metafields.mealplanDetails.mealplanDetails %}
+                {% assign days = mealplanMain.mealplan_days %}
+                {% assign price = mealplanMain.mealplan_price %}
+                {% assign discount = price | divided_by: 10 %}
+                {% assign new_price = price | minus: discount %}
+                {% if days == 6 %}
+                    <button class="btn-days" data-days="6"><span>6 days</span>
+                    <span><span>One time purchase ${{ price }}</span><span>Subscription ${{ new_price }}</span></span></button>
+                {% endif %}
+            {%- endfor -%}
+            {%- for product in collection.products -%}
+                {% assign mealplanMain = product.metafields.mealplanDetails.mealplanDetails %}
+                {% assign days = mealplanMain.mealplan_days %}
+                {% assign price = mealplanMain.mealplan_price %}
+                {% assign discount = price | divided_by: 10 %}
+                {% assign new_price = price | minus: discount %}
+                {% if days > 6 %}
+                    <button class="btn-days" data-days="7"><span>7 days</span>
+                        <span><span>One time purchase ${{ price }}</span><span>Subscription ${{ new_price }} + FREE DELIVERY</span></span></button>
+                {% endif %}
+            {%- endfor -%}
+        </div>
+
+
+        {% comment %}
+        <div class="test-content-days">{% comment %} Content might be from product-meal-pack-metafields {% endcomment %}
+            <button class="btn-days" data-days="5"><span>5 days</span>
+                <span><span>One time purchase $137.40</span><span>Subscription $123.66</span></span></button>
+            <button class="btn-days" data-days="6"><span>6 days</span>
+                <span><span>One time purchase $206.10</span><span>Subscription $185.49</span></span></button>
+            <button class="btn-days" data-days="7"><span>7 days</span>
+                <span><span>One time purchase $274.80</span><span>Subscription $247.32 + FREE DELIVERY</span></span>
+            </button>
+        </div>
+        {% endcomment %}
+
+    </div>
+
+    <script>
+   let meal_packs_days_answer = ['{{ five_days }}', '{{ six_days }}', '{{ seven_days }}'];
+
+        console.log('1 meal_packs_test_answer');
+        console.log(meal_packs_days_answer);
+
+    </script>
+
+{% endif %}
+
+{% schema %}
+    {
+    "name": "Meal Packs Answers",
+    "class": "question-meal-pack",
+    "settings": [
+    {
+    "type": "checkbox",
+    "id": "show",
+    "label": "Show",
+    "default": true
+    },
+    {
+    "type": "header",
+    "content": "Meal packs for days"
+    },
+    {
+    "type": "product",
+    "id": "five_days",
+    "label": "For 5 days"
+    },
+    {
+    "type": "product",
+    "id": "six_days",
+    "label": "For 6 days"
+    },
+    {
+    "type": "product",
+    "id": "seven_days",
+    "label": "For 7 days"
+    }
+    ]
+    }
+
+{% endschema %}

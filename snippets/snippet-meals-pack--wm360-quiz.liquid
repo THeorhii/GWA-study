@@ -1,0 +1,116 @@
+<header>
+    <h2>{{ section.settings.header }}</h2>
+    <div class="WM360-quiz__navigation">
+        <span class="WM360-quiz__navigation-active"></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</header>
+    <div class="WM360-quiz__block-days">
+        <div class="WM360-quiz__block-question">
+            <p>{{ section.settings.days_long_question }}</p>
+            <h3>{{ section.settings.days_short_question }}</h3>
+        </div>
+        <div class="wm360-quiz-ad__container">
+            <h4 style="color:{{ section.settings.meals-start__text--color }}" class="wm360-quiz-ad__title">{{ section.settings.meals-start__ad--text }}</h4>
+        </div>
+        <div class="btn-answer-wm360">
+            <input type="radio" name="wm360-days" id="wm360-days-0" value="5">
+            <label for="wm360-days-0">5 days</label>
+            <div class="btn-answer-wm360__box"></div>
+        </div>
+        <div class="btn-answer-wm360">
+            <input type="radio" name="wm360-days" id="wm360-days-1" value="6">
+            <label for="wm360-days-1">6 days</label>
+            <div class="btn-answer-wm360__box"></div>
+        </div>
+        <div class="btn-answer-wm360">
+            <input type="radio" name="wm360-days" id="wm360-days-2" value="7">
+            <label for="wm360-days-2">7 days</label>
+            <div class="btn-answer-wm360__box"></div>
+        </div>
+    </div>
+    <div class="WM360-quiz__block-meals">
+        <div class="WM360-quiz__block-question">
+            <p>{{ section.settings.meals_long_question }}</p>
+            <h3>{{ section.settings.meals_short_question }}</h3>
+        </div>
+        <div class="wm360-quiz-ad__container">
+            <h4 style="color:{{ section.settings.meals-start__text--color }}" class="wm360-quiz-ad__title">{{ section.settings.meals-start__ad--text }}</h4>
+        </div>
+        <div class="btn-answer-wm360">
+            <input type="radio" name="wm360-meals" id="wm360-meals-0" value="2">
+            <label for="wm360-meals-0"><span class="WM360-quiz__block-meals-qty"></span> MEALS: <span class="WM360-quiz__block-meals-days"></span> Days X 2 Meals/Day</label>
+            <div class="btn-answer-wm360__box"></div>
+        </div>
+        <div class="btn-answer-wm360">
+            <input type="radio" name="wm360-meals" id="wm360-meals-1" value="3">
+            <label for="wm360-meals-1"><span class="WM360-quiz__block-meals-qty"></span> MEALS: <span class="WM360-quiz__block-meals-days"></span> Days X 3 Meals/Day</label>
+            <div class="btn-answer-wm360__box"></div>
+        </div>
+        <div class="btn-answer-wm360">
+            <input type="radio" name="wm360-meals" id="wm360-meals-2" value="4">
+            <label for="wm360-meals-2"><span class="WM360-quiz__block-meals-qty"></span> MEALS: <span class="WM360-quiz__block-meals-days"></span> Days X 4 Meals/Day</label>
+            <div class="btn-answer-wm360__box"></div>
+        </div>
+        <button class="btn-link link-grey WM360-quiz__block-btn-back" data-close="WM360-quiz__block-meals" data-prev="WM360-quiz__block-days" data-WM360-quiz-back>{% include 'icon-angle-down' %} go back</button>
+    </div>
+    <div class="WM360-quiz__block-allergens">
+        <div class="WM360-quiz__block-question">
+            <p>{{ section.settings.allergens_long_question }}</p>
+            <h3>{{ section.settings.allergens_short_question }}</h3>
+        </div>
+        <div class="wm360-quiz-ad__container">
+            <h4 style="color:{{ section.settings.meals-start__text--color }}" class="wm360-quiz-ad__title">{{ section.settings.meals-start__ad--text }}</h4>
+        </div>
+        <div class="btn-answer-wm360">
+            <input type="checkbox" name="wm360-allergen" id="wm360-allergen-0" value="kc_al_nuts">
+            <label for="wm360-allergen-0">No Gluten(kc_al_gluten) kc_al_nuts</label>
+            <div class="btn-answer-wm360__box"></div>
+        </div>
+        <div class="btn-answer-wm360">
+            <input type="checkbox" name="wm360-allergen" id="wm360-allergen-1" value="kc_al_milk">
+            <label for="wm360-allergen-1">No Peanuts(kc_al_peanuts) kc_al_milk</label>
+            <div class="btn-answer-wm360__box"></div>
+        </div>
+        <div class="btn-answer-wm360">
+            <input type="checkbox" name="wm360-allergen" id="wm360-allergen-2" value="kc_al_3">
+            <label for="wm360-allergen-2">No Treenuts(kc_al_treenuts) kc_al_3</label>
+            <div class="btn-answer-wm360__box"></div>
+        </div>
+        <div class="btn-answer-wm360">
+            <input type="checkbox" name="wm360-allergen" id="wm360-allergen-3" value="kc_al_eggs">
+            <label for="wm360-allergen-3">No Eggs</label>
+            <div class="btn-answer-wm360__box"></div>
+        </div>
+        <div class="btn-answer-wm360">
+            <input type="checkbox" name="wm360-allergen" id="wm360-allergen-4" value="kc_al_dairy">
+            <label for="wm360-allergen-4">No Dairy</label>
+            <div class="btn-answer-wm360__box"></div>
+        </div>
+        <div class="btn-answer-wm360">
+            <input type="checkbox" name="wm360-allergen" id="wm360-allergen-5" value="kc_al_sesame">
+            <label for="wm360-allergen-5">No Sesame</label>
+            <div class="btn-answer-wm360__box"></div>
+        </div>
+        <div class="btn-answer-wm360">
+            <input type="checkbox" name="wm360-allergen" id="wm360-allergen-6" value="kc_al_soy">
+            <label for="wm360-allergen-6">No Soy</label>
+            <div class="btn-answer-wm360__box"></div>
+        </div>
+
+        <button class="btn-link link-grey WM360-quiz__block-btn-back" data-close="WM360-quiz__block-allergens" data-prev="WM360-quiz__block-meals" data-WM360-quiz-back>{% include 'icon-angle-down' %} go back</button>
+        <button data-WM360-quiz-confirm class="btn-black btn-medium">confirm</button>
+    </div>
+
+<div class="WM360-quiz__block-success">
+    <h3>{{ section.settings.success_message }}</h3>
+    <button class="btn-link link-grey WM360-quiz__block-btn-back" data-close="WM360-quiz__block-success" data-prev="WM360-quiz__block-allergens" data-WM360-quiz-back>{% include 'icon-angle-down' %} go back</button>
+</div>
+
+<div class="WM360-quiz__block-error">
+    <h3>{{ section.settings.error_message }}</h3>
+    <button class="btn-link link-grey WM360-quiz__block-btn-back" data-close="WM360-quiz__block-error" data-prev="WM360-quiz__block-allergens" data-WM360-quiz-back>{% include 'icon-angle-down' %} go back</button>
+</div>
+
