@@ -7,7 +7,7 @@
             {%- assign icon_desktop = section.settings.image_desktop.src -%}
             {%- assign img_url_desktop = icon_desktop | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
             <img class="ndis-banner__img lazyload banner-meal-pack--image-desktop"
-                 src="{{ section.settings.image_desktop.src }}"
+                 src="{{ section.settings.image_desktop }}"
                  data-widths="[50, 100, 180, 250, 300, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
                  data-sizes="auto"
                  alt="{{ icon_desktop.alt | default: 'Workout Meals ™' | escape }}">
@@ -15,7 +15,7 @@
             {%- assign icon_tablet = section.settings.image_tablet.src -%}
             {%- assign img_url_tablet = icon_tablet | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
             <img class="ndis-banner__img lazyload banner-meal-pack--image-tablet"
-                 src="{{ section.settings.image_tablet.src }}"
+                 src="{{ section.settings.image_tablet }}"
                  data-widths="[50, 100, 180, 250, 300, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
                  data-sizes="auto"
                  alt="{{ icon_tablet.alt | default: 'Workout Meals ™' | escape }}">
@@ -23,7 +23,7 @@
             {%- assign icon_mobile = section.settings.image_mobile.src -%}
             {%- assign img_url_mobile = icon_mobile | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
             <img class="ndis-banner__img lazyload banner-meal-pack--image-mobile"
-                 src="{{ section.settings.image_mobile.src }}"
+                 src="{{ section.settings.image_mobile }}"
                  data-widths="[50, 100, 180, 250, 300, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
                  data-sizes="auto"
                  alt="{{ icon_mobile.alt | default: 'Workout Meals ™' | escape }}">
