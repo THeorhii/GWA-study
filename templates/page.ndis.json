@@ -4,9 +4,75 @@
       "type": "main-page",
       "settings": {
       }
+    },
+    "16375769486685f2ba": {
+      "type": "ndis-section--banner",
+      "settings": {
+        "content_position": "",
+        "sub_headline_d": "",
+        "sub_headline_m": "",
+        "sub_header_color": "#000000",
+        "headline_d": "",
+        "headline_m": "",
+        "header_color": "#000000",
+        "paragraph_d": "",
+        "paragraph_m": "",
+        "paragraph_color": "#000000",
+        "Text-paragraph-1": "Your text",
+        "color-paragraph-1": "#010101",
+        "Text-paragraph-2": "<p>Your text<\/p>",
+        "color-paragraph-2": "#fbb03c"
+      }
+    },
+    "1637576957ccfab88d": {
+      "type": "ndis-section--benefits",
+      "settings": {
+        "ndisBenefitsTitle": "Your title",
+        "ndisBenefitsSubTitleText": "<p>Your text<\/p>",
+        "ndisBenefitsSubTitleTextColor": "#181818"
+      }
+    },
+    "1637576965822606c5": {
+      "type": "ndis-section--cards",
+      "settings": {
+      }
+    },
+    "1637576973273b3351": {
+      "type": "ndis-section--food-blocks",
+      "settings": {
+        "ndisFoodTitle": "Your title",
+        "ndisFoodTitleLink": ""
+      }
+    },
+    "163757698330551ff9": {
+      "type": "ndis-section--form",
+      "settings": {
+        "DescribeTitle": "Your title",
+        "DescribeTitleColor": "#010101",
+        "DescribeText": "<p>Youre text<\/p>",
+        "DescribeTextColor": "#181818",
+        "selectedText": "Your text",
+        "selectedTextColor": "#fbb03a",
+        "ndisTel": "Your number",
+        "nameTitle": "Your name",
+        "namePlaceholder": "Enter your username",
+        "emailTitle": "Your email",
+        "emailPlaceholder": "Enter your email",
+        "telTitle": "Phone number",
+        "telPlaceholder": "Enter your tel",
+        "subjectTitle": "Subject",
+        "subjectPlaceholder": "Placeholder text (Hint text)",
+        "messageTitle": "Message",
+        "messagePlaceholder": "Enter your message"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "16375769486685f2ba",
+    "1637576957ccfab88d",
+    "1637576965822606c5",
+    "1637576973273b3351",
+    "163757698330551ff9"
   ]
 }
