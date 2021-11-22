@@ -1,0 +1,79 @@
+{% for block in section.blocks limit: section.blocks.size %}
+<div class="sus-block__container {% if block.settings.sustainability-block__img--position == true %} sus-block__container--position {% endif %}">
+
+    {%- assign icon_desktop = block.settings.sustainability-block__img.src -%}
+    {%- assign icon_desktop_url = icon_desktop | img_url: '500x500' | replace: '_500x500.', '_{width}x.' -%}
+    <img class="sus-block__img lazyload"
+         src="{{ icon_desktop | img_url: '500x500' }}"
+        data-src="{{ icon_desktop_url }}"
+        data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+        data-sizes="auto"
+        alt="{{ icon_desktop.alt | default: 'Workout Meals ™ - Icon' | escape }}">
+    <div class="sus-block-describe__container">
+        <h3 class="sus-block__title {{block.settings.sustainability-block__title--position}}">
+            {{ block.settings.sustainability-block__title }}</h3>
+        <div class="sus-block__richtext">{{ block.settings.sustainability-block__richtext }}</div>
+    </div>
+
+</div>
+{% endfor %}
+
+{% schema %}
+{
+"name": "Sustainability block",
+"blocks": [
+{
+"type": "text",
+"name":"Sustainability Text block",
+"settings": [
+{
+"type": "text",
+"id": "sustainability-block__title",
+"label": "Title",
+"default": "Your title "
+},
+{
+"type": "radio",
+"id": "sustainability-block__title--position",
+"label": "Title position",
+
+"options": [
+{
+"value": "sus-block__title--left",
+"label": "Left"
+},
+{
+"value": "sus-block__title--center",
+"label": "Centered"
+},
+{
+"value": "sus-block__title--right",
+"label": "Right"
+}
+],
+"default": "sus-block__title--center"
+},
+{
+"type": "image_picker",
+"id": "sustainability-block__img",
+"label": "Image"
+},
+{
+"type": "checkbox",
+"id": "sustainability-block__img--position",
+"label": "Image position - right",
+"default": false
+},
+{
+"type": "richtext",
+"id": "sustainability-block__richtext",
+"label": "Text",
+"default": "<p>Your text</p>"
+}]
+}],"presets": [
+{
+"name": "Sustainability header"
+}
+]
+}
+{% endschema %}

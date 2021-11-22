@@ -1,0 +1,50 @@
+{{ 'sus-template.css' | asset_url | stylesheet_tag }}
+
+<div class="sus-header__container">
+    <h4 class="sus-page__title">{{ section.settings.sustainability-page__title }}</h4>
+    <h2 class="sus-header__title">{{ section.settings.sustainability-header__title }}</h2>
+    {%- assign img_desktop = section.settings.sustainability-header__img.src -%}
+    {%- assign img_desktop_url = img_desktop | img_url: '968x500' | replace: '_1000x500.', '_{width}x.' -%}
+    <img class="sus-header__img lazyload"
+            src="{{ img_desktop | img_url: '968x500' }}"
+            data-src="{{ img_desktop_url }}"
+            data-widths="[50, 100, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+            data-sizes="auto"
+            alt="{{ img_desktop.alt | default: 'Workout Meals ™ - Photo' | escape }}"
+    >
+    <div class="sus-header__richtext"> {{ section.settings.sustainability-header__richtext }} </div>
+</div>
+
+
+{% schema %}
+{
+"name": "Sustainability header",
+"settings": [
+{
+"type": "text",
+"id": "sustainability-page__title",
+"label": "Page title",
+"default": "SUSTAINABILITY"
+},
+{
+"type": "text",
+"id": "sustainability-header__title",
+"label": "Header title",
+"default": "WORKOUT MEALS IS HERE FOR YOUR BETTER FUTURE"
+},
+{
+"type": "image_picker",
+"id": "sustainability-header__img",
+"label": "Header image"
+},
+{
+"type": "richtext",
+"id": "sustainability-header__richtext",
+"label": "Header text",
+"default": "<p> We care about the environment just as much as you do. At Workout Meals, we have a strong commitment to recyclable solutions and to protecting the environment by reducing our carbon footprint and minimizing waste. So the Workout Meals recycling journey can continue, we have put together some steps which you can do to help the environment as recycling all of the components to your Workout Meals box has never been easier.</p>"
+}
+
+]
+
+}
+{% endschema %}

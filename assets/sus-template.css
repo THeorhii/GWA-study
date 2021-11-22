@@ -1,0 +1,196 @@
+/*===============================================
+*   SUSTAINABILITY Page
+* ================================================*/
+/* <============================================= sus template ====================================================================*/
+.sustainability-page__container {
+    max-width: 1168px;
+    margin: 0 auto;
+    display:table
+}
+/*further class name for div inner this template will start with "sus"*/
+/* <============================================= sus header ====================================================================>*/
+.sus-header__container {
+    margin: 56px 0 104px;
+}
+.sus-page__title {
+    font: 28px/42px var(--font-stack-header);
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: 2px;
+    text-align: center;
+    color: #e40000;
+    margin: 0;
+}
+.sus-header__title {
+    text-align: center;
+    margin: 0;
+    font: bold 48px var(--font-stack-header);
+    letter-spacing: 1px;
+    color: #000;
+}
+.sus-header__img {
+    margin-top: 32px;
+    display: flex;
+    width: 100%;
+}
+.sus-header__richtext {
+    margin-top: 32px;
+    font: 24px/32px var(--font-stack-body);
+    color: var(--color-text-black);
+
+}
+@media (min-width: 750px) and (max-width: 1174px) {
+    .sus-header__container {
+        margin: 0 68px;
+    }
+    .sus-header__richtext {
+        font: 18px/24px var(--font-stack-body);
+    }
+
+}
+@media (min-width: 480px) and (max-width: 750px) {
+    .sus-header__container {
+        margin: 0 40px;
+    }
+    .sus-header__richtext {
+        font:  16px/24px var(--font-stack-body);
+    }
+    .sus-header__title {
+        font: bold 42px var(--font-stack-header);
+    }
+}
+@media (max-width: 480px) {
+    .sus-header__container {
+        margin: -35px 15px 0 ;
+    }
+    .sus-page__title {
+        font: bold 16px/24px var(--font-stack-header);
+        margin-top: 24px;
+        padding: 0 30px;
+    }
+    .sus-header__title {
+        font: bold 20px/24px var(--font-stack-header);
+    }
+    .sus-header__richtext {
+        font: 16px/24px var(--font-stack-body);
+        margin-top: 24px;
+        padding: 0 5px;
+    }
+    .sus-header__img {
+        margin-top: 8px;
+    }
+    .sustainability-page__container {
+        background-color: #f9f9f9;
+        box-shadow: inset 0 2px 10px 0 rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* <============================================= sus block ====================================================================>*/
+.sus-block__container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    margin-top: 56px;
+}
+.sus-block__container:last-child {
+    margin-bottom: 104px
+}
+.sus-block__container--position {
+    flex-flow: row-reverse nowrap;
+}
+.sus-block__img {
+    display: flex;
+    max-width:500px
+}
+.sus-block-describe__container {
+    display: flex;
+    flex-flow: column;
+    width:568px;
+}
+.sus-block__title {
+    font: bold 36px var(--font-stack-header);
+    margin-bottom: 0;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 1px;
+    color: var(--color-dark-text);
+}
+.sus-block__title--left {
+    text-align:left;
+}
+.sus-block__title--center {
+    text-align: center;
+}
+.sus-block__title--right {
+    text-align: end;
+}
+.sus-block__richtext {
+    font: 24px var(--font-stack-body);
+    line-height: 1.33;
+    color: var(--color-text-black);
+}
+@media (max-width: 1174px) {
+    .sus-block__container:last-child {
+        margin-bottom: 0;
+
+    }
+    .sus-block__richtext {
+        font-size: 16px;
+    }
+    .sus-block__title {
+        margin-top: 0;
+        font-size: 36px
+    }
+    .sus-page__title {
+        margin-top: 56px;
+    }
+    .sus-block-describe__container {
+        max-width:568px;
+        width: 100%;
+    }
+
+}
+@media (min-width: 750px) and (max-width: 1174px) {
+    .sus-block__container {
+        margin: 56px 68px 0;
+    }
+    .sus-block__img {
+        max-width: 332px;
+        height: 332px;
+        padding: 20px;
+    }
+}
+@media (min-width: 650px) and (max-width: 750px) {
+    .sus-block__container {
+        margin: 56px 40px 0;
+    }
+    .sus-block__img {
+        max-width: 332px;
+        height: 332px;
+        padding: 20px;
+    }
+}
+@media (max-width: 649px) {
+    .sus-block__container {
+        flex-flow: column;
+        margin: 0 40px 0;
+        align-items: center;
+    }
+    .sus-block__title {
+        font-size: 18px;
+        margin-top: 16px
+    }
+    .sus-block__img {
+        max-width: 300px;
+        height: 300px;
+    }
+    .sus-block__container:last-child {
+        margin-bottom: 64px;
+    }
+}
+@media (max-width: 480px) {
+    .sus-block__container {
+        margin: 0 15px 0;
+    }
+}
