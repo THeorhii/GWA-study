@@ -3,10 +3,54 @@
     "main": {
       "type": "product",
       "settings": {
+        "show": true,
+        "show_ingr": true,
+        "show_nutr_info": true,
+        "show_contains": true,
+        "show_desc": true,
+        "show_share_buttons": true
+      }
+    },
+    "16375857496b653bf1": {
+      "type": "index--what-we-do",
+      "blocks": {
+        "16375857491781698f-0": {
+          "type": "what-we-do-element",
+          "settings": {
+            "link_title": "Check",
+            "link_url": "",
+            "image": "shopify:\/\/shop_images\/vegan-meals_2x_101a7443-d8e7-43c5-a2de-37bc17dec7fa.jpg"
+          }
+        },
+        "16375857491781698f-1": {
+          "type": "what-we-do-element",
+          "settings": {
+            "link_title": "Check",
+            "link_url": "",
+            "image": "shopify:\/\/shop_images\/image-copy-2_2x_210a6f30-f2be-47ee-8a71-a4888054c779.png"
+          }
+        },
+        "16375857491781698f-2": {
+          "type": "what-we-do-element",
+          "settings": {
+            "link_title": "Check",
+            "link_url": "",
+            "image": "shopify:\/\/shop_images\/image-copy-3_2x_a0f0c33b-6cc6-44d7-90d9-827b87e4a181.png"
+          }
+        }
+      },
+      "block_order": [
+        "16375857491781698f-0",
+        "16375857491781698f-1",
+        "16375857491781698f-2"
+      ],
+      "settings": {
+        "header": "WHAT WE DO"
       }
     }
   },
   "order": [
-    "main"
+    "main",
+    "16375857496b653bf1"
   ]
 }
