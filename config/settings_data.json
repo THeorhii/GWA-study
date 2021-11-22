@@ -1,0 +1,63 @@
+{
+  "current": {
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo_max_width": 250,
+          "main_linklist": "main-menu",
+          "message": false,
+          "home_page_only": true,
+          "show_icon": true,
+          "message_text": "Announce something here",
+          "message_link": "",
+          "color_bg": "#fbb03b",
+          "color_text": "#fff",
+          "link_bottom_text": "All Meal Packs"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "show_payment_icons": false,
+          "footer_address": "PO Box 353 Parramatta NSW 2124",
+          "quick_links_title": "Quick Links",
+          "quick_links_linklist": "footer",
+          "learn_more_title": "Learn More",
+          "learn_more_linklist": "footer",
+          "contact_title": "CONTACT US",
+          "contact_phone": "1300 794 042",
+          "contact_mail": "mailinfo@workoutmeals.com.au"
+        }
+      },
+      "1637583951580c822d": {
+        "type": "collections",
+        "blocks": {
+          "1637583951580c822d-0": {
+            "type": "one-collection",
+            "settings": {
+              "collection": "doyenne"
+            }
+          },
+          "c714dd2c-4964-4e2a-8caa-1cd1f278db01": {
+            "type": "one-collection",
+            "settings": {
+              "collection": "delille-cellars"
+            }
+          }
+        },
+        "block_order": [
+          "1637583951580c822d-0",
+          "c714dd2c-4964-4e2a-8caa-1cd1f278db01"
+        ],
+        "settings": {
+          "title": "the Most Popular menu",
+          "show_link_to_collection": false
+        }
+      }
+    },
+    "content_for_index": [
+      "1637583951580c822d"
+    ]
+  }
+}
